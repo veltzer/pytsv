@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pytimer',
-    version='0.0.4',
+    version='0.0.5',
     description='pytimer is an easy to use timer',
     long_description='context based timer to easily time your code',
     url='https://veltzer.github.io/pytimer',

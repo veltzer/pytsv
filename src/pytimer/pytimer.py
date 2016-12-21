@@ -13,6 +13,6 @@ class Timer():
         diff = self.end_time - self.start_time
         if self.print:
             if self.title:
-                print('time taken for {title}: {0:.6fdiff} seconds'.format(title=self.title, diff=diff))
+                print('time taken for {title}: {diff:.6f} seconds'.format(title=self.title, diff=diff))
             else:
-                print('time taken: {0:.6fdiff} seconds'.format(diff=diff))
+                print('time taken: {diff:.6f} seconds'.format(diff=diff))
