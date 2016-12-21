@@ -6,7 +6,7 @@ class Timer():
         self.start_time = None
     def __enter__(self):
         self.start_time = time.time()
-    def __end__(self):
+    def __exit__(self):
         self.end_time = time.time()
         diff = self.end_time - self.start_time
         print('time taken: {0:.6f} seconds'.format(diff))
