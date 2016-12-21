@@ -5,6 +5,7 @@ class Timer():
     def __init__(self, print=True, title=None):
         self.start_time = None
         self.title = title
+        self.print = print
     def __enter__(self):
         self.start_time = time.time()
     def __exit__(self, itype, value, traceback):
