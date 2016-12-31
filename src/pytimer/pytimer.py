@@ -1,13 +1,15 @@
 import time
 
 
-class Timer():
-    def __init__(self, print=True, title=None):
+class Timer:
+    def __init__(self, do_print=True, do_title=None):
         self.start_time = None
-        self.title = title
-        self.print = print
+        self.print = do_print
+        self.title = do_title
+
     def __enter__(self):
         self.start_time = time.time()
+
     def __exit__(self, itype, value, traceback):
         self.end_time = time.time()
         diff = self.end_time - self.start_time
