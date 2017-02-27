@@ -6,9 +6,21 @@ from collections import defaultdict
 from typing import Iterable, List, Tuple, Dict
 import itertools
 import logging
+import re
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+
+
+def clean(query: str) -> str:
+    # make sure we have just one space between words
+    # make sure that query does not contain tabs
+    query = re.sub(r"[\r\t\n\v ]+", " ", query)
+    # remove space from the left and right
+    query = query.strip()
+    # TODO: get rid of strings which are binary
+    return query
 
 
 def aggregate(
