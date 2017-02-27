@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.2',
+    version='0.0.3',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://veltzer.github.io/pytsv',
@@ -21,4 +21,13 @@ setuptools.setup(
     keywords='python TSV format csv',
     package_dir={'': 'src'},
     packages=setuptools.find_packages('src'),
+    install_requires=[
+        'click',  # for command line parsing
+    ],
+    entry_points={
+        'console_scripts': [
+            'pypi_check=pytsv.check:main',
+            'pypi_aggregate=pytsv.aggregate:main',
+        ],
+    },
 )
