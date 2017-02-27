@@ -1,2 +1,2 @@
-# pytimer
-Easy timing module for python
+# pytsv
+pytsv is a module to help with all things TSV
