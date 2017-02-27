@@ -6,7 +6,7 @@ import pytsv.pytsv
 @click.command()
 def main():
     """ aggregate a bunch of tsv files """
-    pytsv.aggregate(
+    pytsv.pytsv.aggregate(
         input_file_names=[x for x in os.listdir(".")],
         match_columns=[0, 1],  # columns to match by
         aggregate_columns=[2],  # columns to aggregate (must be numeric)
