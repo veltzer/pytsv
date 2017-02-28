@@ -10,7 +10,7 @@ def main(num_fields, input_files):
     for input_file in input_files:
         with open(input_file, "rt") as input_file_handle:
             for line in input_file_handle:
-                line = line.rstrip()
+                line = line.rstrip('\r\n')
                 parts = line.split("\t")
                 if len(parts) != num_fields:
                     print("line [{}] in file [{}] has errors has [{}] parts instead of [{}]".format(
