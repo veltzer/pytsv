@@ -1,6 +1,3 @@
-"""
-Some utilities to do with tsv files
-"""
 import os
 from collections import defaultdict
 from typing import Iterable, List, Tuple, Dict
@@ -10,7 +7,6 @@ import re
 
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
 
 def clean(text: str, clean_edges: bool=True, sub_trailing: bool=True) -> str:
