@@ -1,0 +1,2 @@
+- add context manager capabilities to the TsvWriter class
+- add ability to do concatenation of tsv files according to key
