@@ -13,14 +13,16 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-def clean(query: str) -> str:
-    # make sure we have just one space between words
-    # make sure that query does not contain tabs
-    query = re.sub(r"[\r\t\n\v ]+", " ", query)
-    # remove space from the left and right
-    query = query.strip()
-    # TODO: get rid of strings which are binary
-    return query
+def clean(text: str, clean_edges: bool=True, sub_trailing: bool=True) -> str:
+    if sub_trailing:
+        # make sure we have just one space between words
+        # make sure that text does not contain tabs
+        text = re.sub(r"[\r\t\n\v ]+", " ", text)
+    if clean_edges:
+        # remove space from the left and right
+        text = text.strip()
+    # TODO: get rid of strings which are binary or not well encoded
+    return text
 
 
 def aggregate(
@@ -96,3 +98,38 @@ def group_by(
         for input_file_name in input_file_names:
             os.unlink(input_file_name)
     return [output_file_template.format(match=match) for match in all_data]
+
+
+class TsvWriter:
+    def __init__(self, filename: str, mode: str, sanitize: bool=True, throw_exceptions: bool=False,
+                 clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
+                 check_num_fields=None):
+        self.io = open(filename, mode=mode)
+        self.sanitize = sanitize
+        self.throw_exceptions = throw_exceptions
+        self.clean_edges = clean_edges
+        self.sub_trailing = sub_trailing
+        self.fields_to_clean = fields_to_clean
+        if self.fields_to_clean is None:
+            self.fields_to_clean = []
+        self.check_num_fields = check_num_fields
+
+    def _sanitize(self, l: List[str]):
+        if self.sanitize:
+            for field in self.fields_to_clean:
+                l[field] = clean(text=l[field], clean_edges=self.clean_edges, sub_trailing=self.sub_trailing)
+
+    def write(self, l: List[str]) -> None:
+        self._sanitize(l)
+        if self.check_num_fields:
+            assert len(l) == self.check_num_fields, "wrong number of fields in {}".format(l)
+        print("\t".join(l), file=self.io)
+
+    def close(self):
+        self.io.close()
+
+    @staticmethod
+    def open(filename: str, mode: str, sanitize: bool=True, throw_exceptions: bool=False,
+             clean_edges: bool=True, sub_trailing=True):
+        return TsvWriter(filename=filename, mode=mode, sanitize=sanitize, throw_exceptions=throw_exceptions,
+                         clean_edges=clean_edges, sub_trailing=sub_trailing)
