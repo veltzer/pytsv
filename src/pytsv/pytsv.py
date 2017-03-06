@@ -99,7 +99,7 @@ def group_by(
 class TsvWriter:
     def __init__(self, filename: str, sanitize: bool=True, throw_exceptions: bool=False,
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
-                 check_num_fields=None):
+                 check_num_fields=None, convert_to_string=True):
         self.io = open(filename, mode="wt")
         self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
@@ -109,24 +109,33 @@ class TsvWriter:
         if self.fields_to_clean is None:
             self.fields_to_clean = []
         self.check_num_fields = check_num_fields
+        self.convert_to_string = convert_to_string
 
-    def _sanitize(self, l: List[str]):
+    def _sanitize(self, l: List[str]) -> None:
         if self.sanitize:
             for field in self.fields_to_clean:
                 l[field] = clean(text=l[field], clean_edges=self.clean_edges, sub_trailing=self.sub_trailing)
+
+    def _convert(self, l: List[str]) -> None:
+        if self.convert_to_string:
+            for i, t in enumerate(l):
+                if type(t) in (int, float):
+                    l[i] = str(t)
 
     def write(self, l: List[str]) -> None:
         self._sanitize(l)
         if self.check_num_fields:
             assert len(l) == self.check_num_fields, "wrong number of fields in {}".format(l)
+        self._convert(l)
         print("\t".join(l), file=self.io)
 
-    def close(self):
+    def close(self) -> None:
         self.io.close()
 
     @staticmethod
     def open(filename: str, sanitize: bool=True, throw_exceptions: bool=False,
-             clean_edges: bool=True, sub_trailing=True, fields_to_clean=None, check_num_fields=None):
+             clean_edges: bool=True, sub_trailing=True, fields_to_clean=None, check_num_fields=None,
+             convert_to_string=True):
         return TsvWriter(filename=filename, sanitize=sanitize, throw_exceptions=throw_exceptions,
                          clean_edges=clean_edges, sub_trailing=sub_trailing, fields_to_clean=fields_to_clean,
-                         check_num_fields=check_num_fields)
+                         check_num_fields=check_num_fields, convert_to_string=convert_to_string)
