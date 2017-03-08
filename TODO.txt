@@ -3,3 +3,4 @@
 - add tsv writer that knows how to write by column names.
     It may even emit a "# column1 column2 ..." header if the user wants.
 - add a tsv reader class.
+- make the tsv checker be able to handle zipped input.
