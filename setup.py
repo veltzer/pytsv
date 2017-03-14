@@ -28,6 +28,7 @@ setuptools.setup(
         'console_scripts': [
             'pytsv_check=pytsv.check:main',
             'pytsv_aggregate=pytsv.aggregate:main',
+            'pytsv_csv_to_tsv=pytsv.csv_to_tsv:main',
         ],
     },
 )

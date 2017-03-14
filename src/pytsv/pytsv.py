@@ -5,6 +5,7 @@ import itertools
 import logging
 import re
 
+import pyanyzip
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +100,7 @@ def group_by(
 class TsvWriter:
     def __init__(self, filename: str, sanitize: bool=True, throw_exceptions: bool=False,
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
-                 check_num_fields=None, convert_to_string=True):
+                 check_num_fields: bool=None, convert_to_string: bool=True):
         self.io = open(filename, mode="wt")
         self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
@@ -134,8 +135,33 @@ class TsvWriter:
 
     @staticmethod
     def open(filename: str, sanitize: bool=True, throw_exceptions: bool=False,
-             clean_edges: bool=True, sub_trailing=True, fields_to_clean=None, check_num_fields=None,
-             convert_to_string=True):
+             clean_edges: bool=True, sub_trailing: bool=True, fields_to_clean=None,
+             check_num_fields: bool=False, convert_to_string: bool=True):
         return TsvWriter(filename=filename, sanitize=sanitize, throw_exceptions=throw_exceptions,
-                         clean_edges=clean_edges, sub_trailing=sub_trailing, fields_to_clean=fields_to_clean,
-                         check_num_fields=check_num_fields, convert_to_string=convert_to_string)
+                         clean_edges=clean_edges, sub_trailing=sub_trailing,
+                         fields_to_clean=fields_to_clean, check_num_fields=check_num_fields,
+                         convert_to_string=convert_to_string)
+
+
+class TsvReader:
+    def __init__(self, filename: str, validate_all_lines_same_number_of_fields: bool=True, use_any_format: bool=True):
+        if use_any_format:
+            self.io = pyanyzip.open(name=filename, mode="rt")
+        else:
+            self.io = open(filename, mode="rt")
+        self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
+        self.number_of_fields = None
+
+    def __next__(self):
+        line = self.io.readline()
+        if not line:
+            raise StopIteration
+        line = line.rstrip('\r\n')
+        fields = line.split('\t')
+        if self.number_of_fields is None:
+            self.number_of_fields = len(fields)
+        else:
+            assert len(fields) == self.number_of_fields
+
+    def close(self) -> None:
+        self.io.close()
