@@ -145,13 +145,14 @@ class TsvWriter:
 
 
 class TsvReader:
-    def __init__(self, filename: str, validate_all_lines_same_number_of_fields: bool=True, use_any_format: bool=True):
+    def __init__(self, filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
+                 use_any_format: bool=True, number_of_fields: int=None):
         if use_any_format:
-            self.io = pyanyzip.open(name=filename, mode="rt")
+            self.io = pyanyzip.open(name=filename, mode=mode)
         else:
-            self.io = open(filename, mode="rt")
+            self.io = open(filename, mode=mode)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
-        self.number_of_fields = None
+        self.number_of_fields = number_of_fields
 
     def __next__(self):
         """ method needed to be an iterator """
@@ -169,6 +170,10 @@ class TsvReader:
     def __iter__(self):
         """ method needed to be an iterator """
         return self
+
+    def __enter__(self):
+        """ method needed to be a context manager """
+        pass
 
     def __exit__(self, itype, value, traceback):
         """ method needed to be a context manager """
