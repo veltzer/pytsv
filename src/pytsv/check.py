@@ -9,7 +9,7 @@ from pytsv.pytsv import TsvReader
 def main(num_fields, input_files):
     """ This script checks that every file given to it is legal tsv """
     for input_file in input_files:
-        with TsvReader.open(filename=input_file, num_fields=num_fields) as input_file_handle:
+        with TsvReader(filename=input_file, num_fields=num_fields) as input_file_handle:
             for _ in input_file_handle:
                 pass
 
