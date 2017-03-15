@@ -146,13 +146,13 @@ class TsvWriter:
 
 class TsvReader:
     def __init__(self, filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
-                 use_any_format: bool=True, number_of_fields: int=None):
+                 use_any_format: bool=True, num_fields: int=None):
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
             self.io = open(filename, mode=mode)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
-        self.number_of_fields = number_of_fields
+        self.num_fields = num_fields
 
     def __next__(self):
         """ method needed to be an iterator """
@@ -161,10 +161,11 @@ class TsvReader:
             raise StopIteration
         line = line.rstrip('\r\n')
         fields = line.split('\t')
-        if self.number_of_fields is None:
-            self.number_of_fields = len(fields)
-        else:
-            assert len(fields) == self.number_of_fields
+        if self.validate_all_lines_same_number_of_fields:
+            if self.num_fields is None:
+                self.num_fields = len(fields)
+            else:
+                assert len(fields) == self.num_fields
         return fields
 
     def __iter__(self):
