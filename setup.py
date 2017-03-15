@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.15',
+    version='0.0.16',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://veltzer.github.io/pytsv',
@@ -23,6 +23,7 @@ setuptools.setup(
     packages=setuptools.find_packages('src'),
     install_requires=[
         'click',  # for command line parsing
+        'tqdm',  # for progress report
     ],
     entry_points={
         'console_scripts': [
