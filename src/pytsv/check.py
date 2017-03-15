@@ -1,5 +1,6 @@
 import click
-import sys
+
+from pytsv.pytsv import TsvWriter
 
 
 @click.command()
@@ -8,16 +9,9 @@ import sys
 def main(num_fields, input_files):
     """ This script checks that every file given to it is legal tsv """
     for input_file in input_files:
-        with open(input_file, "rt") as input_file_handle:
-            for line in input_file_handle:
-                line = line.rstrip('\r\n')
-                parts = line.split("\t")
-                if num_fields is None:
-                    num_fields = len(parts)
-                if len(parts) != num_fields:
-                    print("line [{}] in file [{}] has errors has [{}] parts instead of [{}]".format(
-                        line, input_file, len(parts), num_fields))
-                    sys.exit(1)
+        with TsvWriter.open(filename=input_file, num_fields=num_fields) as input_file_handle:
+            for _ in input_file_handle:
+                pass
 
 
 if __name__ == '__main__':

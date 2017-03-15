@@ -100,7 +100,7 @@ def group_by(
 class TsvWriter:
     def __init__(self, filename: str, sanitize: bool=True, throw_exceptions: bool=False,
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
-                 check_num_fields: bool=True, num_fields: int=0, convert_to_string: bool=True):
+                 check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True):
         self.io = open(filename, mode="wt")
         self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
@@ -137,7 +137,7 @@ class TsvWriter:
     @staticmethod
     def open(filename: str, sanitize: bool=True, throw_exceptions: bool=False,
              clean_edges: bool=True, sub_trailing: bool=True, fields_to_clean=None,
-             check_num_fields: bool=True, num_fields: int=0, convert_to_string: bool=True):
+             check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True):
         return TsvWriter(filename=filename, sanitize=sanitize, throw_exceptions=throw_exceptions,
                          clean_edges=clean_edges, sub_trailing=sub_trailing,
                          fields_to_clean=fields_to_clean, check_num_fields=check_num_fields,
