@@ -11,7 +11,7 @@ from pytsv.pytsv import TsvReader
 @click.argument('input-files', nargs=-1)
 def main(num_fields, progress, cut_fields, input_files):
     """ cut fields from tsv files """
-    cut_fields = [int(x) for x in cut_fields.split(',')]
+    cut_fields = [int(x) for x in cut_fields.split(',') if x != ""]
     for input_file in input_files:
         with TsvReader(filename=input_file, num_fields=num_fields, validate_all_lines_same_number_of_fields=True)\
                 as input_file_handle:
