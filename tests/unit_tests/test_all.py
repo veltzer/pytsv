@@ -11,6 +11,7 @@ def get_file(name: str) -> str:
 file_doesnt_exist = get_file("data/doesnt_exist.tsv")
 file_good = get_file("data/good.tsv")
 file_bad = get_file("data/bad.tsv")
+file_gzip = get_file("data/good.tsv.gz")
 
 
 def read_all_file(filename: str):
@@ -32,4 +33,6 @@ class TestAll(unittest.TestCase):
 
     def testBadFile(self):
         self.assertRaises(AssertionError, read_all_file, filename=file_bad)
-        # read_all_file(filename=file_bad)
+
+    def testGzipFile(self):
+        read_all_file(filename=file_gzip)
