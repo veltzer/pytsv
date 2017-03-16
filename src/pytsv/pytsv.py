@@ -150,7 +150,7 @@ class TsvReader:
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
-            self.io = open(filename, mode=mode)
+            self.io = open(name=filename, mode=mode)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
 
@@ -174,12 +174,11 @@ class TsvReader:
 
     def __enter__(self):
         """ method needed to be a context manager """
-        pass
+        return self
 
     def __exit__(self, itype, value, traceback):
         """ method needed to be a context manager """
         self.close()
 
     def close(self) -> None:
-        print("in close")
         self.io.close()
