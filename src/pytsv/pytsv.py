@@ -153,6 +153,7 @@ class TsvReader:
             self.io = open(name=filename, mode=mode)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
+        self.line_number = 0
 
     def __next__(self):
         """ method needed to be an iterator """
@@ -165,7 +166,8 @@ class TsvReader:
             if self.num_fields is None:
                 self.num_fields = len(fields)
             else:
-                assert len(fields) == self.num_fields
+                assert len(fields) == self.num_fields, "problem with line [{}]".format(self.line_number)
+        self.line_number += 1
         return fields
 
     def __iter__(self):
