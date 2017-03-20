@@ -153,6 +153,13 @@ class TsvWriter:
 
 
 class TsvReader:
+    @staticmethod
+    def open(filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
+             use_any_format: bool = True, num_fields: int = None):
+        return TsvReader(filename=filename, mode=mode,
+                         validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields,
+                         use_any_format=use_any_format, num_fields=num_fields)
+
     def __init__(self, filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
                  use_any_format: bool=True, num_fields: int=None):
         if use_any_format:
