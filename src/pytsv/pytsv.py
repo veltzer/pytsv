@@ -127,7 +127,10 @@ class TsvWriter:
     def write(self, l: List[str]) -> None:
         self._sanitize(l)
         if self.check_num_fields:
-            assert len(l) == self.num_fields, "wrong number of fields in {}".format(l)
+            if self.num_fields is None:
+                self.num_fields = len(l)
+            else:
+                assert len(l) == self.num_fields, "wrong number of fields in {}".format(l)
         self._convert(l)
         print("\t".join(l), file=self.io)
 
