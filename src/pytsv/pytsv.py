@@ -134,6 +134,14 @@ class TsvWriter:
     def close(self) -> None:
         self.io.close()
 
+    def __enter__(self):
+        """ method needed to be a context manager """
+        return self
+
+    def __exit__(self, itype, value, traceback):
+        """ method needed to be a context manager """
+        self.close()
+
     @staticmethod
     def open(filename: str, sanitize: bool=True, throw_exceptions: bool=False,
              clean_edges: bool=True, sub_trailing: bool=True, fields_to_clean=None,
