@@ -192,3 +192,9 @@ class TsvReader:
 
     def close(self) -> None:
         self.io.close()
+
+
+def write_dict(filename: str=None, d: dict=None) -> None:
+    with TsvWriter(filename=filename, num_fields=2) as output_handle:
+        for k, v in d.items():
+            output_handle.write([k, v])
