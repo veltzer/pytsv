@@ -16,7 +16,7 @@ to some of its columns
 @click.option('--input-file', required=True, type=str, help="filename to work on")
 def main(columns, pattern, progress, input_file):
     """ split a tsv file according to columns """
-    columns = [int(x) for x in columns.split(',')]
+    columns = [int(x) for x in columns.split(',') if x != ""]
     assert len(columns) > 0, "must provide --columns"
     tsv_writers_dict = dict()
     with TsvReader(filename=input_file) as input_file_handle:
