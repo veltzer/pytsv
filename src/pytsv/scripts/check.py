@@ -3,6 +3,11 @@ import tqdm
 
 from pytsv.pytsv import TsvReader
 
+"""
+TODO:
+- add ability to say how many lines are bad and print their content
+"""
+
 
 @click.command()
 @click.option('--num-fields', required=False, default=None, type=int, help="how many fields should the tsv have")
