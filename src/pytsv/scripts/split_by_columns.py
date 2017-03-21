@@ -30,7 +30,7 @@ def main(columns, pattern, progress, input_file):
                 tsv_writers_dict[key] = output_handle
             output_handle = tsv_writers_dict[key]
             output_handle.write(fields)
-    # close all writes
+    # close all writers
     for v in tsv_writers_dict.values():
         v.close()
 

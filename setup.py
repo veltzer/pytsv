@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.29',
+    version='0.0.30',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://veltzer.github.io/pytsv',
@@ -27,11 +27,11 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'pytsv_check=pytsv.check:main',
-            'pytsv_aggregate=pytsv.aggregate:main',
-            'pytsv_csv_to_tsv=pytsv.csv_to_tsv:main',
-            'pytsv_cut=pytsv.cut:main',
-            'pytsv_split_by_columns=pytsv.split_by_columns:main',
+            'pytsv_check=pytsv.scripts.check:main',
+            'pytsv_aggregate=pytsv.scripts.aggregate:main',
+            'pytsv_csv_to_tsv=pytsv.scripts.csv_to_tsv:main',
+            'pytsv_cut=pytsv.scripts.cut:main',
+            'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
         ],
     },
 )
