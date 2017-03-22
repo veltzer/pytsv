@@ -1,7 +1,3 @@
-- add context manager capabilities to the TsvWriter class
 - add ability to do concatenation of tsv files according to key
 - add tsv writer that knows how to write by column names.
     It may even emit a "# column1 column2 ..." header if the user wants.
-- add a tsv reader class.
-- make the tsv checker be able to handle zipped input.
-- add the ability to check tsv files that do not have the same number of fields on each line.

@@ -158,26 +158,33 @@ class TsvWriter:
 class TsvReader:
     @staticmethod
     def open(filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
-             use_any_format: bool = True, num_fields: int = None):
+             use_any_format: bool = True, num_fields: int = None, skip_comments: bool=True):
         return TsvReader(filename=filename, mode=mode,
                          validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields,
-                         use_any_format=use_any_format, num_fields=num_fields)
+                         use_any_format=use_any_format, num_fields=num_fields, skip_comments=skip_comments)
 
     def __init__(self, filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
-                 use_any_format: bool=True, num_fields: int=None):
+                 use_any_format: bool=True, num_fields: int=None, skip_comments: bool=True):
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
             self.io = open(name=filename, mode=mode)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
-        self.line_number = 0
+        self.line_number = -1
+        self.skip_comments = skip_comments
 
     def __next__(self):
         """ method needed to be an iterator """
+        self.line_number += 1
         line = self.io.readline()
         if not line:
             raise StopIteration
+        if self.skip_comments:
+            while line.startswith("#"):
+                line = self.io.readline()
+                if not line:
+                    raise StopIteration
         line = line.rstrip('\r\n')
         fields = line.split('\t')
         if self.validate_all_lines_same_number_of_fields:
@@ -185,7 +192,6 @@ class TsvReader:
                 self.num_fields = len(fields)
             else:
                 assert len(fields) == self.num_fields, "problem with line [{}]".format(self.line_number)
-        self.line_number += 1
         return fields
 
     def __iter__(self):
