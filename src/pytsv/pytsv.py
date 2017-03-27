@@ -212,7 +212,11 @@ class TsvReader:
             if self.num_fields is None:
                 self.num_fields = len(fields)
             else:
-                assert len(fields) == self.num_fields, "problem with line [{}]".format(self.line_number)
+                assert len(fields) == self.num_fields, "wrong number of fields in line number {} {} {}".format(
+                    self.line_number,
+                    self.num_fields,
+                    len(fields),
+                )
         if self.check_non_ascii:
             assert is_ascii(line)
         return fields
