@@ -19,8 +19,8 @@ def main(num_fields, progress, validate_all_lines_same_number_of_fields, input_f
     """ This script checks that every file given to it is legal tsv """
     for input_file in input_files:
         with TsvReader(filename=input_file, num_fields=num_fields,
-                       validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields)\
-                as input_file_handle:
+                       validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields,
+                       check_non_ascii=True) as input_file_handle:
             if progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for _ in input_file_handle:

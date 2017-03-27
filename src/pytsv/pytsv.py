@@ -10,11 +10,13 @@ import pyanyzip
 logger = logging.getLogger(__name__)
 
 
-def clean(text: str, clean_edges: bool=True, sub_trailing: bool=True) -> str:
+def clean(text: str, clean_edges: bool=True, sub_trailing: bool=True, remove_non_ascii: bool=True) -> str:
     if sub_trailing:
         # make sure we have just one space between words
         # make sure that text does not contain tabs
         text = re.sub(r"[\r\t\n\v ]+", " ", text)
+    if remove_non_ascii:
+        text = text.encode('ascii', errors='ignore').decode()
     if clean_edges:
         # remove space from the left and right
         text = text.strip()
@@ -97,10 +99,15 @@ def group_by(
     return [output_file_template.format(match=match) for match in all_data]
 
 
+def is_ascii(s):
+    return all(ord(c) < 128 for c in s)
+
+
 class TsvWriter:
     def __init__(self, filename: str, sanitize: bool=True, throw_exceptions: bool=False,
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
-                 check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True):
+                 check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
+                 remove_non_ascii: bool=True):
         self.io = open(filename, mode="wt")
         self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
@@ -112,11 +119,17 @@ class TsvWriter:
         self.check_num_fields = check_num_fields
         self.num_fields = num_fields
         self.convert_to_string = convert_to_string
+        self.remove_non_ascii = remove_non_ascii
 
     def _sanitize(self, l: List[str]) -> None:
         if self.sanitize:
             for field in self.fields_to_clean:
-                l[field] = clean(text=l[field], clean_edges=self.clean_edges, sub_trailing=self.sub_trailing)
+                l[field] = clean(
+                    text=l[field],
+                    clean_edges=self.clean_edges,
+                    sub_trailing=self.sub_trailing,
+                    remove_non_ascii=self.remove_non_ascii,
+                )
 
     def _convert(self, l: List[str]) -> None:
         if self.convert_to_string:
@@ -148,23 +161,28 @@ class TsvWriter:
     @staticmethod
     def open(filename: str, sanitize: bool=True, throw_exceptions: bool=False,
              clean_edges: bool=True, sub_trailing: bool=True, fields_to_clean=None,
-             check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True):
+             check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
+             remove_non_ascii: bool=True):
         return TsvWriter(filename=filename, sanitize=sanitize, throw_exceptions=throw_exceptions,
                          clean_edges=clean_edges, sub_trailing=sub_trailing,
                          fields_to_clean=fields_to_clean, check_num_fields=check_num_fields,
-                         num_fields=num_fields, convert_to_string=convert_to_string)
+                         num_fields=num_fields, convert_to_string=convert_to_string,
+                         remove_non_ascii=remove_non_ascii)
 
 
 class TsvReader:
     @staticmethod
     def open(filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
-             use_any_format: bool = True, num_fields: int = None, skip_comments: bool=True):
+             use_any_format: bool=True, num_fields: int=None, skip_comments: bool=True,
+             check_non_ascii: bool=True):
         return TsvReader(filename=filename, mode=mode,
                          validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields,
-                         use_any_format=use_any_format, num_fields=num_fields, skip_comments=skip_comments)
+                         use_any_format=use_any_format, num_fields=num_fields, skip_comments=skip_comments,
+                         check_non_ascii=check_non_ascii)
 
     def __init__(self, filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
-                 use_any_format: bool=True, num_fields: int=None, skip_comments: bool=True):
+                 use_any_format: bool=True, num_fields: int=None, skip_comments: bool=True,
+                 check_non_ascii: bool=True):
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
@@ -173,6 +191,7 @@ class TsvReader:
         self.num_fields = num_fields
         self.line_number = -1
         self.skip_comments = skip_comments
+        self.check_non_ascii = check_non_ascii
 
     def __next__(self):
         """ method needed to be an iterator """
@@ -186,12 +205,16 @@ class TsvReader:
                 if not line:
                     raise StopIteration
         line = line.rstrip('\r\n')
+        if self.check_non_ascii:
+            assert is_ascii(line), "non ascii characters in line [{}]".format(self.line_number)
         fields = line.split('\t')
         if self.validate_all_lines_same_number_of_fields:
             if self.num_fields is None:
                 self.num_fields = len(fields)
             else:
                 assert len(fields) == self.num_fields, "problem with line [{}]".format(self.line_number)
+        if self.check_non_ascii:
+            assert is_ascii(line)
         return fields
 
     def __iter__(self):
