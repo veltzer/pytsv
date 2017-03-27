@@ -21,7 +21,7 @@ def main(num_fields, progress, filename, check_non_ascii, validate_all_lines_sam
     """ This script checks that every file given to it is legal tsv """
     for input_file in input_files:
         if filename:
-            print('checking [{}]...'.format(filename))
+            print('checking [{}]...'.format(input_file))
         with TsvReader(filename=input_file, num_fields=num_fields,
                        validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields,
                        check_non_ascii=check_non_ascii) as input_file_handle:
