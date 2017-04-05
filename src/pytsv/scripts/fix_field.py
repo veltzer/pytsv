@@ -2,6 +2,7 @@ from typing import List
 
 import click
 import tqdm
+from pytsv import pytsv
 
 from pytsv.pytsv import TsvReader, TsvWriter
 
@@ -29,9 +30,10 @@ def main(progress, input_file, output_file, num_columns, fix_column):
                 if len(fields) != num_columns:
                     count_fixed += 1
                     fixed_field = " ".join(fields[fix_column:len(fields)-num_columns+fix_column+1])
+                    fixed_field = pytsv.clean(fixed_field)
                     new_fields = fields[:fix_column]
                     new_fields.append(fixed_field)
-                    new_fields.extend(fields[fix_column:len(fields)-num_columns+fix_column:])
+                    new_fields.extend(fields[fix_column:len(fields)-num_columns+fix_column+1])
                     output_file_handle.write(new_fields)
                 else:
                     output_file_handle.write(fields)
