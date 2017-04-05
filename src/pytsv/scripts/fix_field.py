@@ -33,7 +33,7 @@ def main(progress, input_file, output_file, num_columns, fix_column):
                     fixed_field = pytsv.clean(fixed_field)
                     new_fields = fields[:fix_column]
                     new_fields.append(fixed_field)
-                    new_fields.extend(fields[len(fields)-fix_column+1:])
+                    new_fields.extend(fields[len(fields)-fix_column:])
                     output_file_handle.write(new_fields)
                 else:
                     output_file_handle.write(fields)
