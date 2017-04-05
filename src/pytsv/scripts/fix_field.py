@@ -35,7 +35,7 @@ def main(progress, input_file, output_file, num_columns, fix_column):
                     output_file_handle.write(new_fields)
                 else:
                     output_file_handle.write(fields)
-
+    print('count_fixed is [{}]'.format(count_fixed))
 
 if __name__ == '__main__':
     main()
