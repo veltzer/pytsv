@@ -21,7 +21,7 @@ setuptools.setup(
     keywords='python TSV format csv',
     package_dir={'': 'src'},
     packages=setuptools.find_packages('src'),
-    python_requires=">3.6",
+    python_requires=">=3",
     install_requires=[
         'click',  # for command line parsing
         'tqdm',  # for progress report
