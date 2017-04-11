@@ -1,6 +1,6 @@
 import os
 from collections import defaultdict
-from typing import Iterable, List, Tuple, Dict
+from typing import Iterable, List, Tuple, Dict, IO
 import itertools
 import logging
 import re
@@ -52,7 +52,7 @@ def aggregate(
                     counts[match] = [int(0)] * len(aggregate_columns)
                 for i, aggregate_column in enumerate(aggregate_columns):
                     counts[match][i] += int(parts[aggregate_column])
-    with open(output_file_name, 'wt') as output_file_handle:
+    with open(output_file_name, 'wt') as output_file_handle:  # type: IO[str]
         for match, aggregates in counts.items():
             print("\t".join(itertools.chain(match, [str(x) for x in aggregates])), file=output_file_handle)
 
@@ -62,7 +62,7 @@ def aggregate(
 
 
 def write_data(data: List[List[str]], output_file_name: str) -> None:
-    with open(output_file_name, "at") as output_file_handle:
+    with open(output_file_name, "at") as output_file_handle:  # type: IO[str]
         for d in data:
             print("\t".join(d), file=output_file_handle)
 
@@ -74,7 +74,7 @@ def group_by(
         output_file_template: str,
         unlink=True) -> List[str]:
     all_data = defaultdict(list)  # type: Dict[str, List[List[str]]]
-    LIMIT = 10000
+    limit = 10000
     for input_file_name in input_file_names:
         logger.debug("working on file [%s]", input_file_name)
         with open(input_file_name, 'rt') as file_handle:
@@ -86,7 +86,7 @@ def group_by(
                 match = "_".join(match)
                 data_to_append = [parts[i] for i in collect_columns]
                 all_data[match].append(data_to_append)
-                if len(all_data[match]) > LIMIT:
+                if len(all_data[match]) > limit:
                     write_data(all_data[match], output_file_template.format(match=match))
                     all_data[match] = list()
     # write the rest for the data
@@ -108,7 +108,7 @@ class TsvWriter:
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
                  check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
                  remove_non_ascii: bool=True):
-        self.io = open(filename, mode="wt")
+        self.io = open(filename, mode="wt")  # type: IO[str]
         self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
         self.clean_edges = clean_edges
@@ -186,7 +186,7 @@ class TsvReader:
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
-            self.io = open(name=filename, mode=mode)
+            self.io = open(filename, mode=mode)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
         self.line_number = -1
