@@ -6,11 +6,11 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.49',
+    version='0.0.50',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://veltzer.github.io/pytsv',
-    bugtrack_url='https://github.com/veltzer/pytsv/issues',
+    # bugtrack_url='https://github.com/veltzer/pytsv/issues',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
     maintainer='Mark Veltzer',
