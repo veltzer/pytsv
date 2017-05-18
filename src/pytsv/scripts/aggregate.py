@@ -2,10 +2,6 @@ import os
 import click
 import pytsv.pytsv
 
-"""
-TODO: make this script more flexible
-"""
-
 
 @click.command()
 @click.option('--folder', required=True, type=str, help="folder")
