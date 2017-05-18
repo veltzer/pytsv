@@ -6,7 +6,7 @@ from pytsv.pytsv import TsvReader
 @click.command()
 @click.option('--input-file', required=True, type=str, help="input file")
 @click.option('--output-file', required=True, type=str, help="output file")
-def main(input_file, output_file):
+def main(input_file: str, output_file: str) -> None:
     """ This script converts a TSV file to a CSV file """
     with open(output_file, "wt") as output_file_handle:
         csv_writer = csv.writer(output_file_handle)

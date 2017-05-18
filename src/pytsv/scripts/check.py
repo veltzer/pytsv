@@ -43,8 +43,16 @@ def check_file(params_for_job: ParamsForJob) -> bool:
 @click.option('--validate_all_lines_same_number_of_fields', required=False, default=True, type=bool,
               help="validate all lines same number of fields")
 @click.argument('input-files', nargs=-1)
-def main(num_fields, progress, parallel, jobs, filename, check_non_ascii, validate_all_lines_same_number_of_fields,
-         input_files):
+def main(
+        num_fields,
+        progress,
+        parallel,
+        jobs,
+        filename,
+        check_non_ascii,
+        validate_all_lines_same_number_of_fields,
+        input_files,
+):
     """ This script checks that every file given to it is legal tsv """
     if parallel:
         with concurrent.futures.ProcessPoolExecutor(max_workers=jobs) as executor:

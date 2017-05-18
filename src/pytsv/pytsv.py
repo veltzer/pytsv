@@ -12,15 +12,14 @@ logger = logging.getLogger(__name__)
 
 def clean(text: str, clean_edges: bool=True, sub_trailing: bool=True, remove_non_ascii: bool=True) -> str:
     if sub_trailing:
-        # make sure we have just one space between words
-        # make sure that text does not contain tabs
+        # replace all manner of whitespace (consecutive or not)
+        # with s single space
         text = re.sub(r"[\r\t\n\v ]+", " ", text)
     if remove_non_ascii:
         text = text.encode('ascii', errors='ignore').decode()
     if clean_edges:
         # remove space from the left and right
         text = text.strip()
-    # TODO: get rid of strings which are binary or not well encoded
     return text
 
 
