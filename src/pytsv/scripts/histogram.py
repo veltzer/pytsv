@@ -19,7 +19,7 @@ def main(
     a = []
     with TsvReader(input_file) as input_handle:
         for fields in input_handle:
-            a.append(fields[column_number])
+            a.append(float(fields[column_number]))
     count_in_bucket, bucket_edges = numpy.histogram(a, bins=bucket_number)
     with TsvWriter(output_file) as output_handle:
         for i, count in enumerate(count_in_bucket):
