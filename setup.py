@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.57',
+    version='0.0.58',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://veltzer.github.io/pytsv',
@@ -29,6 +29,7 @@ setuptools.setup(
         'click',  # for command line parsing
         'tqdm',  # for progress report
         'pyanyzip',  # for opening zipped files
+        'numpy',  # for the histogram feature
     ],
     entry_points={
         'console_scripts': [
@@ -39,6 +40,7 @@ setuptools.setup(
             'pytsv_cut=pytsv.scripts.cut:main',
             'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
             'pytsv_fix_field=pytsv.scripts.fix_field:main',
+            'pytsv_histogram=pytsv.scripts.histogram:main',
         ],
     },
 )

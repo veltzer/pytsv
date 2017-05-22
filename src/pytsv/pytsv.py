@@ -182,9 +182,15 @@ class TsvWriter:
 
 
 class TsvReader:
-    def __init__(self, filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
-                 use_any_format: bool=True, num_fields: int=None, skip_comments: bool=True,
-                 check_non_ascii: bool=True):
+    def __init__(self,
+                 filename: str,
+                 mode: str="rt",
+                 validate_all_lines_same_number_of_fields: bool=True,
+                 use_any_format: bool=True,
+                 num_fields: int=None,
+                 skip_comments: bool=True,
+                 check_non_ascii: bool=True,
+                 ):
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
