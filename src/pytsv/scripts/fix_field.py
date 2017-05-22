@@ -16,6 +16,7 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.option('--sub-trailing', required=False, type=bool,
               help="substitute consecutive white spaces with one single space")
 @click.option('--remove-non-ascii', required=False, type=bool, help="remove non ascii characters")
+@click.option('--lower-case', required=False, type=bool, help="lower case the field")
 def main(
         progress: bool,
         input_file: str,
@@ -24,6 +25,7 @@ def main(
         clean_edges: bool,
         sub_trailing: bool,
         remove_non_ascii: bool,
+        lower_case: bool,
 ) -> None:
     """
     This script will fix a tsv file assuming that bad characters or tabs have been
@@ -41,6 +43,7 @@ left in one column of it.
                     clean_edges=clean_edges,
                     sub_trailing=sub_trailing,
                     remove_non_ascii=remove_non_ascii,
+                    lower_case=lower_case,
                 )
                 new_fields = fields[:fix_column]
                 new_fields.append(fixed_field)

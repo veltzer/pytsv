@@ -11,7 +11,13 @@ import pyanyzip
 logger = logging.getLogger(__name__)
 
 
-def clean(text: str, clean_edges: bool=True, sub_trailing: bool=True, remove_non_ascii: bool=True) -> str:
+def clean(
+        text: str,
+        clean_edges: bool=True,
+        sub_trailing: bool=True,
+        remove_non_ascii: bool=True,
+        lower_case: bool=True,
+) -> str:
     if sub_trailing:
         # replace all manner of whitespace (consecutive or not)
         # with s single space
@@ -21,6 +27,8 @@ def clean(text: str, clean_edges: bool=True, sub_trailing: bool=True, remove_non
     if clean_edges:
         # remove space from the left and right
         text = text.strip()
+    if lower_case:
+        text = text.lower()
     return text
 
 
@@ -107,7 +115,8 @@ class TsvWriter:
     def __init__(self, filename: str, sanitize: bool=True, throw_exceptions: bool=False,
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
                  check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
-                 remove_non_ascii: bool=True, do_gzip: bool=False, filename_detect: bool=True):
+                 remove_non_ascii: bool=True, do_gzip: bool=False, filename_detect: bool=True,
+                 ):
         if filename_detect:
             found = False
             if filename.endswith(".tsv.gz"):
