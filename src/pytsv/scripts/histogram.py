@@ -26,9 +26,9 @@ def main(
             edge_from = bucket_edges[i]
             edge_to = bucket_edges[i+1]
             output_handle.write([
-                edge_from,
-                edge_to,
-                count,
+                str(edge_from),
+                str(edge_to),
+                str(count),
             ])
 
 if __name__ == '__main__':
