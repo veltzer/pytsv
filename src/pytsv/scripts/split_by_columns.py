@@ -24,7 +24,7 @@ def main(columns: str, pattern: str, progress: bool, input_file: str) -> None:
             key = ",".join([fields[x] for x in columns])
             if key not in tsv_writers_dict:
                 filename = pattern.format(key=key)
-                output_handle = TsvWriter.open(filename=filename)
+                output_handle = TsvWriter(filename=filename)
                 tsv_writers_dict[key] = output_handle
             output_handle = tsv_writers_dict[key]
             output_handle.write(fields)

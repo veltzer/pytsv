@@ -36,19 +36,14 @@ left in one column of it.
             input_file_handle = tqdm.tqdm(input_file_handle)
         with TsvWriter(filename=output_file) as output_file_handle:
             for fields in input_file_handle:  # type: List[str]
-                num_columns = len(fields)
-                fixed_field = " ".join(fields[fix_column:len(fields)-num_columns+fix_column+1])
-                fixed_field = pytsv.clean(
-                    text=fixed_field,
+                fields[fix_column] = pytsv.clean(
+                    text=fields[fix_column],
                     clean_edges=clean_edges,
                     sub_trailing=sub_trailing,
                     remove_non_ascii=remove_non_ascii,
                     lower_case=lower_case,
                 )
-                new_fields = fields[:fix_column]
-                new_fields.append(fixed_field)
-                new_fields.extend(fields[len(fields)-fix_column:])
-                output_file_handle.write(new_fields)
+                output_file_handle.write(fields)
 
 if __name__ == '__main__':
     main()
