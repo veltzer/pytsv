@@ -12,11 +12,11 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.option('--input-file', required=True, type=str, help="input file")
 @click.option('--output-file', required=True, type=str, help="output file")
 @click.option('--fix-column', required=True, type=int, help="column to fix")
-@click.option('--clean-edges', required=False, type=bool, help="remove space before and after")
-@click.option('--sub-trailing', required=False, type=bool,
+@click.option('--clean-edges', required=False, default=True, type=bool, help="remove space before and after")
+@click.option('--sub-trailing', required=False, default=True, type=bool,
               help="substitute consecutive white spaces with one single space")
-@click.option('--remove-non-ascii', required=False, type=bool, help="remove non ascii characters")
-@click.option('--lower-case', required=False, type=bool, help="lower case the field")
+@click.option('--remove-non-ascii', required=False, default=True, type=bool, help="remove non ascii characters")
+@click.option('--lower-case', required=False, default=True, type=bool, help="lower case the field")
 def main(
         progress: bool,
         input_file: str,
