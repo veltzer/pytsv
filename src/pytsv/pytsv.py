@@ -1,3 +1,4 @@
+import gzip
 import os
 from collections import defaultdict
 from typing import Iterable, List, Tuple, Dict, IO
@@ -106,8 +107,21 @@ class TsvWriter:
     def __init__(self, filename: str, sanitize: bool=True, throw_exceptions: bool=False,
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
                  check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
-                 remove_non_ascii: bool=True):
-        self.io = open(filename, mode="wt")  # type: IO[str]
+                 remove_non_ascii: bool=True, do_gzip: bool=False, filename_detect: bool=True):
+        if filename_detect:
+            found = False
+            if filename.endswith(".tsv.gz"):
+                self.io = gzip.open(filename, mode="wt")  # type: IO[str]
+                found = True
+            if filename.endswith(".tsv"):
+                self.io = open(filename, mode="wt")  # type: IO[str]
+                found = True
+            assert found
+        else:
+            if do_gzip:
+                self.io = gzip.open(filename, mode="wt")  # type: IO[str]
+            else:
+                self.io = open(filename, mode="wt")  # type: IO[str]
         self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
         self.clean_edges = clean_edges
@@ -157,28 +171,8 @@ class TsvWriter:
         """ method needed to be a context manager """
         self.close()
 
-    @staticmethod
-    def open(filename: str, sanitize: bool=True, throw_exceptions: bool=False,
-             clean_edges: bool=True, sub_trailing: bool=True, fields_to_clean=None,
-             check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
-             remove_non_ascii: bool=True):
-        return TsvWriter(filename=filename, sanitize=sanitize, throw_exceptions=throw_exceptions,
-                         clean_edges=clean_edges, sub_trailing=sub_trailing,
-                         fields_to_clean=fields_to_clean, check_num_fields=check_num_fields,
-                         num_fields=num_fields, convert_to_string=convert_to_string,
-                         remove_non_ascii=remove_non_ascii)
-
 
 class TsvReader:
-    @staticmethod
-    def open(filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
-             use_any_format: bool=True, num_fields: int=None, skip_comments: bool=True,
-             check_non_ascii: bool=True):
-        return TsvReader(filename=filename, mode=mode,
-                         validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields,
-                         use_any_format=use_any_format, num_fields=num_fields, skip_comments=skip_comments,
-                         check_non_ascii=check_non_ascii)
-
     def __init__(self, filename: str, mode: str="rt", validate_all_lines_same_number_of_fields: bool=True,
                  use_any_format: bool=True, num_fields: int=None, skip_comments: bool=True,
                  check_non_ascii: bool=True):
