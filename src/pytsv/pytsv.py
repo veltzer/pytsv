@@ -60,9 +60,12 @@ def aggregate(
                     counts[match] = [int(0)] * len(aggregate_columns)
                 for i, aggregate_column in enumerate(aggregate_columns):
                     counts[match][i] += int(parts[aggregate_column])
-    with open(output_file_name, 'wt') as output_file_handle:  # type: IO[str]
+    with TsvWriter(
+            filename=output_file_name,
+    ) as output_file_handle:
         for match, aggregates in counts.items():
-            print("\t".join(itertools.chain(match, [str(x) for x in aggregates])), file=output_file_handle)
+            for fields in itertools.chain(match, [str(x) for x in aggregates]):
+                output_file_handle.write(fields)
 
     if unlink:
         for input_file_name in input_file_names:
@@ -70,9 +73,12 @@ def aggregate(
 
 
 def write_data(data: List[List[str]], output_file_name: str) -> None:
-    with open(output_file_name, "at") as output_file_handle:  # type: IO[str]
+    with TsvWriter(
+            filename=output_file_name,
+            mode="at",
+    ) as output_file_handle:
         for d in data:
-            print("\t".join(d), file=output_file_handle)
+            output_file_handle.write(d)
 
 
 def group_by(
