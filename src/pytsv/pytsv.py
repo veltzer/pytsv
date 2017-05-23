@@ -63,8 +63,9 @@ def aggregate(
     # of fields because the check requires a len(fields) to be available
     # and it is not in this case because of itertools.chain
     with TsvWriter(
-            filename=output_file_name,
-            check_num_fields=False,
+        filename=output_file_name,
+        check_num_fields=False,
+        sanitize=False,
     ) as output_file_handle:
         for match, aggregates in counts.items():
             output_file_handle.write(itertools.chain(match, aggregates))
@@ -164,7 +165,11 @@ class TsvWriter:
         if self.convert_to_string:
             for i, t in enumerate(l):
                 if type(t) in (int, float):
-                    l[i] = str(t)
+                    yield str(t)
+                else:
+                    yield t
+        else:
+            yield from l
 
     def write(self, l: List[str]) -> None:
         self._sanitize(l)
@@ -173,8 +178,7 @@ class TsvWriter:
                 self.num_fields = len(l)
             else:
                 assert len(l) == self.num_fields, "wrong number of fields in {}".format(l)
-        self._convert(l)
-        print("\t".join(l), file=self.io)
+        print("\t".join(self._convert(l)), file=self.io)
 
     def close(self) -> None:
         self.io.close()
