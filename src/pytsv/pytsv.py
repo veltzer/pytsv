@@ -61,10 +61,7 @@ def aggregate(
                     counts[match][i] += int(parts[aggregate_column])
     with TsvWriter(filename=output_file_name) as output_file_handle:
         for match, aggregates in counts.items():
-            fields = []
-            fields.extend(match)
-            fields.extend(aggregates)
-            output_file_handle.write(fields)
+            output_file_handle.write(itertools.chain(match, aggregates))
     if unlink:
         for input_file_name in input_file_names:
             os.unlink(input_file_name)
@@ -116,7 +113,7 @@ def is_ascii(s):
 
 
 class TsvWriter:
-    def __init__(self, filename: str, sanitize: bool=True, throw_exceptions: bool=False,
+    def __init__(self, filename: str, mode: str="wt", sanitize: bool=True, throw_exceptions: bool=False,
                  clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
                  check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
                  remove_non_ascii: bool=True, do_gzip: bool=False, filename_detect: bool=True,
@@ -124,17 +121,17 @@ class TsvWriter:
         if filename_detect:
             found = False
             if filename.endswith(".tsv.gz"):
-                self.io = gzip.open(filename, mode="wt")  # type: IO[str]
+                self.io = gzip.open(filename, mode=mode)  # type: IO[str]
                 found = True
             if filename.endswith(".tsv"):
-                self.io = open(filename, mode="wt")  # type: IO[str]
+                self.io = open(filename, mode=mode)  # type: IO[str]
                 found = True
             assert found
         else:
             if do_gzip:
-                self.io = gzip.open(filename, mode="wt")  # type: IO[str]
+                self.io = gzip.open(filename, mode=mode)  # type: IO[str]
             else:
-                self.io = open(filename, mode="wt")  # type: IO[str]
+                self.io = open(filename, mode=mode)  # type: IO[str]
         self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
         self.clean_edges = clean_edges
