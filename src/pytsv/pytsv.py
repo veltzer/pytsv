@@ -37,7 +37,8 @@ def aggregate(
         match_columns: List[int],
         aggregate_columns: List[int],
         output_file_name: str,
-        unlink=True) -> None:
+        unlink=True,
+) -> None:
     """
     This function aggregates a bunch of input files by integers.
     :param input_file_names:
@@ -50,23 +51,20 @@ def aggregate(
     counts = dict()  # type: Dict[Tuple[str], List[int]]
     for input_file_name in input_file_names:
         logger.debug("working on file [%s]", input_file_name)
-        with open(input_file_name, 'rt') as file_handle:
-            for line in file_handle:
-                line = line.rstrip()
-                parts = line.split("\t")  # type: List[str]
+        with TsvReader(filename=input_file_name) as input_handle:
+            for parts in input_handle:
                 # noinspection PyTypeChecker
                 match = tuple([parts[i] for i in match_columns])  # type: Tuple[str]
                 if match not in counts:
                     counts[match] = [int(0)] * len(aggregate_columns)
                 for i, aggregate_column in enumerate(aggregate_columns):
                     counts[match][i] += int(parts[aggregate_column])
-    with TsvWriter(
-            filename=output_file_name,
-    ) as output_file_handle:
+    with TsvWriter(filename=output_file_name) as output_file_handle:
         for match, aggregates in counts.items():
-            for fields in itertools.chain(match, [str(x) for x in aggregates]):
-                output_file_handle.write(fields)
-
+            fields = []
+            fields.extend(match)
+            fields.extend(aggregates)
+            output_file_handle.write(fields)
     if unlink:
         for input_file_name in input_file_names:
             os.unlink(input_file_name)
