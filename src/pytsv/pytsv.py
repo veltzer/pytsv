@@ -59,7 +59,13 @@ def aggregate(
                     counts[match] = [int(0)] * len(aggregate_columns)
                 for i, aggregate_column in enumerate(aggregate_columns):
                     counts[match][i] += int(parts[aggregate_column])
-    with TsvWriter(filename=output_file_name) as output_file_handle:
+    # notice that we create a writer that does not check the number
+    # of fields because the check requires a len(fields) to be available
+    # and it is not in this case because of itertools.chain
+    with TsvWriter(
+            filename=output_file_name,
+            check_num_fields=False,
+    ) as output_file_handle:
         for match, aggregates in counts.items():
             output_file_handle.write(itertools.chain(match, aggregates))
     if unlink:
