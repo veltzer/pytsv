@@ -1,7 +1,7 @@
 import gzip
 import os
 from collections import defaultdict
-from typing import Iterable, List, Tuple, Dict, IO
+from typing import Iterable, List, Tuple, Dict, IO, Iterator
 import itertools
 import logging
 import re
@@ -120,11 +120,26 @@ def is_ascii(s):
 
 
 class TsvWriter:
-    def __init__(self, filename: str, mode: str="wt", sanitize: bool=True, throw_exceptions: bool=False,
-                 clean_edges: bool=True, sub_trailing=True, fields_to_clean: List[int]=None,
-                 check_num_fields: bool=True, num_fields: int=None, convert_to_string: bool=True,
-                 remove_non_ascii: bool=True, do_gzip: bool=False, filename_detect: bool=True,
-                 ):
+    def __init__(
+            self,
+            filename: str,
+            mode: str="wt",
+            throw_exceptions: bool=False,
+
+            sanitize: bool = True,
+            fields_to_clean: List[int]=None,
+            clean_edges: bool = True,
+            sub_trailing=True,
+            remove_non_ascii: bool = True,
+            lower_case: bool = True,
+
+            check_num_fields: bool=True,
+            num_fields: int=None,
+            convert_to_string: bool=True,
+
+            do_gzip: bool=False,
+            filename_detect: bool=True,
+    ):
         if filename_detect:
             found = False
             if filename.endswith(".tsv.gz"):
@@ -139,17 +154,20 @@ class TsvWriter:
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
             else:
                 self.io = open(filename, mode=mode)  # type: IO[str]
-        self.sanitize = sanitize
         self.throw_exceptions = throw_exceptions
-        self.clean_edges = clean_edges
-        self.sub_trailing = sub_trailing
+
+        self.sanitize = sanitize
         self.fields_to_clean = fields_to_clean
         if self.fields_to_clean is None:
             self.fields_to_clean = []
+        self.clean_edges = clean_edges
+        self.sub_trailing = sub_trailing
+        self.remove_non_ascii = remove_non_ascii
+        self.lower_case = lower_case
+
         self.check_num_fields = check_num_fields
         self.num_fields = num_fields
         self.convert_to_string = convert_to_string
-        self.remove_non_ascii = remove_non_ascii
 
     def _sanitize(self, l: List[str]) -> None:
         if self.sanitize:
@@ -159,9 +177,10 @@ class TsvWriter:
                     clean_edges=self.clean_edges,
                     sub_trailing=self.sub_trailing,
                     remove_non_ascii=self.remove_non_ascii,
+                    lower_case=self.lower_case,
                 )
 
-    def _convert(self, l: List[str]) -> None:
+    def _convert(self, l: List[str]) -> Iterator[str]:
         if self.convert_to_string:
             for i, t in enumerate(l):
                 if type(t) in (int, float):
@@ -193,24 +212,26 @@ class TsvWriter:
 
 
 class TsvReader:
-    def __init__(self,
-                 filename: str,
-                 mode: str="rt",
-                 validate_all_lines_same_number_of_fields: bool=True,
-                 use_any_format: bool=True,
-                 num_fields: int=None,
-                 skip_comments: bool=True,
-                 check_non_ascii: bool=True,
-                 ):
+    def __init__(
+            self,
+            filename: str,
+            mode: str="rt",
+            use_any_format: bool = True,
+            validate_all_lines_same_number_of_fields: bool=True,
+            num_fields: int=None,
+            skip_comments: bool=True,
+            check_non_ascii: bool=True,
+    ):
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
             self.io = open(filename, mode=mode)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
-        self.line_number = -1
         self.skip_comments = skip_comments
         self.check_non_ascii = check_non_ascii
+
+        self.line_number = -1
 
     def __next__(self):
         """ method needed to be an iterator """
