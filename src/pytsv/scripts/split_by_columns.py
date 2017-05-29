@@ -9,7 +9,12 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.option('--pattern', required=False, default="{key}.tsv", type=str, help="pattern of generated files")
 @click.option('--progress', required=False, default=True, type=bool, help="show progress")
 @click.option('--input-file', required=True, type=str, help="filename to work on")
-def main(columns: str, pattern: str, progress: bool, input_file: str) -> None:
+def main(
+        columns: str,
+        pattern: str,
+        progress: bool,
+        input_file: str,
+) -> None:
     """
     This application will split a TSV file into many files according
     to some of its columns

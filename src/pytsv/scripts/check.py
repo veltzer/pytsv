@@ -1,5 +1,6 @@
 import concurrent.futures
 import os
+from typing import List
 
 import click
 import tqdm
@@ -37,22 +38,22 @@ def check_file(params_for_job: ParamsForJob) -> bool:
 @click.option('--num-fields', required=False, default=None, type=int, help="how many fields should the tsv have")
 @click.option('--progress', required=False, default=True, type=bool, help="show progress")
 @click.option('--parallel', required=False, default=False, type=bool, help="check different files in parallel")
-@click.option("--jobs", default=os.cpu_count(), help="how many jobs to run")
+@click.option("--jobs", default=os.cpu_count(), type=int, help="how many jobs to run")
 @click.option('--filename', required=False, default=True, type=bool, help="show filename")
 @click.option('--check-non-ascii', required=False, default=True, type=bool, help="check non ascii")
 @click.option('--validate_all_lines_same_number_of_fields', required=False, default=True, type=bool,
               help="validate all lines same number of fields")
 @click.argument('input-files', nargs=-1)
 def main(
-        num_fields,
-        progress,
-        parallel,
-        jobs,
-        filename,
-        check_non_ascii,
-        validate_all_lines_same_number_of_fields,
-        input_files,
-):
+        num_fields: int,
+        progress: bool,
+        parallel: bool,
+        jobs: int,
+        filename: str,
+        check_non_ascii: bool,
+        validate_all_lines_same_number_of_fields: bool,
+        input_files: List[str],
+) -> None:
     """ This script checks that every file given to it is legal tsv """
     if parallel:
         with concurrent.futures.ProcessPoolExecutor(max_workers=jobs) as executor:

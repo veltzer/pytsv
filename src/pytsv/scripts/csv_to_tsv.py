@@ -10,7 +10,10 @@ from pytsv.pytsv import TsvWriter
 @click.command()
 @click.option('--input-file', required=True, type=str, help="input file")
 @click.option('--output-file', required=True, type=str, help="output file")
-def main(input_file: str, output_file: str) -> None:
+def main(
+        input_file: str,
+        output_file: str,
+) -> None:
     """ This script converts a CSV to a TSV file """
     with pyanyzip.open(input_file, "rt") as input_file_handle:
         csv_reader = csv.reader(input_file_handle)

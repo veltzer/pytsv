@@ -9,7 +9,12 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.option('--cut-fields', required=True, type=str, help="fields to cut")
 @click.option('--input-file', required=True, type=str, help="input file")
 @click.option('--output-file', required=True, type=str, help="output file")
-def main(progress: bool, cut_fields: str, input_file: str, output_file: str) -> None:
+def main(
+        progress: bool,
+        cut_fields: str,
+        input_file: str,
+        output_file: str
+) -> None:
     """ cut fields from tsv files """
     cut_fields = [int(x) for x in cut_fields.split(',') if x != ""]
     with TsvReader(filename=input_file) as input_file_handle:
