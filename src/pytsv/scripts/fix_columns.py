@@ -32,7 +32,8 @@ def main(
 left in one column of it.
     """
     fix_columns = [int(x) for x in fix_columns.split(',')]
-    with TsvReader(filename=input_file) as input_file_handle:
+    # We need to read the input file WITHOUT assuming that it hasn't problems
+    with TsvReader(filename=input_file, check_non_ascii=False) as input_file_handle:
         if progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         with TsvWriter(filename=output_file) as output_file_handle:
