@@ -7,15 +7,15 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.command()
 @click.option('--progress', required=False, default=True, type=bool, help="show progress")
 @click.option('--cut-fields', required=True, type=str, help="fields to cut")
-@click.option('--input-file', required=True, type=str, help="input file")
-@click.option('--output-file', required=True, type=str, help="output file")
+@click.option('--input-file', required=True, type=str, help="input file (can be compressed)")
+@click.option('--output-file', required=True, type=str, help="output file (can be compressed)")
 def main(
         progress: bool,
         cut_fields: str,
         input_file: str,
-        output_file: str
+        output_file: str,
 ) -> None:
-    """ cut fields from tsv files """
+    """ cut fields from a tsv file """
     cut_fields = [int(x) for x in cut_fields.split(',') if x != ""]
     with TsvReader(filename=input_file) as input_file_handle:
         with TsvWriter(filename=output_file) as output_file_handle:
