@@ -8,7 +8,6 @@ import re
 
 import pyanyzip
 
-logger = logging.getLogger(__name__)
 
 
 def clean(
@@ -49,6 +48,7 @@ def aggregate(
     :return:
     """
     counts = dict()  # type: Dict[Tuple[str], List[int]]
+    logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
         logger.debug("working on file [%s]", input_file_name)
         with TsvReader(filename=input_file_name) as input_handle:
@@ -91,6 +91,7 @@ def group_by(
         unlink=True) -> List[str]:
     all_data = defaultdict(list)  # type: Dict[str, List[List[str]]]
     limit = 10000
+    logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
         logger.debug("working on file [%s]", input_file_name)
         with open(input_file_name, 'rt') as file_handle:
