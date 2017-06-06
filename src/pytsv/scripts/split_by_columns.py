@@ -6,7 +6,7 @@ from pytsv.pytsv import TsvReader, TsvWriter
 
 @click.command()
 @click.option('--columns', required=True, type=str, help="what columns to split by, comma separated")
-@click.option('--pattern', required=False, default="{key}.tsv", type=str, help="pattern of generated files")
+@click.option('--pattern', required=False, default="{key}.tsv.gz", type=str, help="pattern of generated files")
 @click.option('--progress', required=False, default=True, type=bool, help="show progress")
 @click.option('--input-file', required=True, type=str, help="filename to work on")
 def main(
