@@ -9,7 +9,6 @@ import re
 import pyanyzip
 
 
-
 def clean(
         text: str,
         clean_edges: bool=True,

@@ -1,3 +1,4 @@
+pylogconf
 click
 tqdm
 pyanyzip

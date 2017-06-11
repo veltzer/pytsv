@@ -40,7 +40,12 @@ def main(
     """
     sample_columns = [int(x) for x in sample_columns.split(',')]
     df = pd.read_csv(input_file, index_col=False, header=None, sep="\t")
-    df.sample(n=size, weights=np.log2(df[factor_column]) + 1)[sample_columns].to_csv(output_file, sep='\t', index=False, header=None)
+    df.sample(n=size, weights=np.log2(df[factor_column]) + 1)[sample_columns].to_csv(
+        output_file,
+        sep='\t',
+        index=False,
+        header=None,
+    )
 
 
 if __name__ == '__main__':
