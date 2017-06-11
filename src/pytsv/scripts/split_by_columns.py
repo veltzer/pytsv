@@ -13,11 +13,13 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.option('--columns', required=True, type=str, help="what columns to split by, comma separated")
 @click.option('--pattern', required=False, default="{key}.tsv.gz", type=str, help="pattern of generated files")
 @click.option('--progress', required=False, default=True, type=bool, help="show progress")
+@click.option('--check_non_ascii', required=False, default=True, type=bool, help="check for non ascii characters")
 @click.argument('input-files', nargs=-1)
 def main(
         columns: str,
         pattern: str,
         progress: bool,
+        check_non_ascii: bool,
         input_files: List[str],
 ) -> None:
     """
@@ -30,7 +32,7 @@ def main(
     assert len(columns) > 0, "must provide --columns"
     tsv_writers_dict = dict()
     for input_file in input_files:
-        with TsvReader(filename=input_file) as input_file_handle:
+        with TsvReader(filename=input_file, check_non_ascii=check_non_ascii) as input_file_handle:
             if progress:
                 logger.info("working on [%s]" % input_file)
                 input_file_handle = tqdm.tqdm(input_file_handle)
