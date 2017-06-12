@@ -1,15 +1,12 @@
 import concurrent.futures
+import logging
 import os
 from typing import List, Dict
 
+import attr
 import click
-import logging
-
-import itertools
 import pylogconf
 import tqdm
-
-import attr
 
 from pytsv.pytsv import TsvReader, TsvWriter
 
@@ -22,6 +19,7 @@ class JobInfo:
     progress = attr.attrib()  # type: bool
     pattern = attr.attrib()  # type: str
     columns = attr.attrib()  # type: List[int]
+
 
 @attr.attrs
 class JobReturnValue:
@@ -92,12 +90,9 @@ def main(
     for job_return_value in job_return_values:
         for key, filename in job_return_value.files.items():
             outfile = final_pattern.format(key=key)
-            with open(outfile, "wb") as :
-                with open(filename, "rb"):
-                    while
-
-
-
+            with open(outfile, "wb") as _:
+                pass
+                # with open(filename, "rb") as _:
 
 
 if __name__ == '__main__':
