@@ -183,7 +183,7 @@ class TsvWriter:
     def _convert(self, l: List[str]) -> Iterator[str]:
         if self.convert_to_string:
             for i, t in enumerate(l):
-                if type(t) in (int, float):
+                if type(t) in (int, float, type(None)):
                     yield str(t)
                 else:
                     yield t
