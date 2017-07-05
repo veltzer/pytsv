@@ -220,7 +220,7 @@ class TsvReader:
             validate_all_lines_same_number_of_fields: bool=True,
             num_fields: int=None,
             skip_comments: bool=True,
-            check_non_ascii: bool=True,
+            check_non_ascii: bool=False,
     ):
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
