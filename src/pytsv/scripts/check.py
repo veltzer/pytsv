@@ -41,6 +41,7 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     default=None,
     type=int,
     help="how many fields should the tsv have",
+    show_default=True,
 )
 @click.option(
     '--progress',
@@ -48,6 +49,7 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     default=True,
     type=bool,
     help="show progress",
+    show_default=True,
 )
 @click.option(
     '--parallel',
@@ -55,12 +57,14 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     default=False,
     type=bool,
     help="check different files in parallel",
+    show_default=True,
 )
 @click.option(
     '--jobs',
     default=os.cpu_count(),
     type=int,
     help="how many jobs to run",
+    show_default=True,
 )
 @click.option(
     '--filename',
@@ -68,6 +72,7 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     default=True,
     type=bool,
     help="show filename",
+    show_default=True,
 )
 @click.option(
     '--check-non-ascii',
@@ -75,6 +80,7 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     default=CHECK_NON_ASCII,
     type=bool,
     help="check non ascii",
+    show_default=True,
 )
 @click.option(
     '--validate_all_lines_same_number_of_fields',
@@ -82,10 +88,12 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     default=VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
     type=bool,
     help="validate all lines same number of fields",
+    show_default=True,
 )
 @click.argument(
     'input-files',
     nargs=-1,
+    show_default=True,
 )
 def main(
         num_fields: int,

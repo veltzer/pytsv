@@ -9,24 +9,28 @@ import pytsv.pytsv
     required=True,
     type=str,
     help="folder",
+    show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
     help="folder",
+    show_default=True,
 )
 @click.option(
     '--match-columns',
     required=True,
     type=str,
     help="column to match by",
+    show_default=True,
 )
 @click.option(
     '--aggregate-columns',
     required=True,
     type=str,
     help="column to aggregate (must be numeric)",
+    show_default=True,
 )
 @click.option(
     '--do-unlink',
@@ -34,6 +38,7 @@ import pytsv.pytsv
     type=bool,
     default=True,
     help="remove files after done?",
+    show_default=True,
 )
 def main(
         folder: str,

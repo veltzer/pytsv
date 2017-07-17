@@ -10,18 +10,21 @@ from pytsv.pytsv import TsvReader, TsvWriter
     required=True,
     type=str,
     help="input file",
+    show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
     help="output file",
+    show_default=True,
 )
 @click.option(
     '--column-number',
     required=True,
     type=int,
     help="what column to histogram",
+    show_default=True,
 )
 @click.option(
     '--bucket-number',
@@ -29,6 +32,7 @@ from pytsv.pytsv import TsvReader, TsvWriter
     default=10,
     type=int,
     help="what column to histogram",
+    show_default=True,
 )
 def main(
         input_file: str,

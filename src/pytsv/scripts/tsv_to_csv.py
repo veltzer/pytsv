@@ -9,12 +9,14 @@ from pytsv.pytsv import TsvReader
     required=True,
     type=str,
     help="input file",
+    show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
     help="output file",
+    show_default=True,
 )
 def main(
         input_file: str,

@@ -9,24 +9,28 @@ import numpy as np
     required=True,
     type=str,
     help="what columns to split by, comma separated",
+    show_default=True,
 )
 @click.option(
     '--size',
     required=True,
     type=int,
     help="what sample size do you need?",
+    show_default=True,
 )
 @click.option(
     '--input-file',
     required=True,
     type=str,
     help="input filename",
+    show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
     help="output filename",
+    show_default=True,
 )
 def main(
         factor_column: int,

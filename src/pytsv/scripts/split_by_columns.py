@@ -15,6 +15,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
     required=True,
     type=str,
     help="what columns to split by, comma separated",
+    show_default=True,
 )
 @click.option(
     '--pattern',
@@ -22,6 +23,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
     default="{key}.tsv.gz",
     type=str,
     help="pattern of generated files",
+    show_default=True,
 )
 @click.option(
     '--progress',
@@ -29,6 +31,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
     default=True,
     type=bool,
     help="show progress",
+    show_default=True,
 )
 @click.option(
     '--check_non_ascii',
@@ -36,10 +39,12 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
     default=CHECK_NON_ASCII,
     type=bool,
     help="check for non ascii characters",
+    show_default=True,
 )
 @click.argument(
     'input-files',
     nargs=-1,
+    show_default=True,
 )
 def main(
         columns: str,

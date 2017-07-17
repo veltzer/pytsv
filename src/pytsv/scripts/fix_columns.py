@@ -14,24 +14,28 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII,
     default=True,
     type=bool,
     help="show progress",
+    show_default=True,
 )
 @click.option(
     '--input-file',
     required=True,
     type=str,
     help="input file",
+    show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
     help="output file",
+    show_default=True,
 )
 @click.option(
     '--fix-columns',
     required=True,
     type=str,
     help="columns to fix",
+    show_default=True,
 )
 @click.option(
     '--clean-edges',
@@ -39,6 +43,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII,
     default=CLEAN_EDGES,
     type=bool,
     help="remove space before and after",
+    show_default=True,
 )
 @click.option(
     '--sub-trailing',
@@ -46,6 +51,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII,
     default=SUB_TRAILING,
     type=bool,
     help="substitute consecutive white spaces with one single space",
+    show_default=True,
 )
 @click.option(
     '--remove-non-ascii',
@@ -53,6 +59,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII,
     default=REMOVE_NON_ASCII,
     type=bool,
     help="remove non ascii characters",
+    show_default=True,
 )
 @click.option(
     '--lower-case',
@@ -60,6 +67,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII,
     default=LOWER_CASE,
     type=bool,
     help="lower case the field",
+    show_default=True,
 )
 @click.option(
     '--check-non-ascii',
@@ -67,6 +75,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII,
     default=CHECK_NON_ASCII,
     type=bool,
     help="check non ascii",
+    show_default=True,
 )
 def main(
         progress: bool,

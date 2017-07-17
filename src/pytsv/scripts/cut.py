@@ -11,24 +11,28 @@ from pytsv.pytsv import TsvReader, TsvWriter
     default=True,
     type=bool,
     help="show progress",
+    show_default=True,
 )
 @click.option(
     '--cut-fields',
     required=True,
     type=str,
     help="fields to cut",
+    show_default=True,
 )
 @click.option(
     '--input-file',
     required=True,
     type=str,
     help="input file (can be compressed)",
+    show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
     help="output file (can be compressed)",
+    show_default=True,
 )
 def main(
         progress: bool,

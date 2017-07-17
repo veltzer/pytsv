@@ -58,6 +58,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     required=True,
     type=str,
     help="what columns to split by, comma separated",
+    show_default=True,
 )
 @click.option(
     '--pattern',
@@ -65,6 +66,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     default="{key}_{i:04d}.tsv.gz",
     type=str,
     help="pattern of generated files",
+    show_default=True,
 )
 @click.option(
     '--final-pattern',
@@ -72,6 +74,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     default="{key}.tsv.gz",
     type=str,
     help="pattern of generated files",
+    show_default=True,
 )
 @click.option(
     '--progress',
@@ -79,12 +82,14 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     default=True,
     type=bool,
     help="show progress",
+    show_default=True,
 )
 @click.option(
     '--jobs',
     required=False,
     default=os.cpu_count(),
     help="how many jobs to run",
+    show_default=True,
 )
 @click.option(
     '--check_non_ascii',
@@ -92,8 +97,13 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     default=CHECK_NON_ASCII,
     type=bool,
     help="check for non ascii characters",
+    show_default=True,
 )
-@click.argument('input-files', nargs=-1)
+@click.argument(
+    'input-files',
+    nargs=-1,
+    show_default=True,
+)
 def main(
         columns: str,
         pattern: str,

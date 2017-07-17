@@ -13,24 +13,28 @@ from pytsv.pytsv import TsvReader, TsvWriter
     default=True,
     type=bool,
     help="show progress",
+    show_default=True,
 )
 @click.option(
     '--input-file',
     required=True,
     type=str,
     help="input file",
+    show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
     help="output file",
+    show_default=True,
 )
 @click.option(
     '--match-columns',
     required=True,
     type=str,
     help="columns to match",
+    show_default=True,
 )
 def main(
         progress: bool,
