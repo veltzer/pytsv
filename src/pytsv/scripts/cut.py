@@ -5,10 +5,31 @@ from pytsv.pytsv import TsvReader, TsvWriter
 
 
 @click.command()
-@click.option('--progress', required=False, default=True, type=bool, help="show progress")
-@click.option('--cut-fields', required=True, type=str, help="fields to cut")
-@click.option('--input-file', required=True, type=str, help="input file (can be compressed)")
-@click.option('--output-file', required=True, type=str, help="output file (can be compressed)")
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress",
+)
+@click.option(
+    '--cut-fields',
+    required=True,
+    type=str,
+    help="fields to cut",
+)
+@click.option(
+    '--input-file',
+    required=True,
+    type=str,
+    help="input file (can be compressed)",
+)
+@click.option(
+    '--output-file',
+    required=True,
+    type=str,
+    help="output file (can be compressed)",
+)
 def main(
         progress: bool,
         cut_fields: str,

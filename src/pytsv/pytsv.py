@@ -9,6 +9,21 @@ import re
 import pyanyzip
 
 
+CHECK_NON_ASCII = False
+SKIP_COMMENTS = True
+VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS = True
+USE_ANY_FORMAT = True
+SANITIZE = True
+CLEAN_EDGES = True
+SUB_TRAILING = True
+REMOVE_NON_ASCII = True
+LOWER_CASE = True
+CHECK_NUM_FIELDS = True
+CONVERT_TO_STRING = True
+DO_GZIP = False
+FILENAME_DETECT = True
+
+
 def clean(
         text: str,
         clean_edges: bool=True,
@@ -126,19 +141,19 @@ class TsvWriter:
             mode: str="wt",
             throw_exceptions: bool=False,
 
-            sanitize: bool = True,
+            sanitize: bool = SANITIZE,
             fields_to_clean: List[int]=None,
-            clean_edges: bool = True,
-            sub_trailing=True,
-            remove_non_ascii: bool = True,
-            lower_case: bool = True,
+            clean_edges: bool = CLEAN_EDGES,
+            sub_trailing=SUB_TRAILING,
+            remove_non_ascii: bool = REMOVE_NON_ASCII,
+            lower_case: bool = LOWER_CASE,
 
-            check_num_fields: bool=True,
+            check_num_fields: bool=CHECK_NUM_FIELDS,
             num_fields: int=None,
-            convert_to_string: bool=True,
+            convert_to_string: bool=CONVERT_TO_STRING,
 
-            do_gzip: bool=False,
-            filename_detect: bool=True,
+            do_gzip: bool=DO_GZIP,
+            filename_detect: bool=FILENAME_DETECT,
     ):
         if filename_detect:
             found = False
@@ -216,11 +231,11 @@ class TsvReader:
             self,
             filename: str,
             mode: str="rt",
-            use_any_format: bool = True,
-            validate_all_lines_same_number_of_fields: bool=True,
+            use_any_format: bool = USE_ANY_FORMAT,
+            validate_all_lines_same_number_of_fields: bool=VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
             num_fields: int=None,
-            skip_comments: bool=True,
-            check_non_ascii: bool=False,
+            skip_comments: bool=SKIP_COMMENTS,
+            check_non_ascii: bool=CHECK_NON_ASCII,
     ):
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)

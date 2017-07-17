@@ -4,11 +4,37 @@ import pytsv.pytsv
 
 
 @click.command()
-@click.option('--folder', required=True, type=str, help="folder")
-@click.option('--output-file', required=True, type=str, help="folder")
-@click.option('--match-columns', required=True, type=str, help="column to match by")
-@click.option('--aggregate-columns', required=True, type=str, help="column to aggregate (must be numeric)")
-@click.option('--do-unlink', required=False, type=bool, default=True, help="remove files after done?")
+@click.option(
+    '--folder',
+    required=True,
+    type=str,
+    help="folder",
+)
+@click.option(
+    '--output-file',
+    required=True,
+    type=str,
+    help="folder",
+)
+@click.option(
+    '--match-columns',
+    required=True,
+    type=str,
+    help="column to match by",
+)
+@click.option(
+    '--aggregate-columns',
+    required=True,
+    type=str,
+    help="column to aggregate (must be numeric)",
+)
+@click.option(
+    '--do-unlink',
+    required=False,
+    type=bool,
+    default=True,
+    help="remove files after done?",
+)
 def main(
         folder: str,
         output_file: str,

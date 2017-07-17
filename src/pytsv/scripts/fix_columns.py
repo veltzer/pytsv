@@ -4,19 +4,70 @@ import click
 import tqdm
 from pytsv import pytsv
 
-from pytsv.pytsv import TsvReader, TsvWriter
+from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII, SUB_TRAILING, CLEAN_EDGES, LOWER_CASE
 
 
 @click.command()
-@click.option('--progress', required=False, default=True, type=bool, help="show progress")
-@click.option('--input-file', required=True, type=str, help="input file")
-@click.option('--output-file', required=True, type=str, help="output file")
-@click.option('--fix-columns', required=True, type=str, help="columns to fix")
-@click.option('--clean-edges', required=False, default=True, type=bool, help="remove space before and after")
-@click.option('--sub-trailing', required=False, default=True, type=bool,
-              help="substitute consecutive white spaces with one single space")
-@click.option('--remove-non-ascii', required=False, default=True, type=bool, help="remove non ascii characters")
-@click.option('--lower-case', required=False, default=True, type=bool, help="lower case the field")
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress",
+)
+@click.option(
+    '--input-file',
+    required=True,
+    type=str,
+    help="input file",
+)
+@click.option(
+    '--output-file',
+    required=True,
+    type=str,
+    help="output file",
+)
+@click.option(
+    '--fix-columns',
+    required=True,
+    type=str,
+    help="columns to fix",
+)
+@click.option(
+    '--clean-edges',
+    required=False,
+    default=CLEAN_EDGES,
+    type=bool,
+    help="remove space before and after",
+)
+@click.option(
+    '--sub-trailing',
+    required=False,
+    default=SUB_TRAILING,
+    type=bool,
+    help="substitute consecutive white spaces with one single space",
+)
+@click.option(
+    '--remove-non-ascii',
+    required=False,
+    default=REMOVE_NON_ASCII,
+    type=bool,
+    help="remove non ascii characters",
+)
+@click.option(
+    '--lower-case',
+    required=False,
+    default=LOWER_CASE,
+    type=bool,
+    help="lower case the field",
+)
+@click.option(
+    '--check-non-ascii',
+    required=False,
+    default=CHECK_NON_ASCII,
+    type=bool,
+    help="check non ascii",
+)
 def main(
         progress: bool,
         input_file: str,
@@ -26,6 +77,7 @@ def main(
         sub_trailing: bool,
         remove_non_ascii: bool,
         lower_case: bool,
+        check_non_ascii: bool,
 ) -> None:
     """
     This script will fix a tsv file assuming that bad characters or tabs have been
@@ -33,7 +85,7 @@ left in one column of it.
     """
     fix_columns = [int(x) for x in fix_columns.split(',')]
     # We need to read the input file WITHOUT assuming that it hasn't problems
-    with TsvReader(filename=input_file, check_non_ascii=False) as input_file_handle:
+    with TsvReader(filename=input_file, check_non_ascii=check_non_ascii) as input_file_handle:
         if progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         with TsvWriter(filename=output_file) as output_file_handle:

@@ -6,15 +6,41 @@ import logging
 import pylogconf
 import tqdm
 
-from pytsv.pytsv import TsvReader, TsvWriter
+from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
 
 
 @click.command()
-@click.option('--columns', required=True, type=str, help="what columns to split by, comma separated")
-@click.option('--pattern', required=False, default="{key}.tsv.gz", type=str, help="pattern of generated files")
-@click.option('--progress', required=False, default=True, type=bool, help="show progress")
-@click.option('--check_non_ascii', required=False, default=True, type=bool, help="check for non ascii characters")
-@click.argument('input-files', nargs=-1)
+@click.option(
+    '--columns',
+    required=True,
+    type=str,
+    help="what columns to split by, comma separated",
+)
+@click.option(
+    '--pattern',
+    required=False,
+    default="{key}.tsv.gz",
+    type=str,
+    help="pattern of generated files",
+)
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress",
+)
+@click.option(
+    '--check_non_ascii',
+    required=False,
+    default=CHECK_NON_ASCII,
+    type=bool,
+    help="check for non ascii characters",
+)
+@click.argument(
+    'input-files',
+    nargs=-1,
+)
 def main(
         columns: str,
         pattern: str,

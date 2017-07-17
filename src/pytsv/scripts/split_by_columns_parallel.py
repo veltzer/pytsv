@@ -3,28 +3,28 @@ import logging
 import os
 from typing import List, Dict
 
-import attr
+from attr import attrs, attrib
 import click
 import pylogconf
 import tqdm
 
-from pytsv.pytsv import TsvReader, TsvWriter
+from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
 
 
-@attr.attrs
+@attrs
 class JobInfo:
-    check_not_ascii = attr.attrib()  # type: bool
-    input_file = attr.attrib()  # type: str
-    serial = attr.attrib()  # type: int
-    progress = attr.attrib()  # type: bool
-    pattern = attr.attrib()  # type: str
-    columns = attr.attrib()  # type: List[int]
+    check_not_ascii = attrib()  # type: bool
+    input_file = attrib()  # type: str
+    serial = attrib()  # type: int
+    progress = attrib()  # type: bool
+    pattern = attrib()  # type: str
+    columns = attrib()  # type: List[int]
 
 
-@attr.attrs
+@attrs
 class JobReturnValue:
-    serial = attr.attrib()  # type: int
-    files = attr.attrib()  # type: Dict[str, str]
+    serial = attrib()  # type: int
+    files = attrib()  # type: Dict[str, str]
 
 
 def process_single_file(job_info: JobInfo) -> JobReturnValue:
@@ -53,12 +53,46 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
 
 
 @click.command()
-@click.option('--columns', required=True, type=str, help="what columns to split by, comma separated")
-@click.option('--pattern', required=False, default="{key}_{i:04d}.tsv.gz", type=str, help="pattern of generated files")
-@click.option('--final-pattern', required=False, default="{key}.tsv.gz", type=str, help="pattern of generated files")
-@click.option('--progress', required=False, default=True, type=bool, help="show progress")
-@click.option("--jobs", default=os.cpu_count(), help="how many jobs to run")
-@click.option('--check_non_ascii', required=False, default=True, type=bool, help="check for non ascii characters")
+@click.option(
+    '--columns',
+    required=True,
+    type=str,
+    help="what columns to split by, comma separated",
+)
+@click.option(
+    '--pattern',
+    required=False,
+    default="{key}_{i:04d}.tsv.gz",
+    type=str,
+    help="pattern of generated files",
+)
+@click.option(
+    '--final-pattern',
+    required=False,
+    default="{key}.tsv.gz",
+    type=str,
+    help="pattern of generated files",
+)
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress",
+)
+@click.option(
+    '--jobs',
+    required=False,
+    default=os.cpu_count(),
+    help="how many jobs to run",
+)
+@click.option(
+    '--check_non_ascii',
+    required=False,
+    default=CHECK_NON_ASCII,
+    type=bool,
+    help="check for non ascii characters",
+)
 @click.argument('input-files', nargs=-1)
 def main(
         columns: str,

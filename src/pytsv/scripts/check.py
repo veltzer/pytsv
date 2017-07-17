@@ -5,7 +5,7 @@ from typing import List
 import click
 import tqdm
 
-from pytsv.pytsv import TsvReader
+from pytsv.pytsv import TsvReader, CHECK_NON_ASCII, VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS
 
 """
 TODO:
@@ -35,15 +35,58 @@ def check_file(params_for_job: ParamsForJob) -> bool:
 
 
 @click.command()
-@click.option('--num-fields', required=False, default=None, type=int, help="how many fields should the tsv have")
-@click.option('--progress', required=False, default=True, type=bool, help="show progress")
-@click.option('--parallel', required=False, default=False, type=bool, help="check different files in parallel")
-@click.option("--jobs", default=os.cpu_count(), type=int, help="how many jobs to run")
-@click.option('--filename', required=False, default=True, type=bool, help="show filename")
-@click.option('--check-non-ascii', required=False, default=True, type=bool, help="check non ascii")
-@click.option('--validate_all_lines_same_number_of_fields', required=False, default=True, type=bool,
-              help="validate all lines same number of fields")
-@click.argument('input-files', nargs=-1)
+@click.option(
+    '--num-fields',
+    required=False,
+    default=None,
+    type=int,
+    help="how many fields should the tsv have",
+)
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress",
+)
+@click.option(
+    '--parallel',
+    required=False,
+    default=False,
+    type=bool,
+    help="check different files in parallel",
+)
+@click.option(
+    '--jobs',
+    default=os.cpu_count(),
+    type=int,
+    help="how many jobs to run",
+)
+@click.option(
+    '--filename',
+    required=False,
+    default=True,
+    type=bool,
+    help="show filename",
+)
+@click.option(
+    '--check-non-ascii',
+    required=False,
+    default=CHECK_NON_ASCII,
+    type=bool,
+    help="check non ascii",
+)
+@click.option(
+    '--validate_all_lines_same_number_of_fields',
+    required=False,
+    default=VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
+    type=bool,
+    help="validate all lines same number of fields",
+)
+@click.argument(
+    'input-files',
+    nargs=-1,
+)
 def main(
         num_fields: int,
         progress: bool,

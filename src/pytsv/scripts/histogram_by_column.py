@@ -5,10 +5,31 @@ from pytsv.pytsv import TsvReader, TsvWriter
 
 
 @click.command()
-@click.option('--input-file', required=True, type=str, help="input file")
-@click.option('--output-file', required=True, type=str, help="output file")
-@click.option('--column-number', required=True, type=int, help="what column to histogram")
-@click.option('--bucket-number', required=False, default=10, type=int, help="what column to histogram")
+@click.option(
+    '--input-file',
+    required=True,
+    type=str,
+    help="input file",
+)
+@click.option(
+    '--output-file',
+    required=True,
+    type=str,
+    help="output file",
+)
+@click.option(
+    '--column-number',
+    required=True,
+    type=int,
+    help="what column to histogram",
+)
+@click.option(
+    '--bucket-number',
+    required=False,
+    default=10,
+    type=int,
+    help="what column to histogram",
+)
 def main(
         input_file: str,
         output_file: str,

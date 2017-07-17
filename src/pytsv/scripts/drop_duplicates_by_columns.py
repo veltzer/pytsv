@@ -7,10 +7,31 @@ from pytsv.pytsv import TsvReader, TsvWriter
 
 
 @click.command()
-@click.option('--progress', required=False, default=True, type=bool, help="show progress")
-@click.option('--input-file', required=True, type=str, help="input file")
-@click.option('--output-file', required=True, type=str, help="output file")
-@click.option('--match-columns', required=True, type=str, help="columns to match")
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress",
+)
+@click.option(
+    '--input-file',
+    required=True,
+    type=str,
+    help="input file",
+)
+@click.option(
+    '--output-file',
+    required=True,
+    type=str,
+    help="output file",
+)
+@click.option(
+    '--match-columns',
+    required=True,
+    type=str,
+    help="columns to match",
+)
 def main(
         progress: bool,
         input_file: str,

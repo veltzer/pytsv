@@ -8,8 +8,18 @@ from pytsv.pytsv import TsvWriter
 
 
 @click.command()
-@click.option('--input-file', required=True, type=str, help="input file")
-@click.option('--output-file', required=True, type=str, help="output file")
+@click.option(
+    '--input-file',
+    required=True,
+    type=str,
+    help="input file",
+)
+@click.option(
+    '--output-file',
+    required=True,
+    type=str,
+    help="output file",
+)
 def main(
         input_file: str,
         output_file: str,
