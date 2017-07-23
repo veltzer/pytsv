@@ -231,7 +231,7 @@ class TsvReader:
             self,
             filename: str,
             mode: str="rt",
-            use_any_format: bool = USE_ANY_FORMAT,
+            use_any_format: bool=USE_ANY_FORMAT,
             validate_all_lines_same_number_of_fields: bool=VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
             num_fields: int=None,
             skip_comments: bool=SKIP_COMMENTS,

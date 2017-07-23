@@ -44,7 +44,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
 @click.argument(
     'input-files',
     nargs=-1,
-    show_default=True,
+    required=True,
 )
 def main(
         columns: str,

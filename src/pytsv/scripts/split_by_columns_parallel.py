@@ -102,7 +102,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
 @click.argument(
     'input-files',
     nargs=-1,
-    show_default=True,
+    required=True,
 )
 def main(
         columns: str,

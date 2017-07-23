@@ -93,7 +93,7 @@ def check_file(params_for_job: ParamsForJob) -> bool:
 @click.argument(
     'input-files',
     nargs=-1,
-    show_default=True,
+    required=True,
 )
 def main(
         num_fields: int,
