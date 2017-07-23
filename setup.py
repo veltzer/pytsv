@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.81',
+    version='0.0.82',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://veltzer.github.io/pytsv',
@@ -32,17 +32,19 @@ setuptools.setup(
         'numpy',  # for the histogram feature
     ],
     entry_points={
+        # order here is by order of files in the scripts folder
         'console_scripts': [
-            'pytsv_check=pytsv.scripts.check:main',
             'pytsv_aggregate=pytsv.scripts.aggregate:main',
+            'pytsv_check=pytsv.scripts.check:main',
             'pytsv_csv_to_tsv=pytsv.scripts.csv_to_tsv:main',
-            'pytsv_tsv_to_csv=pytsv.scripts.tsv_to_csv:main',
             'pytsv_cut=pytsv.scripts.cut:main',
-            'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
-            'pytsv_fix_columns=pytsv.scripts.fix_columns:main',
             'pytsv_drop_duplicates_by_columns=pytsv.scripts.drop_duplicates_by_columns:main',
+            'pytsv_fix_columns=pytsv.scripts.fix_columns:main',
             'pytsv_histogram_by_column=pytsv.scripts.histogram_by_column:main',
+            'pytsv_lc=pytsv.scripts.lc:main',
             'pytsv_sample_by_column=pytsv.scripts.sample_by_column:main',
+            'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
+            'pytsv_tsv_to_csv=pytsv.scripts.tsv_to_csv:main',
         ],
     },
 )
