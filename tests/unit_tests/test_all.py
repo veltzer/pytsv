@@ -4,7 +4,8 @@ import unittest
 from pytsv.pytsv import TsvReader
 
 
-def get_file(name: str) -> str:
+def get_file(name):
+    # type: (str) -> str
     return os.path.join(os.path.dirname(__file__), "../../", name)
 
 
@@ -14,7 +15,8 @@ file_bad = get_file("data/bad.tsv")
 file_gzip = get_file("data/good.tsv.gz")
 
 
-def read_all_file(filename: str):
+def read_all_file(filename):
+    # type: (str) -> None
     with TsvReader(filename=filename) as input_handle:
         for _ in input_handle:
             pass
@@ -23,7 +25,10 @@ def read_all_file(filename: str):
 class TestAll(unittest.TestCase):
 
     def testOpenNotExists(self):
-        self.assertRaises(FileNotFoundError, TsvReader, filename=file_doesnt_exist)
+        # python 3
+        # self.assertRaises(FileNotFoundError, TsvReader, filename=file_doesnt_exist)
+        # python 2
+        self.assertRaises(IOError, TsvReader, filename=file_doesnt_exist)
 
     def testGoodFile(self):
         TsvReader(filename=file_good)

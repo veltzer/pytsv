@@ -22,9 +22,11 @@ class ParamsForJob:
         self.progress = None
 
 
-def check_file(params_for_job: ParamsForJob) -> bool:
+def check_file(params_for_job):
+    # type: (ParamsForJob) -> bool
     print('checking [{}]...'.format(params_for_job.input_file))
-    with TsvReader(filename=params_for_job.input_file, num_fields=params_for_job.num_fields,
+    with TsvReader(filename=params_for_job.input_file,
+                   num_fields=params_for_job.num_fields,
                    validate_all_lines_same_number_of_fields=params_for_job.validate_all_lines_same_number_of_fields,
                    check_non_ascii=params_for_job.check_non_ascii) as input_file_handle:
         if params_for_job.progress:
@@ -96,15 +98,16 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     required=True,
 )
 def main(
-        num_fields: int,
-        progress: bool,
-        parallel: bool,
-        jobs: int,
-        filename: str,
-        check_non_ascii: bool,
-        validate_all_lines_same_number_of_fields: bool,
-        input_files: List[str],
-) -> None:
+        num_fields,
+        progress,
+        parallel,
+        jobs,
+        filename,
+        check_non_ascii,
+        validate_all_lines_same_number_of_fields,
+        input_files,
+):
+    # type: (int, bool, bool, int, str, bool, bool, List[str]) -> None
     """ This script checks that every file given to it is legal tsv """
     if parallel:
         with concurrent.futures.ProcessPoolExecutor(max_workers=jobs) as executor:

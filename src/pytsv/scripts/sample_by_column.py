@@ -33,12 +33,13 @@ import numpy as np
     show_default=True,
 )
 def main(
-        factor_column: int,
-        sample_columns: str,
-        size: int,
-        input_file: str,
-        output_file: str,
-) -> None:
+        factor_column,
+        sample_columns,
+        size,
+        input_file,
+        output_file,
+):
+    # type: (int, str, int, str, str) -> None
     """
     This application will sample a set of a tsv file.
     """

@@ -47,6 +47,7 @@ def main(
         aggregate_columns,
         do_unlink,
 ):
+    # type: (str, str, str, str, bool) -> None
     """ aggregate a bunch of tsv files """
     match_columns = [int(x) for x in match_columns.split(",")]
     aggregate_columns = [int(x) for x in aggregate_columns.split(",")]

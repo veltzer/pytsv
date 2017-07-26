@@ -47,12 +47,13 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
     required=True,
 )
 def main(
-        columns: str,
-        pattern: str,
-        progress: bool,
-        check_non_ascii: bool,
-        input_files: List[str],
-) -> None:
+        columns,
+        pattern,
+        progress,
+        check_non_ascii,
+        input_files,
+):
+    # type: (str, str, bool, bool, List[str]) -> None
     """
     This application will split a TSV file into many files according
     to some of its columns

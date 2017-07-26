@@ -35,11 +35,12 @@ from pytsv.pytsv import TsvReader, TsvWriter
     show_default=True,
 )
 def main(
-        progress: bool,
-        cut_fields: str,
-        input_file: str,
-        output_file: str,
-) -> None:
+        progress,
+        cut_fields,
+        input_file,
+        output_file,
+):
+    # type: (bool, str, str, str) -> None
     """ cut fields from a tsv file """
     cut_fields = [int(x) for x in cut_fields.split(',') if x != ""]
     with TsvReader(filename=input_file) as input_file_handle:

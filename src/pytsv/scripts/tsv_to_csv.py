@@ -19,9 +19,10 @@ from pytsv.pytsv import TsvReader
     show_default=True,
 )
 def main(
-        input_file: str,
-        output_file: str,
-) -> None:
+        input_file,
+        output_file,
+):
+    # type: (str, str) -> None
     """ This script converts a TSV file to a CSV file """
     with open(output_file, "wt") as output_file_handle:
         csv_writer = csv.writer(output_file_handle)

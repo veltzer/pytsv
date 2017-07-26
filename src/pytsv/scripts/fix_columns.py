@@ -78,16 +78,17 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII, REMOVE_NON_ASCII,
     show_default=True,
 )
 def main(
-        progress: bool,
-        input_file: str,
-        output_file: str,
-        fix_columns: str,
-        clean_edges: bool,
-        sub_trailing: bool,
-        remove_non_ascii: bool,
-        lower_case: bool,
-        check_non_ascii: bool,
-) -> None:
+        progress,
+        input_file,
+        output_file,
+        fix_columns,
+        clean_edges,
+        sub_trailing,
+        remove_non_ascii,
+        lower_case,
+        check_non_ascii,
+):
+    # type: (bool, str, str, str, bool, bool, bool, bool, bool) -> None
     """
     This script will fix a tsv file assuming that bad characters or tabs have been
 left in one column of it.

@@ -26,6 +26,7 @@ def main(
         input_file,
         output_file,
 ):
+    # type: (str, str) -> None
     """ This script converts a CSV to a TSV file """
     with pyanyzip.open(input_file, "rt") as input_file_handle:
         csv_reader = csv.reader(input_file_handle)

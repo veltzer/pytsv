@@ -37,11 +37,12 @@ from pytsv.pytsv import TsvReader, TsvWriter
     show_default=True,
 )
 def main(
-        progress: bool,
-        lc_fields: str,
-        input_file: str,
-        output_file: str,
-) -> None:
+        progress,
+        lc_fields,
+        input_file,
+        output_file,
+):
+    # type: (bool, str, str, str) -> None
     """ lower case some columns """
     lc_fields = [int(x) for x in lc_fields.split(',') if x != ""]
     with TsvReader(filename=input_file) as input_file_handle:

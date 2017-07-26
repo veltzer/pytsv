@@ -35,11 +35,12 @@ from pytsv.pytsv import TsvReader, TsvWriter
     show_default=True,
 )
 def main(
-        input_file: str,
-        output_file: str,
-        column_number: int,
-        bucket_number: int,
-) -> None:
+        input_file,
+        output_file,
+        column_number,
+        bucket_number,
+):
+    # type: (str, str, int, int) -> None
     """ Create a histogram from a field in a tsv file """
     a = []
     total = 0

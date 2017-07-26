@@ -42,6 +42,7 @@ def main(
         output_file,
         match_columns,
 ):
+    # type: (bool, str, str, str) -> None
     """
     This script will fix a tsv file assuming that bad characters or tabs have been
 left in one column of it.

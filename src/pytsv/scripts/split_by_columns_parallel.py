@@ -12,7 +12,7 @@ from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
 
 
 @attrs
-class JobInfo:
+class JobInfo(object):
     check_not_ascii = attrib()  # type: bool
     input_file = attrib()  # type: str
     serial = attrib()  # type: int
@@ -22,12 +22,13 @@ class JobInfo:
 
 
 @attrs
-class JobReturnValue:
+class JobReturnValue(object):
     serial = attrib()  # type: int
     files = attrib()  # type: Dict[str, str]
 
 
-def process_single_file(job_info: JobInfo) -> JobReturnValue:
+def process_single_file(job_info):
+    # type (JobInfo) -> JobReturnValue
     logger = logging.getLogger(__name__)
     tsv_writers_dict = dict()
     results = dict()
@@ -105,14 +106,15 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     required=True,
 )
 def main(
-        columns: str,
-        pattern: str,
-        final_pattern: str,
-        progress: bool,
-        jobs: int,
-        check_non_ascii: bool,
-        input_files: List[str],
-) -> None:
+        columns,
+        pattern,
+        final_pattern,
+        progress,
+        jobs,
+        check_non_ascii,
+        input_files,
+):
+    # type: (str, str, str, bool, int, bool, List[str]) -> None
     """
     This application will split a TSV file into many files according
     to some of its columns
@@ -130,7 +132,7 @@ def main(
     ) for i, input_file in enumerate(input_files)]
     with concurrent.futures.ProcessPoolExecutor(max_workers=jobs) as executor:
         job_return_values = list(executor.map(process_single_file, job_data))  # type: List[JobReturnValue]
-    job_return_values.sort(key=lambda x: x.serial)
+    job_return_values.sort(key=lambda u: u.serial)
     for job_return_value in job_return_values:
         for key, filename in job_return_value.files.items():
             outfile = final_pattern.format(key=key)
