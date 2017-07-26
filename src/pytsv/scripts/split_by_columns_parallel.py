@@ -1,30 +1,30 @@
-import concurrent.futures
 import logging
-import os
-from typing import List, Dict
+import multiprocessing
 
-from attr import attrs, attrib
 import click
+import concurrent.futures
 import pylogconf
 import tqdm
+from attr import attrs
+from typing import List, Dict
 
 from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
 
 
 @attrs
 class JobInfo(object):
-    check_not_ascii = attrib()  # type: bool
-    input_file = attrib()  # type: str
-    serial = attrib()  # type: int
-    progress = attrib()  # type: bool
-    pattern = attrib()  # type: str
-    columns = attrib()  # type: List[int]
+    check_not_ascii = attrs.attrib()  # type: bool
+    input_file = attrs.attrib()  # type: str
+    serial = attrs.attrib()  # type: int
+    progress = attrs.attrib()  # type: bool
+    pattern = attrs.attrib()  # type: str
+    columns = attrs.attrib()  # type: List[int]
 
 
 @attrs
 class JobReturnValue(object):
-    serial = attrib()  # type: int
-    files = attrib()  # type: Dict[str, str]
+    serial = attrs.attrib()  # type: int
+    files = attrs.attrib()  # type: Dict[str, str]
 
 
 def process_single_file(job_info):
@@ -88,7 +88,7 @@ def process_single_file(job_info):
 @click.option(
     '--jobs',
     required=False,
-    default=os.cpu_count(),
+    default=multiprocessing.cpu_count(),
     help="how many jobs to run",
     show_default=True,
 )

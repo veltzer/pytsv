@@ -25,6 +25,7 @@ setuptools.setup(
         'tqdm',  # for progress report
         'pyanyzip',  # for opening zipped files
         'numpy',  # for the histogram feature
+        'futures',  # for python2.7 backport of concurrent.futures
     ],
     entry_points={
         # order here is by order of files in the scripts folder

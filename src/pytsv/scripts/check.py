@@ -1,5 +1,6 @@
+import multiprocessing
+
 import concurrent.futures
-import os
 from typing import List
 
 import click
@@ -63,7 +64,7 @@ def check_file(params_for_job):
 )
 @click.option(
     '--jobs',
-    default=os.cpu_count(),
+    default=multiprocessing.cpu_count(),
     type=int,
     help="how many jobs to run",
     show_default=True,
