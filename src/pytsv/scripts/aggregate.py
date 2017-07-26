@@ -41,12 +41,12 @@ import pytsv.pytsv
     show_default=True,
 )
 def main(
-        folder: str,
-        output_file: str,
-        match_columns: str,
-        aggregate_columns: str,
-        do_unlink: bool,
-) -> None:
+        folder,
+        output_file,
+        match_columns,
+        aggregate_columns,
+        do_unlink,
+):
     """ aggregate a bunch of tsv files """
     match_columns = [int(x) for x in match_columns.split(",")]
     aggregate_columns = [int(x) for x in aggregate_columns.split(",")]

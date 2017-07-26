@@ -37,11 +37,11 @@ from pytsv.pytsv import TsvReader, TsvWriter
     show_default=True,
 )
 def main(
-        progress: bool,
-        input_file: str,
-        output_file: str,
-        match_columns: str,
-) -> None:
+        progress,
+        input_file,
+        output_file,
+        match_columns,
+):
     """
     This script will fix a tsv file assuming that bad characters or tabs have been
 left in one column of it.

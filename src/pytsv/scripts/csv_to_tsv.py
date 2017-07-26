@@ -23,9 +23,9 @@ from pytsv.pytsv import TsvWriter
     show_default=True,
 )
 def main(
-        input_file: str,
-        output_file: str,
-) -> None:
+        input_file,
+        output_file,
+):
     """ This script converts a CSV to a TSV file """
     with pyanyzip.open(input_file, "rt") as input_file_handle:
         csv_reader = csv.reader(input_file_handle)
