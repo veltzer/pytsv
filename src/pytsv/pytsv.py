@@ -33,7 +33,7 @@ def clean(
         remove_non_ascii=True,
         lower_case=True,
 ):
-    # type (str, bool, bool, bool, bool) -> str
+    # type: (str, bool, bool, bool, bool) -> str
     if sub_trailing:
         # replace all manner of whitespace (consecutive or not)
         # with s single space
@@ -86,7 +86,8 @@ def aggregate(
         sanitize=False,
     ) as output_file_handle:
         for match, aggregates in counts.items():
-            output_file_handle.write(itertools.chain(match, aggregates))
+            to_write = itertools.chain(match, aggregates)  # type: List[str]
+            output_file_handle.write(to_write)
     if unlink:
         for input_file_name in input_file_names:
             os.unlink(input_file_name)
@@ -107,8 +108,9 @@ def group_by(
         group_by_columns,
         collect_columns,
         output_file_template,
-        unlink=True):
-    # type (Iterable[str], List[int], List[int], str, bool) -> List[str]
+        unlink=True,
+):
+    # type: (Iterable[str], List[int], List[int], str, bool) -> List[str]
     all_data = defaultdict(list)  # type: Dict[str, List[List[str]]]
     limit = 10000
     logger = logging.getLogger(__name__)
@@ -118,7 +120,6 @@ def group_by(
             for line in file_handle:
                 line = line.rstrip()
                 parts = line.split("\t")  # type: List[str]
-                # noinspection PyTypeChecker
                 match = tuple([parts[i] for i in group_by_columns])  # type: Tuple[str]
                 match = "_".join(match)
                 data_to_append = [parts[i] for i in collect_columns]
@@ -137,6 +138,7 @@ def group_by(
 
 
 def is_ascii(s):
+    # type: (str) -> bool
     return all(ord(c) < 128 for c in s)
 
 
@@ -216,7 +218,7 @@ class TsvWriter(object):
                 yield x
 
     def write(self, l):
-        # type (List[str]) -> None
+        # type: (List[str]) -> None
         self._sanitize(l)
         if self.check_num_fields:
             if self.num_fields is None:
