@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.84',
+    version='0.0.85',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://veltzer.github.io/pytsv',
@@ -18,8 +18,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3',
     ],
     keywords='python TSV format csv',
-    package_dir={'': 'src'},
-    packages=setuptools.find_packages('src'),
+    packages=setuptools.find_packages(),
     install_requires=[
         'click',  # for command line parsing
         'tqdm',  # for progress report
