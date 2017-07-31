@@ -264,7 +264,7 @@ class TsvReader:
         self.line_number = -1
 
     def next(self):
-        self.__next__()
+        return self.__next__()
 
     def __next__(self):
         """ method needed to be an iterator """
