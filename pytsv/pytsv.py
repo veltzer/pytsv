@@ -266,12 +266,18 @@ class TsvReader:
     def __next__(self):
         """ method needed to be an iterator """
         self.line_number += 1
-        line = self.io.readline()
+        # python2
+        line = self.next()
+        # python3
+        # line = self.io.readline()
         if not line:
             raise StopIteration
         if self.skip_comments:
             while line.startswith("#"):
-                line = self.io.readline()
+                # python2
+                line = self.next()
+                # python3
+                # line = self.io.readline()
                 if not line:
                     raise StopIteration
         line = line.rstrip('\r\n')
