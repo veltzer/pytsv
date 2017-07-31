@@ -267,7 +267,7 @@ class TsvReader:
         """ method needed to be an iterator """
         self.line_number += 1
         # python2
-        line = self.next()
+        line = self.io.next()
         # python3
         # line = self.io.readline()
         if not line:
@@ -275,7 +275,7 @@ class TsvReader:
         if self.skip_comments:
             while line.startswith("#"):
                 # python2
-                line = self.next()
+                line = self.io.next()
                 # python3
                 # line = self.io.readline()
                 if not line:
