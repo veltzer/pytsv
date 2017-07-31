@@ -272,6 +272,7 @@ class TsvReader:
         return self.__next__()
 
     def __next__(self):
+        # type: () -> List[unicode]
         """ method needed to be an iterator """
         self.line_number += 1
         # python2
