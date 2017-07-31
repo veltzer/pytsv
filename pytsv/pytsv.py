@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import codecs
 import gzip
 import os
 from collections import defaultdict
@@ -24,6 +25,7 @@ CHECK_NUM_FIELDS = True
 CONVERT_TO_STRING = True
 DO_GZIP = False
 FILENAME_DETECT = True
+DEFAULT_ENCODING = 'utf-8'
 
 
 def clean(
@@ -162,6 +164,7 @@ class TsvWriter(object):
 
             do_gzip=DO_GZIP,
             filename_detect=FILENAME_DETECT,
+            encoding=DEFAULT_ENCODING,
     ):
         # type: (str, str, bool, bool, List[int], bool, bool, bool, bool, bool, int, bool, bool, bool) -> None
         if filename_detect:
@@ -178,6 +181,8 @@ class TsvWriter(object):
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
             else:
                 self.io = open(filename, mode=mode)  # type: IO[str]
+        # python 2.7
+        self.io = codecs.getwriter(encoding=encoding)(self.io)
         self.throw_exceptions = throw_exceptions
 
         self.sanitize = sanitize
