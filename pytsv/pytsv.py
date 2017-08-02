@@ -4,13 +4,13 @@ import codecs
 import gzip
 import os
 from collections import defaultdict
-from typing import Iterable, List, Tuple, Dict, IO, Iterator
+from typing import Iterable, List, Tuple, Dict, IO, Iterator, Text
 import itertools
 import logging
 import re
 
 import pyanyzip
-
+import sys
 
 CHECK_NON_ASCII = False
 SKIP_COMMENTS = True
@@ -26,6 +26,15 @@ CONVERT_TO_STRING = True
 DO_GZIP = False
 FILENAME_DETECT = True
 DEFAULT_ENCODING = 'utf-8'
+ATTACH_ENCODER = False
+
+
+if sys.version_info > (3, 0):
+    def stream_next(file):
+        return file.readline()
+else:
+    def stream_next(file):
+        return file.next()
 
 
 def clean(
@@ -165,6 +174,7 @@ class TsvWriter(object):
             do_gzip=DO_GZIP,
             filename_detect=FILENAME_DETECT,
             encoding=DEFAULT_ENCODING,
+            attach_encoder=ATTACH_ENCODER,
     ):
         # type: (str, str, bool, bool, List[int], bool, bool, bool, bool, bool, int, bool, bool, bool) -> None
         if filename_detect:
@@ -181,8 +191,10 @@ class TsvWriter(object):
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
             else:
                 self.io = open(filename, mode=mode)  # type: IO[str]
-        # python 2.7
-        self.io = codecs.getwriter(encoding=encoding)(self.io)
+        # the next branch is mainly for python 2 when the PYTHONIOENCODING
+        # environment variable is not set
+        if attach_encoder:
+            self.io = codecs.getwriter(encoding=encoding)(self.io)
         self.throw_exceptions = throw_exceptions
 
         self.sanitize = sanitize
@@ -272,21 +284,15 @@ class TsvReader:
         return self.__next__()
 
     def __next__(self):
-        # type: () -> List[unicode]
+        # type: () -> List[Text]
         """ method needed to be an iterator """
         self.line_number += 1
-        # python2
-        line = self.io.next()
-        # python3
-        # line = self.io.readline()
+        line = stream_next(self.io)
         if not line:
             raise StopIteration
         if self.skip_comments:
             while line.startswith("#"):
-                # python2
-                line = self.io.next()
-                # python3
-                # line = self.io.readline()
+                line = stream_next(self.io)
                 if not line:
                     raise StopIteration
         line = line.rstrip('\r\n')
