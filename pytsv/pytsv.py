@@ -181,6 +181,8 @@ class TsvWriter(object):
             found = False
             if filename.endswith(".tsv.gz"):
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
+                # python 2.7
+                self.io = codecs.getwriter(encoding=encoding)(self.io)
                 found = True
             if filename.endswith(".tsv"):
                 self.io = open(filename, mode=mode)  # type: IO[str]
@@ -189,6 +191,8 @@ class TsvWriter(object):
         else:
             if do_gzip:
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
+                # python 2.7
+                self.io = codecs.getwriter(encoding=encoding)(self.io)
             else:
                 self.io = open(filename, mode=mode)  # type: IO[str]
         # the next branch is mainly for python 2 when the PYTHONIOENCODING
