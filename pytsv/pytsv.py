@@ -37,6 +37,10 @@ else:
         return file.next()
 
 
+def is_2():
+    return sys.version_info[0] == 2
+
+
 def clean(
         text,
         clean_edges=True,
@@ -81,13 +85,12 @@ def aggregate(
     for input_file_name in input_file_names:
         logger.debug("working on file [%s]", input_file_name)
         with TsvReader(filename=input_file_name) as input_handle:
-            for parts in input_handle:
-                # noinspection PyTypeChecker
-                match = tuple([parts[i] for i in match_columns])  # type: Tuple[str]
+            for fields in input_handle:
+                match = tuple([fields[i] for i in match_columns])  # type: Tuple[str]
                 if match not in counts:
                     counts[match] = [int(0)] * len(aggregate_columns)
                 for i, aggregate_column in enumerate(aggregate_columns):
-                    counts[match][i] += int(parts[aggregate_column])
+                    counts[match][i] += int(fields[aggregate_column])
     # notice that we create a writer that does not check the number
     # of fields because the check requires a len(fields) to be available
     # and it is not in this case because of itertools.chain
@@ -181,8 +184,8 @@ class TsvWriter(object):
             found = False
             if filename.endswith(".tsv.gz"):
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
-                # python 2.7
-                self.io = codecs.getwriter(encoding=encoding)(self.io)
+                if is_2():
+                    self.io = codecs.getwriter(encoding=encoding)(self.io)
                 found = True
             if filename.endswith(".tsv"):
                 self.io = open(filename, mode=mode)  # type: IO[str]
@@ -191,8 +194,8 @@ class TsvWriter(object):
         else:
             if do_gzip:
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
-                # python 2.7
-                self.io = codecs.getwriter(encoding=encoding)(self.io)
+                if is_2():
+                    self.io = codecs.getwriter(encoding=encoding)(self.io)
             else:
                 self.io = open(filename, mode=mode)  # type: IO[str]
         # the next branch is mainly for python 2 when the PYTHONIOENCODING
