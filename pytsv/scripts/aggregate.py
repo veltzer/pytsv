@@ -5,17 +5,17 @@ import pytsv.pytsv
 
 @click.command()
 @click.option(
-    '--folder',
+    '--input-folder',
     required=True,
     type=str,
-    help="folder",
+    help="folder of input files",
     show_default=True,
 )
 @click.option(
     '--output-file',
     required=True,
     type=str,
-    help="folder",
+    help="output file to generate",
     show_default=True,
 )
 @click.option(
@@ -36,12 +36,12 @@ import pytsv.pytsv
     '--do-unlink',
     required=False,
     type=bool,
-    default=True,
+    default=False,
     help="remove files after done?",
     show_default=True,
 )
 def main(
-        folder,
+        input_folder,
         output_file,
         match_columns,
         aggregate_columns,
@@ -52,7 +52,7 @@ def main(
     match_columns = [int(x) for x in match_columns.split(",")]
     aggregate_columns = [int(x) for x in aggregate_columns.split(",")]
     pytsv.pytsv.aggregate(
-        input_file_names=os.listdir(folder),
+        input_file_names=os.listdir(input_folder),
         match_columns=match_columns,
         aggregate_columns=aggregate_columns,
         output_file_name=output_file,
