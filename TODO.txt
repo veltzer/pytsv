@@ -5,3 +5,5 @@
     look at utils_add_hash.py in twkpi
 - add tsv writer that knows how to write by column names.
     It may even emit a "# column1 column2 ..." header if the user wants.
+- add the option in csv_to_tsv and tsv_to_csv to have filtering (for instance
+	encoding, removing of special characters and so forth).
