@@ -1,3 +1,3 @@
 virtual_env_python=/usr/bin/python3
 virtual_env_name=pytsv3
-virtual_env_requirement_files=requirements.txt requirements3.txt
+virtual_env_requirement_files=requirements.txt requirements.dev.txt requirements3.txt

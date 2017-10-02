@@ -5,5 +5,3 @@ tqdm
 pyanyzip
 numpy
 pandas
-pypitools
-setuptools
