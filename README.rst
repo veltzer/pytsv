@@ -1,1 +1,2 @@
-This is to make 'python setup.py sdist' happy...
+# pytsv
+pytsv is a module to help with all things TSV
