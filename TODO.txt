@@ -1,3 +1,6 @@
+- write python app to check multiple tsv files in parallel.
+	add it to pytsv.
+	have an option for it to leave a stamp for files which are correct.
 - better naming convention for all of the scripts in this package.
     Gather them into groups.
 - add ability to do concatenation of tsv files according to key
