@@ -130,7 +130,7 @@ def main(
                 filename=input_file,
                 num_fields=num_fields,
                 validate_all_lines_same_number_of_fields=validate_all_lines_same_number_of_fields,
-                check_non_ascii=check_non_ascii
+                check_non_ascii=check_non_ascii,
         ) as input_file_handle:
             if progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
