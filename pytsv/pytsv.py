@@ -13,7 +13,7 @@ import pyanyzip
 import sys
 
 CHECK_NON_ASCII = False
-SKIP_COMMENTS = True
+SKIP_COMMENTS = False
 VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS = True
 USE_ANY_FORMAT = True
 SANITIZE = True
@@ -300,6 +300,7 @@ class TsvReader:
             raise StopIteration
         if self.skip_comments:
             while line.startswith("#"):
+                self.line_number += 1
                 line = stream_next(self.io)
                 if not line:
                     raise StopIteration
