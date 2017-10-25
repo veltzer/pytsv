@@ -23,7 +23,7 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.option(
     '--sample-column',
     required=True,
-    type=str,
+    type=int,
     help="what column to sample by",
     show_default=True,
 )
