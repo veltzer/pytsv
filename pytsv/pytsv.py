@@ -4,7 +4,7 @@ import codecs
 import gzip
 import os
 from collections import defaultdict
-from typing import Iterable, List, Tuple, Dict, IO, Iterator, Text
+from typing import Iterable, List, Tuple, Dict, IO, Iterator, Text, Union
 import itertools
 import logging
 import re
@@ -274,12 +274,13 @@ class TsvReader:
             num_fields=None,
             skip_comments=SKIP_COMMENTS,
             check_non_ascii=CHECK_NON_ASCII,
+            newline='\n',
     ):
-        # type: (str, str, bool, bool, int, bool, bool) -> None
+        # type: (str, str, bool, bool, int, bool, bool, Union[str, None]) -> None
         if use_any_format:
-            self.io = pyanyzip.open(name=filename, mode=mode)
+            self.io = pyanyzip.open(name=filename, mode=mode, newline=newline)
         else:
-            self.io = open(filename, mode=mode, newline='\n')
+            self.io = open(filename, mode=mode, newline=newline)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
         self.skip_comments = skip_comments
