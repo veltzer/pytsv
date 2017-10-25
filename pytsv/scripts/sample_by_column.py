@@ -1,6 +1,8 @@
+from random import choices
+
 import click
-import pandas as pd
-import numpy as np
+
+from pytsv.pytsv import TsvReader, TsvWriter
 
 
 @click.command()
@@ -40,15 +42,20 @@ def main(
 ):
     # type: (str, str, int, int) -> None
     """
-    This application will sample from a tsv file by a weight column
+    This application will sample from a tsv file by a sample column
+    The sample column must be convertible to a floating point number.
     """
-    df = pd.read_csv(input_file, index_col=False, header=None, sep="\t")
-    df.sample(n=size, weights=np.log2(df[sample_column]) + 1).to_csv(
-        output_file,
-        sep='\t',
-        index=False,
-        header=None,
-    )
+    weights = []
+    lines = []
+    with TsvReader(input_file) as input_handle:
+        for fields in input_handle:
+            lines.append(fields)
+            weight = float(fields[sample_column])
+            weights.append(weight)
+    results = choices(lines, p=weights, k=size)
+    with TsvWriter(output_file) as output_handle:
+        for result in results:
+            output_handle.write(result)
 
 
 if __name__ == '__main__':

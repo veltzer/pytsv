@@ -110,5 +110,6 @@ left in one column of it.
                     )
                 output_file_handle.write(fields)
 
+
 if __name__ == '__main__':
     main()

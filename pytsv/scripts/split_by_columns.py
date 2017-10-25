@@ -80,5 +80,6 @@ def main(
     for v in tsv_writers_dict.values():
         v.close()
 
+
 if __name__ == '__main__':
     main()
