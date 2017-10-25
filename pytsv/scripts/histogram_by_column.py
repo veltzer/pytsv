@@ -62,5 +62,6 @@ def main(
                 str(int(100.0*current_sum/total)),
             ])
 
+
 if __name__ == '__main__':
     main()

@@ -34,5 +34,6 @@ def main(
             for row in csv_reader:
                 output_file_handle.write(row)
 
+
 if __name__ == '__main__':
     main()
