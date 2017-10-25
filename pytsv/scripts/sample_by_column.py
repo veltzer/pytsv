@@ -1,6 +1,7 @@
 from random import choices
 
 import click
+import tqdm
 
 from pytsv.pytsv import TsvReader, TsvWriter
 
@@ -34,13 +35,22 @@ from pytsv.pytsv import TsvReader, TsvWriter
     help="what sample size do you need?",
     show_default=True,
 )
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress",
+    show_default=True,
+)
 def main(
         input_file,
         output_file,
         sample_column,
         size,
+        progress,
 ):
-    # type: (str, str, int, int) -> None
+    # type: (str, str, int, int, bool) -> None
     """
     This application will sample from a tsv file by a sample column
     The sample column must be convertible to a floating point number.
@@ -48,6 +58,8 @@ def main(
     weights = []
     lines = []
     with TsvReader(input_file) as input_handle:
+        if progress:
+            input_handle = tqdm.tqdm(input_handle)
         for fields in input_handle:
             lines.append(fields)
             weight = float(fields[sample_column])
