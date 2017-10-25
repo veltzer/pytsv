@@ -279,7 +279,7 @@ class TsvReader:
         if use_any_format:
             self.io = pyanyzip.open(name=filename, mode=mode)
         else:
-            self.io = open(filename, mode=mode)
+            self.io = open(filename, mode=mode, newline='\n')
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
         self.skip_comments = skip_comments
