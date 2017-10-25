@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pytsv',
-    version='0.0.99',
+    version='0.1.00',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://github.com/veltzer/pytsv',
