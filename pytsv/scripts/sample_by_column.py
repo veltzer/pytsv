@@ -52,7 +52,7 @@ def main(
             lines.append(fields)
             weight = float(fields[sample_column])
             weights.append(weight)
-    results = choices(lines, p=weights, k=size)
+    results = choices(lines, weights, k=size)
     with TsvWriter(output_file) as output_handle:
         for result in results:
             output_handle.write(result)
