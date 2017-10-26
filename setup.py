@@ -37,6 +37,7 @@ setuptools.setup(
             'pytsv_drop_duplicates_by_columns=pytsv.scripts.drop_duplicates_by_columns:main',
             'pytsv_fix_columns=pytsv.scripts.fix_columns:main',
             'pytsv_histogram_by_column=pytsv.scripts.histogram_by_column:main',
+            'pytsv_join=pytsv.scripts.join:main',
             'pytsv_lc=pytsv.scripts.lc:main',
             'pytsv_sample_by_column=pytsv.scripts.sample_by_column:main',
             'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
