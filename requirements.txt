@@ -4,4 +4,3 @@ click
 tqdm
 pyanyzip
 numpy
-pandas

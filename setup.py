@@ -26,7 +26,6 @@ setuptools.setup(
         'pyanyzip',  # for opening zipped files
         'numpy',  # for the histogram feature
         'futures',  # for python2.7 backport of concurrent.futures
-        'pandas',  # for sample_by_column
     ],
     entry_points={
         # order here is by order of files in the scripts folder
