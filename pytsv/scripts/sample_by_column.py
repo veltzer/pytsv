@@ -2,7 +2,7 @@ import click
 import tqdm
 
 from pytsv.pytsv import TsvReader, TsvWriter
-from numpy.random import choice
+import numpy.random
 
 
 @click.command()
