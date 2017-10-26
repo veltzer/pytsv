@@ -1,9 +1,8 @@
-from random import choices
-
 import click
 import tqdm
 
 from pytsv.pytsv import TsvReader, TsvWriter
+from numpy.random import choice
 
 
 @click.command()
@@ -56,15 +55,21 @@ def main(
     The sample column must be convertible to a floating point number.
     """
     weights = []
-    lines = []
+    elements = []
     with TsvReader(input_file) as input_handle:
         if progress:
             input_handle = tqdm.tqdm(input_handle)
         for fields in input_handle:
-            lines.append(fields)
+            elements.append(fields)
             weight = float(fields[sample_column])
             weights.append(weight)
-    results = choices(lines, weights, k=size)
+    # the following code will only work on python3.6 because the
+    # random.choices API was only introduced then
+    # from random import choices
+    # results = choices(lines, weights, k=size)
+
+    # this is the same code with numpy
+    results = [numpy.random.choice(elements, p=weights) for _ in range(size)]
     with TsvWriter(output_file) as output_handle:
         for result in results:
             output_handle.write(result)
