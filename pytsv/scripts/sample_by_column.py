@@ -37,6 +37,12 @@ import numpy.random
     help="allow replacement",
 )
 @click.option(
+    '--hits-mode',
+    required=True,
+    type=bool,
+    help="sample size is hits",
+)
+@click.option(
     '--progress',
     required=False,
     default=True,
@@ -50,9 +56,10 @@ def main(
         sample_column,
         size,
         replace,
+        hits_mode,
         progress,
 ):
-    # type: (str, str, int, int, bool) -> None
+    # type: (str, str, int, int, bool, bool) -> None
     """
     This application will sample from a tsv file by a sample column
     The sample column must be convertible to a floating point number.
@@ -75,15 +82,30 @@ def main(
 
     # this is the same code with numpy
     weights = [w/sum_weights for w in weights]
-    results = numpy.random.choice(
-        a=len(elements),
-        replace=replace,
-        size=size,
-        p=weights,
-    )
-    with TsvWriter(output_file) as output_handle:
-        for result in results:
-            output_handle.write(elements[result])
+    if hits_mode:
+        results_dict = defaultdict(int)
+        for i in range(size):
+            current_result = numpy.random.choice(
+                a=len(elements),
+                replace=replace,
+                size=1,
+                p=weights,
+            )
+            current_result = current_result[0]
+            results_dict[current_result] += 1
+        with TsvWriter(output_file) as output_handle:
+            for result, hits in results_dict.items():
+                output_handle.write([reuslt, hits])
+    else:
+        results = numpy.random.choice(
+            a=len(elements),
+            replace=replace,
+            size=size,
+            p=weights,
+        )
+        with TsvWriter(output_file) as output_handle:
+            for result in results:
+                output_handle.write(elements[result])
 
 
 if __name__ == '__main__':
