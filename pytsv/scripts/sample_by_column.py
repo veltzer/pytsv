@@ -3,6 +3,7 @@ import tqdm
 
 from pytsv.pytsv import TsvReader, TsvWriter
 import numpy.random
+from collections import defaultdict
 
 
 @click.command()
