@@ -83,9 +83,9 @@ def main(
     # type: (bool, str, int, int, str, int, str, int, bool) -> None
     """ join two tsv files by column """
     d = dict()
-    event_not_found = 0
+    event_found = 0
     event_unknown_added = 0
-    event_key_not_found = 0
+    event_discarded = 0
     with TsvReader(hash_file) as hash_file_handle:
         if progress:
             hash_file_handle = tqdm.tqdm(hash_file_handle, desc="reading hash")
@@ -100,7 +100,7 @@ def main(
         for fields in input_file_handle:
             key = fields[input_key_column]
             if key in d:
-                event_not_found += 1
+                event_found += 1
                 new_value = d[key]
                 fields.insert(output_insert_column, new_value)
                 output_file_handle.write(fields)
@@ -110,10 +110,10 @@ def main(
                     fields.insert(output_insert_column, "unknown")
                     output_file_handle.write(fields)
                 else:
-                    event_key_not_found += 1
-    print("event_not_found {}".format(event_not_found))
+                    event_discarded += 1
+    print("event_found {}".format(event_found))
     print("event_unknown_added {}".format(event_unknown_added))
-    print("event_key_not_found {}".format(event_key_not_found))
+    print("event_discarded {}".format(event_discarded))
 
 
 if __name__ == '__main__':
