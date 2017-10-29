@@ -96,7 +96,7 @@ def main(
             results_dict[current_result] += 1
         with TsvWriter(output_file) as output_handle:
             for result, hits in results_dict.items():
-                output_handle.write([reuslt, hits])
+                output_handle.write([result, hits])
     else:
         results = numpy.random.choice(
             a=len(elements),
