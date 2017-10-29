@@ -48,7 +48,7 @@ class MyEventTypes(Enum):
 @click.option(
     '--input-key-column',
     required=True,
-    type=str,
+    type=int,
     help="column to match on in the input file",
 )
 @click.option(
