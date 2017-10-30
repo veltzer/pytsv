@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pytsv',
-    version='0.1.15',
+    version='0.1.16',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://github.com/veltzer/pytsv',
@@ -26,6 +26,7 @@ setuptools.setup(
         'pyanyzip',  # for opening zipped files
         'numpy',  # for the histogram feature
         'futures',  # for python2.7 backport of concurrent.futures
+        'pandas',  # for sample_by_column_pandas
     ],
     entry_points={
         # order here is by order of files in the scripts folder
@@ -40,6 +41,7 @@ setuptools.setup(
             'pytsv_join=pytsv.scripts.join:main',
             'pytsv_lc=pytsv.scripts.lc:main',
             'pytsv_sample_by_column=pytsv.scripts.sample_by_column:main',
+            'pytsv_sample_by_column_pandas=pytsv.scripts.sample_by_column_pandas:main',
             'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
             'pytsv_tsv_to_csv=pytsv.scripts.tsv_to_csv:main',
         ],
