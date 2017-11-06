@@ -47,7 +47,7 @@ def main(
             if progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                current_number = fields[input_field_number]
+                current_number = int(fields[input_field_number])
                 for _ in range(current_number):
                     output_file_handle.write(fields)
 
