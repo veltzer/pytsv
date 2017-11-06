@@ -23,7 +23,7 @@ from pytsv.pytsv import TsvReader, TsvWriter
 @click.option(
     '--input-field-number',
     required=True,
-    type=str,
+    type=int,
     help="fields according to which to multiply",
     show_default=True,
 )
