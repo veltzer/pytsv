@@ -5,26 +5,27 @@ import click
 import concurrent.futures
 import pylogconf
 import tqdm
-from attr import attrs
+# noinspection PyPackageRequirements
+import attr
 from typing import List, Dict
 
 from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
 
 
-@attrs
+@attr.attrs
 class JobInfo(object):
-    check_not_ascii = attrs.attrib()  # type: bool
-    input_file = attrs.attrib()  # type: str
-    serial = attrs.attrib()  # type: int
-    progress = attrs.attrib()  # type: bool
-    pattern = attrs.attrib()  # type: str
-    columns = attrs.attrib()  # type: List[int]
+    check_not_ascii = attr.attrib()  # type: bool
+    input_file = attr.attrib()  # type: str
+    serial = attr.attrib()  # type: int
+    progress = attr.attrib()  # type: bool
+    pattern = attr.attrib()  # type: str
+    columns = attr.attrib()  # type: List[int]
 
 
-@attrs
+@attr.attrs
 class JobReturnValue(object):
-    serial = attrs.attrib()  # type: int
-    files = attrs.attrib()  # type: Dict[str, str]
+    serial = attr.attrib()  # type: int
+    files = attr.attrib()  # type: Dict[str, str]
 
 
 def process_single_file(job_info):
