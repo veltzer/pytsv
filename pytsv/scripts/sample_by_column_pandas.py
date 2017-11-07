@@ -1,7 +1,6 @@
 import click
 
 import pandas
-import numpy
 
 
 @click.command()
