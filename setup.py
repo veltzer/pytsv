@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pytsv',
-    version='0.1.21',
+    version='0.1.22',
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
     url='https://github.com/veltzer/pytsv',
@@ -45,6 +45,7 @@ setuptools.setup(
             'pytsv_sample_by_column=pytsv.scripts.sample_by_column:main',
             'pytsv_sample_by_column_pandas=pytsv.scripts.sample_by_column_pandas:main',
             'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
+            'pytsv_tree=pytsv.scripts.tree:main',
             'pytsv_tsv_to_csv=pytsv.scripts.tsv_to_csv:main',
         ],
     },
