@@ -1,10 +1,7 @@
 import click
+import os
 import pandas
-import tqdm
-
-from pytsv.pytsv import TsvReader, TsvWriter
-import numpy.random
-from collections import defaultdict
+from tqdm import tqdm
 
 
 @click.command()
@@ -71,11 +68,25 @@ def main(
         sep='\t',
         header=None,
     )
-    sample = []
-    for cluster in df[group_column].unique():
+    clusters = df[group_column].unique()
+    if progress:
+        clusters = tqdm(clusters)
+    if os.path.isfile(output_file):
+        os.unlink(output_file)
+    for cluster in clusters:
         cluster_queries = df[df[group_column] == cluster]
-        print(cluster_queries)
-    print(sample)
+        cluster_sample = cluster_queries.sample(
+            n=size,
+            replace=replace,
+            weights=cluster_queries[weight_column],
+        )
+        cluster_sample.to_csv(
+            output_file,
+            sep='\t',
+            index=False,
+            mode='a',
+            header=None,
+        )
 
 
 if __name__ == '__main__':
