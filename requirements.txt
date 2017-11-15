@@ -5,3 +5,4 @@ pyanyzip
 numpy
 pandas
 attrs
+pydmt

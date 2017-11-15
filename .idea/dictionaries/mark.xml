@@ -4,14 +4,19 @@
       <w>backport</w>
       <w>bugtrack</w>
       <w>gitconfig</w>
+      <w>htmlhelp</w>
       <w>itype</w>
       <w>licensable</w>
       <w>licensor</w>
       <w>pyanyzip</w>
       <w>pythonioencoding</w>
       <w>pytsv</w>
+      <w>pytsvdoc</w>
       <w>qffxd</w>
       <w>readline</w>
+      <w>searchbox</w>
+      <w>todos</w>
+      <w>viewcode</w>
     </words>
   </dictionary>
 </component>
