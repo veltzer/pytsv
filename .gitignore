@@ -89,4 +89,4 @@ ENV/
 
 /.idea/workspace.xml
 
-.pydmt/
+/.pydmt
