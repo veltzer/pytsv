@@ -50,6 +50,7 @@ setuptools.setup(
             'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
             'pytsv_tree=pytsv.scripts.tree:main',
             'pytsv_tsv_to_csv=pytsv.scripts.tsv_to_csv:main',
+            'pytsv_version=pytsv.scripts.version:main',
         ],
     },
 )
