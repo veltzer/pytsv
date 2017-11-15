@@ -73,7 +73,6 @@ def main(
     )
     sample = []
     for cluster in df[group_column].unique():
-        # cluster_queries = df[df[df.columns[group_column]] == cluster]
         cluster_queries = df[df[group_column] == cluster]
         print(cluster_queries)
     print(sample)
