@@ -1,3 +1,0 @@
-pypitools
-Sphinx
-pydmt
