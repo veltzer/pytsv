@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__
-/.venv
+/.venv/
 
 # C extensions
 *.so
@@ -73,13 +73,6 @@ target/
 
 # celery beat schedule file
 celerybeat-schedule
-
-# dotenv
-.env
-
-# virtualenv
-venv/
-ENV/
 
 # Spyder project settings
 .spyderproject
