@@ -12,6 +12,12 @@ from tqdm import tqdm
     help="input filename",
 )
 @click.option(
+    '--output-file',
+    required=True,
+    type=str,
+    help="output filename",
+)
+@click.option(
     '--group-column',
     required=True,
     type=int,
@@ -24,10 +30,10 @@ from tqdm import tqdm
     help="what column to determine weight by",
 )
 @click.option(
-    '--output-file',
+    '--value-column',
     required=True,
-    type=str,
-    help="output filename",
+    type=int,
+    help="what is the value column",
 )
 @click.option(
     '--size',
@@ -51,14 +57,15 @@ from tqdm import tqdm
 )
 def main(
         input_file,
+        output_file,
         group_column,
         weight_column,
-        output_file,
+        value_column,
         size,
         replace,
         progress,
 ):
-    # type: (str, int, int, str, int, bool, bool) -> None
+    # type: (str, str, int, int, int, int, bool, bool) -> None
     """
     This application will sample from a tsv file by a sample column
     The sample column must be convertible to a floating point number.
@@ -75,12 +82,13 @@ def main(
         os.unlink(output_file)
     for cluster in clusters:
         cluster_queries = df[df[group_column] == cluster]
-        cluster_sample = cluster_queries.sample(
+        sample = cluster_queries.sample(
             n=size,
             replace=replace,
             weights=cluster_queries[weight_column],
         )
-        cluster_sample.to_csv(
+        res = sample[sample.columns[value_column]].value_counts()
+        res.to_csv(
             output_file,
             sep='\t',
             index=False,
