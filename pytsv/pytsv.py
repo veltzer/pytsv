@@ -9,7 +9,7 @@ import itertools
 import logging
 import re
 
-import pyanyzip
+import pyanyzip.core
 import sys
 
 CHECK_NON_ASCII = False
@@ -278,7 +278,7 @@ class TsvReader:
     ):
         # type: (str, str, bool, bool, int, bool, bool, Union[str, None]) -> None
         if use_any_format:
-            self.io = pyanyzip.open(name=filename, mode=mode, newline=newline)
+            self.io = pyanyzip.core.open(name=filename, mode=mode, newline=newline)
         else:
             self.io = open(filename, mode=mode, newline=newline)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields

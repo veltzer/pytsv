@@ -2,7 +2,7 @@ import csv
 
 import click
 
-import pyanyzip
+import pyanyzip.core
 
 from pytsv.pytsv import TsvWriter
 
@@ -28,7 +28,7 @@ def main(
 ):
     # type: (str, str) -> None
     """ This script converts a CSV to a TSV file """
-    with pyanyzip.open(input_file, "rt") as input_file_handle:
+    with pyanyzip.core.open(input_file, "rt") as input_file_handle:
         csv_reader = csv.reader(input_file_handle)
         with TsvWriter(output_file) as output_file_handle:
             for row in csv_reader:
