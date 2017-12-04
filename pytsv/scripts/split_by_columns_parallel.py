@@ -3,7 +3,7 @@ import multiprocessing
 
 import click
 import concurrent.futures
-import pylogconf
+import pylogconf.core
 import tqdm
 # noinspection PyPackageRequirements
 import attr
@@ -120,7 +120,7 @@ def main(
     This application will split a TSV file into many files according
     to some of its columns
     """
-    pylogconf.setup()
+    pylogconf.core.setup()
     columns = [int(x) for x in columns.split(',') if x != ""]
     assert len(columns) > 0, "must provide --columns"
     job_data = [JobInfo(

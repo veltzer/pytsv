@@ -3,7 +3,7 @@ from typing import List
 import click
 import logging
 
-import pylogconf
+import pylogconf.core
 import tqdm
 
 from pytsv.pytsv import TsvReader, TsvWriter, CHECK_NON_ASCII
@@ -58,7 +58,7 @@ def main(
     This application will split a TSV file into many files according
     to some of its columns
     """
-    pylogconf.setup()
+    pylogconf.core.setup()
     logger = logging.getLogger(__name__)
     columns = [int(x) for x in columns.split(',') if x != ""]
     assert len(columns) > 0, "must provide --columns"
