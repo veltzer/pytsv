@@ -190,7 +190,11 @@ class TsvWriter(object):
             if filename.endswith(".tsv"):
                 self.io = open(filename, mode=mode)  # type: IO[str]
                 found = True
-            assert found, "file name unknown"
+            if not found:
+                # treat as tsv
+                self.io = open(filename, mode=mode)  # type: IO[str]
+            # old code, be more strict
+            # assert found, "file name unknown"
         else:
             if do_gzip:
                 self.io = gzip.open(filename, mode=mode)  # type: IO[str]
