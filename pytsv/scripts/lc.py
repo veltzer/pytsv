@@ -16,7 +16,7 @@ from pytsv.pytsv import TsvReader, TsvWriter
     show_default=True,
 )
 @click.option(
-    '--cut-fields',
+    '--lc-fields',
     required=True,
     type=str,
     help="fields to cut",
