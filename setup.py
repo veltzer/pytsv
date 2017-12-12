@@ -48,6 +48,7 @@ setuptools.setup(
             'pytsv_sample_by_column_old=pytsv.scripts.sample_by_column_old:main',
             'pytsv_sample_by_two_columns=pytsv.scripts.sample_by_two_columns:main',
             'pytsv_split_by_columns=pytsv.scripts.split_by_columns:main',
+            'pytsv_sum=pytsv.scripts.sum:main',
             'pytsv_tree=pytsv.scripts.tree:main',
             'pytsv_tsv_to_csv=pytsv.scripts.tsv_to_csv:main',
             'pytsv_version=pytsv.scripts.version:main',
