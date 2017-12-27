@@ -46,10 +46,10 @@ def main(
             if progress:
                 input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
             for line_number, fields in enumerate(input_file_handle):
-                for column in columns:
+                for i, column in enumerate(columns):
                     value = fields[column]
-                    if value in dicts[column]:
-                        line = dicts[column]
+                    if value in dicts[i]:
+                        line = dicts[i]
                         print("value [{}] is duplicate on [{}] and [{}]".format(
                             value,
                             line,
@@ -57,7 +57,7 @@ def main(
                         ))
                         errors = True
                     else:
-                        dicts[column] = line_number
+                        dicts[i][value] = line_number
     assert errors is False, "found errors"
 
 
