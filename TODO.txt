@@ -1,3 +1,4 @@
+- write another script to check that a column in a tsv file is unique.
 - write python app to check multiple tsv files in parallel.
 	add it to pytsv.
 	have an option for it to leave a stamp for files which are correct.
