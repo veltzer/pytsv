@@ -50,7 +50,7 @@ def main(
                     value = fields[column]
                     if value in dicts[i]:
                         line = dicts[i][value]
-                        print("value [{}] is duplicate on [{}] and [{}]".format(
+                        print("value [{}] is duplicate on lines [{}, {}]".format(
                             value,
                             line,
                             line_number,
