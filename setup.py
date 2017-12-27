@@ -35,6 +35,7 @@ setuptools.setup(
         'console_scripts': [
             'pytsv_aggregate=pytsv.scripts.aggregate:main',
             'pytsv_check=pytsv.scripts.check:main',
+            'pytsv_check_columns_unique=pytsv.scripts.check_columns_unique:main',
             'pytsv_csv_to_tsv=pytsv.scripts.csv_to_tsv:main',
             'pytsv_cut=pytsv.scripts.cut:main',
             'pytsv_drop_duplicates_by_columns=pytsv.scripts.drop_duplicates_by_columns:main',

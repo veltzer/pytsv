@@ -69,14 +69,6 @@ def check_file(params_for_job):
     show_default=True,
 )
 @click.option(
-    '--filename',
-    required=False,
-    default=True,
-    type=bool,
-    help="show filename",
-    show_default=True,
-)
-@click.option(
     '--check-non-ascii',
     required=False,
     default=CHECK_NON_ASCII,
@@ -102,12 +94,11 @@ def main(
         progress,
         parallel,
         jobs,
-        filename,
         check_non_ascii,
         validate_all_lines_same_number_of_fields,
         input_files,
 ):
-    # type: (int, bool, bool, int, str, bool, bool, List[str]) -> None
+    # type: (int, bool, bool, int, bool, bool, List[str]) -> None
     """ This script checks that every file given to it is legal tsv """
     if parallel:
         with concurrent.futures.ProcessPoolExecutor(max_workers=jobs) as executor:
@@ -123,8 +114,6 @@ def main(
             results = list(executor.map(check_file, job_list))
         print(results)
     for input_file in input_files:
-        if filename:
-            print('checking [{}]...'.format(input_file))
         with TsvReader(
             filename=input_file,
             num_fields=num_fields,
