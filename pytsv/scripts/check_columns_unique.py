@@ -49,7 +49,7 @@ def main(
                 for i, column in enumerate(columns):
                     value = fields[column]
                     if value in dicts[i]:
-                        line = dicts[i]
+                        line = dicts[i][value]
                         print("value [{}] is duplicate on [{}] and [{}]".format(
                             value,
                             line,
