@@ -7,7 +7,7 @@ setuptools.setup(
     version=pytsv.version.version_str,
     description='pytsv is a module to help with all things TSV',
     long_description='pytsv is a module to help with all things TSV',
-    url='https://github.com/veltzer/pytsv',
+    url='https://veltzer.github.io/pytsv',
     download_url='https://github.com/veltzer/pytsv',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
