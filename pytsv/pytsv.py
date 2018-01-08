@@ -2,7 +2,6 @@ from __future__ import print_function
 
 import codecs
 import gzip
-import os
 from collections import defaultdict
 from typing import Iterable, List, Tuple, Dict, IO, Iterator, Text, Union
 import itertools
@@ -68,16 +67,14 @@ def aggregate(
         match_columns,
         aggregate_columns,
         output_file_name,
-        unlink=True,
 ):
-    # type: (Iterable[str], List[int], List[int], str, bool) -> None
+    # type: (Iterable[str], List[int], List[int], str) -> None
     """
     This function aggregates a bunch of input files by integers.
     :param input_file_names:
     :param match_columns:
     :param aggregate_columns:
     :param output_file_name:
-    :param unlink:
     :return:
     """
     counts = dict()  # type: Dict[Tuple[str], List[int]]
@@ -102,9 +99,6 @@ def aggregate(
         for match, aggregates in counts.items():
             to_write = itertools.chain(match, aggregates)  # type: List[str]
             output_file_handle.write(to_write)
-    if unlink:
-        for input_file_name in input_file_names:
-            os.unlink(input_file_name)
 
 
 def write_data(data, output_file_name):
@@ -122,10 +116,9 @@ def group_by(
         group_by_columns,
         collect_columns,
         output_file_template,
-        unlink=True,
 ):
     # type: (Iterable[str], List[int], List[int], str, bool) -> List[str]
-    all_data = defaultdict(list)  # type: Dict[str, List[List[str]]]
+    all_data = defaultdict(list)  # type: Dict[Tuple[str], List[List[str]]]
     limit = 10000
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
@@ -144,10 +137,6 @@ def group_by(
     # write the rest for the data
     for match, data in all_data.items():
         write_data(data, output_file_template.format(match=match))
-    # remove the input files
-    if unlink:
-        for input_file_name in input_file_names:
-            os.unlink(input_file_name)
     return [output_file_template.format(match=match) for match in all_data]
 
 
