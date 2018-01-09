@@ -45,7 +45,7 @@ def main(
     Remove lines from a tsv file that do not have the right number of
     columns
     """
-    with TsvReader(filename=input_file) as input_file_handle:
+    with TsvReader(filename=input_file, validate_all_lines_same_number_of_fields=False) as input_file_handle:
         with TsvWriter(filename=output_file) as output_file_handle:
             if progress:
                 input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
