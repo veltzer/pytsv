@@ -63,18 +63,20 @@ def clean(
 
 
 def aggregate(
-        input_file_names,
-        match_columns,
-        aggregate_columns,
-        output_file_name,
+    input_file_names,
+    match_columns,
+    aggregate_columns,
+    output_file_name,
+    floating_point,
 ):
-    # type: (Iterable[str], List[int], List[int], str) -> None
+    # type: (Iterable[str], List[int], List[int], str, bool) -> None
     """
     This function aggregates a bunch of input files by integers.
     :param input_file_names:
     :param match_columns:
     :param aggregate_columns:
     :param output_file_name:
+    :param floating_point:
     :return:
     """
     counts = dict()  # type: Dict[Tuple[str], List[int]]
@@ -85,9 +87,15 @@ def aggregate(
             for fields in input_handle:
                 match = tuple([fields[i] for i in match_columns])  # type: Tuple[str]
                 if match not in counts:
-                    counts[match] = [int(0)] * len(aggregate_columns)
+                    if floating_point:
+                        counts[match] = [float(0)] * len(aggregate_columns)
+                    else:
+                        counts[match] = [int(0)] * len(aggregate_columns)
                 for i, aggregate_column in enumerate(aggregate_columns):
-                    counts[match][i] += int(fields[aggregate_column])
+                    if floating_point:
+                        counts[match][i] += float(fields[aggregate_column])
+                    else:
+                        counts[match][i] += int(fields[aggregate_column])
     # notice that we create a writer that does not check the number
     # of fields because the check requires a len(fields) to be available
     # and it is not in this case because of itertools.chain
