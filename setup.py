@@ -53,7 +53,6 @@ setuptools.setup(
             'pytsv_sum=pytsv.scripts.sum:main',
             'pytsv_tree=pytsv.scripts.tree:main',
             'pytsv_tsv_to_csv=pytsv.scripts.tsv_to_csv:main',
-            'pytsv_version=pytsv.scripts.version:main',
         ],
     },
 )
