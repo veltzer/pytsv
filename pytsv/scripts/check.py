@@ -121,7 +121,7 @@ def main(
             check_non_ascii=check_non_ascii,
         ) as input_file_handle:
             if progress:
-                input_file_handle = tqdm.tqdm(input_file_handle)
+                input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
             for _ in input_file_handle:
                 pass
 
