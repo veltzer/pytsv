@@ -186,6 +186,8 @@ class TsvWriter(object):
                 found = True
             if filename.endswith(".tsv"):
                 self.io = open(filename, mode=mode)  # type: IO[str]
+                if is_2():
+                    self.io = codecs.getwriter(encoding=encoding)(self.io)
                 found = True
             if not found:
                 # treat as tsv
