@@ -64,8 +64,8 @@ def main(
         replace=replace,
         weights=df[weight_column],
     )
-    res = sample[sample.columns[value_column]].value_counts()
-    res.to_csv(
+    df_result = sample[value_column].value_counts()
+    df_result.to_csv(
         output_file,
         sep='\t',
         index=True,

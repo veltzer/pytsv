@@ -1,3 +1,6 @@
+- do progress report for most of the utilities here.
+    measure the size of the file using a function and do progress.
+    allow to turn off this behaviour.
 - write python app to check multiple tsv files in parallel.
 	add it to pytsv.
 	have an option for it to leave a stamp for files which are correct.
