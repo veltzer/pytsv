@@ -46,6 +46,7 @@ setuptools.setup(
             'pytsv_lc=pytsv.scripts.lc:main',
             'pytsv_majority=pytsv.scripts.majority:main',
             'pytsv_multiply=pytsv.scripts.multiply:main',
+            'pytsv_remove_quotes=pytsv.scripts.remove_quotes:main',
             'pytsv_sample_by_column=pytsv.scripts.sample_by_column:main',
             'pytsv_sample_by_column_old=pytsv.scripts.sample_by_column_old:main',
             'pytsv_sample_by_two_columns=pytsv.scripts.sample_by_two_columns:main',
