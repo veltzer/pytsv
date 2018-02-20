@@ -1,6 +1,9 @@
+import logging
+
 import click
 import os
 import pandas
+import pylogconf.core
 from tqdm import tqdm
 
 
@@ -55,6 +58,13 @@ from tqdm import tqdm
     help="show progress",
     show_default=True,
 )
+@click.option(
+    '--check-unique',
+    required=False,
+    type=bool,
+    default=True,
+    help="check that the value_column has unique values?",
+)
 def main(
         input_file,
         output_file,
@@ -64,17 +74,27 @@ def main(
         size,
         replace,
         progress,
+        check_unique,
 ):
-    # type: (str, str, int, int, int, int, bool, bool) -> None
+    # type: (str, str, int, int, int, int, bool, bool, bool) -> None
     """
     This application will sample from a tsv file by a sample column
     The sample column must be convertible to a floating point number.
     """
+    logger = logging.getLogger(__name__)
+    logger.info("reading the data")
     df = pandas.read_csv(
         input_file,
         sep='\t',
         header=None,
     )
+    logger.info("checking that the values are unique")
+    unique_values_count = df[value_column].nunique()
+    if check_unique and unique_values_count != df.shape[0]:
+        logger.error("your data is not unique in the value_column")
+        logger.error("unique values {} != number of rows {}".format(unique_values_count, df.shape[0]))
+        return
+    logger.info("finding clusters")
     clusters = df[group_column].unique()
     if progress:
         clusters = tqdm(clusters)
@@ -98,4 +118,5 @@ def main(
 
 
 if __name__ == '__main__':
+    pylogconf.core.setup()
     main()
