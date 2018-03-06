@@ -1,3 +1,6 @@
+- move this whole package to use pytconf instead of click.
+	as part of this unify all utils to one executable.
+- move this package to pydmt.
 - do progress report for most of the utilities here.
     measure the size of the file using a function and do progress.
     allow to turn off this behaviour.
@@ -7,8 +10,6 @@
 - better naming convention for all of the scripts in this package.
     Gather them into groups.
 - add ability to do concatenation of tsv files according to key
-- add utility to add a hash of a tsv file to another file.
-    look at utils_add_hash.py in twkpi
 - add tsv writer that knows how to write by column names.
     It may even emit a "# column1 column2 ..." header if the user wants.
 - add the option in csv_to_tsv and tsv_to_csv to have filtering (for instance
