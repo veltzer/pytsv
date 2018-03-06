@@ -9,7 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/pytsv.egg-info" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.6.3 virtualenv at ~/git/pytsv/.venv/default" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.6 (pytsv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

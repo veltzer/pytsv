@@ -76,9 +76,9 @@ def main(
     while len(stack) > 0:
         name, depth, last, print_list = stack.pop()
         if last:
-            special_string = "└──"
+            special_string = u"└──"
         else:
-            special_string = "├──"
+            special_string = u"├──"
         print("{}{}".format(print_list + special_string, name))
         first = True
         list_to_append = []
@@ -86,7 +86,7 @@ def main(
             if last:
                 special_string = "   "
             else:
-                special_string = "│  "
+                special_string = u"│  "
             list_to_append.append((p_child, depth+1, first, print_list+special_string))
             first = False
         stack.extend(list(reversed(list_to_append)))
