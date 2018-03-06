@@ -2,6 +2,7 @@ import logging
 import multiprocessing
 
 import click
+# noinspection PyCompatibility
 import concurrent.futures
 import pylogconf.core
 import tqdm

@@ -1,3 +1,4 @@
+# noinspection PyCompatibility
 import concurrent.futures
 import multiprocessing
 from typing import List

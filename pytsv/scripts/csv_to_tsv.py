@@ -2,8 +2,8 @@ import csv
 
 import click
 
-import pyanyzip.core
 import sys
+import pyanyzip.core
 
 from typing import List
 
