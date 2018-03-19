@@ -45,8 +45,9 @@ test_requires = [
 ]
 
 dev_requires = [
-    'pypitools',
-    'pydmt',
+    'pyclassifiers',  # for programmatic classifiers
+    'pypitools',  # for uploading to pypi
+    'pydmt',  # for building easier
 ]
 
 install_requires = list(setup_requires)
