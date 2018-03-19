@@ -8,7 +8,9 @@ Welcome to pytsv's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+
+       pytsv <pytsv.rst>
+       pytsv.scripts <pytsv.scripts.rst>
 
    modules
 

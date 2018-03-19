@@ -1,14 +1,14 @@
-# production
-pylogconf
+# THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
+# production requirements
 click
 tqdm
 pyanyzip
 numpy
+futures
 pandas
+pylogconf
 attrs
-pydmt
-# development tools
+# dev requirements
+pyclassifiers
 pypitools
 pydmt
-# python 2.7 production
-# futures
