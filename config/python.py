@@ -37,8 +37,8 @@ run_requires = [
     'numpy',  # for the histogram feature
     'futures',  # for python2.7 backport of concurrent.futures
     'pandas',  # for sample_by_column_pandas
-    'pylogconf', # for logging configuration
-    'attrs', # for attr like objects
+    'pylogconf',  # for logging configuration
+    'attrs',  # for attr like objects
 ]
 
 test_requires = [
