@@ -7,7 +7,7 @@ import pyanyzip.core
 
 from typing import List
 
-from pytsv.pytsv import TsvWriter
+from pytsv.pytsv import TsvWriter, CHECK_NUM_FIELDS
 
 
 @click.command()
@@ -41,19 +41,31 @@ from pytsv.pytsv import TsvWriter
     help="do you want to replace tabs with spaces?",
     show_default=True,
 )
+@click.option(
+    '--check-num_fields',
+    required=False,
+    default=CHECK_NUM_FIELDS,
+    type=bool,
+    help="check that all lines have the same number of fields?",
+    show_default=True,
+)
 def main(
         input_file,
         output_file,
         set_max,
         replace_tabs_with_spaces,
+        check_num_fields,
 ):
-    # type: (str, str, bool, bool) -> None
+    # type: (str, str, bool, bool, bool) -> None
     """ This script converts a CSV to a TSV file """
     if set_max:
         csv.field_size_limit(sys.maxsize)
     with pyanyzip.core.open(input_file, "rt") as input_file_handle:
         csv_reader = csv.reader(input_file_handle)
-        with TsvWriter(output_file) as output_file_handle:
+        with TsvWriter(
+            filename=output_file,
+            check_num_fields=check_num_fields,
+        ) as output_file_handle:
             for row in csv_reader:  # type: List[str]
                 if replace_tabs_with_spaces:
                     for i, item in enumerate(row):
