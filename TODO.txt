@@ -1,3 +1,5 @@
+- TsvReader does not have a "header=True" property that I can pass
+	at construction that can be used to skip the first line.
 - move this whole package to use pytconf instead of click.
 	as part of this unify all utils to one executable.
 - move this package to pydmt.
