@@ -7,7 +7,7 @@ http://setuptools.readthedocs.io/en/latest/setuptools.html
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name='pytsv',
-    version='0.1.50',
+    version='0.1.51',
     packages=[
         'pytsv',
         'pytsv.scripts',
@@ -64,6 +64,7 @@ setuptools.setup(
         'pytsv_lc=pytsv.scripts.lc:main',
         'pytsv_majority=pytsv.scripts.majority:main',
         'pytsv_multiply=pytsv.scripts.multiply:main',
+        'pytsv_read=pytsv.scripts.read:main',
         'pytsv_remove_quotes=pytsv.scripts.remove_quotes:main',
         'pytsv_sample_by_column=pytsv.scripts.sample_by_column:main',
         'pytsv_sample_by_column_old=pytsv.scripts.sample_by_column_old:main',

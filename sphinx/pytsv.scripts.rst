@@ -108,6 +108,14 @@ pytsv.scripts.multiply module
     :undoc-members:
     :show-inheritance:
 
+pytsv.scripts.read module
+-------------------------
+
+.. automodule:: pytsv.scripts.read
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 pytsv.scripts.remove\_quotes module
 -----------------------------------
 
