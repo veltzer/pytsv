@@ -1,3 +1,5 @@
+- pytsv_csv_to_tsv does not work well because the csvreader that it
+	uses uses 'ascii' instead of 'utf-8'. fix this.
 - TsvReader does not have a "header=True" property that I can pass
 	at construction that can be used to skip the first line.
 - move this whole package to use pytconf instead of click.
