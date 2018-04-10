@@ -3,7 +3,7 @@ from __future__ import print_function
 import codecs
 import gzip
 from collections import defaultdict
-from typing import Iterable, List, Tuple, Dict, IO, Iterator, Text, Union
+from typing import Iterable, List, Tuple, Dict, IO, Iterator, Text, Union, Sequence
 import itertools
 import logging
 import re
@@ -79,7 +79,7 @@ def aggregate(
     :param floating_point:
     :return:
     """
-    counts = dict()  # type: Dict[Tuple[str], List[int]]
+    counts = dict()  # type: Dict[Tuple[str], List[Union[int, float]]]
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
         logger.debug("working on file [%s]", input_file_name)
@@ -221,19 +221,23 @@ class TsvWriter(object):
         self.convert_to_string = convert_to_string
 
     def _sanitize(self, l):
-        # type: (List[str]) -> None
+        # type: (Sequence[str]) -> Sequence[str]
         if self.sanitize:
+            r = list(l)
             for field in self.fields_to_clean:
-                l[field] = clean(
-                    text=l[field],
+                r[field] = clean(
+                    text=r[field],
                     clean_edges=self.clean_edges,
                     sub_trailing=self.sub_trailing,
                     remove_non_ascii=self.remove_non_ascii,
                     lower_case=self.lower_case,
                 )
+            return r
+        else:
+            return l
 
     def _convert(self, l):
-        # type: (List[str]) -> Iterator[str]
+        # type: (Sequence[str]) -> Iterator[str]
         if self.convert_to_string:
             for i, t in enumerate(l):
                 if type(t) in (int, float, type(None)):
@@ -244,15 +248,15 @@ class TsvWriter(object):
             for x in l:
                 yield x
 
-    def write(self, l):
-        # type: (List[str]) -> None
-        self._sanitize(l)
+    def write(self, input_list):
+        # type: (Sequence[str]) -> None
+        sanitized_list = self._sanitize(input_list)
         if self.check_num_fields:
             if self.num_fields is None:
-                self.num_fields = len(l)
+                self.num_fields = len(sanitized_list)
             else:
-                assert len(l) == self.num_fields, "wrong number of fields in {}".format(l)
-        print("\t".join(self._convert(l)), file=self.io)
+                assert len(sanitized_list) == self.num_fields, "wrong number of fields in {}".format(sanitized_list)
+        print("\t".join(self._convert(sanitized_list)), file=self.io)
 
     def close(self):
         # type: () -> None
