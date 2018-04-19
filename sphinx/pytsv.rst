@@ -1,6 +1,13 @@
 pytsv package
 =============
 
+Subpackages
+-----------
+
+.. toctree::
+
+    pytsv.scripts
+
 Submodules
 ----------
 

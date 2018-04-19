@@ -85,3 +85,5 @@ celerybeat-schedule
 /.idea/workspace.xml
 
 /.pydmt
+
+/.pytest_cache/

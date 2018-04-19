@@ -12,3 +12,5 @@ attrs
 pyclassifiers
 pypitools
 pydmt
+pylint
+pytest
