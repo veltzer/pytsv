@@ -51,14 +51,14 @@
     <span class="n">input_file</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: str</span>
     <span class="n">serial</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: int</span>
     <span class="n">progress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: bool</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: str</span></div>
-    <span class="n">columns</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: List[int]</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: str</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: List[int]</span></div>
 
 
 <div class="viewcode-block" id="JobReturnValue"><a class="viewcode-back" href="../../../pytsv.scripts.html#pytsv.scripts.split_by_columns_parallel.JobReturnValue">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">attrs</span>
 <span class="k">class</span> <span class="nc">JobReturnValue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">serial</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: int</span></div>
-    <span class="n">files</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: Dict[str, str]</span>
+    <span class="n">serial</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: int</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: Dict[str, str]</span></div>
 
 
 <div class="viewcode-block" id="process_single_file"><a class="viewcode-back" href="../../../pytsv.scripts.html#pytsv.scripts.split_by_columns_parallel.process_single_file">[docs]</a><span class="k">def</span> <span class="nf">process_single_file</span><span class="p">(</span><span class="n">job_info</span><span class="p">):</span>
@@ -83,8 +83,8 @@
             <span class="n">output_handle</span> <span class="o">=</span> <span class="n">tsv_writers_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
             <span class="n">output_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tsv_writers_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">v</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
-    <span class="k">return</span> <span class="n">JobReturnValue</span><span class="p">(</span><span class="n">job_info</span><span class="o">.</span><span class="n">serial</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">JobReturnValue</span><span class="p">(</span><span class="n">job_info</span><span class="o">.</span><span class="n">serial</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span></div>
 
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
@@ -212,7 +212,7 @@
       &copy;2017, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
     </div>
