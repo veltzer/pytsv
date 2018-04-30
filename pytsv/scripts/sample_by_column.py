@@ -74,12 +74,13 @@ def main(
         sep='\t',
         header=None,
     )
-    logger.info("checking that the values are unique")
-    unique_values_count = df[value_column].nunique()
-    if check_unique and unique_values_count != df.shape[0]:
-        logger.error("your data is not unique in the value_column")
-        logger.error("unique values {} != number of rows {}".format(unique_values_count, df.shape[0]))
-        return
+    if check_unique:
+        logger.info("checking that the values are unique")
+        unique_values_count = df[value_column].nunique()
+        if unique_values_count != df.shape[0]:
+            logger.error("your data is not unique in the value_column")
+            logger.error("unique values {} != number of rows {}".format(unique_values_count, df.shape[0]))
+            return
     logger.info("sampling")
     sample = df.sample(
         n=size,
