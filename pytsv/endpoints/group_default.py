@@ -49,7 +49,9 @@ def register_group_default():
 )
 def aggregate():
     # type: () -> None
-    """ aggregate tsv files """
+    """
+    aggregate tsv files
+    """
     pytsv.pytsv.aggregate(
         input_file_names=ConfigInputFiles.input_files,
         match_columns=ConfigMatchColumns.match_columns,
@@ -232,8 +234,8 @@ def cut():
 def drop_duplicates_by_columns():
     # type: () -> None
     """
-    This script will fix a tsv file assuming that bad characters or tabs have been
-left in one column of it.
+    This script will fix a tsv file assuming that bad characters or tabs have been left in one column of it.
+
     """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
@@ -263,8 +265,8 @@ left in one column of it.
 def fix_columns():
     # type: () -> None
     """
-    This script will fix a tsv file assuming that bad characters or tabs have been
-left in one column of it.
+    This script will fix a tsv file assuming that bad characters or tabs have been left in one column of it.
+
     """
     # We need to read the input file WITHOUT assuming that it hasn't problems
     with TsvReader(
