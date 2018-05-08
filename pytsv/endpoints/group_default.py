@@ -50,7 +50,7 @@ def register_group_default():
 def aggregate():
     # type: () -> None
     """
-    aggregate tsv files
+    aggregate TSV files
     """
     pytsv.pytsv.aggregate(
         input_file_names=ConfigInputFiles.input_files,
@@ -235,7 +235,7 @@ def cut():
 def drop_duplicates_by_columns():
     # type: () -> None
     """
-    fix a tsv file assuming that bad characters or tabs have been left in one column of it
+    fix a TSV file assuming that bad characters or tabs have been left in one column of it
     """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
@@ -265,7 +265,7 @@ def drop_duplicates_by_columns():
 def fix_columns():
     # type: () -> None
     """
-    fix a tsv file assuming that bad characters or tabs have been left in one column of it
+    fix a TSV file assuming that bad characters or tabs have been left in one column of it
     """
     # We need to read the input file WITHOUT assuming that it hasn't problems
     with TsvReader(
@@ -300,7 +300,7 @@ def fix_columns():
 )
 def histogram_by_column():
     # type: () -> None
-    """ Create a histogram from a field in a tsv file """
+    """ Create a histogram from a field in a TSV file """
     a = []
     total = 0
     with TsvReader(ConfigInputFile.input_file) as input_handle:
@@ -378,7 +378,7 @@ def majority():
 )
 def multiply():
     # type: () -> None
-    """ multiply a tsv file according to column """
+    """ multiply a TSV file according to column """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
@@ -401,7 +401,7 @@ def multiply():
 def read():
     # type: () -> None
     """
-    read tsv files as plainly as possible
+    read TSV files as plainly as possible
     """
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(filename=input_file) as input_file_handle:
@@ -483,7 +483,9 @@ class MyEventTypes(Enum):
 )
 def join():
     # type: () -> None
-    """ join two tsv files by column """
+    """
+    join two TSV files by column
+    """
     d = dict()
     event_found = 0
     event_unknown_added = 0
@@ -742,7 +744,7 @@ def tsv_to_csv():
 def sample_by_column():
     # type: () -> None
     """
-    create a weighted sample from a tsv file.
+    create a weighted sample from a TSV file
     """
     """
     To run this you must supply a 'value_column' (the column
@@ -854,7 +856,7 @@ def sample_by_column_old():
 def sample_by_two_columns():
     # type: () -> None
     """
-    sample from a TSV file by two columns"
+    sample from a TSV file by two columns
     """
     logger = logging.getLogger(__name__)
     logger.info("reading the data")
