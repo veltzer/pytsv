@@ -19,8 +19,9 @@ class ConfigNumFields(Config):
     """
     Parameter to config number of fields in a TSV file
     """
-    num_fields = ParamCreator.create_int(
+    num_fields = ParamCreator.create_int_or_none(
         help_string="how many fields should the tsv have",
+        default=None,
     )
 
 
@@ -91,7 +92,7 @@ class ConfigProgress(Config):
     """
     Parameters to control progress reporting
     """
-    progress = ParamCreator.create_bool(default=False, help_string="do you want progress report")
+    progress = ParamCreator.create_bool(default=True, help_string="do you want progress report")
 
 
 class ConfigColumn(Config):

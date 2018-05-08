@@ -16,8 +16,6 @@ import tqdm
 from pytconf.config import register_endpoint, register_function_group
 from typing import List, Dict, Set
 
-from tqdm import tqdm
-
 import pytsv.pytsv
 from pytsv import pytsv
 from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \
@@ -865,7 +863,7 @@ def sample_by_two_columns():
     logger.info("finding clusters")
     clusters = df[ConfigSampleByTwoColumns.group_column].unique()
     if ConfigProgress.progress:
-        clusters = tqdm(clusters)
+        clusters = tqdm.tqdm(clusters)
     if os.path.isfile(ConfigOutputFile.output_file):
         os.unlink(ConfigOutputFile.output_file)
     for cluster in clusters:
