@@ -87,16 +87,13 @@
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.check">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.check" title="Permalink to this definition">¶</a></dt>
-<dd><p>This script checks that every file given to it is legal tsv
-TODO:
-- add ability to say how many lines are bad and print their content</p>
+<dd><p>check that every file is legal TSV</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.check_columns_unique">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">check_columns_unique</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#check_columns_unique"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.check_columns_unique" title="Permalink to this definition">¶</a></dt>
-<dd><p>This script checks that for certain columns every value in the files
-is unique.</p>
+<dd><p>checks that for certain columns every value in the files is unique</p>
 </dd></dl>
 
 <dl class="function">
@@ -107,32 +104,31 @@ is unique.</p>
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.clean_by_field_num">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">clean_by_field_num</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#clean_by_field_num"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.clean_by_field_num" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove lines from a tsv file that do not have the right number of
-columns</p>
+<dd><p>remove lines from a TSV file that do not have the right number of columns</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.csv_to_tsv">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">csv_to_tsv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#csv_to_tsv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.csv_to_tsv" title="Permalink to this definition">¶</a></dt>
-<dd><p>This script converts a CSV to a TSV file</p>
+<dd><p>convert a CSV to a TSV file</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.cut">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">cut</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#cut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.cut" title="Permalink to this definition">¶</a></dt>
-<dd><p>cut fields from a tsv file</p>
+<dd><p>cut fields from a TSV file</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.drop_duplicates_by_columns">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">drop_duplicates_by_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#drop_duplicates_by_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.drop_duplicates_by_columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>This script will fix a tsv file assuming that bad characters or tabs have been left in one column of it.</p>
+<dd><p>fix a tsv file assuming that bad characters or tabs have been left in one column of it</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.fix_columns">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">fix_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#fix_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.fix_columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>This script will fix a tsv file assuming that bad characters or tabs have been left in one column of it.</p>
+<dd><p>fix a tsv file assuming that bad characters or tabs have been left in one column of it</p>
 </dd></dl>
 
 <dl class="function">
@@ -156,9 +152,7 @@ columns</p>
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.majority">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">majority</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#majority"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.majority" title="Permalink to this definition">¶</a></dt>
-<dd><p>reduce two columns to a majority. This means that if x1 appears more
-with y2 than any other values in column Y then x1, y2 will be in the output
-and no other entry with x1 will appear</p>
+<dd><p>reduce two columns to a majority</p>
 </dd></dl>
 
 <dl class="function">
@@ -175,7 +169,7 @@ and no other entry with x1 will appear</p>
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.read">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read tsv files as plainly as possible</p>
+<dd><p>read tsv files as plainly as possible</p>
 </dd></dl>
 
 <dl class="function">
@@ -192,38 +186,31 @@ and no other entry with x1 will appear</p>
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.sample_by_column">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">sample_by_column</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#sample_by_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.sample_by_column" title="Permalink to this definition">¶</a></dt>
-<dd><p>This application will create a weighted sample from a tsv file.
-To run this you must supply a ‘value_column’ (the column
-which will be sampled) and a ‘weight_column’ which must
-be convertible to a floating point number.</p>
+<dd><p>create a weighted sample from a tsv file.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.sample_by_column_old">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">sample_by_column_old</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#sample_by_column_old"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.sample_by_column_old" title="Permalink to this definition">¶</a></dt>
-<dd><p>This application will sample from a tsv file by a sample column
-The sample column must be convertible to a floating point number.</p>
+<dd><p>sample from a TSV file by a sample column</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.sample_by_two_columns">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">sample_by_two_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#sample_by_two_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.sample_by_two_columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>This application will sample from a tsv file by a sample column
-The sample column must be convertible to a floating point number.</p>
+<dd><p>sample from a TSV file by two columns”</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.split_by_columns">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">split_by_columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#split_by_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.split_by_columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>This application will split a TSV file into many files according
-to some of its columns</p>
+<dd><p>split a TSV file into many files according to some of its columns</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.split_by_columns_parallel">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">split_by_columns_parallel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#split_by_columns_parallel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.split_by_columns_parallel" title="Permalink to this definition">¶</a></dt>
-<dd><p>This application will split a TSV file into many files according
-to some of its columns</p>
+<dd><p>split a TSV file into many files according to some of its columns</p>
 </dd></dl>
 
 <dl class="function">
@@ -235,14 +222,13 @@ to some of its columns</p>
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.tree">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw tree by two columns in a tsv file
-You can also see only parts of the tree</p>
+<dd><p>draw tree by two columns from a TSV file</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.endpoints.group_default.tsv_to_csv">
 <code class="descclassname">pytsv.endpoints.group_default.</code><code class="descname">tsv_to_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#tsv_to_csv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.tsv_to_csv" title="Permalink to this definition">¶</a></dt>
-<dd><p>This script converts a TSV file to a CSV file</p>
+<dd><p>convert a TSV file to a CSV file</p>
 </dd></dl>
 
 </div>
