@@ -82,7 +82,7 @@
 <span class="k">def</span> <span class="nf">aggregate</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    aggregate tsv files</span>
+<span class="sd">    aggregate TSV files</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pytsv</span><span class="o">.</span><span class="n">pytsv</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
         <span class="n">input_file_names</span><span class="o">=</span><span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">,</span>
@@ -267,7 +267,7 @@
 <span class="k">def</span> <span class="nf">drop_duplicates_by_columns</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    fix a tsv file assuming that bad characters or tabs have been left in one column of it</span>
+<span class="sd">    fix a TSV file assuming that bad characters or tabs have been left in one column of it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -297,7 +297,7 @@
 <span class="k">def</span> <span class="nf">fix_columns</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    fix a tsv file assuming that bad characters or tabs have been left in one column of it</span>
+<span class="sd">    fix a TSV file assuming that bad characters or tabs have been left in one column of it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># We need to read the input file WITHOUT assuming that it hasn&#39;t problems</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span>
@@ -332,7 +332,7 @@
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">histogram_by_column</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
-    <span class="sd">&quot;&quot;&quot; Create a histogram from a field in a tsv file &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Create a histogram from a field in a TSV file &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_handle</span><span class="p">:</span>
@@ -410,7 +410,7 @@
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">multiply</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
-    <span class="sd">&quot;&quot;&quot; multiply a tsv file according to column &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; multiply a TSV file according to column &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -433,7 +433,7 @@
 <span class="k">def</span> <span class="nf">read</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    read tsv files as plainly as possible</span>
+<span class="sd">    read TSV files as plainly as possible</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
@@ -515,7 +515,9 @@
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">join</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
-    <span class="sd">&quot;&quot;&quot; join two tsv files by column &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    join two TSV files by column</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">event_found</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">event_unknown_added</span> <span class="o">=</span> <span class="mi">0</span>
@@ -774,7 +776,7 @@
 <span class="k">def</span> <span class="nf">sample_by_column</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    create a weighted sample from a tsv file.</span>
+<span class="sd">    create a weighted sample from a TSV file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    To run this you must supply a &#39;value_column&#39; (the column</span>
@@ -886,7 +888,7 @@
 <span class="k">def</span> <span class="nf">sample_by_two_columns</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    sample from a TSV file by two columns&quot;</span>
+<span class="sd">    sample from a TSV file by two columns</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;reading the data&quot;</span><span class="p">)</span>
