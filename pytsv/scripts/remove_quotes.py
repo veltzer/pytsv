@@ -43,7 +43,7 @@ def main(
         output_file,
 ):
     # type: (bool, str, str, str) -> None
-    """ lower case some columns """
+    """ removed quotes from fields """
     field_nums = [int(x) for x in fields.split(',') if x != ""]  # type: List[int]
     with TsvReader(filename=input_file) as input_file_handle:
         with TsvWriter(filename=output_file) as output_file_handle:
