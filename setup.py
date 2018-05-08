@@ -7,7 +7,7 @@ http://setuptools.readthedocs.io/en/latest/setuptools.html
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name='pytsv',
-    version='0.1.53',
+    version='0.1.54',
     packages=[
         'pytsv',
         'pytsv.endpoints',
