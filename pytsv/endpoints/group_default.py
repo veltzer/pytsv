@@ -3,7 +3,7 @@ import csv
 import logging
 import os
 import sys
-from collections.__init__ import defaultdict
+from collections import defaultdict
 from enum import Enum
 
 import attr
@@ -98,7 +98,10 @@ def check_file(params_for_job):
 )
 def check():
     # type () -> None
-    """ This script checks that every file given to it is legal tsv
+    """
+    check that every file is legal TSV
+    """
+    """
     TODO:
     - add ability to say how many lines are bad and print their content
     """
@@ -141,8 +144,7 @@ def check():
 def check_columns_unique():
     # type: () -> None
     """
-    This script checks that for certain columns every value in the files
-    is unique.
+    checks that for certain columns every value in the files is unique
     """
     dicts = [dict() for _ in range(len(ConfigColumns.columns))]
     errors = False
@@ -182,8 +184,7 @@ def check_columns_unique():
 def clean_by_field_num():
     # type: () -> None
     """
-    Remove lines from a tsv file that do not have the right number of
-    columns
+    remove lines from a TSV file that do not have the right number of columns
     """
     with TsvReader(
         filename=ConfigInputFile.input_file,
@@ -210,7 +211,7 @@ def clean_by_field_num():
 )
 def cut():
     # type: () -> None
-    """ cut fields from a tsv file """
+    """ cut fields from a TSV file """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
@@ -234,8 +235,7 @@ def cut():
 def drop_duplicates_by_columns():
     # type: () -> None
     """
-    This script will fix a tsv file assuming that bad characters or tabs have been left in one column of it.
-
+    fix a tsv file assuming that bad characters or tabs have been left in one column of it
     """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
@@ -265,8 +265,7 @@ def drop_duplicates_by_columns():
 def fix_columns():
     # type: () -> None
     """
-    This script will fix a tsv file assuming that bad characters or tabs have been left in one column of it.
-
+    fix a tsv file assuming that bad characters or tabs have been left in one column of it
     """
     # We need to read the input file WITHOUT assuming that it hasn't problems
     with TsvReader(
@@ -337,7 +336,10 @@ def histogram_by_column():
 def majority():
     # type: () -> None
     """
-    reduce two columns to a majority. This means that if x1 appears more
+    reduce two columns to a majority
+    """
+    """
+    This means that if x1 appears more
     with y2 than any other values in column Y then x1, y2 will be in the output
     and no other entry with x1 will appear
     """
@@ -398,7 +400,9 @@ def multiply():
 )
 def read():
     # type: () -> None
-    """ Read tsv files as plainly as possible """
+    """
+    read tsv files as plainly as possible
+    """
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(filename=input_file) as input_file_handle:
             if ConfigProgress.progress:
@@ -444,7 +448,7 @@ def remove_quotes():
 )
 def csv_to_tsv():
     # type: () -> None
-    """ This script converts a CSV to a TSV file """
+    """ convert a CSV to a TSV file """
     if ConfigCsvToTsv.set_max:
         csv.field_size_limit(sys.maxsize)
     with pyanyzip.core.open(ConfigInputFile.input_file, "rt") as input_file_handle:
@@ -619,8 +623,7 @@ def process_single_file(job_info):
 def split_by_columns_parallel():
     # type: () -> None
     """
-    This application will split a TSV file into many files according
-    to some of its columns
+    split a TSV file into many files according to some of its columns
     """
     pylogconf.core.setup()
     assert len(ConfigColumns.columns) > 0, "must provide --columns"
@@ -655,7 +658,9 @@ def split_by_columns_parallel():
 def tree():
     # type: () -> None
     """
-    Draw tree by two columns in a tsv file
+    draw tree by two columns from a TSV file
+    """
+    """
     You can also see only parts of the tree
     """
     children_dict = defaultdict(set)  # type: Dict[Set]
@@ -714,7 +719,9 @@ def tree():
 )
 def tsv_to_csv():
     # type: () -> None
-    """ This script converts a TSV file to a CSV file """
+    """
+    convert a TSV file to a CSV file
+    """
     with open(ConfigOutputFile.output_file, "wt") as output_file_handle:
         csv_writer = csv.writer(output_file_handle)
         with TsvReader(ConfigInputFile.input_file) as input_file_handle:
@@ -735,7 +742,9 @@ def tsv_to_csv():
 def sample_by_column():
     # type: () -> None
     """
-    This application will create a weighted sample from a tsv file.
+    create a weighted sample from a tsv file.
+    """
+    """
     To run this you must supply a 'value_column' (the column
     which will be sampled) and a 'weight_column' which must
     be convertible to a floating point number.
@@ -783,8 +792,7 @@ def sample_by_column():
 def sample_by_column_old():
     # type: () -> None
     """
-    This application will sample from a tsv file by a sample column
-    The sample column must be convertible to a floating point number.
+    sample from a TSV file by a sample column
     """
     weights = []
     elements = []
@@ -846,8 +854,7 @@ def sample_by_column_old():
 def sample_by_two_columns():
     # type: () -> None
     """
-    This application will sample from a tsv file by a sample column
-    The sample column must be convertible to a floating point number.
+    sample from a TSV file by two columns"
     """
     logger = logging.getLogger(__name__)
     logger.info("reading the data")
@@ -900,8 +907,7 @@ def sample_by_two_columns():
 def split_by_columns():
     # type: () -> None
     """
-    This application will split a TSV file into many files according
-    to some of its columns
+    split a TSV file into many files according to some of its columns
     """
     pylogconf.core.setup()
     logger = logging.getLogger(__name__)
