@@ -16,13 +16,11 @@ import tqdm
 from pytconf.config import register_endpoint, register_function_group
 from typing import List, Dict, Set
 
-import pytsv.pytsv
-from pytsv import pytsv
 from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \
     ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, ConfigTsvReader, ConfigColumns, \
     ConfigInputFile, ConfigFixTypes, ConfigColumn, ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
     ConfigSplit, ConfigTree, ConfigSampleByColumn, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern
-from pytsv.pytsv import TsvReader, TsvWriter
+from pytsv.core import TsvReader, TsvWriter, clean
 
 GROUP_NAME_DEFAULT = "default"
 GROUP_DESCRIPTION_DEFAULT = "all pytsv commands"
@@ -52,7 +50,7 @@ def aggregate():
     """
     aggregate TSV files
     """
-    pytsv.pytsv.aggregate(
+    aggregate(
         input_file_names=ConfigInputFiles.input_files,
         match_columns=ConfigMatchColumns.match_columns,
         aggregate_columns=ConfigAggregateColumns.aggregate_columns,
@@ -277,7 +275,7 @@ def fix_columns():
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             for fields in input_file_handle:  # type: List[str]
                 for fix_column in ConfigColumns.columns:
-                    fields[fix_column] = pytsv.clean(
+                    fields[fix_column] = clean(
                         text=fields[fix_column],
                         clean_edges=ConfigFixTypes.clean_edges,
                         sub_trailing=ConfigFixTypes.sub_trailing,

@@ -48,13 +48,11 @@
 <span class="kn">from</span> <span class="nn">pytconf.config</span> <span class="k">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_function_group</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span>
 
-<span class="kn">import</span> <span class="nn">pytsv.pytsv</span>
-<span class="kn">from</span> <span class="nn">pytsv</span> <span class="k">import</span> <span class="n">pytsv</span>
 <span class="kn">from</span> <span class="nn">pytsv.configs</span> <span class="k">import</span> <span class="n">ConfigInputFiles</span><span class="p">,</span> <span class="n">ConfigFloatingPoint</span><span class="p">,</span> <span class="n">ConfigAggregateColumns</span><span class="p">,</span> <span class="n">ConfigMatchColumns</span><span class="p">,</span> \
     <span class="n">ConfigOutputFile</span><span class="p">,</span> <span class="n">ConfigProgress</span><span class="p">,</span> <span class="n">ConfigParallel</span><span class="p">,</span> <span class="n">ConfigNumFields</span><span class="p">,</span> <span class="n">ConfigTsvReader</span><span class="p">,</span> <span class="n">ConfigColumns</span><span class="p">,</span> \
     <span class="n">ConfigInputFile</span><span class="p">,</span> <span class="n">ConfigFixTypes</span><span class="p">,</span> <span class="n">ConfigColumn</span><span class="p">,</span> <span class="n">ConfigBucketNumber</span><span class="p">,</span> <span class="n">ConfigMajority</span><span class="p">,</span> <span class="n">ConfigCsvToTsv</span><span class="p">,</span> <span class="n">ConfigJoin</span><span class="p">,</span> \
     <span class="n">ConfigSplit</span><span class="p">,</span> <span class="n">ConfigTree</span><span class="p">,</span> <span class="n">ConfigSampleByColumn</span><span class="p">,</span> <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span> <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span> <span class="n">ConfigPattern</span>
-<span class="kn">from</span> <span class="nn">pytsv.pytsv</span> <span class="k">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span>
+<span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="k">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span>
 
 <span class="n">GROUP_NAME_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
 <span class="n">GROUP_DESCRIPTION_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;all pytsv commands&quot;</span>
@@ -84,7 +82,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    aggregate TSV files</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pytsv</span><span class="o">.</span><span class="n">pytsv</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
+    <span class="n">aggregate</span><span class="p">(</span>
         <span class="n">input_file_names</span><span class="o">=</span><span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">,</span>
         <span class="n">match_columns</span><span class="o">=</span><span class="n">ConfigMatchColumns</span><span class="o">.</span><span class="n">match_columns</span><span class="p">,</span>
         <span class="n">aggregate_columns</span><span class="o">=</span><span class="n">ConfigAggregateColumns</span><span class="o">.</span><span class="n">aggregate_columns</span><span class="p">,</span>
@@ -309,7 +307,7 @@
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>  <span class="c1"># type: List[str]</span>
                 <span class="k">for</span> <span class="n">fix_column</span> <span class="ow">in</span> <span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-                    <span class="n">fields</span><span class="p">[</span><span class="n">fix_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">pytsv</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span>
+                    <span class="n">fields</span><span class="p">[</span><span class="n">fix_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">clean</span><span class="p">(</span>
                         <span class="n">text</span><span class="o">=</span><span class="n">fields</span><span class="p">[</span><span class="n">fix_column</span><span class="p">],</span>
                         <span class="n">clean_edges</span><span class="o">=</span><span class="n">ConfigFixTypes</span><span class="o">.</span><span class="n">clean_edges</span><span class="p">,</span>
                         <span class="n">sub_trailing</span><span class="o">=</span><span class="n">ConfigFixTypes</span><span class="o">.</span><span class="n">sub_trailing</span><span class="p">,</span>

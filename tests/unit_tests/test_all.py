@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from pytsv.pytsv import TsvReader
+from pytsv.core import TsvReader
 
 
 def get_file(name):
