@@ -19,10 +19,10 @@ pytsv.configs module
     :undoc-members:
     :show-inheritance:
 
-pytsv.pytsv module
-------------------
+pytsv.core module
+-----------------
 
-.. automodule:: pytsv.pytsv
+.. automodule:: pytsv.core
     :members:
     :undoc-members:
     :show-inheritance:
