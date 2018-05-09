@@ -34,8 +34,21 @@
 
 <span class="kn">from</span> <span class="nn">pytconf.config</span> <span class="k">import</span> <span class="n">ParamCreator</span><span class="p">,</span> <span class="n">Config</span>
 
-<span class="kn">from</span> <span class="nn">pytsv.pytsv</span> <span class="k">import</span> <span class="n">CHECK_NON_ASCII</span><span class="p">,</span> <span class="n">VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS</span><span class="p">,</span> <span class="n">CHECK_NUM_FIELDS</span><span class="p">,</span> <span class="n">CLEAN_EDGES</span><span class="p">,</span> \
-    <span class="n">SUB_TRAILING</span><span class="p">,</span> <span class="n">REMOVE_NON_ASCII</span><span class="p">,</span> <span class="n">LOWER_CASE</span>
+<span class="n">CHECK_NON_ASCII</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">SKIP_COMMENTS</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">USE_ANY_FORMAT</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">SANITIZE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">CLEAN_EDGES</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">SUB_TRAILING</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">REMOVE_NON_ASCII</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">LOWER_CASE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">CHECK_NUM_FIELDS</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">CONVERT_TO_STRING</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">DO_GZIP</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">FILENAME_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">DEFAULT_ENCODING</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+<span class="n">ATTACH_ENCODER</span> <span class="o">=</span> <span class="kc">False</span>
 
 
 <div class="viewcode-block" id="ConfigInputFiles"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigInputFiles">[docs]</a><span class="k">class</span> <span class="nc">ConfigInputFiles</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>

@@ -43,22 +43,9 @@
 <span class="kn">import</span> <span class="nn">pyanyzip.core</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">CHECK_NON_ASCII</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">SKIP_COMMENTS</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">USE_ANY_FORMAT</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">SANITIZE</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">CLEAN_EDGES</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">SUB_TRAILING</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">REMOVE_NON_ASCII</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">LOWER_CASE</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">CHECK_NUM_FIELDS</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">CONVERT_TO_STRING</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">DO_GZIP</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">FILENAME_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">DEFAULT_ENCODING</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
-<span class="n">ATTACH_ENCODER</span> <span class="o">=</span> <span class="kc">False</span>
-
+<span class="kn">from</span> <span class="nn">pytsv.configs</span> <span class="k">import</span> <span class="n">SANITIZE</span><span class="p">,</span> <span class="n">CLEAN_EDGES</span><span class="p">,</span> <span class="n">SUB_TRAILING</span><span class="p">,</span> <span class="n">REMOVE_NON_ASCII</span><span class="p">,</span> <span class="n">LOWER_CASE</span><span class="p">,</span> <span class="n">CHECK_NUM_FIELDS</span><span class="p">,</span> \
+    <span class="n">CONVERT_TO_STRING</span><span class="p">,</span> <span class="n">FILENAME_DETECT</span><span class="p">,</span> <span class="n">DO_GZIP</span><span class="p">,</span> <span class="n">DEFAULT_ENCODING</span><span class="p">,</span> <span class="n">ATTACH_ENCODER</span><span class="p">,</span> <span class="n">USE_ANY_FORMAT</span><span class="p">,</span> <span class="n">SKIP_COMMENTS</span><span class="p">,</span> \
+    <span class="n">CHECK_NON_ASCII</span><span class="p">,</span> <span class="n">VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS</span>
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">stream_next</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
