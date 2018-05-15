@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 import os
 import subprocess
@@ -19,6 +19,32 @@ def array_indented(level: int, l: List[str], quote_char='\'', comma_after=False)
     for x in l:
         out += (((level+1) * 4) * " ") + '{}{}{}'.format(quote_char, x, quote_char) + ",\n"
     out += ((level * 4) * " ") + "]"
+    if comma_after:
+        out += ","
+    return out
+
+
+def dict_indented(level: int, l: Dict[str, List[int]], quote_char='\'', comma_after=False) -> str:
+    """
+    return an dict indented according to indent level
+    :param level:
+    :param l:
+    :param quote_char:
+    :param comma_after:
+    :return:
+    """
+    out = "[\n"
+    for k, v in l.items():
+        spaces = (((level+1) * 4) * " ")
+        out += '{}{}{}{}: {},\n'.format(
+            spaces,
+            quote_char,
+            k,
+            quote_char,
+            v,
+        )
+    spaces = ((level * 4) * " ")
+    out += "{}]".format(spaces)
     if comma_after:
         out += ","
     return out

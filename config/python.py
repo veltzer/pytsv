@@ -15,7 +15,6 @@ run_requires = [
     'tqdm',  # for progress report
     'pyanyzip',  # for opening zipped files
     'numpy',  # for the histogram feature
-    'futures',  # for python2.7 backport of concurrent.futures
     'pandas',  # for sample_by_column_pandas
     'pylogconf',  # for logging configuration
     'attrs',  # for attr like objects
@@ -37,3 +36,7 @@ install_requires = list(setup_requires)
 install_requires.extend(run_requires)
 
 python_requires = ">=2.7"
+
+extras_require={
+    ':python_version == "2.7"': ['futures'],  # for python2.7 backport of concurrent.futures
+}
