@@ -49,7 +49,7 @@ def clean(
     return text
 
 
-def aggregate(
+def do_aggregate(
     input_file_names,
     match_columns,
     aggregate_columns,
