@@ -20,7 +20,7 @@ from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregate
     ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, ConfigTsvReader, ConfigColumns, \
     ConfigInputFile, ConfigFixTypes, ConfigColumn, ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
     ConfigSplit, ConfigTree, ConfigSampleByColumn, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern
-from pytsv.core import TsvReader, TsvWriter, clean
+from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
 
 GROUP_NAME_DEFAULT = "default"
 GROUP_DESCRIPTION_DEFAULT = "all pytsv commands"
@@ -50,7 +50,7 @@ def aggregate():
     """
     aggregate TSV files
     """
-    aggregate(
+    do_aggregate(
         input_file_names=ConfigInputFiles.input_files,
         match_columns=ConfigMatchColumns.match_columns,
         aggregate_columns=ConfigAggregateColumns.aggregate_columns,
@@ -552,7 +552,7 @@ def lc():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def sum():
+def sum_columns():
     # type: () -> None
     """ sum some columns """
     sums = [0] * len(ConfigColumns.columns)
