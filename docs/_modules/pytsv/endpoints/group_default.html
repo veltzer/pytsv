@@ -52,7 +52,7 @@
     <span class="n">ConfigOutputFile</span><span class="p">,</span> <span class="n">ConfigProgress</span><span class="p">,</span> <span class="n">ConfigParallel</span><span class="p">,</span> <span class="n">ConfigNumFields</span><span class="p">,</span> <span class="n">ConfigTsvReader</span><span class="p">,</span> <span class="n">ConfigColumns</span><span class="p">,</span> \
     <span class="n">ConfigInputFile</span><span class="p">,</span> <span class="n">ConfigFixTypes</span><span class="p">,</span> <span class="n">ConfigColumn</span><span class="p">,</span> <span class="n">ConfigBucketNumber</span><span class="p">,</span> <span class="n">ConfigMajority</span><span class="p">,</span> <span class="n">ConfigCsvToTsv</span><span class="p">,</span> <span class="n">ConfigJoin</span><span class="p">,</span> \
     <span class="n">ConfigSplit</span><span class="p">,</span> <span class="n">ConfigTree</span><span class="p">,</span> <span class="n">ConfigSampleByColumn</span><span class="p">,</span> <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span> <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span> <span class="n">ConfigPattern</span>
-<span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="k">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span>
+<span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="k">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">do_aggregate</span>
 
 <span class="n">GROUP_NAME_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
 <span class="n">GROUP_DESCRIPTION_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;all pytsv commands&quot;</span>
@@ -82,7 +82,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    aggregate TSV files</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">aggregate</span><span class="p">(</span>
+    <span class="n">do_aggregate</span><span class="p">(</span>
         <span class="n">input_file_names</span><span class="o">=</span><span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">,</span>
         <span class="n">match_columns</span><span class="o">=</span><span class="n">ConfigMatchColumns</span><span class="o">.</span><span class="n">match_columns</span><span class="p">,</span>
         <span class="n">aggregate_columns</span><span class="o">=</span><span class="n">ConfigAggregateColumns</span><span class="o">.</span><span class="n">aggregate_columns</span><span class="p">,</span>
@@ -574,7 +574,7 @@
                 <span class="n">output_file_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="sum"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.sum">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+<div class="viewcode-block" id="sum_columns"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.sum_columns">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
@@ -584,7 +584,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sum</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">sum_columns</span><span class="p">():</span>
     <span class="c1"># type: () -&gt; None</span>
     <span class="sd">&quot;&quot;&quot; sum some columns &quot;&quot;&quot;</span>
     <span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>

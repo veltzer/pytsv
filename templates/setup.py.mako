@@ -28,6 +28,7 @@ setuptools.setup(
     license='${config.project.project_license}',
     platforms=${config.helpers.array_indented(1, config.project.project_platforms)},
     install_requires=${config.helpers.array_indented(1, config.python.install_requires)},
+    extras_require=${config.helpers.dict_indented(1, config.python.extras_require)},
     classifiers=${config.helpers.array_indented(1, config.project.project_classifiers)},
     data_files=${config.helpers.array_indented(1, config.project.project_data_files)},
     entry_points={'console_scripts': ${config.helpers.array_indented(1, config.python.console_scripts)}},

@@ -36,10 +36,12 @@ setuptools.setup(
         'tqdm',
         'pyanyzip',
         'numpy',
-        'futures',
         'pandas',
         'pylogconf',
         'attrs',
+    ],
+    extras_require=[
+        ':python_version == "2.7"': ['futures'],
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

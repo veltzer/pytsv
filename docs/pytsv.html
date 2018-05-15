@@ -288,7 +288,7 @@ point or not</p>
 <p>Parameters to configure how thing should run in parallel</p>
 <dl class="attribute">
 <dt id="pytsv.configs.ConfigParallel.jobs">
-<code class="descname">jobs</code><em class="property"> = 4</em><a class="headerlink" href="#pytsv.configs.ConfigParallel.jobs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">jobs</code><em class="property"> = 8</em><a class="headerlink" href="#pytsv.configs.ConfigParallel.jobs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -510,8 +510,13 @@ point or not</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pytsv.core.aggregate">
-<code class="descclassname">pytsv.core.</code><code class="descname">aggregate</code><span class="sig-paren">(</span><em>input_file_names</em>, <em>match_columns</em>, <em>aggregate_columns</em>, <em>output_file_name</em>, <em>floating_point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt id="pytsv.core.clean">
+<code class="descclassname">pytsv.core.</code><code class="descname">clean</code><span class="sig-paren">(</span><em>text</em>, <em>clean_edges=True</em>, <em>sub_trailing=True</em>, <em>remove_non_ascii=True</em>, <em>lower_case=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.clean" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pytsv.core.do_aggregate">
+<code class="descclassname">pytsv.core.</code><code class="descname">do_aggregate</code><span class="sig-paren">(</span><em>input_file_names</em>, <em>match_columns</em>, <em>aggregate_columns</em>, <em>output_file_name</em>, <em>floating_point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#do_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.do_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function aggregates a bunch of input files by integers.
 :param input_file_names:
 :param match_columns:
@@ -520,11 +525,6 @@ point or not</p>
 :param floating_point:
 :return:</p>
 </dd></dl>
-
-<dl class="function">
-<dt id="pytsv.core.clean">
-<code class="descclassname">pytsv.core.</code><code class="descname">clean</code><span class="sig-paren">(</span><em>text</em>, <em>clean_edges=True</em>, <em>sub_trailing=True</em>, <em>remove_non_ascii=True</em>, <em>lower_case=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.clean" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="function">
 <dt id="pytsv.core.group_by">

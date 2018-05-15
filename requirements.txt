@@ -4,7 +4,6 @@ pytconf
 tqdm
 pyanyzip
 numpy
-futures
 pandas
 pylogconf
 attrs
