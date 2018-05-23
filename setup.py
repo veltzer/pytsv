@@ -40,9 +40,9 @@ setuptools.setup(
         'pylogconf',
         'attrs',
     ],
-    extras_require=[
+    extras_require={
         ':python_version == "2.7"': ['futures'],
-    ],
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',

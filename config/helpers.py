@@ -33,7 +33,7 @@ def dict_indented(level: int, l: Dict[str, List[int]], quote_char='\'', comma_af
     :param comma_after:
     :return:
     """
-    out = "[\n"
+    out = "{\n"
     for k, v in l.items():
         spaces = (((level+1) * 4) * " ")
         out += '{}{}{}{}: {},\n'.format(
@@ -44,7 +44,7 @@ def dict_indented(level: int, l: Dict[str, List[int]], quote_char='\'', comma_af
             v,
         )
     spaces = ((level * 4) * " ")
-    out += "{}]".format(spaces)
+    out += "{}}".format(spaces)
     if comma_after:
         out += ","
     return out
