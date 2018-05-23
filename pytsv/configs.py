@@ -70,7 +70,7 @@ class ConfigInputFile(Config):
     """
     Parameters to specify input file
     """
-    input_file = ParamCreator.create_list_str(
+    input_file = ParamCreator.create_existing_file(
         help_string="input file",
     )
 
