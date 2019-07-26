@@ -16,7 +16,7 @@ ${a}
 % if config.python.dev_requires:
 # dev requirements
 % for a in config.python.dev_requires:
-${a}
+# ${a}
 % endfor
 % endif
 % if config.python.test_requires:
