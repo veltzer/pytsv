@@ -27,7 +27,7 @@ dev_requires = [
     'pyclassifiers',  # for programmatic classifiers
     # remarked for now
     # 'pypitools',  # for uploading to pypi
-    # 'pydmt',  # for building easier
+    'pydmt',  # for building easier
     'pylint',  # for checking the code
     'pytest',  # for testing the project
 ]
