@@ -6,7 +6,7 @@ Subpackages
 
 .. toctree::
 
-    pytsv.endpoints
+   pytsv.endpoints
 
 Submodules
 ----------
@@ -15,23 +15,23 @@ pytsv.configs module
 --------------------
 
 .. automodule:: pytsv.configs
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 pytsv.core module
 -----------------
 
 .. automodule:: pytsv.core
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 Module contents
 ---------------
 
 .. automodule:: pytsv
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

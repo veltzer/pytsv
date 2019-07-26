@@ -9,5 +9,6 @@ pylogconf
 attrs
 # dev requirements
 pyclassifiers
+pydmt
 pylint
 pytest
