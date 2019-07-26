@@ -8,7 +8,7 @@ pandas
 pylogconf
 attrs
 # dev requirements
-pyclassifiers
-pydmt
-pylint
-pytest
+# pyclassifiers
+# pydmt
+# pylint
+# pytest
