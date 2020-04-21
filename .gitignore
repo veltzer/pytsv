@@ -83,8 +83,6 @@ celerybeat-schedule
 # Rope project settings
 .ropeproject
 
-/.idea/workspace.xml
-
 /.pydmt
 
 /.pytest_cache/
