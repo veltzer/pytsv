@@ -25,7 +25,7 @@ project_license = 'MIT'
 project_year_started = '2016'
 project_description = project_short_description
 project_platforms = [
-    'python2',
+    'python3',
 ]
 project_classifiers = [
     pyclassifiers.values.DevelopmentStatus__4_Beta,

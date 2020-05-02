@@ -29,7 +29,7 @@ setuptools.setup(
     download_url='https://github.com/veltzer/pytsv',
     license='MIT',
     platforms=[
-        'python2',
+        'python3',
     ],
     install_requires=[
         'pytconf',
