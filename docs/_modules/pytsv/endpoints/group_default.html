@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>pytsv.endpoints.group_default &#8212; pytsv 0.0.1 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
    
@@ -36,8 +36,8 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
-<span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="kn">import</span> <span class="nn">attr</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
@@ -46,14 +46,14 @@
 <span class="kn">import</span> <span class="nn">pyanyzip.core</span>
 <span class="kn">import</span> <span class="nn">pylogconf.core</span>
 <span class="kn">import</span> <span class="nn">tqdm</span>
-<span class="kn">from</span> <span class="nn">pytconf.config</span> <span class="k">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_function_group</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span> <span class="nn">pytconf.config</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_function_group</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span>
 
-<span class="kn">from</span> <span class="nn">pytsv.configs</span> <span class="k">import</span> <span class="n">ConfigInputFiles</span><span class="p">,</span> <span class="n">ConfigFloatingPoint</span><span class="p">,</span> <span class="n">ConfigAggregateColumns</span><span class="p">,</span> <span class="n">ConfigMatchColumns</span><span class="p">,</span> \
+<span class="kn">from</span> <span class="nn">pytsv.configs</span> <span class="kn">import</span> <span class="n">ConfigInputFiles</span><span class="p">,</span> <span class="n">ConfigFloatingPoint</span><span class="p">,</span> <span class="n">ConfigAggregateColumns</span><span class="p">,</span> <span class="n">ConfigMatchColumns</span><span class="p">,</span> \
     <span class="n">ConfigOutputFile</span><span class="p">,</span> <span class="n">ConfigProgress</span><span class="p">,</span> <span class="n">ConfigParallel</span><span class="p">,</span> <span class="n">ConfigNumFields</span><span class="p">,</span> <span class="n">ConfigTsvReader</span><span class="p">,</span> <span class="n">ConfigColumns</span><span class="p">,</span> \
     <span class="n">ConfigInputFile</span><span class="p">,</span> <span class="n">ConfigFixTypes</span><span class="p">,</span> <span class="n">ConfigColumn</span><span class="p">,</span> <span class="n">ConfigBucketNumber</span><span class="p">,</span> <span class="n">ConfigMajority</span><span class="p">,</span> <span class="n">ConfigCsvToTsv</span><span class="p">,</span> <span class="n">ConfigJoin</span><span class="p">,</span> \
     <span class="n">ConfigSplit</span><span class="p">,</span> <span class="n">ConfigTree</span><span class="p">,</span> <span class="n">ConfigSampleByColumn</span><span class="p">,</span> <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span> <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span> <span class="n">ConfigPattern</span>
-<span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="k">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">do_aggregate</span>
+<span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="kn">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">do_aggregate</span>
 
 <span class="n">GROUP_NAME_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
 <span class="n">GROUP_DESCRIPTION_DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;all pytsv commands&quot;</span>
@@ -92,7 +92,7 @@
 
 
 <div class="viewcode-block" id="ParamsForJob"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.ParamsForJob">[docs]</a><span class="k">class</span> <span class="nc">ParamsForJob</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input_file</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validate_all_lines_same_number_of_fields</span> <span class="o">=</span> <span class="kc">None</span>
@@ -962,16 +962,16 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2017, Mark Veltzer.
+      &copy;2016-2020, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
