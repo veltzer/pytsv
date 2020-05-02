@@ -5,3 +5,5 @@
 %>${line}
 *${config.project.project_name}*
 ${line}
+
+![build](https://github.com/veltzer/${config.project.project_name}/workflows/build/badge.svg)

@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import codecs
 import gzip
 from collections import defaultdict
@@ -15,26 +13,13 @@ from pytsv.configs import SANITIZE, CLEAN_EDGES, SUB_TRAILING, REMOVE_NON_ASCII,
     CONVERT_TO_STRING, FILENAME_DETECT, DO_GZIP, DEFAULT_ENCODING, ATTACH_ENCODER, USE_ANY_FORMAT, SKIP_COMMENTS, \
     CHECK_NON_ASCII, VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS
 
-if sys.version_info > (3, 0):
-    def stream_next(file):
-        return file.readline()
-else:
-    def stream_next(file):
-        return file.next()
-
-
-def is_2():
-    return sys.version_info[0] == 2
-
-
 def clean(
-        text,
-        clean_edges=True,
-        sub_trailing=True,
-        remove_non_ascii=True,
-        lower_case=True,
-):
-    # type: (str, bool, bool, bool, bool) -> str
+        text: str,
+        clean_edges: bool =True,
+        sub_trailing: bool =True,
+        remove_non_ascii: bool =True,
+        lower_case: bool =True,
+) -> str:
     if sub_trailing:
         # replace all manner of whitespace (consecutive or not)
         # with s single space
@@ -50,13 +35,12 @@ def clean(
 
 
 def do_aggregate(
-    input_file_names,
-    match_columns,
-    aggregate_columns,
-    output_file_name,
-    floating_point,
-):
-    # type: (Iterable[str], List[int], List[int], str, bool) -> None
+    input_file_names: Iterable[str],
+    match_columns: List[int],
+    aggregate_columns: List[int],
+    output_file_name: str,
+    floating_point: bool,
+) -> None:
     """
     This function aggregates a bunch of input files by integers.
     :param input_file_names:
@@ -66,13 +50,13 @@ def do_aggregate(
     :param floating_point:
     :return:
     """
-    counts = dict()  # type: Dict[Tuple[str], List[Union[int, float]]]
+    counts: Dict[Tuple[str], List[Union[int, float]]]=dict()
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
         logger.debug("working on file [%s]", input_file_name)
         with TsvReader(filename=input_file_name) as input_handle:
             for fields in input_handle:
-                match = tuple([fields[i] for i in match_columns])  # type: Tuple[str]
+                match: Tuple[str] = tuple([fields[i] for i in match_columns])
                 if match not in counts:
                     if floating_point:
                         counts[match] = [float(0)] * len(aggregate_columns)
@@ -92,12 +76,11 @@ def do_aggregate(
         sanitize=False,
     ) as output_file_handle:
         for match, aggregates in counts.items():
-            to_write = itertools.chain(match, aggregates)  # type: List[str]
+            to_write: List[str] = itertools.chain(match, aggregates)
             output_file_handle.write(to_write)
 
 
-def write_data(data, output_file_name):
-    # type: (List[List[str]], str) -> None
+def write_data(data: List[List[str]], output_file_name: str) -> None:
     with TsvWriter(
             filename=output_file_name,
             mode="at",
@@ -107,13 +90,12 @@ def write_data(data, output_file_name):
 
 
 def group_by(
-        input_file_names,
-        group_by_columns,
-        collect_columns,
-        output_file_template,
-):
-    # type: (Iterable[str], List[int], List[int], str, bool) -> List[str]
-    all_data = defaultdict(list)  # type: Dict[Tuple[str], List[List[str]]]
+        input_file_names: Iterable[str],
+        group_by_columns: List[int],
+        collect_columns: List[int],
+        output_file_template: str,
+) -> List[str]:
+    all_data: Dict[Tuple[str], List[List[str]]]=defaultdict(list)
     limit = 10000
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
@@ -121,8 +103,8 @@ def group_by(
         with open(input_file_name, 'rt') as file_handle:
             for line in file_handle:
                 line = line.rstrip()
-                parts = line.split("\t")  # type: List[str]
-                match = tuple([parts[i] for i in group_by_columns])  # type: Tuple[str]
+                parts: List[str] = line.split("\t")
+                match: Tuple[str] = tuple([parts[i] for i in group_by_columns])
                 match = "_".join(match)
                 data_to_append = [parts[i] for i in collect_columns]
                 all_data[match].append(data_to_append)
@@ -135,59 +117,51 @@ def group_by(
     return [output_file_template.format(match=match) for match in all_data]
 
 
-def is_ascii(s):
-    # type: (str) -> bool
+def is_ascii(s: str) -> bool:
     return all(ord(c) < 128 for c in s)
 
 
 class TsvWriter(object):
     def __init__(
             self,
-            filename,
-            mode="wt",
-            throw_exceptions=False,
+            filename: str,
+            mode: str="wt",
+            throw_exceptions: bool=False,
 
-            sanitize=SANITIZE,
-            fields_to_clean=None,
-            clean_edges=CLEAN_EDGES,
-            sub_trailing=SUB_TRAILING,
-            remove_non_ascii=REMOVE_NON_ASCII,
-            lower_case=LOWER_CASE,
+            sanitize: bool=SANITIZE,
+            fields_to_clean: List[int]=None,
+            clean_edges: bool=CLEAN_EDGES,
+            sub_trailing: bool=SUB_TRAILING,
+            remove_non_ascii: bool=REMOVE_NON_ASCII,
+            lower_case: bool=LOWER_CASE,
 
-            check_num_fields=CHECK_NUM_FIELDS,
-            num_fields=None,
-            convert_to_string=CONVERT_TO_STRING,
+            check_num_fields: bool=CHECK_NUM_FIELDS,
+            num_fields: int=None,
+            convert_to_string: bool=CONVERT_TO_STRING,
 
-            do_gzip=DO_GZIP,
-            filename_detect=FILENAME_DETECT,
-            encoding=DEFAULT_ENCODING,
-            attach_encoder=ATTACH_ENCODER,
-    ):
-        # type: (str, str, bool, bool, List[int], bool, bool, bool, bool, bool, int, bool, bool, bool) -> None
+            do_gzip: bool=DO_GZIP,
+            filename_detect: bool=FILENAME_DETECT,
+            encoding: str=DEFAULT_ENCODING,
+            attach_encoder: bool=ATTACH_ENCODER,
+    ) -> None:
         if filename_detect:
             found = False
             if filename.endswith(".tsv.gz"):
-                self.io = gzip.open(filename, mode=mode)  # type: IO[str]
-                if is_2():
-                    self.io = codecs.getwriter(encoding=encoding)(self.io)
+                self.io: IO[str] = gzip.open(filename, mode=mode)
                 found = True
             if filename.endswith(".tsv"):
-                self.io = open(filename, mode=mode)  # type: IO[str]
-                if is_2():
-                    self.io = codecs.getwriter(encoding=encoding)(self.io)
+                self.io: IO[str] = open(filename, mode=mode)
                 found = True
             if not found:
                 # treat as tsv
-                self.io = open(filename, mode=mode)  # type: IO[str]
+                self.io: IO[str] = open(filename, mode=mode)
             # old code, be more strict
             # assert found, "file name unknown"
         else:
             if do_gzip:
-                self.io = gzip.open(filename, mode=mode)  # type: IO[str]
-                if is_2():
-                    self.io = codecs.getwriter(encoding=encoding)(self.io)
+                self.io: IO[str] = gzip.open(filename, mode=mode)
             else:
-                self.io = open(filename, mode=mode)  # type: IO[str]
+                self.io: IO[str] = open(filename, mode=mode)
         # the next branch is mainly for python 2 when the PYTHONIOENCODING
         # environment variable is not set
         if attach_encoder:
@@ -207,8 +181,7 @@ class TsvWriter(object):
         self.num_fields = num_fields
         self.convert_to_string = convert_to_string
 
-    def _sanitize(self, l):
-        # type: (Sequence[str]) -> Sequence[str]
+    def _sanitize(self, l: Sequence[str]) -> Sequence[str]:
         if self.sanitize:
             r = list(l)
             for field in self.fields_to_clean:
@@ -223,8 +196,7 @@ class TsvWriter(object):
         else:
             return l
 
-    def _convert(self, l):
-        # type: (Sequence[str]) -> Iterator[str]
+    def _convert(self, l: Sequence[str]) -> Sequence[str]:
         if self.convert_to_string:
             for i, t in enumerate(l):
                 if type(t) in (int, float, type(None)):
@@ -235,8 +207,7 @@ class TsvWriter(object):
             for x in l:
                 yield x
 
-    def write(self, input_list):
-        # type: (Sequence[str]) -> None
+    def write(self, input_list: Sequence[str]) -> None:
         sanitized_list = self._sanitize(input_list)
         if self.check_num_fields:
             if self.num_fields is None:
@@ -245,8 +216,7 @@ class TsvWriter(object):
                 assert len(sanitized_list) == self.num_fields, "wrong number of fields in {}".format(sanitized_list)
         print("\t".join(self._convert(sanitized_list)), file=self.io)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self.io.close()
 
     def __enter__(self):
@@ -261,16 +231,15 @@ class TsvWriter(object):
 class TsvReader:
     def __init__(
             self,
-            filename,
-            mode="rt",
-            use_any_format=USE_ANY_FORMAT,
-            validate_all_lines_same_number_of_fields=VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
-            num_fields=None,
-            skip_comments=SKIP_COMMENTS,
-            check_non_ascii=CHECK_NON_ASCII,
-            newline='\n',
-    ):
-        # type: (str, str, bool, bool, int, bool, bool, Union[str, None]) -> None
+            filename: str,
+            mode: str="rt",
+            use_any_format: bool=USE_ANY_FORMAT,
+            validate_all_lines_same_number_of_fields: bool=VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
+            num_fields: Union[int, None]=None,
+            skip_comments: bool=SKIP_COMMENTS,
+            check_non_ascii: bool=CHECK_NON_ASCII,
+            newline: Union[str, None]='\n',
+    ) -> None:
         if use_any_format:
             self.io = pyanyzip.core.open(name=filename, mode=mode, newline=newline)
         else:
@@ -285,17 +254,16 @@ class TsvReader:
     def next(self):
         return self.__next__()
 
-    def __next__(self):
-        # type: () -> List[Text]
+    def __next__(self) -> List[Text]:
         """ method needed to be an iterator """
         self.line_number += 1
-        line = stream_next(self.io)
+        line = self.io.readline()
         if not line:
             raise StopIteration
         if self.skip_comments:
             while line.startswith("#"):
                 self.line_number += 1
-                line = stream_next(self.io)
+                line = self.io.readline()
                 if not line:
                     raise StopIteration
         line = line.rstrip('\r\n')
@@ -327,13 +295,11 @@ class TsvReader:
         """ method needed to be a context manager """
         self.close()
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self.io.close()
 
 
-def write_dict(filename=None, d=None):
-    # type: (str, Dict[str,str]) -> None
+def write_dict(filename: str=None, d: Dict[str,str]=None) -> None:
     with TsvWriter(filename=filename, num_fields=2, fields_to_clean=[0]) as output_handle:
         for k, v in d.items():
             output_handle.write([k, v])

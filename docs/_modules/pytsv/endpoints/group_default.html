@@ -78,8 +78,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">aggregate</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">aggregate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    aggregate TSV files</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -101,8 +100,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="check_file"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.check_file">[docs]</a><span class="k">def</span> <span class="nf">check_file</span><span class="p">(</span><span class="n">params_for_job</span><span class="p">):</span>
-    <span class="c1"># type: (ParamsForJob) -&gt; bool</span>
+<div class="viewcode-block" id="check_file"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.check_file">[docs]</a><span class="k">def</span> <span class="nf">check_file</span><span class="p">(</span><span class="n">params_for_job</span><span class="p">:</span> <span class="n">ParamsForJob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;checking [</span><span class="si">{}</span><span class="s1">]...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">params_for_job</span><span class="o">.</span><span class="n">input_file</span><span class="p">))</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">params_for_job</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span>
                    <span class="n">num_fields</span><span class="o">=</span><span class="n">params_for_job</span><span class="o">.</span><span class="n">num_fields</span><span class="p">,</span>
@@ -127,8 +125,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">check</span><span class="p">():</span>
-    <span class="c1"># type () -&gt; None</span>
+<span class="k">def</span> <span class="nf">check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    check that every file is legal TSV</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -172,8 +169,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">check_columns_unique</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">check_columns_unique</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    checks that for certain columns every value in the files is unique</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -212,8 +208,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">clean_by_field_num</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">clean_by_field_num</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    remove lines from a TSV file that do not have the right number of columns</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -240,8 +235,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">cut</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">cut</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; cut fields from a TSV file &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
@@ -263,8 +257,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">drop_duplicates_by_columns</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">drop_duplicates_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    fix a TSV file assuming that bad characters or tabs have been left in one column of it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -273,7 +266,7 @@
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
         <span class="n">saw</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>  <span class="c1"># type: List[str]</span>
+            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
                 <span class="n">match</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">fields</span><span class="p">[</span><span class="n">match_column</span><span class="p">]</span> <span class="k">for</span> <span class="n">match_column</span> <span class="ow">in</span> <span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">match</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">saw</span><span class="p">:</span>
                     <span class="n">saw</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
@@ -293,8 +286,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">fix_columns</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">fix_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    fix a TSV file assuming that bad characters or tabs have been left in one column of it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -306,7 +298,7 @@
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>  <span class="c1"># type: List[str]</span>
+            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">fix_column</span> <span class="ow">in</span> <span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
                     <span class="n">fields</span><span class="p">[</span><span class="n">fix_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">clean</span><span class="p">(</span>
                         <span class="n">text</span><span class="o">=</span><span class="n">fields</span><span class="p">[</span><span class="n">fix_column</span><span class="p">],</span>
@@ -329,8 +321,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">histogram_by_column</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">histogram_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Create a histogram from a field in a TSV file &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -364,8 +355,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">majority</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">majority</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    reduce two columns to a majority</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -374,7 +364,7 @@
 <span class="sd">    with y2 than any other values in column Y then x1, y2 will be in the output</span>
 <span class="sd">    and no other entry with x1 will appear</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>  <span class="c1"># type: Dict[Dict[str, int]]</span>
+    <span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
@@ -407,8 +397,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">multiply</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; multiply a TSV file according to column &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
@@ -429,8 +418,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">read</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    read TSV files as plainly as possible</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -453,14 +441,13 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">remove_quotes</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">remove_quotes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; removed quotes from fields &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
                 <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>  <span class="c1"># type: List[str]</span>
+            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -477,8 +464,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">csv_to_tsv</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">csv_to_tsv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; convert a CSV to a TSV file &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ConfigCsvToTsv</span><span class="o">.</span><span class="n">set_max</span><span class="p">:</span>
         <span class="n">csv</span><span class="o">.</span><span class="n">field_size_limit</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
@@ -488,7 +474,7 @@
             <span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">,</span>
             <span class="n">check_num_fields</span><span class="o">=</span><span class="n">ConfigCsvToTsv</span><span class="o">.</span><span class="n">check_num_fields</span><span class="p">,</span>
         <span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>  <span class="c1"># type: List[str]</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">ConfigCsvToTsv</span><span class="o">.</span><span class="n">replace_tabs_with_spaces</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
                         <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
@@ -512,8 +498,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">join</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">join</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    join two TSV files by column</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -562,14 +547,13 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">lc</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">lc</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; lower case some columns &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
                 <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>  <span class="c1"># type: List[str]</span>
+            <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
                     <span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
                 <span class="n">output_file_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span></div>
@@ -585,14 +569,13 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sum_columns</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">sum_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; sum some columns &quot;&quot;&quot;</span>
     <span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>  <span class="c1"># type: List[str]</span>
+        <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
                 <span class="n">sums</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span></div>
@@ -600,22 +583,21 @@
 
 <div class="viewcode-block" id="JobInfo"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.JobInfo">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">attrs</span>
 <span class="k">class</span> <span class="nc">JobInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">check_not_ascii</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: bool</span>
-    <span class="n">input_file</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: str</span>
-    <span class="n">serial</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: int</span>
-    <span class="n">progress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: bool</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: str</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: List[int]</span></div>
+    <span class="n">check_not_ascii</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
+    <span class="n">input_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
+    <span class="n">serial</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
+    <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="JobReturnValue"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.JobReturnValue">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">attrs</span>
 <span class="k">class</span> <span class="nc">JobReturnValue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">serial</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: int</span>
-    <span class="n">files</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>  <span class="c1"># type: Dict[str, str]</span></div>
+    <span class="n">serial</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
+    <span class="n">files</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="process_single_file"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.process_single_file">[docs]</a><span class="k">def</span> <span class="nf">process_single_file</span><span class="p">(</span><span class="n">job_info</span><span class="p">):</span>
-    <span class="c1"># type (JobInfo) -&gt; JobReturnValue</span>
+<div class="viewcode-block" id="process_single_file"><a class="viewcode-back" href="../../../pytsv.endpoints.html#pytsv.endpoints.group_default.process_single_file">[docs]</a><span class="k">def</span> <span class="nf">process_single_file</span><span class="p">(</span><span class="n">job_info</span><span class="p">:</span> <span class="n">JobInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JobReturnValue</span><span class="p">:</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">tsv_writers_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">results</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -653,8 +635,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">split_by_columns_parallel</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">split_by_columns_parallel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    split a TSV file into many files according to some of its columns</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -669,7 +650,7 @@
         <span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
     <span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">)]</span>
     <span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">ConfigParallel</span><span class="o">.</span><span class="n">jobs</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
-        <span class="n">job_return_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_single_file</span><span class="p">,</span> <span class="n">job_data</span><span class="p">))</span>  <span class="c1"># type: List[JobReturnValue]</span>
+        <span class="n">job_return_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">JobReturnValue</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_single_file</span><span class="p">,</span> <span class="n">job_data</span><span class="p">))</span>
     <span class="n">job_return_values</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">u</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">serial</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">job_return_value</span> <span class="ow">in</span> <span class="n">job_return_values</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">job_return_value</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -688,15 +669,14 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">tree</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">tree</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    draw tree by two columns from a TSV file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    You can also see only parts of the tree</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">children_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>  <span class="c1"># type: Dict[Set]</span>
+    <span class="n">children_dict</span><span class="p">:</span> <span class="n">Doct</span><span class="p">[</span><span class="n">Set</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
     <span class="n">parents_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
@@ -750,8 +730,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">tsv_to_csv</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">tsv_to_csv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    convert a TSV file to a CSV file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -772,8 +751,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sample_by_column</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">sample_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    create a weighted sample from a TSV file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -822,8 +800,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sample_by_column_old</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">sample_by_column_old</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    sample from a TSV file by a sample column</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -884,8 +861,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sample_by_two_columns</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">sample_by_two_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    sample from a TSV file by two columns</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -937,8 +913,7 @@
     <span class="p">],</span>
     <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">split_by_columns</span><span class="p">():</span>
-    <span class="c1"># type: () -&gt; None</span>
+<span class="k">def</span> <span class="nf">split_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    split a TSV file into many files according to some of its columns</span>
 <span class="sd">    &quot;&quot;&quot;</span>

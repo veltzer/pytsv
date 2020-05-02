@@ -480,11 +480,11 @@ point or not</p>
 <span id="pytsv-core-module"></span><h2>pytsv.core module<a class="headerlink" href="#module-pytsv.core" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pytsv.core.TsvReader">
-<em class="property">class </em><code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">TsvReader</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">mode='rt'</em>, <em class="sig-param">use_any_format=True</em>, <em class="sig-param">validate_all_lines_same_number_of_fields=True</em>, <em class="sig-param">num_fields=None</em>, <em class="sig-param">skip_comments=False</em>, <em class="sig-param">check_non_ascii=False</em>, <em class="sig-param">newline='n'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvReader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">TsvReader</code><span class="sig-paren">(</span><em class="sig-param">filename: str</em>, <em class="sig-param">mode: str = 'rt'</em>, <em class="sig-param">use_any_format: bool = True</em>, <em class="sig-param">validate_all_lines_same_number_of_fields: bool = True</em>, <em class="sig-param">num_fields: Optional[int] = None</em>, <em class="sig-param">skip_comments: bool = False</em>, <em class="sig-param">check_non_ascii: bool = False</em>, <em class="sig-param">newline: Optional[str] = 'n'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="pytsv.core.TsvReader.close">
-<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvReader.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvReader.close" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/core.html#TsvReader.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvReader.close" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -496,28 +496,28 @@ point or not</p>
 
 <dl class="class">
 <dt id="pytsv.core.TsvWriter">
-<em class="property">class </em><code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">TsvWriter</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">mode='wt'</em>, <em class="sig-param">throw_exceptions=False</em>, <em class="sig-param">sanitize=True</em>, <em class="sig-param">fields_to_clean=None</em>, <em class="sig-param">clean_edges=True</em>, <em class="sig-param">sub_trailing=True</em>, <em class="sig-param">remove_non_ascii=True</em>, <em class="sig-param">lower_case=True</em>, <em class="sig-param">check_num_fields=True</em>, <em class="sig-param">num_fields=None</em>, <em class="sig-param">convert_to_string=True</em>, <em class="sig-param">do_gzip=False</em>, <em class="sig-param">filename_detect=True</em>, <em class="sig-param">encoding='utf-8'</em>, <em class="sig-param">attach_encoder=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvWriter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">TsvWriter</code><span class="sig-paren">(</span><em class="sig-param">filename: str</em>, <em class="sig-param">mode: str = 'wt'</em>, <em class="sig-param">throw_exceptions: bool = False</em>, <em class="sig-param">sanitize: bool = True</em>, <em class="sig-param">fields_to_clean: List[int] = None</em>, <em class="sig-param">clean_edges: bool = True</em>, <em class="sig-param">sub_trailing: bool = True</em>, <em class="sig-param">remove_non_ascii: bool = True</em>, <em class="sig-param">lower_case: bool = True</em>, <em class="sig-param">check_num_fields: bool = True</em>, <em class="sig-param">num_fields: int = None</em>, <em class="sig-param">convert_to_string: bool = True</em>, <em class="sig-param">do_gzip: bool = False</em>, <em class="sig-param">filename_detect: bool = True</em>, <em class="sig-param">encoding: str = 'utf-8'</em>, <em class="sig-param">attach_encoder: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="pytsv.core.TsvWriter.close">
-<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvWriter.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvWriter.close" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/core.html#TsvWriter.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvWriter.close" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="pytsv.core.TsvWriter.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">input_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvWriter.write" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">input_list: Sequence[str]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/core.html#TsvWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.TsvWriter.write" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="function">
 <dt id="pytsv.core.clean">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">clean</code><span class="sig-paren">(</span><em class="sig-param">text</em>, <em class="sig-param">clean_edges=True</em>, <em class="sig-param">sub_trailing=True</em>, <em class="sig-param">remove_non_ascii=True</em>, <em class="sig-param">lower_case=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.clean" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">clean</code><span class="sig-paren">(</span><em class="sig-param">text: str</em>, <em class="sig-param">clean_edges: bool = True</em>, <em class="sig-param">sub_trailing: bool = True</em>, <em class="sig-param">remove_non_ascii: bool = True</em>, <em class="sig-param">lower_case: bool = True</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/pytsv/core.html#clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.clean" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="pytsv.core.do_aggregate">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">do_aggregate</code><span class="sig-paren">(</span><em class="sig-param">input_file_names</em>, <em class="sig-param">match_columns</em>, <em class="sig-param">aggregate_columns</em>, <em class="sig-param">output_file_name</em>, <em class="sig-param">floating_point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#do_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.do_aggregate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">do_aggregate</code><span class="sig-paren">(</span><em class="sig-param">input_file_names: Iterable[str], match_columns: List[int], aggregate_columns: List[int], output_file_name: str, floating_point: bool</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/core.html#do_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.do_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function aggregates a bunch of input files by integers.
 :param input_file_names:
 :param match_columns:
@@ -529,37 +529,28 @@ point or not</p>
 
 <dl class="function">
 <dt id="pytsv.core.group_by">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">group_by</code><span class="sig-paren">(</span><em class="sig-param">input_file_names</em>, <em class="sig-param">group_by_columns</em>, <em class="sig-param">collect_columns</em>, <em class="sig-param">output_file_template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#group_by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.group_by" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="pytsv.core.is_2">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">is_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#is_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.is_2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">group_by</code><span class="sig-paren">(</span><em class="sig-param">input_file_names: Iterable[str], group_by_columns: List[int], collect_columns: List[int], output_file_template: str</em><span class="sig-paren">)</span> &#x2192; List[str]<a class="reference internal" href="_modules/pytsv/core.html#group_by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.group_by" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="pytsv.core.is_ascii">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">is_ascii</code><span class="sig-paren">(</span><em class="sig-param">s</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#is_ascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.is_ascii" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="pytsv.core.stream_next">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">stream_next</code><span class="sig-paren">(</span><em class="sig-param">file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#stream_next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.stream_next" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">is_ascii</code><span class="sig-paren">(</span><em class="sig-param">s: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/pytsv/core.html#is_ascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.is_ascii" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="pytsv.core.write_data">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">write_data</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">output_file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#write_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.write_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">write_data</code><span class="sig-paren">(</span><em class="sig-param">data: List[List[str]], output_file_name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/core.html#write_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.write_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="pytsv.core.write_dict">
-<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">write_dict</code><span class="sig-paren">(</span><em class="sig-param">filename=None</em>, <em class="sig-param">d=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#write_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.write_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pytsv.core.</code><code class="sig-name descname">write_dict</code><span class="sig-paren">(</span><em class="sig-param">filename: str = None</em>, <em class="sig-param">d: Dict[str</em>, <em class="sig-param">str] = None</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/core.html#write_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.core.write_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
 <div class="section" id="module-pytsv">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pytsv" title="Permalink to this headline">¶</a></h2>
+<p>The version of this module</p>
 </div>
 </div>
 

@@ -45,8 +45,7 @@ def register_group_default():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def aggregate():
-    # type: () -> None
+def aggregate() -> None:
     """
     aggregate TSV files
     """
@@ -68,8 +67,7 @@ class ParamsForJob:
         self.progress = None
 
 
-def check_file(params_for_job):
-    # type: (ParamsForJob) -> bool
+def check_file(params_for_job: ParamsForJob) -> bool:
     print('checking [{}]...'.format(params_for_job.input_file))
     with TsvReader(filename=params_for_job.input_file,
                    num_fields=params_for_job.num_fields,
@@ -94,8 +92,7 @@ def check_file(params_for_job):
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def check():
-    # type () -> None
+def check() -> None:
     """
     check that every file is legal TSV
     """
@@ -139,8 +136,7 @@ def check():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def check_columns_unique():
-    # type: () -> None
+def check_columns_unique() -> None:
     """
     checks that for certain columns every value in the files is unique
     """
@@ -179,8 +175,7 @@ def check_columns_unique():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def clean_by_field_num():
-    # type: () -> None
+def clean_by_field_num() -> None:
     """
     remove lines from a TSV file that do not have the right number of columns
     """
@@ -207,8 +202,7 @@ def clean_by_field_num():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def cut():
-    # type: () -> None
+def cut() -> None:
     """ cut fields from a TSV file """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
@@ -230,8 +224,7 @@ def cut():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def drop_duplicates_by_columns():
-    # type: () -> None
+def drop_duplicates_by_columns() -> None:
     """
     fix a TSV file assuming that bad characters or tabs have been left in one column of it
     """
@@ -240,7 +233,7 @@ def drop_duplicates_by_columns():
             input_file_handle = tqdm.tqdm(input_file_handle)
         saw = set()
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
-            for fields in input_file_handle:  # type: List[str]
+            for fields in input_file_handle:
                 match = frozenset([fields[match_column] for match_column in ConfigColumns.columns])
                 if match not in saw:
                     saw.add(match)
@@ -260,8 +253,7 @@ def drop_duplicates_by_columns():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def fix_columns():
-    # type: () -> None
+def fix_columns() -> None:
     """
     fix a TSV file assuming that bad characters or tabs have been left in one column of it
     """
@@ -273,7 +265,7 @@ def fix_columns():
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
-            for fields in input_file_handle:  # type: List[str]
+            for fields in input_file_handle:
                 for fix_column in ConfigColumns.columns:
                     fields[fix_column] = clean(
                         text=fields[fix_column],
@@ -296,8 +288,7 @@ def fix_columns():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def histogram_by_column():
-    # type: () -> None
+def histogram_by_column() -> None:
     """ Create a histogram from a field in a TSV file """
     a = []
     total = 0
@@ -331,8 +322,7 @@ def histogram_by_column():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def majority():
-    # type: () -> None
+def majority() -> None:
     """
     reduce two columns to a majority
     """
@@ -341,7 +331,7 @@ def majority():
     with y2 than any other values in column Y then x1, y2 will be in the output
     and no other entry with x1 will appear
     """
-    d = defaultdict(dict)  # type: Dict[Dict[str, int]]
+    d: Dict[Dict[str, int]] = defaultdict(dict)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
@@ -374,8 +364,7 @@ def majority():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def multiply():
-    # type: () -> None
+def multiply() -> None:
     """ multiply a TSV file according to column """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
@@ -396,8 +385,7 @@ def multiply():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def read():
-    # type: () -> None
+def read() -> None:
     """
     read TSV files as plainly as possible
     """
@@ -420,14 +408,13 @@ def read():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def remove_quotes():
-    # type: () -> None
+def remove_quotes() -> None:
     """ removed quotes from fields """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
-            for fields in input_file_handle:  # type: List[str]
+            for fields in input_file_handle:
                 for i in ConfigColumns.columns:
                     if fields[i].startswith("\"") and fields[i].endswith("\"") and len(fields[i]) > 1:
                         fields[i] = fields[i][1:-1]
@@ -444,8 +431,7 @@ def remove_quotes():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def csv_to_tsv():
-    # type: () -> None
+def csv_to_tsv() -> None:
     """ convert a CSV to a TSV file """
     if ConfigCsvToTsv.set_max:
         csv.field_size_limit(sys.maxsize)
@@ -455,7 +441,7 @@ def csv_to_tsv():
             filename=ConfigOutputFile.output_file,
             check_num_fields=ConfigCsvToTsv.check_num_fields,
         ) as output_file_handle:
-            for row in csv_reader:  # type: List[str]
+            for row in csv_reader:
                 if ConfigCsvToTsv.replace_tabs_with_spaces:
                     for i, item in enumerate(row):
                         row[i] = row[i].replace("\t", " ")
@@ -479,8 +465,7 @@ class MyEventTypes(Enum):
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def join():
-    # type: () -> None
+def join() -> None:
     """
     join two TSV files by column
     """
@@ -529,14 +514,13 @@ def join():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def lc():
-    # type: () -> None
+def lc() -> None:
     """ lower case some columns """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
-            for fields in input_file_handle:  # type: List[str]
+            for fields in input_file_handle:
                 for i in ConfigColumns.columns:
                     fields[i] = fields[i].lower()
                 output_file_handle.write(fields)
@@ -552,14 +536,13 @@ def lc():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def sum_columns():
-    # type: () -> None
+def sum_columns() -> None:
     """ sum some columns """
     sums = [0] * len(ConfigColumns.columns)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
-        for fields in input_file_handle:  # type: List[str]
+        for fields in input_file_handle:
             for n, i in enumerate(ConfigColumns.columns):
                 sums[n] += float(fields[i])
     print(sums)
@@ -567,22 +550,21 @@ def sum_columns():
 
 @attr.attrs
 class JobInfo(object):
-    check_not_ascii = attr.attrib()  # type: bool
-    input_file = attr.attrib()  # type: str
-    serial = attr.attrib()  # type: int
-    progress = attr.attrib()  # type: bool
-    pattern = attr.attrib()  # type: str
-    columns = attr.attrib()  # type: List[int]
+    check_not_ascii: bool = attr.attrib()
+    input_file: str = attr.attrib()
+    serial: int = attr.attrib()
+    progress: bool = attr.attrib()
+    pattern: str = attr.attrib()
+    columns: List[int] = attr.attrib()
 
 
 @attr.attrs
 class JobReturnValue(object):
-    serial = attr.attrib()  # type: int
-    files = attr.attrib()  # type: Dict[str, str]
+    serial: int = attr.attrib()
+    files: Dict[str, str] = attr.attrib()
 
 
-def process_single_file(job_info):
-    # type (JobInfo) -> JobReturnValue
+def process_single_file(job_info: JobInfo) -> JobReturnValue:
     logger = logging.getLogger(__name__)
     tsv_writers_dict = dict()
     results = dict()
@@ -620,8 +602,7 @@ def process_single_file(job_info):
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def split_by_columns_parallel():
-    # type: () -> None
+def split_by_columns_parallel() -> None:
     """
     split a TSV file into many files according to some of its columns
     """
@@ -636,7 +617,7 @@ def split_by_columns_parallel():
         ConfigColumns.columns,
     ) for i, input_file in enumerate(ConfigInputFiles.input_files)]
     with concurrent.futures.ProcessPoolExecutor(max_workers=ConfigParallel.jobs) as executor:
-        job_return_values = list(executor.map(process_single_file, job_data))  # type: List[JobReturnValue]
+        job_return_values: List[JobReturnValue] = list(executor.map(process_single_file, job_data))
     job_return_values.sort(key=lambda u: u.serial)
     for job_return_value in job_return_values:
         for key, filename in job_return_value.files.items():
@@ -655,15 +636,14 @@ def split_by_columns_parallel():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def tree():
-    # type: () -> None
+def tree() -> None:
     """
     draw tree by two columns from a TSV file
     """
     """
     You can also see only parts of the tree
     """
-    children_dict = defaultdict(set)  # type: Dict[Set]
+    children_dict: Doct[Set] = defaultdict(set)
     parents_dict = defaultdict(set)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         for fields in input_file_handle:
@@ -717,8 +697,7 @@ def tree():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def tsv_to_csv():
-    # type: () -> None
+def tsv_to_csv() -> None:
     """
     convert a TSV file to a CSV file
     """
@@ -739,8 +718,7 @@ def tsv_to_csv():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def sample_by_column():
-    # type: () -> None
+def sample_by_column() -> None:
     """
     create a weighted sample from a TSV file
     """
@@ -789,8 +767,7 @@ def sample_by_column():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def sample_by_column_old():
-    # type: () -> None
+def sample_by_column_old() -> None:
     """
     sample from a TSV file by a sample column
     """
@@ -851,8 +828,7 @@ def sample_by_column_old():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def sample_by_two_columns():
-    # type: () -> None
+def sample_by_two_columns() -> None:
     """
     sample from a TSV file by two columns
     """
@@ -904,8 +880,7 @@ def sample_by_two_columns():
     ],
     group=GROUP_NAME_DEFAULT,
 )
-def split_by_columns():
-    # type: () -> None
+def split_by_columns() -> None:
     """
     split a TSV file into many files according to some of its columns
     """
