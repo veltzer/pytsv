@@ -7,7 +7,7 @@ http://setuptools.readthedocs.io/en/latest/setuptools.html
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name='pytsv',
-    version='0.1.60',
+    version='0.1.61',
     packages=[
         'pytsv',
         'pytsv.endpoints',
@@ -41,7 +41,6 @@ setuptools.setup(
         'attrs',
     ],
     extras_require={
-        ':python_version == "2.7"': ['futures'],
     },
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -55,5 +54,5 @@ setuptools.setup(
     entry_points={'console_scripts': [
         'pytsv=pytsv.endpoints.main:main',
     ]},
-    python_requires='>=2.7',
+    python_requires='>=3.4',
 )

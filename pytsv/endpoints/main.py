@@ -1,5 +1,3 @@
-from __future__ import print_function, division
-
 import pylogconf.core
 from pytconf.config import register_main, get_pytconf
 
