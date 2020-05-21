@@ -28,6 +28,14 @@ pytsv.core module
    :undoc-members:
    :show-inheritance:
 
+pytsv.version module
+--------------------
+
+.. automodule:: pytsv.version
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------
