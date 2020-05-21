@@ -21,6 +21,7 @@ from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregate
     ConfigInputFile, ConfigFixTypes, ConfigColumn, ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
     ConfigSplit, ConfigTree, ConfigSampleByColumn, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
+import pytsv.version
 
 GROUP_NAME_DEFAULT = "default"
 GROUP_DESCRIPTION_DEFAULT = "all pytsv commands"
@@ -31,6 +32,18 @@ def register_group_default():
             function_group_name=GROUP_NAME_DEFAULT,
             function_group_description=GROUP_DESCRIPTION_DEFAULT,
     )
+
+
+@register_endpoint(
+    configs=[],
+    suggest_configs=[],
+    group=GROUP_NAME_DEFAULT,
+)
+def version() -> None:
+    """
+    Print version
+    """
+    print(pytsv.version.VERSION_STR)
 
 
 @register_endpoint(
