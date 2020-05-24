@@ -36,7 +36,6 @@ def register_group_default():
 
 @register_endpoint(
     configs=[],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def version() -> None:
@@ -53,8 +52,6 @@ def version() -> None:
         ConfigAggregateColumns,
         ConfigMatchColumns,
         ConfigOutputFile,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -101,8 +98,6 @@ def check_file(params_for_job: ParamsForJob) -> bool:
         ConfigInputFiles,
         ConfigTsvReader,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def check() -> None:
@@ -145,8 +140,6 @@ def check() -> None:
         ConfigInputFiles,
         ConfigColumns,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def check_columns_unique() -> None:
@@ -184,8 +177,6 @@ def check_columns_unique() -> None:
         ConfigProgress,
         ConfigColumns,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def clean_by_field_num() -> None:
@@ -211,8 +202,6 @@ def clean_by_field_num() -> None:
         ConfigColumns,
         ConfigProgress,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def cut() -> None:
@@ -232,8 +221,6 @@ def cut() -> None:
         ConfigOutputFile,
         ConfigProgress,
         ConfigColumns,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -261,8 +248,6 @@ def drop_duplicates_by_columns() -> None:
         ConfigColumns,
         ConfigTsvReader,
         ConfigFixTypes,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -297,8 +282,6 @@ def fix_columns() -> None:
         ConfigColumn,
         ConfigBucketNumber,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def histogram_by_column() -> None:
@@ -330,8 +313,6 @@ def histogram_by_column() -> None:
         ConfigOutputFile,
         ConfigProgress,
         ConfigMajority,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -373,8 +354,6 @@ def majority() -> None:
         ConfigProgress,
         ConfigColumn,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def multiply() -> None:
@@ -393,8 +372,6 @@ def multiply() -> None:
     configs=[
         ConfigProgress,
         ConfigInputFiles,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -417,8 +394,6 @@ def read() -> None:
         ConfigInputFile,
         ConfigOutputFile,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def remove_quotes() -> None:
@@ -439,8 +414,6 @@ def remove_quotes() -> None:
         ConfigInputFile,
         ConfigOutputFile,
         ConfigCsvToTsv,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -473,8 +446,6 @@ class MyEventTypes(Enum):
         ConfigOutputFile,
         ConfigProgress,
         ConfigJoin,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -523,8 +494,6 @@ def join() -> None:
         ConfigColumns,
         ConfigProgress,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def lc() -> None:
@@ -544,8 +513,6 @@ def lc() -> None:
         ConfigInputFile,
         ConfigColumns,
         ConfigProgress,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -611,8 +578,6 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
         ConfigTsvReader,
         ConfigSplit,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def split_by_columns_parallel() -> None:
@@ -644,8 +609,6 @@ def split_by_columns_parallel() -> None:
     configs=[
         ConfigInputFile,
         ConfigTree,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -706,8 +669,6 @@ def tree() -> None:
         ConfigInputFile,
         ConfigOutputFile,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def tsv_to_csv() -> None:
@@ -726,8 +687,6 @@ def tsv_to_csv() -> None:
         ConfigInputFile,
         ConfigOutputFile,
         ConfigSampleByColumn,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -775,8 +734,6 @@ def sample_by_column() -> None:
         ConfigOutputFile,
         ConfigProgress,
         ConfigSampleByColumnOld,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -837,8 +794,6 @@ def sample_by_column_old() -> None:
         ConfigProgress,
         ConfigSampleByTwoColumns,
     ],
-    suggest_configs=[
-    ],
     group=GROUP_NAME_DEFAULT,
 )
 def sample_by_two_columns() -> None:
@@ -888,8 +843,6 @@ def sample_by_two_columns() -> None:
         ConfigTsvReader,
         ConfigInputFiles,
         ConfigPattern,
-    ],
-    suggest_configs=[
     ],
     group=GROUP_NAME_DEFAULT,
 )
