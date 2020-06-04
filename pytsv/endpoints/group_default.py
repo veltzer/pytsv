@@ -19,7 +19,8 @@ from typing import List, Dict, Set
 from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \
     ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, ConfigTsvReader, ConfigColumns, \
     ConfigInputFile, ConfigFixTypes, ConfigColumn, ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
-    ConfigSplit, ConfigTree, ConfigSampleByColumn, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern
+    ConfigTree, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern, \
+    ConfigSampleSize, ConfigReplace, ConfigSampleColumn, ConfigWeightValue, ConfigCheckUnique
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
 import pytsv.version
 
@@ -575,7 +576,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
         ConfigInputFiles,
         ConfigParallel,
         ConfigTsvReader,
-        ConfigSplit,
+        ConfigPattern,
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -590,7 +591,7 @@ def split_by_columns_parallel() -> None:
         input_file,
         i,
         ConfigProgress.progress,
-        ConfigSplit.pattern,
+        ConfigPattern.pattern,
         ConfigColumns.columns,
     ) for i, input_file in enumerate(ConfigInputFiles.input_files)]
     with concurrent.futures.ProcessPoolExecutor(max_workers=ConfigParallel.jobs) as executor:
@@ -598,7 +599,7 @@ def split_by_columns_parallel() -> None:
     job_return_values.sort(key=lambda u: u.serial)
     for job_return_value in job_return_values:
         for key, filename in job_return_value.files.items():
-            outfile = ConfigSplit.final_pattern.format(key=key)
+            outfile = ConfigPattern.final_pattern.format(key=key)
             with open(outfile, "wb") as _:
                 pass
                 # with open(filename, "rb") as _:
@@ -685,7 +686,7 @@ def tsv_to_csv() -> None:
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
-        ConfigSampleByColumn,
+        ConfigCheckUnique,
     ],
     group=GROUP_NAME_DEFAULT,
 )
@@ -705,20 +706,20 @@ def sample_by_column() -> None:
         sep='\t',
         header=None,
     )
-    if ConfigSampleByColumn.check_unique:
+    if ConfigCheckUnique.check_unique:
         logger.info("checking that the values are unique")
-        unique_values_count = df[ConfigSampleByColumn.value_column].nunique()
+        unique_values_count = df[ConfigWeightValue.value_column].nunique()
         if unique_values_count != df.shape[0]:
             logger.error("your data is not unique in the value_column")
             logger.error("unique values {} != number of rows {}".format(unique_values_count, df.shape[0]))
             return
     logger.info("sampling")
     sample = df.sample(
-        n=ConfigSampleByColumn.size,
-        replace=ConfigSampleByColumn.replace,
-        weights=df[ConfigSampleByColumn.weight_column],
+        n=ConfigSampleSize.size,
+        replace=ConfigReplace.replace,
+        weights=df[ConfigWeightValue.weight_column],
     )
-    df_result = sample[ConfigSampleByColumn.value_column].value_counts()
+    df_result = sample[ConfigWeightValue.value_column].value_counts()
     logger.info("writing the output")
     df_result.to_csv(
         ConfigOutputFile.output_file,
@@ -748,7 +749,7 @@ def sample_by_column_old() -> None:
             input_handle = tqdm.tqdm(input_handle)
         for fields in input_handle:
             elements.append(fields)
-            weight = float(fields[ConfigSampleByColumnOld.sample_column])
+            weight = float(fields[ConfigSampleColumn.sample_column])
             sum_weights += weight
             weights.append(weight)
     # the following code will only work on python3.6 because the
@@ -760,10 +761,10 @@ def sample_by_column_old() -> None:
     weights = [w/sum_weights for w in weights]
     if ConfigSampleByColumnOld.hits_mode:
         results_dict = defaultdict(int)
-        for i in range(ConfigSampleByColumnOld.size):
+        for i in range(ConfigSampleSize.size):
             current_result = numpy.random.choice(
                 a=len(elements),
-                replace=ConfigSampleByColumnOld.replace,
+                replace=ConfigReplace.replace,
                 size=1,
                 p=weights,
             )
@@ -777,8 +778,8 @@ def sample_by_column_old() -> None:
     else:
         results = numpy.random.choice(
             a=len(elements),
-            replace=ConfigSampleByColumnOld.replace,
-            size=ConfigSampleByColumnOld.size,
+            replace=ConfigReplace.replace,
+            size=ConfigSampleSize.size,
             p=weights,
         )
         with TsvWriter(ConfigOutputFile.output_file) as output_handle:
@@ -807,8 +808,8 @@ def sample_by_two_columns() -> None:
         header=None,
     )
     logger.info("checking that the values are unique")
-    unique_values_count = df[ConfigSampleByTwoColumns.value_column].nunique()
-    if ConfigSampleByTwoColumns.check_unique and unique_values_count != df.shape[0]:
+    unique_values_count = df[ConfigWeightValue.value_column].nunique()
+    if ConfigCheckUnique.check_unique and unique_values_count != df.shape[0]:
         logger.error("your data is not unique in the value_column")
         logger.error("unique values {} != number of rows {}".format(unique_values_count, df.shape[0]))
         return
@@ -821,11 +822,11 @@ def sample_by_two_columns() -> None:
     for cluster in clusters:
         cluster_queries = df[df[ConfigSampleByTwoColumns.group_column] == cluster]
         sample = cluster_queries.sample(
-            n=ConfigSampleByTwoColumns.size,
-            replace=ConfigSampleByTwoColumns.replace,
-            weights=cluster_queries[ConfigSampleByTwoColumns.weight_column],
+            n=ConfigSampleSize.size,
+            replace=ConfigReplace.replace,
+            weights=cluster_queries[ConfigWeightValue.weight_column],
         )
-        res = sample[sample.columns[ConfigSampleByTwoColumns.value_column]].value_counts()
+        res = sample[sample.columns[ConfigWeightValue.value_column]].value_counts()
         res.to_csv(
             ConfigOutputFile.output_file,
             sep='\t',

@@ -196,16 +196,6 @@ class ConfigBucketNumber(Config):
     )
 
 
-class ConfigPattern(Config):
-    """
-    Parameters to configure pattern of files to be created
-    """
-    pattern = ParamCreator.create_str(
-        help_string="pattern of generated files",
-        default="{key}.tsv.gz",
-    )
-
-
 class ConfigFixTypes(Config):
     """
     Parameters to control which fixes to apply to a TSV file.
@@ -228,26 +218,40 @@ class ConfigFixTypes(Config):
     )
 
 
-class ConfigSampleByColumn(Config):
+class ConfigCheckUnique(Config):
     """
-    Parameters for the sample by column command
+    Configure whether or not to check a column for uniqueness
     """
-    weight_column = ParamCreator.create_int(
-        help_string="what column to sample by",
-    )
-    value_column = ParamCreator.create_int(
-        help_string="what is the value column",
-    )
-    size = ParamCreator.create_int(
-        help_string="what sample size do you need?",
-    )
-    replace = ParamCreator.create_bool(
-        help_string="allow replacements?",
-        default=False,
-    )
     check_unique = ParamCreator.create_bool(
         help_string="check that the value_column has unique values?",
         default=True,
+    )
+
+
+class ConfigSampleSize(Config):
+    """
+    Configure sample size
+    """
+    size = ParamCreator.create_int(
+        help_string="what sample size do you need?",
+    )
+
+
+class ConfigSampleColumn(Config):
+    """
+    Configuration options for sampling
+    """
+    sample_column = ParamCreator.create_int(
+        help_string="what column to sample by",
+    )
+
+
+class ConfigReplace(Config):
+    """
+    Configure whether you want replacements or not
+    """
+    replace = ParamCreator.create_bool(
+        help_string="allow replacements?",
     )
 
 
@@ -255,15 +259,6 @@ class ConfigSampleByColumnOld(Config):
     """
     Parameters to configure the old sample by column algorithm
     """
-    sample_column = ParamCreator.create_int(
-        help_string="what column to sample by",
-    )
-    size = ParamCreator.create_int(
-        help_string="what sample size do you need?",
-    )
-    replace = ParamCreator.create_bool(
-        help_string="allow replacement",
-    )
     hits_mode = ParamCreator.create_bool(
         help_string="sample size is hits",
     )
@@ -293,9 +288,9 @@ class ConfigJoin(Config):
     )
 
 
-class ConfigSplit(Config):
+class ConfigPattern(Config):
     """
-    Parameters to configure the split by column algorithm
+    Parameters to configure patterns of files generated
     """
     pattern = ParamCreator.create_str(
         help_string="pattern of intermediate generated files",
@@ -314,19 +309,16 @@ class ConfigSampleByTwoColumns(Config):
     group_column = ParamCreator.create_int(
         help_string="what column to determine group by",
     )
+
+
+class ConfigWeightValue(Config):
+    """
+    Config weight and Value
+    """
     weight_column = ParamCreator.create_int(
         help_string="what column to determine weight by",
     )
     value_column = ParamCreator.create_int(
         help_string="what is the value column",
     )
-    size = ParamCreator.create_int(
-        help_string="what sample size do you need?",
-    )
-    replace = ParamCreator.create_bool(
-        help_string="allow replacements?",
-    )
-    check_unique = ParamCreator.create_bool(
-        help_string="check that the value_column has unique values?",
-        default=True,
-    )
+
