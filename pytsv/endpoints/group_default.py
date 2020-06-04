@@ -549,7 +549,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     results = dict()
     with TsvReader(
             filename=job_info.input_file,
-            check_non_ascii=job_info.check_non_ascii
+            check_non_ascii=job_info.check_not_ascii
     ) as input_file_handle:
         if job_info.progress:
             logger.info("working on [%s]" % job_info.input_file)
@@ -618,7 +618,7 @@ def tree() -> None:
     """
     You can also see only parts of the tree
     """
-    children_dict: Doct[Set] = defaultdict(set)
+    children_dict: Dict[Set] = defaultdict(set)
     parents_dict = defaultdict(set)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         for fields in input_file_handle:
