@@ -19,8 +19,9 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
 import config.project
+
+sys.path.insert(0, os.path.abspath('..'))
 
 
 # -- General configuration ------------------------------------------------
@@ -52,6 +53,7 @@ master_doc = 'index'
 project = 'pytsv'
 # noinspection PyShadowingBuiltins
 author = 'Mark Veltzer'
+# noinspection PyShadowingBuiltins
 copyright = config.project.project_copyright_years_short+', '+author
 
 # The version info for the project you're documenting, acts as replacement for
