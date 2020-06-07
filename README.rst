@@ -2,9 +2,11 @@
 *pytsv*
 =======
 
-.. image:: https://img.shields.io/github/license/veltzer/pydmt   :alt: GitHub
+.. image:: https://img.shields.io/pypi/v/pytsv
 
-![build](https://github.com/veltzer/pytsv/workflows/build/badge.svg)
+.. image:: https://img.shields.io/github/license/veltzer/pytsv
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
 
 project website: https://veltzer.github.io/pytsv
 

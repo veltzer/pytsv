@@ -2,14 +2,20 @@
 
 # *pytsv* project by Mark Veltzer
 
-![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-![GitHub](https://img.shields.io/github/license/veltzer/pytsv)
-![PyPI](https://img.shields.io/pypi/v/pytsv)
+![PyPI - Status](https://img.shields.io/pypi/status/pytsv)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytsv)
+![PyPI - License](https://img.shields.io/pypi/l/pytsv)
+![PyPI - Package Name](https://img.shields.io/pypi/v/pytsv)
 ![PyPI - Format](https://img.shields.io/pypi/format/pytsv)
-[![Downloads](https://pepy.tech/badge/pytsv)](https://pepy.tech/project/pytsv)
-[![Downloads](https://pepy.tech/badge/pytsv/month)](https://pepy.tech/project/pytsv/month)
-[![Downloads](https://pepy.tech/badge/pytsv/week)](https://pepy.tech/project/pytsv/week)
 
+![PyPI - Downloads](https://img.shields.io/pypi/dd/pytsv)
+![PyPI - Downloads](https://img.shields.io/pypi/dw/pytsv)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/pytsv)
+
+![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
+![Downloads](https://pepy.tech/badge/pytsv)
+![Downloads](https://pepy.tech/badge/pytsv/month)
+![Downloads](https://pepy.tech/badge/pytsv/week)
 
 pytsv is a module to help with all things TSV
 
