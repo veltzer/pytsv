@@ -1,5 +1,4 @@
 
-
 # *pytsv* project by Mark Veltzer
 
 ![PyPI - Status](https://img.shields.io/pypi/status/pytsv)
@@ -17,7 +16,7 @@
 ![Downloads](https://pepy.tech/badge/pytsv/month)
 ![Downloads](https://pepy.tech/badge/pytsv/week)
 
+
 pytsv is a module to help with all things TSV
 
-project website: https://veltzer.github.io/pytsv
-
+project website: <https://veltzer.github.io/pytsv>
