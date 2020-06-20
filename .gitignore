@@ -86,3 +86,4 @@ celerybeat-schedule
 /.pydmt
 
 /.pytest_cache/
+/node_modules/
