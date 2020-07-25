@@ -19,6 +19,7 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head><body>
@@ -27,6 +28,8 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="pytsv-package">
@@ -57,7 +60,7 @@
 <p>Parameters to select which columns to aggregate</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigAggregateColumns.aggregate_columns">
-<code class="sig-name descname">aggregate_columns</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigAggregateColumns.aggregate_columns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">aggregate_columns</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigAggregateColumns.aggregate_columns" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -93,7 +96,7 @@
 <p>Parameters to select which column to work on</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigColumn.column">
-<code class="sig-name descname">column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigColumn.column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigColumn.column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -105,7 +108,7 @@
 <p>Parameters to select which columns to use</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigColumns.columns">
-<code class="sig-name descname">columns</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigColumns.columns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">columns</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigColumns.columns" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -179,7 +182,7 @@ point or not</p>
 <p>Parameters to specify input file</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigInputFile.input_file">
-<code class="sig-name descname">input_file</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigInputFile.input_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">input_file</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigInputFile.input_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -191,7 +194,7 @@ point or not</p>
 <p>Parameters to specify input files</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigInputFiles.input_files">
-<code class="sig-name descname">input_files</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigInputFiles.input_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">input_files</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigInputFiles.input_files" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -203,32 +206,32 @@ point or not</p>
 <p>Parameters to configure a TSV join operation</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigJoin.hash_file">
-<code class="sig-name descname">hash_file</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.hash_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hash_file</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.hash_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigJoin.hash_key_column">
-<code class="sig-name descname">hash_key_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.hash_key_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hash_key_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.hash_key_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigJoin.hash_value_column">
-<code class="sig-name descname">hash_value_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.hash_value_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hash_value_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.hash_value_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigJoin.input_key_column">
-<code class="sig-name descname">input_key_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.input_key_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">input_key_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.input_key_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigJoin.output_add_unknown">
-<code class="sig-name descname">output_add_unknown</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.output_add_unknown" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">output_add_unknown</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.output_add_unknown" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigJoin.output_insert_column">
-<code class="sig-name descname">output_insert_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.output_insert_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">output_insert_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigJoin.output_insert_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -240,17 +243,17 @@ point or not</p>
 <p>Config the parameters for the majority algorithm</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigMajority.input_first_column">
-<code class="sig-name descname">input_first_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMajority.input_first_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">input_first_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMajority.input_first_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigMajority.input_multiplication_column">
-<code class="sig-name descname">input_multiplication_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMajority.input_multiplication_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">input_multiplication_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMajority.input_multiplication_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigMajority.input_second_column">
-<code class="sig-name descname">input_second_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMajority.input_second_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">input_second_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMajority.input_second_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -262,7 +265,7 @@ point or not</p>
 <p>Parameters to select which columns to match by</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigMatchColumns.match_columns">
-<code class="sig-name descname">match_columns</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMatchColumns.match_columns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">match_columns</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigMatchColumns.match_columns" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -286,7 +289,7 @@ point or not</p>
 <p>Parameters to configure the output file</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigOutputFile.output_file">
-<code class="sig-name descname">output_file</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigOutputFile.output_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">output_file</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigOutputFile.output_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -344,7 +347,7 @@ point or not</p>
 <p>Configure whether you want replacements or not</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigReplace.replace">
-<code class="sig-name descname">replace</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigReplace.replace" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">replace</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigReplace.replace" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -356,7 +359,7 @@ point or not</p>
 <p>Parameters to configure the old sample by column algorithm</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigSampleByColumnOld.hits_mode">
-<code class="sig-name descname">hits_mode</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleByColumnOld.hits_mode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hits_mode</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleByColumnOld.hits_mode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -368,7 +371,7 @@ point or not</p>
 <p>Parameters for the sample by column command</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigSampleByTwoColumns.group_column">
-<code class="sig-name descname">group_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleByTwoColumns.group_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">group_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleByTwoColumns.group_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -380,7 +383,7 @@ point or not</p>
 <p>Configuration options for sampling</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigSampleColumn.sample_column">
-<code class="sig-name descname">sample_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleColumn.sample_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sample_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleColumn.sample_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -392,7 +395,7 @@ point or not</p>
 <p>Configure sample size</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigSampleSize.size">
-<code class="sig-name descname">size</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleSize.size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">size</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigSampleSize.size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -404,17 +407,17 @@ point or not</p>
 <p>Parameters to configure the parameters of a tree to show</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigTree.child_column">
-<code class="sig-name descname">child_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigTree.child_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">child_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigTree.child_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigTree.parent_column">
-<code class="sig-name descname">parent_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigTree.parent_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">parent_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigTree.parent_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigTree.roots">
-<code class="sig-name descname">roots</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigTree.roots" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">roots</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigTree.roots" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -443,12 +446,12 @@ point or not</p>
 <p>Config weight and Value</p>
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigWeightValue.value_column">
-<code class="sig-name descname">value_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigWeightValue.value_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">value_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigWeightValue.value_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="pytsv.configs.ConfigWeightValue.weight_column">
-<code class="sig-name descname">weight_column</code><em class="property"> = &lt;pytconf.config.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigWeightValue.weight_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">weight_column</code><em class="property"> = &lt;pytconf.param.Unique object&gt;</em><a class="headerlink" href="#pytsv.configs.ConfigWeightValue.weight_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -537,6 +540,7 @@ point or not</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -567,8 +571,8 @@ point or not</p>
       &copy;2016-2020, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/pytsv.rst.txt"

@@ -1,6 +1,6 @@
 import multiprocessing
 
-from pytconf.config import ParamCreator, Config
+from pytconf import ParamCreator, Config
 
 CHECK_NON_ASCII = False
 SKIP_COMMENTS = False
