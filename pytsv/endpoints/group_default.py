@@ -13,7 +13,7 @@ import pandas
 import pyanyzip.core
 import pylogconf.core
 import tqdm
-from pytconf.config import register_endpoint, register_function_group
+from pytconf import register_endpoint, register_function_group
 from typing import List, Dict, Set
 
 from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \

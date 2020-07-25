@@ -9,7 +9,7 @@ def get_readme():
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pytsv",
-    version="0.1.63",
+    version="0.1.64",
     packages=[
         'pytsv',
         'pytsv.endpoints',
