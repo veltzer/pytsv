@@ -17,8 +17,11 @@
 ![Downloads](https://pepy.tech/badge/pytsv/week)
 
 
+
 pytsv is a module to help with all things TSV
 
 project website: <https://veltzer.github.io/pytsv>
+
+chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
 
