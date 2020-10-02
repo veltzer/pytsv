@@ -28,10 +28,10 @@ pytsv.core module
    :undoc-members:
    :show-inheritance:
 
-pytsv.version module
---------------------
+pytsv.static module
+-------------------
 
-.. automodule:: pytsv.version
+.. automodule:: pytsv.static
    :members:
    :undoc-members:
    :show-inheritance:
