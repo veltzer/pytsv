@@ -16,6 +16,8 @@
 ![Downloads](https://pepy.tech/badge/pytsv/month)
 ![Downloads](https://pepy.tech/badge/pytsv/week)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pytsv/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pytsv?targetFile=requirements.txt)
+
 
 
 pytsv is a module to help with all things TSV
