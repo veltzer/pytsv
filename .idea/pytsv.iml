@@ -9,8 +9,10 @@
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/pytsv.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/htmlcov" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/wheel" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (pytsv)" jdkType="Python SDK" />
-    <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
