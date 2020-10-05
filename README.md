@@ -19,10 +19,13 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pytsv/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pytsv?targetFile=requirements.txt)
 
 
+Actions
+
+![build](https://github.com/veltzer/pytsv/workflows/build/badge.svg)
 
 pytsv is a module to help with all things TSV
 
-project website: <https://veltzer.github.io/pytsv>
+project website: https://veltzer.github.io/pytsv
 
 chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
