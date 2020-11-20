@@ -11,24 +11,24 @@ setup_requires = [
 ]
 
 run_requires = [
-    'pytconf',  # for command line parsing
-    'tqdm',  # for progress report
-    'pyanyzip',  # for opening zipped files
-    'numpy',  # for the histogram feature
-    'pandas',  # for sample_by_column_pandas
-    'pylogconf',  # for logging configuration
-    'attrs',  # for attr like objects
+    'pytconf',
+    'tqdm',
+    'pyanyzip',
+    'numpy',
+    'pandas',
+    'pylogconf',
+    'attrs',
 ]
 
 test_requires = [
 ]
 
 dev_requires = [
-    'pyclassifiers',  # for programmatic classifiers
-    'pypitools',  # for uploading to pypi
-    'pydmt',  # for building easier
-    'pylint',  # for checking the code
-    'pytest',  # for testing the project
+    'pyclassifiers',
+    'pypitools',
+    'pydmt',
+    'pylint',
+    'pytest',
 ]
 
 install_requires = list(setup_requires)
@@ -37,5 +37,4 @@ install_requires.extend(run_requires)
 python_requires = ">=3.6"
 
 extras_require = {
-    # ':python_version == "2.7"': ['futures'],  # for python2.7 backport of concurrent.futures
 }
