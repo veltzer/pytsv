@@ -5,6 +5,7 @@ import os
 import sys
 from collections import defaultdict
 from enum import Enum
+from typing import List, Dict, Set
 
 import attr
 import numpy
@@ -14,7 +15,6 @@ import pyanyzip.core
 import pylogconf.core
 import tqdm
 from pytconf import register_endpoint, register_function_group
-from typing import List, Dict, Set
 
 from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \
     ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, ConfigTsvReader, ConfigColumns, \
@@ -849,7 +849,7 @@ def split_by_columns() -> None:
                 logger.info("working on [%s]" % input_file)
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                key = ",".join([fields[x] for x in ConfigColumns.columns])
+                key = ",".join([fields[x] for x in iter(ConfigColumns.columns)])
                 if key not in tsv_writers_dict:
                     filename = ConfigPattern.pattern.format(key=key)
                     output_handle = TsvWriter(filename=filename)
