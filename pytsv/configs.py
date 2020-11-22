@@ -1,4 +1,5 @@
 import multiprocessing
+from typing import List
 
 from pytconf import ParamCreator, Config
 
@@ -321,4 +322,3 @@ class ConfigWeightValue(Config):
     value_column = ParamCreator.create_int(
         help_string="what is the value column",
     )
-

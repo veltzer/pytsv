@@ -1,4 +1,3 @@
-import codecs
 import gzip
 import itertools
 import logging
@@ -9,7 +8,7 @@ from typing import Iterable, List, Tuple, Dict, IO, Text, Union, Sequence
 import pyanyzip.core
 
 from pytsv.configs import SANITIZE, CLEAN_EDGES, SUB_TRAILING, REMOVE_NON_ASCII, LOWER_CASE, CHECK_NUM_FIELDS, \
-    CONVERT_TO_STRING, FILENAME_DETECT, DO_GZIP, DEFAULT_ENCODING, ATTACH_ENCODER, USE_ANY_FORMAT, SKIP_COMMENTS, \
+    CONVERT_TO_STRING, FILENAME_DETECT, DO_GZIP, USE_ANY_FORMAT, SKIP_COMMENTS, \
     CHECK_NON_ASCII, VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS
 
 
@@ -141,8 +140,6 @@ class TsvWriter(object):
 
         do_gzip: bool = DO_GZIP,
         filename_detect: bool = FILENAME_DETECT,
-        encoding: str = DEFAULT_ENCODING,
-        attach_encoder: bool = ATTACH_ENCODER,
     ) -> None:
         if filename_detect:
             found = False
@@ -162,10 +159,6 @@ class TsvWriter(object):
                 self.io: IO[str] = gzip.open(filename, mode=mode)
             else:
                 self.io: IO[str] = open(filename, mode=mode)
-        # the next branch is mainly for python 2 when the PYTHONIOENCODING
-        # environment variable is not set
-        if attach_encoder:
-            self.io = codecs.getwriter(encoding=encoding)(self.io)
         self.throw_exceptions = throw_exceptions
 
         self.sanitize = sanitize
