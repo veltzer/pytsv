@@ -21,14 +21,18 @@ run_requires = [
 ]
 
 test_requires = [
+    'pylint',
+    'pytest',
+    'pytest-cov',
+    'pyflakes',
+    'flake8',
+    'pymakehelper',
 ]
 
 dev_requires = [
     'pyclassifiers',
     'pypitools',
     'pydmt',
-    'pylint',
-    'pytest',
 ]
 
 install_requires = list(setup_requires)

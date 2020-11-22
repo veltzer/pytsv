@@ -130,6 +130,8 @@
 <dt id="pytsv.endpoints.group_default.check">
 <code class="sig-prename descclassname">pytsv.endpoints.group_default.</code><code class="sig-name descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.check" title="Permalink to this definition">¶</a></dt>
 <dd><p>check that every file is legal TSV</p>
+<p>TODO:
+- add ability to say how many lines are bad and print their content</p>
 </dd></dl>
 
 <dl class="py function">
@@ -195,6 +197,9 @@
 <dt id="pytsv.endpoints.group_default.majority">
 <code class="sig-prename descclassname">pytsv.endpoints.group_default.</code><code class="sig-name descname">majority</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#majority"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.majority" title="Permalink to this definition">¶</a></dt>
 <dd><p>reduce two columns to a majority</p>
+<p>This means that if x1 appears more
+with y2 than any other values in column Y then x1, y2 will be in the output
+and no other entry with x1 will appear</p>
 </dd></dl>
 
 <dl class="py function">
@@ -229,6 +234,9 @@
 <dt id="pytsv.endpoints.group_default.sample_by_column">
 <code class="sig-prename descclassname">pytsv.endpoints.group_default.</code><code class="sig-name descname">sample_by_column</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#sample_by_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.sample_by_column" title="Permalink to this definition">¶</a></dt>
 <dd><p>create a weighted sample from a TSV file</p>
+<p>To run this you must supply a ‘value_column’ (the column
+which will be sampled) and a ‘weight_column’ which must
+be convertible to a floating point number.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -265,6 +273,7 @@
 <dt id="pytsv.endpoints.group_default.tree">
 <code class="sig-prename descclassname">pytsv.endpoints.group_default.</code><code class="sig-name descname">tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/pytsv/endpoints/group_default.html#tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pytsv.endpoints.group_default.tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>draw tree by two columns from a TSV file</p>
+<p>You can also see only parts of the tree</p>
 </dd></dl>
 
 <dl class="py function">
