@@ -11,5 +11,10 @@ attrs
 pyclassifiers
 pypitools
 pydmt
+# test requirements
 pylint
 pytest
+pytest-cov
+pyflakes
+flake8
+pymakehelper

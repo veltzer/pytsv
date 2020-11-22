@@ -29,8 +29,8 @@ GROUP_DESCRIPTION_DEFAULT = "all pytsv commands"
 
 def register_group_default():
     register_function_group(
-            function_group_name=GROUP_NAME_DEFAULT,
-            function_group_description=GROUP_DESCRIPTION_DEFAULT,
+        function_group_name=GROUP_NAME_DEFAULT,
+        function_group_description=GROUP_DESCRIPTION_DEFAULT,
     )
 
 
@@ -92,15 +92,14 @@ def check_file(params_for_job: ParamsForJob) -> bool:
 def check() -> None:
     """
     check that every file is legal TSV
-    """
-    """
+
     TODO:
     - add ability to say how many lines are bad and print their content
     """
     if ConfigParallel.parallel:
         with concurrent.futures.ProcessPoolExecutor(max_workers=ConfigParallel.jobs) as executor:
             job_list = []
-            for input_file in ConfigInputFiles.input_files:
+            for input_file in iter(ConfigInputFiles.input_files):
                 job = ParamsForJob()
                 job.progress = ConfigProgress.progress
                 job.check_non_ascii = ConfigTsvReader.check_non_ascii
@@ -110,7 +109,7 @@ def check() -> None:
                 job_list.append(job)
             results = list(executor.map(check_file, job_list))
         print(results)
-    for input_file in ConfigInputFiles.input_files:
+    for input_file in iter(ConfigInputFiles.input_files):
         with TsvReader(
             filename=input_file,
             num_fields=ConfigNumFields.num_fields,
@@ -137,7 +136,7 @@ def check_columns_unique() -> None:
     """
     dicts = [dict() for _ in range(len(ConfigColumns.columns))]
     errors = False
-    for input_file in ConfigInputFiles.input_files:
+    for input_file in iter(ConfigInputFiles.input_files):
         with TsvReader(
             filename=input_file,
         ) as input_file_handle:
@@ -200,7 +199,7 @@ def cut() -> None:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                out_fields = [fields[x] for x in ConfigColumns.columns]
+                out_fields = [fields[x] for x in iter(ConfigColumns.columns)]
                 output_file_handle.write(out_fields)
 
 
@@ -223,7 +222,7 @@ def drop_duplicates_by_columns() -> None:
         saw = set()
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             for fields in input_file_handle:
-                match = frozenset([fields[match_column] for match_column in ConfigColumns.columns])
+                match = frozenset([fields[match_column] for match_column in iter(ConfigColumns.columns)])
                 if match not in saw:
                     saw.add(match)
                     output_file_handle.write(fields)
@@ -253,7 +252,7 @@ def fix_columns() -> None:
             input_file_handle = tqdm.tqdm(input_file_handle)
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             for fields in input_file_handle:
-                for fix_column in ConfigColumns.columns:
+                for fix_column in iter(ConfigColumns.columns):
                     fields[fix_column] = clean(
                         text=fields[fix_column],
                         clean_edges=ConfigFixTypes.clean_edges,
@@ -287,12 +286,12 @@ def histogram_by_column() -> None:
         for i, count in enumerate(count_in_bucket):
             current_sum += count
             edge_from = bucket_edges[i]
-            edge_to = bucket_edges[i+1]
+            edge_to = bucket_edges[i + 1]
             output_handle.write([
                 str(edge_from),
                 str(edge_to),
                 str(count),
-                str(int(100.0*current_sum/total)),
+                str(int(100.0 * current_sum / total)),
             ])
 
 
@@ -308,8 +307,7 @@ def histogram_by_column() -> None:
 def majority() -> None:
     """
     reduce two columns to a majority
-    """
-    """
+
     This means that if x1 appears more
     with y2 than any other values in column Y then x1, y2 will be in the output
     and no other entry with x1 will appear
@@ -327,7 +325,7 @@ def majority() -> None:
             d[p_first][p_second] += p_multiplication
     with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
         for p_first, p_dict in d.items():
-            p_second = max(p_dict.keys(), key=lambda x: p_dict[x])
+            p_second = max(p_dict.keys(), key=lambda x, closure_dict=p_dict: closure_dict[x])
             p_count = p_dict[p_second]
             output_file_handle.write([
                 p_first,
@@ -368,7 +366,7 @@ def read() -> None:
     """
     read TSV files as plainly as possible
     """
-    for input_file in ConfigInputFiles.input_files:
+    for input_file in iter(ConfigInputFiles.input_files):
         with TsvReader(filename=input_file) as input_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
@@ -392,7 +390,7 @@ def remove_quotes() -> None:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                for i in ConfigColumns.columns:
+                for i in iter(ConfigColumns.columns):
                     if fields[i].startswith("\"") and fields[i].endswith("\"") and len(fields[i]) > 1:
                         fields[i] = fields[i][1:-1]
                 output_file_handle.write(fields)
@@ -418,7 +416,7 @@ def csv_to_tsv() -> None:
         ) as output_file_handle:
             for row in csv_reader:
                 if ConfigCsvToTsv.replace_tabs_with_spaces:
-                    for i, item in enumerate(row):
+                    for i, _item in enumerate(row):
                         row[i] = row[i].replace("\t", " ")
                 output_file_handle.write(row)
 
@@ -492,7 +490,7 @@ def lc() -> None:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                for i in ConfigColumns.columns:
+                for i in iter(ConfigColumns.columns):
                     fields[i] = fields[i].lower()
                 output_file_handle.write(fields)
 
@@ -518,7 +516,7 @@ def sum_columns() -> None:
 
 
 @attr.attrs
-class JobInfo(object):
+class JobInfo:
     check_not_ascii: bool = attr.attrib()
     input_file: str = attr.attrib()
     serial: int = attr.attrib()
@@ -528,7 +526,7 @@ class JobInfo(object):
 
 
 @attr.attrs
-class JobReturnValue(object):
+class JobReturnValue:
     serial: int = attr.attrib()
     files: Dict[str, str] = attr.attrib()
 
@@ -542,7 +540,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
             check_non_ascii=job_info.check_not_ascii
     ) as input_file_handle:
         if job_info.progress:
-            logger.info("working on [%s]" % job_info.input_file)
+            logger.info("working on [{job_info.input_file}]")
             input_file_handle = tqdm.tqdm(input_file_handle)
         for fields in input_file_handle:
             key = ",".join([fields[x] for x in job_info.columns])
@@ -582,12 +580,12 @@ def split_by_columns_parallel() -> None:
         ConfigProgress.progress,
         ConfigPattern.pattern,
         ConfigColumns.columns,
-    ) for i, input_file in enumerate(ConfigInputFiles.input_files)]
+    ) for i, input_file in enumerate(iter(ConfigInputFiles.input_files))]
     with concurrent.futures.ProcessPoolExecutor(max_workers=ConfigParallel.jobs) as executor:
         job_return_values: List[JobReturnValue] = list(executor.map(process_single_file, job_data))
     job_return_values.sort(key=lambda u: u.serial)
     for job_return_value in job_return_values:
-        for key, filename in job_return_value.files.items():
+        for key, _filename in job_return_value.files.items():
             outfile = ConfigPattern.final_pattern.format(key=key)
             with open(outfile, "wb") as _:
                 pass
@@ -604,8 +602,7 @@ def split_by_columns_parallel() -> None:
 def tree() -> None:
     """
     draw tree by two columns from a TSV file
-    """
-    """
+
     You can also see only parts of the tree
     """
     children_dict: Dict[Set] = defaultdict(set)
@@ -618,7 +615,7 @@ def tree() -> None:
             parents_dict[p_child].add(p_parent)
     # find the roots (parents that have no parents)
     if ConfigTree.roots:
-        list_of_roots = ConfigTree.roots.split(',')
+        list_of_roots = ConfigTree.roots
     else:
         list_of_roots = []
         for p_parent in children_dict.keys():
@@ -648,7 +645,7 @@ def tree() -> None:
                 special_string = "   "
             else:
                 special_string = u"│  "
-            list_to_append.append((p_child, depth+1, first, print_list+special_string))
+            list_to_append.append((p_child, depth + 1, first, print_list + special_string))
             first = False
         stack.extend(list(reversed(list_to_append)))
 
@@ -682,8 +679,7 @@ def tsv_to_csv() -> None:
 def sample_by_column() -> None:
     """
     create a weighted sample from a TSV file
-    """
-    """
+
     To run this you must supply a 'value_column' (the column
     which will be sampled) and a 'weight_column' which must
     be convertible to a floating point number.
@@ -747,10 +743,10 @@ def sample_by_column_old() -> None:
     # results = choices(lines, weights, k=size)
 
     # this is the same code with numpy
-    weights = [w/sum_weights for w in weights]
+    weights = [w / sum_weights for w in weights]
     if ConfigSampleByColumnOld.hits_mode:
         results_dict = defaultdict(int)
-        for i in range(ConfigSampleSize.size):
+        for _ in range(ConfigSampleSize.size):
             current_result = numpy.random.choice(
                 a=len(elements),
                 replace=ConfigReplace.replace,
@@ -843,10 +839,10 @@ def split_by_columns() -> None:
     logger = logging.getLogger(__name__)
     assert len(ConfigColumns.columns) > 0, "must provide --columns"
     tsv_writers_dict = dict()
-    for input_file in ConfigInputFiles.input_files:
+    for input_file in iter(ConfigInputFiles.input_files):
         with TsvReader(filename=input_file, check_non_ascii=ConfigTsvReader.check_non_ascii) as input_file_handle:
             if ConfigProgress.progress:
-                logger.info("working on [%s]" % input_file)
+                logger.info(f"working on [{input_file}]")
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
                 key = ",".join([fields[x] for x in iter(ConfigColumns.columns)])

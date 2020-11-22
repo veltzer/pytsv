@@ -120,7 +120,7 @@ def is_ascii(s: str) -> bool:
     return all(ord(c) < 128 for c in s)
 
 
-class TsvWriter(object):
+class TsvWriter:
     def __init__(
         self,
         filename: str,
@@ -186,12 +186,11 @@ class TsvWriter(object):
                     lower_case=self.lower_case,
                 )
             return r
-        else:
-            return seq
+        return seq
 
     def _convert(self, seq: Sequence[str]) -> Sequence[str]:
         if self.convert_to_string:
-            for i, t in enumerate(seq):
+            for t in seq:
                 if type(t) in (int, float, type(None)):
                     yield str(t)
                 else:

@@ -1,5 +1,4 @@
 import multiprocessing
-from typing import List
 
 from pytconf import ParamCreator, Config
 
@@ -159,7 +158,7 @@ class ConfigTree(Config):
     Parameters to configure the parameters of a tree to show
     """
     roots = ParamCreator.create_list_str(
-        help_string="roots to output, separated by commas",
+        help_string="roots to output",
     )
     parent_column = ParamCreator.create_int(
         help_string="parent column",
