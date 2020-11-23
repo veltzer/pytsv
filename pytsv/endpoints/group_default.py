@@ -408,7 +408,7 @@ def csv_to_tsv() -> None:
     """ convert a CSV to a TSV file """
     if ConfigCsvToTsv.set_max:
         csv.field_size_limit(sys.maxsize)
-    with pyanyzip.core.open(ConfigInputFile.input_file, "rt") as input_file_handle:
+    with pyanyzip.core.openzip(ConfigInputFile.input_file, "rt") as input_file_handle:
         csv_reader = csv.reader(input_file_handle)
         with TsvWriter(
             filename=ConfigOutputFile.output_file,
