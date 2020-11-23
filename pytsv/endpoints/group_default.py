@@ -99,7 +99,7 @@ def check() -> None:
     if ConfigParallel.parallel:
         with concurrent.futures.ProcessPoolExecutor(max_workers=ConfigParallel.jobs) as executor:
             job_list = []
-            for input_file in iter(ConfigInputFiles.input_files):
+            for input_file in ConfigInputFiles.input_files:
                 job = ParamsForJob()
                 job.progress = ConfigProgress.progress
                 job.check_non_ascii = ConfigTsvReader.check_non_ascii
@@ -109,7 +109,7 @@ def check() -> None:
                 job_list.append(job)
             results = list(executor.map(check_file, job_list))
         print(results)
-    for input_file in iter(ConfigInputFiles.input_files):
+    for input_file in ConfigInputFiles.input_files:
         with TsvReader(
             filename=input_file,
             num_fields=ConfigNumFields.num_fields,
@@ -136,7 +136,7 @@ def check_columns_unique() -> None:
     """
     dicts = [dict() for _ in range(len(ConfigColumns.columns))]
     errors = False
-    for input_file in iter(ConfigInputFiles.input_files):
+    for input_file in ConfigInputFiles.input_files:
         with TsvReader(
             filename=input_file,
         ) as input_file_handle:
@@ -199,7 +199,7 @@ def cut() -> None:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                out_fields = [fields[x] for x in iter(ConfigColumns.columns)]
+                out_fields = [fields[x] for x in ConfigColumns.columns]
                 output_file_handle.write(out_fields)
 
 
@@ -222,7 +222,7 @@ def drop_duplicates_by_columns() -> None:
         saw = set()
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             for fields in input_file_handle:
-                match = frozenset([fields[match_column] for match_column in iter(ConfigColumns.columns)])
+                match = frozenset([fields[match_column] for match_column in ConfigColumns.columns])
                 if match not in saw:
                     saw.add(match)
                     output_file_handle.write(fields)
@@ -252,7 +252,7 @@ def fix_columns() -> None:
             input_file_handle = tqdm.tqdm(input_file_handle)
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             for fields in input_file_handle:
-                for fix_column in iter(ConfigColumns.columns):
+                for fix_column in ConfigColumns.columns:
                     fields[fix_column] = clean(
                         text=fields[fix_column],
                         clean_edges=ConfigFixTypes.clean_edges,
@@ -366,7 +366,7 @@ def read() -> None:
     """
     read TSV files as plainly as possible
     """
-    for input_file in iter(ConfigInputFiles.input_files):
+    for input_file in ConfigInputFiles.input_files:
         with TsvReader(filename=input_file) as input_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
@@ -390,7 +390,7 @@ def remove_quotes() -> None:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                for i in iter(ConfigColumns.columns):
+                for i in ConfigColumns.columns:
                     if fields[i].startswith("\"") and fields[i].endswith("\"") and len(fields[i]) > 1:
                         fields[i] = fields[i][1:-1]
                 output_file_handle.write(fields)
@@ -490,7 +490,7 @@ def lc() -> None:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                for i in iter(ConfigColumns.columns):
+                for i in ConfigColumns.columns:
                     fields[i] = fields[i].lower()
                 output_file_handle.write(fields)
 
@@ -839,13 +839,13 @@ def split_by_columns() -> None:
     logger = logging.getLogger(__name__)
     assert len(ConfigColumns.columns) > 0, "must provide --columns"
     tsv_writers_dict = dict()
-    for input_file in iter(ConfigInputFiles.input_files):
+    for input_file in ConfigInputFiles.input_files:
         with TsvReader(filename=input_file, check_non_ascii=ConfigTsvReader.check_non_ascii) as input_file_handle:
             if ConfigProgress.progress:
                 logger.info(f"working on [{input_file}]")
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
-                key = ",".join([fields[x] for x in iter(ConfigColumns.columns)])
+                key = ",".join([fields[x] for x in ConfigColumns.columns])
                 if key not in tsv_writers_dict:
                     filename = ConfigPattern.pattern.format(key=key)
                     output_handle = TsvWriter(filename=filename)
