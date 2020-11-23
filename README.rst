@@ -12,6 +12,6 @@ project website: https://veltzer.github.io/pytsv
 
 author: Mark Veltzer
 
-version: 0.1.65
+version: 0.1.66
 
 
