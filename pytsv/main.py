@@ -36,6 +36,7 @@ def register_group_default():
 
 
 @register_endpoint(
+    description="aggregate TSV files",
     configs=[
         ConfigInputFiles,
         ConfigFloatingPoint,
@@ -43,12 +44,8 @@ def register_group_default():
         ConfigMatchColumns,
         ConfigOutputFile,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def aggregate() -> None:
-    """
-    aggregate TSV files
-    """
     do_aggregate(
         input_file_names=ConfigInputFiles.input_files,
         match_columns=ConfigMatchColumns.match_columns,
@@ -81,6 +78,7 @@ def check_file(params_for_job: ParamsForJob) -> bool:
 
 
 @register_endpoint(
+    description="check that every file is legal TSV",
     configs=[
         ConfigProgress,
         ConfigParallel,
@@ -88,12 +86,9 @@ def check_file(params_for_job: ParamsForJob) -> bool:
         ConfigInputFiles,
         ConfigTsvReader,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def check() -> None:
     """
-    check that every file is legal TSV
-
     TODO:
     - add ability to say how many lines are bad and print their content
     """
@@ -124,17 +119,14 @@ def check() -> None:
 
 
 @register_endpoint(
+    description="checks that for certain columns every value in the files is unique",
     configs=[
         ConfigProgress,
         ConfigInputFiles,
         ConfigColumns,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def check_columns_unique() -> None:
-    """
-    checks that for certain columns every value in the files is unique
-    """
     dicts = [dict() for _ in range(len(ConfigColumns.columns))]
     errors = False
     for input_file in ConfigInputFiles.input_files:
@@ -160,18 +152,15 @@ def check_columns_unique() -> None:
 
 
 @register_endpoint(
+    description="remove lines from a TSV file that do not have the right number of columns",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigProgress,
         ConfigColumns,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def clean_by_field_num() -> None:
-    """
-    remove lines from a TSV file that do not have the right number of columns
-    """
     with TsvReader(
         filename=ConfigInputFile.input_file,
         validate_all_lines_same_number_of_fields=False
@@ -185,16 +174,15 @@ def clean_by_field_num() -> None:
 
 
 @register_endpoint(
+    description="cut fields from a TSV file",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigColumns,
         ConfigProgress,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def cut() -> None:
-    """ cut fields from a TSV file """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
@@ -205,18 +193,15 @@ def cut() -> None:
 
 
 @register_endpoint(
+    description="fix a TSV file assuming that bad characters or tabs have been left in one column of it",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigProgress,
         ConfigColumns,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def drop_duplicates_by_columns() -> None:
-    """
-    fix a TSV file assuming that bad characters or tabs have been left in one column of it
-    """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
@@ -230,6 +215,7 @@ def drop_duplicates_by_columns() -> None:
 
 
 @register_endpoint(
+    description="fix a TSV file assuming that bad characters or tabs have been left in one column of it",
     configs=[
         ConfigInputFile,
         ConfigProgress,
@@ -238,12 +224,8 @@ def drop_duplicates_by_columns() -> None:
         ConfigTsvReader,
         ConfigFixTypes,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def fix_columns() -> None:
-    """
-    fix a TSV file assuming that bad characters or tabs have been left in one column of it
-    """
     # We need to read the input file WITHOUT assuming that it hasn't problems
     with TsvReader(
             filename=ConfigInputFile.input_file,
@@ -265,16 +247,15 @@ def fix_columns() -> None:
 
 
 @register_endpoint(
+    description="Create a histogram from a field in a TSV file",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigColumn,
         ConfigBucketNumber,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def histogram_by_column() -> None:
-    """ Create a histogram from a field in a TSV file """
     a = []
     total = 0
     with TsvReader(ConfigInputFile.input_file) as input_handle:
@@ -297,18 +278,16 @@ def histogram_by_column() -> None:
 
 
 @register_endpoint(
+    description="reduce two columns to a majority",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigProgress,
         ConfigMajority,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def majority() -> None:
     """
-    reduce two columns to a majority
-
     This means that if x1 appears more
     with y2 than any other values in column Y then x1, y2 will be in the output
     and no other entry with x1 will appear
@@ -336,16 +315,15 @@ def majority() -> None:
 
 
 @register_endpoint(
+    description="multiply a TSV file according to column",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigProgress,
         ConfigColumn,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def multiply() -> None:
-    """ multiply a TSV file according to column """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
@@ -357,16 +335,13 @@ def multiply() -> None:
 
 
 @register_endpoint(
+    description="read TSV files as plainly as possible",
     configs=[
         ConfigProgress,
         ConfigInputFiles,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def read() -> None:
-    """
-    read TSV files as plainly as possible
-    """
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(filename=input_file) as input_file_handle:
             if ConfigProgress.progress:
@@ -376,16 +351,15 @@ def read() -> None:
 
 
 @register_endpoint(
+    description="removed quotes from fields",
     configs=[
         ConfigProgress,
         ConfigColumns,
         ConfigInputFile,
         ConfigOutputFile,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def remove_quotes() -> None:
-    """ removed quotes from fields """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
@@ -398,15 +372,14 @@ def remove_quotes() -> None:
 
 
 @register_endpoint(
+    description="convert a CSV to a TSV file",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigCsvToTsv,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def csv_to_tsv() -> None:
-    """ convert a CSV to a TSV file """
     if ConfigCsvToTsv.set_max:
         csv.field_size_limit(sys.maxsize)
     with pyanyzip.core.openzip(ConfigInputFile.input_file, "rt") as input_file_handle:
@@ -429,18 +402,15 @@ class MyEventTypes(Enum):
 
 
 @register_endpoint(
+    description="join two TSV files by column",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigProgress,
         ConfigJoin,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def join() -> None:
-    """
-    join two TSV files by column
-    """
     d = dict()
     event_found = 0
     event_unknown_added = 0
@@ -476,16 +446,15 @@ def join() -> None:
 
 
 @register_endpoint(
+    description="lower case some columns",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigColumns,
         ConfigProgress,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def lc() -> None:
-    """ lower case some columns """
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
@@ -497,15 +466,14 @@ def lc() -> None:
 
 
 @register_endpoint(
+    description="sum some columns",
     configs=[
         ConfigInputFile,
         ConfigColumns,
         ConfigProgress,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def sum_columns() -> None:
-    """ sum some columns """
     sums = [0] * len(ConfigColumns.columns)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
@@ -558,6 +526,7 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
 
 
 @register_endpoint(
+    description="split a TSV file into many files according to some of its columns",
     configs=[
         ConfigColumns,
         ConfigProgress,
@@ -566,12 +535,8 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
         ConfigTsvReader,
         ConfigPattern,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def split_by_columns_parallel() -> None:
-    """
-    split a TSV file into many files according to some of its columns
-    """
     pylogconf.core.setup()
     assert len(ConfigColumns.columns) > 0, "must provide --columns"
     job_data = [JobInfo(
@@ -594,16 +559,14 @@ def split_by_columns_parallel() -> None:
 
 
 @register_endpoint(
+    description="draw tree by two columns from a TSV file",
     configs=[
         ConfigInputFile,
         ConfigTree,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def tree() -> None:
     """
-    draw tree by two columns from a TSV file
-
     You can also see only parts of the tree
     """
     children_dict: Dict[Set] = defaultdict(set)
@@ -652,16 +615,13 @@ def tree() -> None:
 
 
 @register_endpoint(
+    description="convert a TSV file to a CSV file",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def tsv_to_csv() -> None:
-    """
-    convert a TSV file to a CSV file
-    """
     with open(ConfigOutputFile.output_file, "wt") as output_file_handle:
         csv_writer = csv.writer(output_file_handle)
         with TsvReader(ConfigInputFile.input_file) as input_file_handle:
@@ -670,17 +630,15 @@ def tsv_to_csv() -> None:
 
 
 @register_endpoint(
+    description="create a weighted sample from a TSV file",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigCheckUnique,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def sample_by_column() -> None:
     """
-    create a weighted sample from a TSV file
-
     To run this you must supply a 'value_column' (the column
     which will be sampled) and a 'weight_column' which must
     be convertible to a floating point number.
@@ -715,18 +673,15 @@ def sample_by_column() -> None:
 
 
 @register_endpoint(
+    description="sample from a TSV file by a sample column",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigProgress,
         ConfigSampleByColumnOld,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def sample_by_column_old() -> None:
-    """
-    sample from a TSV file by a sample column
-    """
     weights = []
     elements = []
     sum_weights = float(0)
@@ -774,18 +729,15 @@ def sample_by_column_old() -> None:
 
 
 @register_endpoint(
+    description="sample from a TSV file by two columns",
     configs=[
         ConfigInputFile,
         ConfigOutputFile,
         ConfigProgress,
         ConfigSampleByTwoColumns,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def sample_by_two_columns() -> None:
-    """
-    sample from a TSV file by two columns
-    """
     logger = logging.getLogger(__name__)
     logger.info("reading the data")
     df = pandas.read_csv(
@@ -823,6 +775,7 @@ def sample_by_two_columns() -> None:
 
 
 @register_endpoint(
+    description="split a TSV file into many files according to some of its columns",
     configs=[
         ConfigColumns,
         ConfigProgress,
@@ -830,12 +783,8 @@ def sample_by_two_columns() -> None:
         ConfigInputFiles,
         ConfigPattern,
     ],
-    group=GROUP_NAME_DEFAULT,
 )
 def split_by_columns() -> None:
-    """
-    split a TSV file into many files according to some of its columns
-    """
     pylogconf.core.setup()
     logger = logging.getLogger(__name__)
     assert len(ConfigColumns.columns) > 0, "must provide --columns"
