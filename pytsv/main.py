@@ -14,7 +14,7 @@ import pandas
 import pyanyzip.core
 import pylogconf.core
 import tqdm
-from pytconf import register_endpoint, register_function_group
+from pytconf import register_endpoint, register_function_group, register_main, config_arg_parse_and_launch
 
 from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \
     ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, ConfigTsvReader, ConfigColumns, \
@@ -22,6 +22,7 @@ from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregate
     ConfigTree, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern, \
     ConfigSampleSize, ConfigReplace, ConfigSampleColumn, ConfigWeightValue, ConfigCheckUnique
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
+from pytsv.static import APP_NAME, VERSION_STR
 
 GROUP_NAME_DEFAULT = "default"
 GROUP_DESCRIPTION_DEFAULT = "all pytsv commands"
@@ -855,3 +856,17 @@ def split_by_columns() -> None:
     # close all writers
     for v in tsv_writers_dict.values():
         v.close()
+
+
+@register_main(
+    main_description="Pytsv is the Swiss Army Knife for TSV",
+    app_name=APP_NAME,
+    version=VERSION_STR,
+)
+def main():
+    pylogconf.core.setup()
+    config_arg_parse_and_launch()
+
+
+if __name__ == '__main__':
+    main()

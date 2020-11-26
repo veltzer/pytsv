@@ -12,7 +12,6 @@ setuptools.setup(
     version="0.1.66",
     packages=[
         'pytsv',
-        'pytsv.endpoints',
     ],
     # from here all is optional
     description="pytsv is a module to help with all things TSV",
@@ -61,7 +60,7 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={"console_scripts": [
-        'pytsv=pytsv.endpoints.main:main',
+        'pytsv=pytsv.main:main',
     ]},
     python_requires=">=3.6",
 )

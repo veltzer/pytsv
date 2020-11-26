@@ -5,7 +5,6 @@ Welcome to pytsv's documentation!
    :maxdepth: 2
 
        pytsv <pytsv.rst>
-       pytsv.endpoints <pytsv.endpoints.rst>
 
    modules
 

@@ -4,7 +4,7 @@ package_name = config.project.project_name
 
 
 console_scripts = [
-    'pytsv=pytsv.endpoints.main:main',
+    'pytsv=pytsv.main:main',
 ]
 
 setup_requires = [
