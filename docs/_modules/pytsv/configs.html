@@ -59,6 +59,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">input_files</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_str</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;input files&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -106,6 +107,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">input_file</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_existing_file</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;input file&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -115,8 +117,8 @@
 <span class="sd">    point or not</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">floating_point</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;work with floating point?&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -126,12 +128,15 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">input_first_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;first column&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">input_second_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;second column&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">input_multiplication_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;multiplication column&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -139,7 +144,10 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to control progress reporting</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">progress</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;do you want progress report&quot;</span><span class="p">)</span></div>
+    <span class="n">progress</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
+        <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;do you want progress report&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ConfigColumn"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigColumn">[docs]</a><span class="k">class</span> <span class="nc">ConfigColumn</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
@@ -148,6 +156,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;column to use (list of numbers separated by comma)&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -157,6 +166,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">columns</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;columns to use (list of numbers separated by comma)&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -166,6 +176,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">aggregate_columns</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;column to aggregate by (list of numbers separated by comma)&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -175,6 +186,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">match_columns</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;column to match by (list of numbers separated by comma)&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -184,6 +196,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">output_file</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_new_file</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;output file to generate&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -193,12 +206,15 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">roots</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_str</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;roots to output&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parent_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;parent column&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">child_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;child column&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -268,6 +284,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;what sample size do you need?&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -277,6 +294,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sample_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;what column to sample by&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -286,6 +304,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">replace</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;allow replacements?&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -295,6 +314,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">hits_mode</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;sample size is hits&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -304,21 +324,27 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">hash_file</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_existing_file</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;hash file&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">hash_key_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;column to match on in the hash file&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">hash_value_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;value to get from the hash file&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">input_key_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;column to match on in the input file&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">output_insert_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;column to insert at in the first file to create the output file&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">output_add_unknown</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;add UNKNOWN when there is no match or drop&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -342,6 +368,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">group_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;what column to determine group by&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -351,9 +378,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">weight_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;what column to determine weight by&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">value_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
         <span class="n">help_string</span><span class="o">=</span><span class="s2">&quot;what is the value column&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span></div>
 </pre></div>
 

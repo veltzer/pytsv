@@ -1,14 +1,6 @@
 pytsv package
 =============
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   pytsv.endpoints
-
 Submodules
 ----------
 
@@ -24,6 +16,14 @@ pytsv.core module
 -----------------
 
 .. automodule:: pytsv.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pytsv.main module
+-----------------
+
+.. automodule:: pytsv.main
    :members:
    :undoc-members:
    :show-inheritance:
