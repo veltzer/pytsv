@@ -25,7 +25,6 @@ class ConfigInputFiles(Config):
     """
     input_files = ParamCreator.create_list_str(
         help_string="input files",
-        required=True,
     )
 
 
@@ -73,7 +72,6 @@ class ConfigInputFile(Config):
     """
     input_file = ParamCreator.create_existing_file(
         help_string="input file",
-        required=True,
     )
 
 
@@ -94,15 +92,12 @@ class ConfigMajority(Config):
     """
     input_first_column = ParamCreator.create_int(
         help_string="first column",
-        required=True,
     )
     input_second_column = ParamCreator.create_int(
         help_string="second column",
-        required=True,
     )
     input_multiplication_column = ParamCreator.create_int(
         help_string="multiplication column",
-        required=True,
     )
 
 
@@ -122,7 +117,6 @@ class ConfigColumn(Config):
     """
     column = ParamCreator.create_int(
         help_string="column to use (list of numbers separated by comma)",
-        required=True,
     )
 
 
@@ -132,7 +126,6 @@ class ConfigColumns(Config):
     """
     columns = ParamCreator.create_list_int(
         help_string="columns to use (list of numbers separated by comma)",
-        required=True,
     )
 
 
@@ -142,7 +135,6 @@ class ConfigAggregateColumns(Config):
     """
     aggregate_columns = ParamCreator.create_list_int(
         help_string="column to aggregate by (list of numbers separated by comma)",
-        required=True,
     )
 
 
@@ -152,7 +144,6 @@ class ConfigMatchColumns(Config):
     """
     match_columns = ParamCreator.create_list_int(
         help_string="column to match by (list of numbers separated by comma)",
-        required=True,
     )
 
 
@@ -162,7 +153,6 @@ class ConfigOutputFile(Config):
     """
     output_file = ParamCreator.create_new_file(
         help_string="output file to generate",
-        required=True,
     )
 
 
@@ -172,15 +162,12 @@ class ConfigTree(Config):
     """
     roots = ParamCreator.create_list_str(
         help_string="roots to output",
-        required=True,
     )
     parent_column = ParamCreator.create_int(
         help_string="parent column",
-        required=True,
     )
     child_column = ParamCreator.create_int(
         help_string="child column",
-        required=True,
     )
 
 
@@ -250,7 +237,6 @@ class ConfigSampleSize(Config):
     """
     size = ParamCreator.create_int(
         help_string="what sample size do you need?",
-        required=True,
     )
 
 
@@ -260,7 +246,6 @@ class ConfigSampleColumn(Config):
     """
     sample_column = ParamCreator.create_int(
         help_string="what column to sample by",
-        required=True,
     )
 
 
@@ -270,7 +255,6 @@ class ConfigReplace(Config):
     """
     replace = ParamCreator.create_bool(
         help_string="allow replacements?",
-        required=True,
     )
 
 
@@ -280,7 +264,6 @@ class ConfigSampleByColumnOld(Config):
     """
     hits_mode = ParamCreator.create_bool(
         help_string="sample size is hits",
-        required=True,
     )
 
 
@@ -290,27 +273,21 @@ class ConfigJoin(Config):
     """
     hash_file = ParamCreator.create_existing_file(
         help_string="hash file",
-        required=True,
     )
     hash_key_column = ParamCreator.create_int(
         help_string="column to match on in the hash file",
-        required=True,
     )
     hash_value_column = ParamCreator.create_int(
         help_string="value to get from the hash file",
-        required=True,
     )
     input_key_column = ParamCreator.create_int(
         help_string="column to match on in the input file",
-        required=True,
     )
     output_insert_column = ParamCreator.create_int(
         help_string="column to insert at in the first file to create the output file",
-        required=True,
     )
     output_add_unknown = ParamCreator.create_bool(
         help_string="add UNKNOWN when there is no match or drop",
-        required=True,
     )
 
 
@@ -334,7 +311,6 @@ class ConfigSampleByTwoColumns(Config):
     """
     group_column = ParamCreator.create_int(
         help_string="what column to determine group by",
-        required=True,
     )
 
 
@@ -344,9 +320,7 @@ class ConfigWeightValue(Config):
     """
     weight_column = ParamCreator.create_int(
         help_string="what column to determine weight by",
-        required=True,
     )
     value_column = ParamCreator.create_int(
         help_string="what is the value column",
-        required=True,
     )
