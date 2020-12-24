@@ -70,6 +70,7 @@
 
 
 <div class="viewcode-block" id="aggregate"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.aggregate">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;aggregate TSV files&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFiles</span><span class="p">,</span>
         <span class="n">ConfigFloatingPoint</span><span class="p">,</span>
@@ -77,12 +78,8 @@
         <span class="n">ConfigMatchColumns</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">aggregate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    aggregate TSV files</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">do_aggregate</span><span class="p">(</span>
         <span class="n">input_file_names</span><span class="o">=</span><span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">,</span>
         <span class="n">match_columns</span><span class="o">=</span><span class="n">ConfigMatchColumns</span><span class="o">.</span><span class="n">match_columns</span><span class="p">,</span>
@@ -115,6 +112,7 @@
 
 
 <div class="viewcode-block" id="check"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.check">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;check that every file is legal TSV&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigParallel</span><span class="p">,</span>
@@ -122,12 +120,9 @@
         <span class="n">ConfigInputFiles</span><span class="p">,</span>
         <span class="n">ConfigTsvReader</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    check that every file is legal TSV</span>
-
 <span class="sd">    TODO:</span>
 <span class="sd">    - add ability to say how many lines are bad and print their content</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -158,17 +153,14 @@
 
 
 <div class="viewcode-block" id="check_columns_unique"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.check_columns_unique">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;checks that for certain columns every value in the files is unique&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigInputFiles</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">check_columns_unique</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    checks that for certain columns every value in the files is unique</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dicts</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">:</span>
@@ -194,18 +186,15 @@
 
 
 <div class="viewcode-block" id="clean_by_field_num"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.clean_by_field_num">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;remove lines from a TSV file that do not have the right number of columns&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">clean_by_field_num</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    remove lines from a TSV file that do not have the right number of columns</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span>
         <span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span>
         <span class="n">validate_all_lines_same_number_of_fields</span><span class="o">=</span><span class="kc">False</span>
@@ -219,16 +208,15 @@
 
 
 <div class="viewcode-block" id="cut"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.cut">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;cut fields from a TSV file&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">cut</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; cut fields from a TSV file &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -239,18 +227,15 @@
 
 
 <div class="viewcode-block" id="drop_duplicates_by_columns"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.drop_duplicates_by_columns">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;fix a TSV file assuming that bad characters or tabs have been left in one column of it&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">drop_duplicates_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    fix a TSV file assuming that bad characters or tabs have been left in one column of it</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
@@ -264,6 +249,7 @@
 
 
 <div class="viewcode-block" id="fix_columns"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.fix_columns">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;fix a TSV file assuming that bad characters or tabs have been left in one column of it&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
@@ -272,12 +258,8 @@
         <span class="n">ConfigTsvReader</span><span class="p">,</span>
         <span class="n">ConfigFixTypes</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">fix_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    fix a TSV file assuming that bad characters or tabs have been left in one column of it</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># We need to read the input file WITHOUT assuming that it hasn&#39;t problems</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span>
             <span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span>
@@ -299,16 +281,15 @@
 
 
 <div class="viewcode-block" id="histogram_by_column"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.histogram_by_column">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create a histogram from a field in a TSV file&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigColumn</span><span class="p">,</span>
         <span class="n">ConfigBucketNumber</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">histogram_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; Create a histogram from a field in a TSV file &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_handle</span><span class="p">:</span>
@@ -331,18 +312,16 @@
 
 
 <div class="viewcode-block" id="majority"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.majority">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;reduce two columns to a majority&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigMajority</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">majority</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    reduce two columns to a majority</span>
-
 <span class="sd">    This means that if x1 appears more</span>
 <span class="sd">    with y2 than any other values in column Y then x1, y2 will be in the output</span>
 <span class="sd">    and no other entry with x1 will appear</span>
@@ -370,16 +349,15 @@
 
 
 <div class="viewcode-block" id="multiply"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.multiply">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;multiply a TSV file according to column&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigColumn</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">multiply</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; multiply a TSV file according to column &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -391,16 +369,13 @@
 
 
 <div class="viewcode-block" id="read"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.read">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;read TSV files as plainly as possible&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigInputFiles</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    read TSV files as plainly as possible</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -410,16 +385,15 @@
 
 
 <div class="viewcode-block" id="remove_quotes"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.remove_quotes">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;removed quotes from fields&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">remove_quotes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; removed quotes from fields &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -432,15 +406,14 @@
 
 
 <div class="viewcode-block" id="csv_to_tsv"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.csv_to_tsv">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;convert a CSV to a TSV file&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigCsvToTsv</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">csv_to_tsv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; convert a CSV to a TSV file &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ConfigCsvToTsv</span><span class="o">.</span><span class="n">set_max</span><span class="p">:</span>
         <span class="n">csv</span><span class="o">.</span><span class="n">field_size_limit</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">pyanyzip</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">openzip</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
@@ -463,18 +436,15 @@
 
 
 <div class="viewcode-block" id="join"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.join">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;join two TSV files by column&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigJoin</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">join</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    join two TSV files by column</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">event_found</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">event_unknown_added</span> <span class="o">=</span> <span class="mi">0</span>
@@ -510,16 +480,15 @@
 
 
 <div class="viewcode-block" id="lc"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.lc">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;lower case some columns&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">lc</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; lower case some columns &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -531,15 +500,14 @@
 
 
 <div class="viewcode-block" id="sum_columns"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.sum_columns">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;sum some columns&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">sum_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; sum some columns &quot;&quot;&quot;</span>
     <span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -592,6 +560,7 @@
 
 
 <div class="viewcode-block" id="split_by_columns_parallel"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.split_by_columns_parallel">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;split a TSV file into many files according to some of its columns&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
@@ -600,12 +569,8 @@
         <span class="n">ConfigTsvReader</span><span class="p">,</span>
         <span class="n">ConfigPattern</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">split_by_columns_parallel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    split a TSV file into many files according to some of its columns</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pylogconf</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;must provide --columns&quot;</span>
     <span class="n">job_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">JobInfo</span><span class="p">(</span>
@@ -628,16 +593,14 @@
 
 
 <div class="viewcode-block" id="tree"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.tree">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;draw tree by two columns from a TSV file&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigTree</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">tree</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    draw tree by two columns from a TSV file</span>
-
 <span class="sd">    You can also see only parts of the tree</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">children_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Set</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
@@ -686,16 +649,13 @@
 
 
 <div class="viewcode-block" id="tsv_to_csv"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.tsv_to_csv">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;convert a TSV file to a CSV file&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">tsv_to_csv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    convert a TSV file to a CSV file</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
         <span class="n">csv_writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">output_file_handle</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
@@ -704,17 +664,15 @@
 
 
 <div class="viewcode-block" id="sample_by_column"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.sample_by_column">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;create a weighted sample from a TSV file&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigCheckUnique</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">sample_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    create a weighted sample from a TSV file</span>
-
 <span class="sd">    To run this you must supply a &#39;value_column&#39; (the column</span>
 <span class="sd">    which will be sampled) and a &#39;weight_column&#39; which must</span>
 <span class="sd">    be convertible to a floating point number.</span>
@@ -749,18 +707,15 @@
 
 
 <div class="viewcode-block" id="sample_by_column_old"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.sample_by_column_old">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;sample from a TSV file by a sample column&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">sample_by_column_old</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    sample from a TSV file by a sample column</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">elements</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">sum_weights</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -808,18 +763,15 @@
 
 
 <div class="viewcode-block" id="sample_by_two_columns"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.sample_by_two_columns">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;sample from a TSV file by two columns&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigInputFile</span><span class="p">,</span>
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
         <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">sample_by_two_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    sample from a TSV file by two columns</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;reading the data&quot;</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -857,6 +809,7 @@
 
 
 <div class="viewcode-block" id="split_by_columns"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.split_by_columns">[docs]</a><span class="nd">@register_endpoint</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;split a TSV file into many files according to some of its columns&quot;</span><span class="p">,</span>
     <span class="n">configs</span><span class="o">=</span><span class="p">[</span>
         <span class="n">ConfigColumns</span><span class="p">,</span>
         <span class="n">ConfigProgress</span><span class="p">,</span>
@@ -864,12 +817,8 @@
         <span class="n">ConfigInputFiles</span><span class="p">,</span>
         <span class="n">ConfigPattern</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="n">group</span><span class="o">=</span><span class="n">GROUP_NAME_DEFAULT</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">split_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    split a TSV file into many files according to some of its columns</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pylogconf</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;must provide --columns&quot;</span>
