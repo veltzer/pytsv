@@ -13,9 +13,6 @@
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-
-Actions
-
 ![build](https://github.com/veltzer/pytsv/workflows/build/badge.svg)
 
 pytsv is a module to help with all things TSV
