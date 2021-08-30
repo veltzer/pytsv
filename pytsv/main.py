@@ -127,7 +127,7 @@ def check() -> None:
     ],
 )
 def check_columns_unique() -> None:
-    dicts = [dict() for _ in range(len(ConfigColumns.columns))]
+    dicts = [{} for _ in range(len(ConfigColumns.columns))]
     errors = False
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(
@@ -411,7 +411,7 @@ class MyEventTypes(Enum):
     ],
 )
 def join() -> None:
-    d = dict()
+    d = {}
     event_found = 0
     event_unknown_added = 0
     event_discarded = 0
@@ -502,8 +502,8 @@ class JobReturnValue:
 
 def process_single_file(job_info: JobInfo) -> JobReturnValue:
     logger = logging.getLogger(__name__)
-    tsv_writers_dict = dict()
-    results = dict()
+    tsv_writers_dict = {}
+    results = {}
     with TsvReader(
             filename=job_info.input_file,
             check_non_ascii=job_info.check_not_ascii
@@ -598,9 +598,9 @@ def tree() -> None:
     while len(stack) > 0:
         name, depth, last, print_list = stack.pop()
         if last:
-            special_string = u"└──"
+            special_string = "└──"
         else:
-            special_string = u"├──"
+            special_string = "├──"
         print("{}{}".format(print_list + special_string, name))
         first = True
         list_to_append = []
@@ -608,7 +608,7 @@ def tree() -> None:
             if last:
                 special_string = "   "
             else:
-                special_string = u"│  "
+                special_string = "│  "
             list_to_append.append((p_child, depth + 1, first, print_list + special_string))
             first = False
         stack.extend(list(reversed(list_to_append)))
@@ -788,7 +788,7 @@ def split_by_columns() -> None:
     pylogconf.core.setup()
     logger = logging.getLogger(__name__)
     assert len(ConfigColumns.columns) > 0, "must provide --columns"
-    tsv_writers_dict = dict()
+    tsv_writers_dict = {}
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(filename=input_file, check_non_ascii=ConfigTsvReader.check_non_ascii) as input_file_handle:
             if ConfigProgress.progress:
