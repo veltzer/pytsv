@@ -49,13 +49,13 @@ def do_aggregate(
     :param floating_point:
     :return:
     """
-    counts: Dict[Tuple[str], List[Union[int, float]]] = dict()
+    counts: Dict[Tuple[str], List[Union[int, float]]] = {}
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
-        logger.debug("working on file [%s]", input_file_name)
+        logger.debug(f"working on file [{input_file_name}]")
         with TsvReader(filename=input_file_name) as input_handle:
             for fields in input_handle:
-                match: Tuple[str] = tuple([fields[i] for i in match_columns])
+                match: Tuple[str] = tuple(fields[i] for i in match_columns)
                 if match not in counts:
                     if floating_point:
                         counts[match] = [float(0)] * len(aggregate_columns)
@@ -98,18 +98,18 @@ def group_by(
     limit = 10000
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
-        logger.debug("working on file [%s]", input_file_name)
+        logger.debug(f"working on file [{input_file_name}]")
         with open(input_file_name, 'rt') as file_handle:
             for line in file_handle:
                 line = line.rstrip()
                 parts: List[str] = line.split("\t")
-                match_tup: Tuple[str] = tuple([parts[i] for i in group_by_columns])
+                match_tup: Tuple[str] = tuple(parts[i] for i in group_by_columns)
                 match = "_".join(match_tup)
                 data_to_append = [parts[i] for i in collect_columns]
                 all_data[match].append(data_to_append)
                 if len(all_data[match]) > limit:
                     write_data(all_data[match], output_file_template.format(match=match))
-                    all_data[match] = list()
+                    all_data[match] = []
     # write the rest for the data
     for match, data in all_data.items():
         write_data(data, output_file_template.format(match=match))
@@ -147,10 +147,12 @@ class TsvWriter:
                 self.io: IO[str] = gzip.open(filename, mode=mode)
                 found = True
             if filename.endswith(".tsv"):
+                # pylint: disable=consider-using-with
                 self.io: IO[str] = open(filename, mode=mode)
                 found = True
             if not found:
                 # treat as tsv
+                # pylint: disable=consider-using-with
                 self.io: IO[str] = open(filename, mode=mode)
             # old code, be more strict
             # assert found, "file name unknown"
@@ -158,6 +160,7 @@ class TsvWriter:
             if do_gzip:
                 self.io: IO[str] = gzip.open(filename, mode=mode)
             else:
+                # pylint: disable=consider-using-with
                 self.io: IO[str] = open(filename, mode=mode)
         self.throw_exceptions = throw_exceptions
 
@@ -235,6 +238,7 @@ class TsvReader:
         if use_any_format:
             self.io = pyanyzip.core.openzip(name=filename, mode=mode, newline=newline)
         else:
+            # pylint: disable=consider-using-with
             self.io = open(filename, mode=mode, newline=newline)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
