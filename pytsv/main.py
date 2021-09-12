@@ -24,6 +24,9 @@ from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregate
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
 from pytsv.static import APP_NAME, VERSION_STR
 
+# The next line is because pylint complains about pandas objects
+# pylint: disable=unsubscriptable-object,no-member
+
 GROUP_NAME_DEFAULT = "default"
 GROUP_DESCRIPTION_DEFAULT = "all pytsv commands"
 
