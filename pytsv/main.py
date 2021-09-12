@@ -14,7 +14,7 @@ import pandas
 import pyanyzip.core
 import pylogconf.core
 import tqdm
-from pytconf import register_endpoint, register_function_group, register_main, config_arg_parse_and_launch
+from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
 from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \
     ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, ConfigTsvReader, ConfigColumns, \
@@ -26,16 +26,6 @@ from pytsv.static import APP_NAME, VERSION_STR
 
 # The next line is because pylint complains about pandas objects
 # pylint: disable=unsubscriptable-object,no-member
-
-GROUP_NAME_DEFAULT = "default"
-GROUP_DESCRIPTION_DEFAULT = "all pytsv commands"
-
-
-def register_group_default():
-    register_function_group(
-        function_group_name=GROUP_NAME_DEFAULT,
-        function_group_description=GROUP_DESCRIPTION_DEFAULT,
-    )
 
 
 @register_endpoint(
