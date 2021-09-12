@@ -18,7 +18,6 @@ jobs:
     - name: Install python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip cache purge
         pip install -r requirements.txt
     - name: Build
       run: make

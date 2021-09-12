@@ -1,6 +1,6 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 # production requirements
-pytconf
+pytconf >= 0.0.76
 tqdm
 pyanyzip
 numpy
