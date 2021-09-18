@@ -208,7 +208,7 @@ class TsvWriter:
             if self.num_fields is None:
                 self.num_fields = len(sanitized_list)
             else:
-                assert len(sanitized_list) == self.num_fields, "wrong number of fields in {}".format(sanitized_list)
+                assert len(sanitized_list) == self.num_fields, f"wrong number of fields in {sanitized_list}"
         print("\t".join(self._convert(sanitized_list)), file=self.io)
 
     def close(self) -> None:
@@ -264,17 +264,14 @@ class TsvReader:
                     raise StopIteration
         line = line.rstrip('\r\n')
         if self.check_non_ascii:
-            assert is_ascii(line), "non ascii characters in line [{}]".format(self.line_number)
+            assert is_ascii(line), f"non ascii characters in line [{self.line_number}]"
         fields = line.split('\t')
         if self.validate_all_lines_same_number_of_fields:
             if self.num_fields is None:
                 self.num_fields = len(fields)
             else:
-                assert len(fields) == self.num_fields, "wrong number of fields in line number {} {} {}".format(
-                    self.line_number,
-                    self.num_fields,
-                    len(fields),
-                )
+                assert len(fields) == self.num_fields, f"""wrong number of fields in line\
+                        number {self.line_number} {self.num_fields} {len(fields)}"""
         if self.check_non_ascii:
             assert is_ascii(line)
         return fields

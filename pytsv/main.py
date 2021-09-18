@@ -58,7 +58,7 @@ class ParamsForJob:
 
 
 def check_file(params_for_job: ParamsForJob) -> bool:
-    print('checking [{}]...'.format(params_for_job.input_file))
+    print(f"checking [{params_for_job.input_file}]...")
     with TsvReader(filename=params_for_job.input_file,
                    num_fields=params_for_job.num_fields,
                    validate_all_lines_same_number_of_fields=params_for_job.validate_all_lines_same_number_of_fields,
@@ -133,11 +133,7 @@ def check_columns_unique() -> None:
                     value = fields[column]
                     if value in dicts[i]:
                         line = dicts[i][value]
-                        print("value [{}] is duplicate on lines [{}, {}]".format(
-                            value,
-                            line,
-                            line_number,
-                        ))
+                        print(f"value [{value}] is duplicate on lines [{line}, {line_number}]")
                         errors = True
                     else:
                         dicts[i][value] = line_number
@@ -433,9 +429,9 @@ def join() -> None:
                     output_file_handle.write(fields)
                 else:
                     event_discarded += 1
-    print("event_found {}".format(event_found))
-    print("event_unknown_added {}".format(event_unknown_added))
-    print("event_discarded {}".format(event_discarded))
+    print(f"event_found {event_found}")
+    print(f"event_unknown_added {event_unknown_added}")
+    print(f"event_discarded {event_discarded}")
 
 
 @register_endpoint(
@@ -594,7 +590,7 @@ def tree() -> None:
             special_string = "└──"
         else:
             special_string = "├──"
-        print("{}{}".format(print_list + special_string, name))
+        print(f"{print_list+special_string}{name}")
         first = True
         list_to_append = []
         for p_child in children_dict[name]:
@@ -648,7 +644,7 @@ def sample_by_column() -> None:
         unique_values_count = df[ConfigWeightValue.value_column].nunique()
         if unique_values_count != df.shape[0]:
             logger.error("your data is not unique in the value_column")
-            logger.error("unique values {} != number of rows {}".format(unique_values_count, df.shape[0]))
+            logger.error(f"unique values {unique_values_count} != number of rows {df.shape[0]}")
             return
     logger.info("sampling")
     sample = df.sample(
@@ -742,7 +738,7 @@ def sample_by_two_columns() -> None:
     unique_values_count = df[ConfigWeightValue.value_column].nunique()
     if ConfigCheckUnique.check_unique and unique_values_count != df.shape[0]:
         logger.error("your data is not unique in the value_column")
-        logger.error("unique values {} != number of rows {}".format(unique_values_count, df.shape[0]))
+        logger.error(f"unique values {unique_values_count} != number of rows {df.shape[0]}")
         return
     logger.info("finding clusters")
     clusters = df[ConfigSampleByTwoColumns.group_column].unique()
