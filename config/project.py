@@ -23,7 +23,7 @@ project_keywords = [
     "csv",
 ]
 project_license = "MIT"
-project_year_started = "2016"
+project_year_started = 2016
 project_description = project_short_description
 project_platforms = [
     "python3",
@@ -48,6 +48,8 @@ codacy_id = None
 project_google_analytics_tracking_id = None
 project_paypal_donate_button_id = None
 
-project_copyright_years = config.helpers.get_copyright_years(project_year_started)
 project_google_analytics_snipplet = config.helpers.get_google_analytics(project_google_analytics_tracking_id)
 project_paypal_donate_button_snipplet = config.helpers.get_paypal(project_paypal_donate_button_id)
+
+project_copyright_years = config.helpers.get_copyright_years(project_year_started)
+project_copyright_years_short = config.helpers.get_copyright_years_short(project_year_started)

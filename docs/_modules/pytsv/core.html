@@ -241,7 +241,7 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sanitized_list</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">sanitized_list</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span><span class="p">,</span> <span class="s2">&quot;wrong number of fields in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sanitized_list</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">sanitized_list</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;wrong number of fields in </span><span class="si">{</span><span class="n">sanitized_list</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert</span><span class="p">(</span><span class="n">sanitized_list</span><span class="p">)),</span> <span class="n">file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">io</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TsvWriter.close"><a class="viewcode-back" href="../../pytsv.html#pytsv.core.TsvWriter.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -297,17 +297,14 @@
                     <span class="k">raise</span> <span class="ne">StopIteration</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_non_ascii</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">is_ascii</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="s2">&quot;non ascii characters in line [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">line_number</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">is_ascii</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;non ascii characters in line [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">line_number</span><span class="si">}</span><span class="s2">]&quot;</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_all_lines_same_number_of_fields</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span><span class="p">,</span> <span class="s2">&quot;wrong number of fields in line number </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">line_number</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span><span class="p">,</span>
-                    <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">),</span>
-                <span class="p">)</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;wrong number of fields in line</span><span class="se">\</span>
+<span class="s2">                        number </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">line_number</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_non_ascii</span><span class="p">:</span>
             <span class="k">assert</span> <span class="n">is_ascii</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">fields</span>
@@ -352,7 +349,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -363,10 +360,10 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016-2021, Mark Veltzer.
+      &copy;2016 - 2022, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
