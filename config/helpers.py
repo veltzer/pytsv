@@ -1,12 +1,16 @@
 import datetime
 
 
-def get_copyright_years(project_year_started):
-    # return ", ".join(map(str, range(int(project_year_started), datetime.datetime.now().year + 1)))
-    general_current_year = datetime.datetime.now().year
-    if str(general_current_year) == project_year_started:
-        return general_current_year
-    return f"{project_year_started}-{general_current_year}"
+def get_copyright_years_short(project_year_started: int):
+    project_year_now = datetime.datetime.now().year
+    if project_year_now == project_year_started:
+        return str(project_year_now)
+    return f"{project_year_started} - {project_year_now}"
+
+
+def get_copyright_years(project_year_started: int):
+    project_year_now = datetime.datetime.now().year
+    return ", ".join(map(str, range(project_year_started, project_year_now + 1)))
 
 
 def get_google_analytics(project_google_analytics_tracking_id):
