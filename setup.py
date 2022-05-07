@@ -33,17 +33,6 @@ setuptools.setup(
     platforms=[
         'python3',
     ],
-    install_requires=[
-        'pytconf',
-        'tqdm',
-        'pyanyzip',
-        'numpy',
-        'pandas',
-        'pylogconf',
-        'attrs',
-    ],
-    extras_require={
-    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
