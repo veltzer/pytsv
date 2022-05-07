@@ -6,7 +6,11 @@ package_name = config.project.project_name
 console_scripts = [
     "pytsv=pytsv.main:main",
 ]
-
+dev_requires = [
+    "pyclassifiers",
+    "pypitools",
+    "pydmt",
+]
 install_requires = [
     "pytconf",
     "tqdm",
@@ -16,7 +20,6 @@ install_requires = [
     "pylogconf",
     "attrs",
 ]
-
 test_requires = [
     "pylint",
     "pytest",
@@ -26,12 +29,7 @@ test_requires = [
     "pymakehelper",
 ]
 
-dev_requires = [
-    "pyclassifiers",
-    "pypitools",
-    "pydmt",
-]
+python_requires = ">=3.10"
 
-python_requires = ">=3.9"
-test_os = ["ubuntu-20.04"]
-test_python = ["3.9"]
+test_os = ["ubuntu-22.04"]
+test_python = ["3.10"]
