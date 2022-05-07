@@ -7,7 +7,7 @@ console_scripts = [
     "pytsv=pytsv.main:main",
 ]
 
-run_requires = [
+install_requires = [
     "pytconf",
     "tqdm",
     "pyanyzip",
