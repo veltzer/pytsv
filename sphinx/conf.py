@@ -19,7 +19,7 @@
 #
 import os
 import sys
-import config.project
+import pydmt.helpers.signature
 
 sys.path.insert(0, os.path.abspath('..'))
 
@@ -54,7 +54,8 @@ project = 'pytsv'
 # noinspection PyShadowingBuiltins
 author = 'Mark Veltzer'
 # noinspection PyShadowingBuiltins
-copyright = config.project.project_copyright_years_short+', '+author
+# copyright = pydmt.helpers.signature.get_copyright_years_short()+', '+author
+copyright = "2016 - 2022"+', '+author
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
