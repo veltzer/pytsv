@@ -1,3 +1,6 @@
+""" configuration for this project """
+
+
 import multiprocessing
 
 from pytconf import ParamCreator, Config
@@ -17,6 +20,8 @@ DO_GZIP = False
 FILENAME_DETECT = True
 DEFAULT_ENCODING = 'utf-8'
 ATTACH_ENCODER = False
+
+# pylint: disable=too-few-public-methods
 
 
 class ConfigInputFiles(Config):
@@ -176,7 +181,8 @@ class ConfigCsvToTsv(Config):
     Parameters to control the CSV to TSV conversion process
     """
     set_max = ParamCreator.create_bool(
-        help_string="do you want to unset the limit on csv fields (good for large fielded csv files)",
+        help_string="""do you want to unset the limit on csv fields \
+                (good for large fielded csv files)""",
         default=True,
     )
     replace_tabs_with_spaces = ParamCreator.create_bool(
