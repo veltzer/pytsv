@@ -247,9 +247,6 @@ class TsvReader:
 
         self.line_number = -1
 
-    def next(self):
-        return self.__next__()
-
     def __next__(self) -> List[Text]:
         """ method needed to be an iterator """
         self.line_number += 1

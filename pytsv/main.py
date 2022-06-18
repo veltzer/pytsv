@@ -16,9 +16,10 @@ import pylogconf.core
 import tqdm
 from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
 
-from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, ConfigMatchColumns, \
-    ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, ConfigTsvReader, ConfigColumns, \
-    ConfigInputFile, ConfigFixTypes, ConfigColumn, ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
+from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, \
+    ConfigMatchColumns, ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, \
+    ConfigTsvReader, ConfigColumns, ConfigInputFile, ConfigFixTypes, ConfigColumn, \
+    ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
     ConfigTree, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern, \
     ConfigSampleSize, ConfigReplace, ConfigSampleColumn, ConfigWeightValue, ConfigCheckUnique
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
