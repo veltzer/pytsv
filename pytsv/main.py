@@ -21,7 +21,7 @@ from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregate
     ConfigTsvReader, ConfigColumns, ConfigInputFile, ConfigFixTypes, ConfigColumn, \
     ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
     ConfigTree, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern, \
-    ConfigSampleSize, ConfigReplace, ConfigSampleColumn, ConfigWeightValue, ConfigCheckUnique
+    ConfigSampleSize, ConfigReplace, ConfigWeightValue, ConfigCheckUnique
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
 from pytsv.static import APP_NAME, VERSION_STR
 
@@ -121,7 +121,7 @@ def check() -> None:
     ],
 )
 def check_columns_unique() -> None:
-    dicts = [{} for _ in range(len(ConfigColumns.columns))]
+    dicts: List[Dict[str, int]] = [{} for _ in range(len(ConfigColumns.columns))]
     errors = False
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(
@@ -282,7 +282,7 @@ def majority() -> None:
     with y2 than any other values in column Y then x1, y2 will be in the output
     and no other entry with x1 will appear
     """
-    d: Dict[str, Dict[str, int]] = defaultdict(dict)
+    d: Dict[str, Dict[int, int]] = defaultdict(dict)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
@@ -295,7 +295,8 @@ def majority() -> None:
             d[p_first][p_second] += p_multiplication
     with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
         for p_first, p_dict in d.items():
-            p_second = max(p_dict.keys(), key=lambda x, closure_dict=p_dict: closure_dict[x])
+            # p_second = max(p_dict.keys(), key=lambda x: x, closure_dict=p_dict: closure_dict[x])
+            p_second = max(p_dict.keys())
             p_count = p_dict[p_second]
             output_file_handle.write([
                 p_first,
@@ -680,7 +681,7 @@ def sample_by_column_old() -> None:
             input_handle = tqdm.tqdm(input_handle)
         for fields in input_handle:
             elements.append(fields)
-            weight = float(fields[ConfigSampleColumn.sample_column])
+            weight = float(fields[ConfigSampleByColumnOld.sample_column])
             sum_weights += weight
             weights.append(weight)
     # the following code will only work on python3.6 because the
@@ -703,8 +704,8 @@ def sample_by_column_old() -> None:
             results_dict[current_result] += 1
         with TsvWriter(ConfigOutputFile.output_file) as output_handle:
             for result, hits in results_dict.items():
-                record: List[int] = list(elements[result])
-                record.append(hits)
+                record = list(elements[result])
+                record.append(str(hits))
                 output_handle.write(record)
     else:
         results = numpy.random.choice(
