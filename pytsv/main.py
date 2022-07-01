@@ -282,13 +282,13 @@ def majority() -> None:
     with y2 than any other values in column Y then x1, y2 will be in the output
     and no other entry with x1 will appear
     """
-    d: Dict[Dict[str, int]] = defaultdict(dict)
+    d: Dict[str, Dict[str, int]] = defaultdict(dict)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         for fields in input_file_handle:
             p_first = fields[ConfigMajority.input_first_column]
-            p_second = fields[ConfigMajority.input_second_column]
+            p_second = int(fields[ConfigMajority.input_second_column])
             p_multiplication = int(fields[ConfigMajority.input_multiplication_column])
             if p_second not in d[p_first]:
                 d[p_first][p_second] = 0
@@ -464,7 +464,7 @@ def lc() -> None:
     ],
 )
 def sum_columns() -> None:
-    sums = [0] * len(ConfigColumns.columns)
+    sums: List[float] = [0] * len(ConfigColumns.columns)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
@@ -559,7 +559,7 @@ def tree() -> None:
     """
     You can also see only parts of the tree
     """
-    children_dict: Dict[Set] = defaultdict(set)
+    children_dict: Dict[str, Set] = defaultdict(set)
     parents_dict = defaultdict(set)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         for fields in input_file_handle:
@@ -672,8 +672,8 @@ def sample_by_column() -> None:
     ],
 )
 def sample_by_column_old() -> None:
-    weights = []
-    elements = []
+    weights: List[float] = []
+    elements: List[List[str]] = []
     sum_weights = float(0)
     with TsvReader(ConfigInputFile.input_file) as input_handle:
         if ConfigProgress.progress:
@@ -691,19 +691,19 @@ def sample_by_column_old() -> None:
     # this is the same code with numpy
     weights = [w / sum_weights for w in weights]
     if ConfigSampleByColumnOld.hits_mode:
-        results_dict = defaultdict(int)
+        results_dict: Dict[int, int] = defaultdict(int)
         for _ in range(ConfigSampleSize.size):
-            current_result = numpy.random.choice(
+            current_results = numpy.random.choice(
                 a=len(elements),
                 replace=ConfigReplace.replace,
                 size=1,
                 p=weights,
             )
-            current_result = current_result[0]
+            current_result = current_results[0]
             results_dict[current_result] += 1
         with TsvWriter(ConfigOutputFile.output_file) as output_handle:
             for result, hits in results_dict.items():
-                record = list(elements[result])
+                record: List[int] = list(elements[result])
                 record.append(hits)
                 output_handle.write(record)
     else:
