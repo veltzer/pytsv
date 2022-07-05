@@ -50,11 +50,12 @@
 <span class="kn">import</span> <span class="nn">tqdm</span>
 <span class="kn">from</span> <span class="nn">pytconf</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_main</span><span class="p">,</span> <span class="n">config_arg_parse_and_launch</span>
 
-<span class="kn">from</span> <span class="nn">pytsv.configs</span> <span class="kn">import</span> <span class="n">ConfigInputFiles</span><span class="p">,</span> <span class="n">ConfigFloatingPoint</span><span class="p">,</span> <span class="n">ConfigAggregateColumns</span><span class="p">,</span> <span class="n">ConfigMatchColumns</span><span class="p">,</span> \
-    <span class="n">ConfigOutputFile</span><span class="p">,</span> <span class="n">ConfigProgress</span><span class="p">,</span> <span class="n">ConfigParallel</span><span class="p">,</span> <span class="n">ConfigNumFields</span><span class="p">,</span> <span class="n">ConfigTsvReader</span><span class="p">,</span> <span class="n">ConfigColumns</span><span class="p">,</span> \
-    <span class="n">ConfigInputFile</span><span class="p">,</span> <span class="n">ConfigFixTypes</span><span class="p">,</span> <span class="n">ConfigColumn</span><span class="p">,</span> <span class="n">ConfigBucketNumber</span><span class="p">,</span> <span class="n">ConfigMajority</span><span class="p">,</span> <span class="n">ConfigCsvToTsv</span><span class="p">,</span> <span class="n">ConfigJoin</span><span class="p">,</span> \
+<span class="kn">from</span> <span class="nn">pytsv.configs</span> <span class="kn">import</span> <span class="n">ConfigInputFiles</span><span class="p">,</span> <span class="n">ConfigFloatingPoint</span><span class="p">,</span> <span class="n">ConfigAggregateColumns</span><span class="p">,</span> \
+    <span class="n">ConfigMatchColumns</span><span class="p">,</span> <span class="n">ConfigOutputFile</span><span class="p">,</span> <span class="n">ConfigProgress</span><span class="p">,</span> <span class="n">ConfigParallel</span><span class="p">,</span> <span class="n">ConfigNumFields</span><span class="p">,</span> \
+    <span class="n">ConfigTsvReader</span><span class="p">,</span> <span class="n">ConfigColumns</span><span class="p">,</span> <span class="n">ConfigInputFile</span><span class="p">,</span> <span class="n">ConfigFixTypes</span><span class="p">,</span> <span class="n">ConfigColumn</span><span class="p">,</span> \
+    <span class="n">ConfigBucketNumber</span><span class="p">,</span> <span class="n">ConfigMajority</span><span class="p">,</span> <span class="n">ConfigCsvToTsv</span><span class="p">,</span> <span class="n">ConfigJoin</span><span class="p">,</span> \
     <span class="n">ConfigTree</span><span class="p">,</span> <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span> <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span> <span class="n">ConfigPattern</span><span class="p">,</span> \
-    <span class="n">ConfigSampleSize</span><span class="p">,</span> <span class="n">ConfigReplace</span><span class="p">,</span> <span class="n">ConfigSampleColumn</span><span class="p">,</span> <span class="n">ConfigWeightValue</span><span class="p">,</span> <span class="n">ConfigCheckUnique</span>
+    <span class="n">ConfigSampleSize</span><span class="p">,</span> <span class="n">ConfigReplace</span><span class="p">,</span> <span class="n">ConfigWeightValue</span><span class="p">,</span> <span class="n">ConfigCheckUnique</span>
 <span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="kn">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">do_aggregate</span>
 <span class="kn">from</span> <span class="nn">pytsv.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span>
 
@@ -154,7 +155,7 @@
     <span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">check_columns_unique</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">dicts</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
+    <span class="n">dicts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span>
@@ -315,20 +316,21 @@
 <span class="sd">    with y2 than any other values in column Y then x1, y2 will be in the output</span>
 <span class="sd">    and no other entry with x1 will appear</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
             <span class="n">p_first</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="n">ConfigMajority</span><span class="o">.</span><span class="n">input_first_column</span><span class="p">]</span>
-            <span class="n">p_second</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="n">ConfigMajority</span><span class="o">.</span><span class="n">input_second_column</span><span class="p">]</span>
+            <span class="n">p_second</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">ConfigMajority</span><span class="o">.</span><span class="n">input_second_column</span><span class="p">])</span>
             <span class="n">p_multiplication</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">ConfigMajority</span><span class="o">.</span><span class="n">input_multiplication_column</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">p_second</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="n">p_first</span><span class="p">]:</span>
                 <span class="n">d</span><span class="p">[</span><span class="n">p_first</span><span class="p">][</span><span class="n">p_second</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">d</span><span class="p">[</span><span class="n">p_first</span><span class="p">][</span><span class="n">p_second</span><span class="p">]</span> <span class="o">+=</span> <span class="n">p_multiplication</span>
     <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">p_first</span><span class="p">,</span> <span class="n">p_dict</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">p_second</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">p_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">closure_dict</span><span class="o">=</span><span class="n">p_dict</span><span class="p">:</span> <span class="n">closure_dict</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+            <span class="c1"># p_second = max(p_dict.keys(), key=lambda x: x, closure_dict=p_dict: closure_dict[x])</span>
+            <span class="n">p_second</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">p_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
             <span class="n">p_count</span> <span class="o">=</span> <span class="n">p_dict</span><span class="p">[</span><span class="n">p_second</span><span class="p">]</span>
             <span class="n">output_file_handle</span><span class="o">.</span><span class="n">write</span><span class="p">([</span>
                 <span class="n">p_first</span><span class="p">,</span>
@@ -497,7 +499,7 @@
     <span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">sum_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">sums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
@@ -592,7 +594,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    You can also see only parts of the tree</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">children_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Set</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+    <span class="n">children_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Set</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
     <span class="n">parents_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_file_handle</span><span class="p">:</span>
@@ -705,15 +707,15 @@
     <span class="p">],</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">sample_by_column_old</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">weights</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">elements</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">sum_weights</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_handle</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">input_handle</span><span class="p">:</span>
             <span class="n">elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
-            <span class="n">weight</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">ConfigSampleColumn</span><span class="o">.</span><span class="n">sample_column</span><span class="p">])</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">ConfigSampleByColumnOld</span><span class="o">.</span><span class="n">sample_column</span><span class="p">])</span>
             <span class="n">sum_weights</span> <span class="o">+=</span> <span class="n">weight</span>
             <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
     <span class="c1"># the following code will only work on python3.6 because the</span>
@@ -724,20 +726,20 @@
     <span class="c1"># this is the same code with numpy</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="o">/</span> <span class="n">sum_weights</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">ConfigSampleByColumnOld</span><span class="o">.</span><span class="n">hits_mode</span><span class="p">:</span>
-        <span class="n">results_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">results_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ConfigSampleSize</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-            <span class="n">current_result</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+            <span class="n">current_results</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
                 <span class="n">a</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span>
                 <span class="n">replace</span><span class="o">=</span><span class="n">ConfigReplace</span><span class="o">.</span><span class="n">replace</span><span class="p">,</span>
                 <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                 <span class="n">p</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">current_result</span> <span class="o">=</span> <span class="n">current_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">current_result</span> <span class="o">=</span> <span class="n">current_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">results_dict</span><span class="p">[</span><span class="n">current_result</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_handle</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">result</span><span class="p">,</span> <span class="n">hits</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">record</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="n">result</span><span class="p">])</span>
-                <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span>
+                <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">hits</span><span class="p">))</span>
                 <span class="n">output_handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">results</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
