@@ -2,8 +2,11 @@ console_scripts = [
     "pytsv=pytsv.main:main",
 ]
 dev_requires = [
-    "pyclassifiers",
     "pypitools",
+]
+make_requires = [
+    "pyclassifiers",
+    "pymakehelper",
     "pydmt",
 ]
 install_requires = [
@@ -21,6 +24,5 @@ test_requires = [
     "pytest-cov",
     "pyflakes",
     "flake8",
-    "pymakehelper",
     "mypy",
 ]
