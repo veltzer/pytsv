@@ -4,17 +4,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pytsv package &#8212; pytsv 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="pytsv" href="modules.html" />
@@ -35,18 +32,18 @@
 
           <div class="body" role="main">
             
-  <section id="pytsv-package">
-<h1>pytsv package<a class="headerlink" href="#pytsv-package" title="Permalink to this heading">¶</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
-</section>
-<section id="module-pytsv.configs">
-<span id="pytsv-configs-module"></span><h2>pytsv.configs module<a class="headerlink" href="#module-pytsv.configs" title="Permalink to this heading">¶</a></h2>
+  <div class="section" id="pytsv-package">
+<h1>pytsv package<a class="headerlink" href="#pytsv-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pytsv.configs">
+<span id="pytsv-configs-module"></span><h2>pytsv.configs module<a class="headerlink" href="#module-pytsv.configs" title="Permalink to this headline">¶</a></h2>
 <p>configuration for this project</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigAggregateColumns">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigAggregateColumns</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigAggregateColumns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigAggregateColumns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to select which columns to aggregate</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigAggregateColumns.aggregate_columns">
@@ -58,7 +55,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigBucketNumber">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigBucketNumber</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigBucketNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigBucketNumber" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure the bucket number for a histogram</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigBucketNumber.bucket_number">
@@ -70,7 +67,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigCheckUnique">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigCheckUnique</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigCheckUnique"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigCheckUnique" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Configure whether or not to check a column for uniqueness</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigCheckUnique.check_unique">
@@ -82,7 +79,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigColumn">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigColumn</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigColumn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigColumn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to select which column to work on</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigColumn.column">
@@ -94,7 +91,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigColumns">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigColumns</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigColumns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigColumns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to select which columns to use</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigColumns.columns">
@@ -106,7 +103,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigCsvToTsv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigCsvToTsv</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigCsvToTsv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigCsvToTsv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to control the CSV to TSV conversion process</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigCsvToTsv.check_num_fields">
@@ -128,7 +125,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigFixTypes">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigFixTypes</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigFixTypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigFixTypes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to control which fixes to apply to a TSV file.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigFixTypes.clean_edges">
@@ -155,7 +152,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigFloatingPoint">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigFloatingPoint</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigFloatingPoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigFloatingPoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to select whether to work with floating
 point or not</p>
 <dl class="py attribute">
@@ -168,7 +165,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigInputFile">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigInputFile</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigInputFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigInputFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to specify input file</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigInputFile.input_file">
@@ -180,7 +177,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigInputFiles">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigInputFiles</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigInputFiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigInputFiles" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to specify input files</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigInputFiles.input_files">
@@ -192,7 +189,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigJoin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigJoin</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigJoin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigJoin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure a TSV join operation</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigJoin.hash_file">
@@ -229,7 +226,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigMajority">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigMajority</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigMajority"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigMajority" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Config the parameters for the majority algorithm</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigMajority.input_first_column">
@@ -251,7 +248,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigMatchColumns">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigMatchColumns</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigMatchColumns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigMatchColumns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to select which columns to match by</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigMatchColumns.match_columns">
@@ -263,7 +260,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigNumFields">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigNumFields</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigNumFields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigNumFields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameter to config number of fields in a TSV file</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigNumFields.num_fields">
@@ -275,7 +272,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigOutputFile">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigOutputFile</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigOutputFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigOutputFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure the output file</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigOutputFile.output_file">
@@ -287,7 +284,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigParallel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigParallel</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigParallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigParallel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure how thing should run in parallel</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigParallel.jobs">
@@ -304,7 +301,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigPattern">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigPattern</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigPattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigPattern" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure patterns of files generated</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigPattern.final_pattern">
@@ -321,7 +318,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigProgress">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigProgress</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigProgress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigProgress" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to control progress reporting</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigProgress.progress">
@@ -333,7 +330,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigReplace">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigReplace</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigReplace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigReplace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Configure whether you want replacements or not</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigReplace.replace">
@@ -345,7 +342,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleByColumnOld">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigSampleByColumnOld</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigSampleByColumnOld"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigSampleByColumnOld" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure the old sample by column algorithm</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleByColumnOld.hits_mode">
@@ -357,7 +354,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleByTwoColumns">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigSampleByTwoColumns</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigSampleByTwoColumns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigSampleByTwoColumns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters for the sample by column command</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleByTwoColumns.group_column">
@@ -369,7 +366,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleColumn">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigSampleColumn</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigSampleColumn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigSampleColumn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Configuration options for sampling</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleColumn.sample_column">
@@ -381,7 +378,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleSize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigSampleSize</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigSampleSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigSampleSize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Configure sample size</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigSampleSize.size">
@@ -393,7 +390,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigTree">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigTree</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigTree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure the parameters of a tree to show</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigTree.child_column">
@@ -415,7 +412,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigTsvReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigTsvReader</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigTsvReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigTsvReader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Parameters to configure a TSV reader object</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigTsvReader.check_non_ascii">
@@ -432,7 +429,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigWeightValue">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.configs.</span></span><span class="sig-name descname"><span class="pre">ConfigWeightValue</span></span><a class="reference internal" href="_modules/pytsv/configs.html#ConfigWeightValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.configs.ConfigWeightValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pytconf.config.Config</span></code></p>
 <p>Config weight and Value</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.configs.ConfigWeightValue.value_column">
@@ -446,9 +443,9 @@ point or not</p>
 
 </dd></dl>
 
-</section>
-<section id="module-pytsv.core">
-<span id="pytsv-core-module"></span><h2>pytsv.core module<a class="headerlink" href="#module-pytsv.core" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="module-pytsv.core">
+<span id="pytsv-core-module"></span><h2>pytsv.core module<a class="headerlink" href="#module-pytsv.core" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.core.TsvReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.core.</span></span><span class="sig-name descname"><span class="pre">TsvReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_any_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_all_lines_same_number_of_fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_comments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_non_ascii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'\n'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/core.html#TsvReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.core.TsvReader" title="Permalink to this definition">¶</a></dt>
@@ -513,9 +510,9 @@ point or not</p>
 <span class="sig-prename descclassname"><span class="pre">pytsv.core.</span></span><span class="sig-name descname"><span class="pre">write_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pytsv/core.html#write_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.core.write_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pytsv.main">
-<span id="pytsv-main-module"></span><h2>pytsv.main module<a class="headerlink" href="#module-pytsv.main" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="module-pytsv.main">
+<span id="pytsv-main-module"></span><h2>pytsv.main module<a class="headerlink" href="#module-pytsv.main" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.main.JobInfo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.main.</span></span><span class="sig-name descname"><span class="pre">JobInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_not_ascii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serial</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/main.html#JobInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.main.JobInfo" title="Permalink to this definition">¶</a></dt>
@@ -571,7 +568,7 @@ point or not</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pytsv.main.MyEventTypes">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytsv.main.</span></span><span class="sig-name descname"><span class="pre">MyEventTypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pytsv/main.html#MyEventTypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.main.MyEventTypes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pytsv.main.MyEventTypes.key_found">
@@ -615,7 +612,7 @@ point or not</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pytsv.main.check_file">
-<span class="sig-prename descclassname"><span class="pre">pytsv.main.</span></span><span class="sig-name descname"><span class="pre">check_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_for_job</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pytsv.main.ParamsForJob" title="pytsv.main.ParamsForJob"><span class="pre">ParamsForJob</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pytsv/main.html#check_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.main.check_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pytsv.main.</span></span><span class="sig-name descname"><span class="pre">check_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_for_job</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pytsv.main.ParamsForJob" title="pytsv.main.ParamsForJob"><span class="pre">pytsv.main.ParamsForJob</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pytsv/main.html#check_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.main.check_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -678,7 +675,7 @@ and no other entry with x1 will appear</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pytsv.main.process_single_file">
-<span class="sig-prename descclassname"><span class="pre">pytsv.main.</span></span><span class="sig-name descname"><span class="pre">process_single_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pytsv.main.JobInfo" title="pytsv.main.JobInfo"><span class="pre">JobInfo</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pytsv.main.JobReturnValue" title="pytsv.main.JobReturnValue"><span class="pre">JobReturnValue</span></a></span></span><a class="reference internal" href="_modules/pytsv/main.html#process_single_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.main.process_single_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pytsv.main.</span></span><span class="sig-name descname"><span class="pre">process_single_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pytsv.main.JobInfo" title="pytsv.main.JobInfo"><span class="pre">pytsv.main.JobInfo</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pytsv.main.JobReturnValue" title="pytsv.main.JobReturnValue"><span class="pre">pytsv.main.JobReturnValue</span></a></span></span><a class="reference internal" href="_modules/pytsv/main.html#process_single_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.main.process_single_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -735,15 +732,15 @@ be convertible to a floating point number.</p>
 <span class="sig-prename descclassname"><span class="pre">pytsv.main.</span></span><span class="sig-name descname"><span class="pre">tsv_to_csv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pytsv/main.html#tsv_to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pytsv.main.tsv_to_csv" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
-<section id="module-pytsv.static">
-<span id="pytsv-static-module"></span><h2>pytsv.static module<a class="headerlink" href="#module-pytsv.static" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="module-pytsv.static">
+<span id="pytsv-static-module"></span><h2>pytsv.static module<a class="headerlink" href="#module-pytsv.static" title="Permalink to this headline">¶</a></h2>
 <p>version which can be consumed from within the module</p>
-</section>
-<section id="module-pytsv">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pytsv" title="Permalink to this heading">¶</a></h2>
-</section>
-</section>
+</div>
+<div class="section" id="module-pytsv">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pytsv" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
 
 
           </div>
@@ -769,7 +766,7 @@ be convertible to a floating point number.</p>
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -778,7 +775,7 @@ be convertible to a floating point number.</p>
       &copy;2016 - 2022, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.2.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
