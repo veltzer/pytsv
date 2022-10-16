@@ -7,12 +7,3 @@ numpy
 pandas
 pylogconf
 attrs
-# dev requirements
-pypitools
-# test requirements
-pylint
-pytest
-pytest-cov
-pyflakes
-flake8
-mypy
