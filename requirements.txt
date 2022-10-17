@@ -1,9 +1,0 @@
-# THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
-# production requirements
-pytconf
-tqdm
-pyanyzip
-numpy
-pandas
-pylogconf
-attrs
