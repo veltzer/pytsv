@@ -134,7 +134,7 @@ class TsvWriter:
         lower_case: bool = LOWER_CASE,
 
         check_num_fields: bool = CHECK_NUM_FIELDS,
-        num_fields: int = None,
+        num_fields: Optional[int] = None,
         convert_to_string: bool = CONVERT_TO_STRING,
 
         do_gzip: bool = DO_GZIP,
