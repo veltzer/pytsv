@@ -13,6 +13,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -59,7 +60,7 @@
 
 
 <div class="viewcode-block" id="ConfigInputFiles"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigInputFiles">[docs]</a><span class="k">class</span> <span class="nc">ConfigInputFiles</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to specify input files</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">input_files</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_str</span><span class="p">(</span>
@@ -68,7 +69,7 @@
 
 
 <div class="viewcode-block" id="ConfigNumFields"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigNumFields">[docs]</a><span class="k">class</span> <span class="nc">ConfigNumFields</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameter to config number of fields in a TSV file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">num_fields</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int_or_none</span><span class="p">(</span>
@@ -78,7 +79,7 @@
 
 
 <div class="viewcode-block" id="ConfigTsvReader"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigTsvReader">[docs]</a><span class="k">class</span> <span class="nc">ConfigTsvReader</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure a TSV reader object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">check_non_ascii</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -92,7 +93,7 @@
 
 
 <div class="viewcode-block" id="ConfigParallel"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigParallel">[docs]</a><span class="k">class</span> <span class="nc">ConfigParallel</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure how thing should run in parallel</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parallel</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -106,7 +107,7 @@
 
 
 <div class="viewcode-block" id="ConfigInputFile"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigInputFile">[docs]</a><span class="k">class</span> <span class="nc">ConfigInputFile</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to specify input file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">input_file</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_existing_file</span><span class="p">(</span>
@@ -115,7 +116,7 @@
 
 
 <div class="viewcode-block" id="ConfigFloatingPoint"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigFloatingPoint">[docs]</a><span class="k">class</span> <span class="nc">ConfigFloatingPoint</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to select whether to work with floating</span>
 <span class="sd">    point or not</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -126,7 +127,7 @@
 
 
 <div class="viewcode-block" id="ConfigMajority"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigMajority">[docs]</a><span class="k">class</span> <span class="nc">ConfigMajority</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Config the parameters for the majority algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">input_first_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
@@ -141,7 +142,7 @@
 
 
 <div class="viewcode-block" id="ConfigProgress"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigProgress">[docs]</a><span class="k">class</span> <span class="nc">ConfigProgress</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to control progress reporting</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">progress</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -151,7 +152,7 @@
 
 
 <div class="viewcode-block" id="ConfigColumn"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigColumn">[docs]</a><span class="k">class</span> <span class="nc">ConfigColumn</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to select which column to work on</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
@@ -160,7 +161,7 @@
 
 
 <div class="viewcode-block" id="ConfigColumns"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigColumns">[docs]</a><span class="k">class</span> <span class="nc">ConfigColumns</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to select which columns to use</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">columns</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_int</span><span class="p">(</span>
@@ -169,7 +170,7 @@
 
 
 <div class="viewcode-block" id="ConfigAggregateColumns"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigAggregateColumns">[docs]</a><span class="k">class</span> <span class="nc">ConfigAggregateColumns</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to select which columns to aggregate</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">aggregate_columns</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_int</span><span class="p">(</span>
@@ -178,7 +179,7 @@
 
 
 <div class="viewcode-block" id="ConfigMatchColumns"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigMatchColumns">[docs]</a><span class="k">class</span> <span class="nc">ConfigMatchColumns</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to select which columns to match by</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">match_columns</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_int</span><span class="p">(</span>
@@ -187,7 +188,7 @@
 
 
 <div class="viewcode-block" id="ConfigOutputFile"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigOutputFile">[docs]</a><span class="k">class</span> <span class="nc">ConfigOutputFile</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure the output file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">output_file</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_new_file</span><span class="p">(</span>
@@ -196,7 +197,7 @@
 
 
 <div class="viewcode-block" id="ConfigTree"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigTree">[docs]</a><span class="k">class</span> <span class="nc">ConfigTree</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure the parameters of a tree to show</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">roots</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_list_str</span><span class="p">(</span>
@@ -211,7 +212,7 @@
 
 
 <div class="viewcode-block" id="ConfigCsvToTsv"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigCsvToTsv">[docs]</a><span class="k">class</span> <span class="nc">ConfigCsvToTsv</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to control the CSV to TSV conversion process</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">set_max</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -230,7 +231,7 @@
 
 
 <div class="viewcode-block" id="ConfigBucketNumber"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigBucketNumber">[docs]</a><span class="k">class</span> <span class="nc">ConfigBucketNumber</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure the bucket number for a histogram</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bucket_number</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
@@ -240,7 +241,7 @@
 
 
 <div class="viewcode-block" id="ConfigFixTypes"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigFixTypes">[docs]</a><span class="k">class</span> <span class="nc">ConfigFixTypes</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to control which fixes to apply to a TSV file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">clean_edges</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -262,7 +263,7 @@
 
 
 <div class="viewcode-block" id="ConfigCheckUnique"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigCheckUnique">[docs]</a><span class="k">class</span> <span class="nc">ConfigCheckUnique</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configure whether or not to check a column for uniqueness</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">check_unique</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -272,7 +273,7 @@
 
 
 <div class="viewcode-block" id="ConfigSampleSize"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigSampleSize">[docs]</a><span class="k">class</span> <span class="nc">ConfigSampleSize</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configure sample size</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
@@ -281,7 +282,7 @@
 
 
 <div class="viewcode-block" id="ConfigSampleColumn"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigSampleColumn">[docs]</a><span class="k">class</span> <span class="nc">ConfigSampleColumn</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configuration options for sampling</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sample_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
@@ -290,7 +291,7 @@
 
 
 <div class="viewcode-block" id="ConfigReplace"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigReplace">[docs]</a><span class="k">class</span> <span class="nc">ConfigReplace</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configure whether you want replacements or not</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">replace</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -299,7 +300,7 @@
 
 
 <div class="viewcode-block" id="ConfigSampleByColumnOld"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigSampleByColumnOld">[docs]</a><span class="k">class</span> <span class="nc">ConfigSampleByColumnOld</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure the old sample by column algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">hits_mode</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_bool</span><span class="p">(</span>
@@ -308,7 +309,7 @@
 
 
 <div class="viewcode-block" id="ConfigJoin"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigJoin">[docs]</a><span class="k">class</span> <span class="nc">ConfigJoin</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure a TSV join operation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">hash_file</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_existing_file</span><span class="p">(</span>
@@ -332,7 +333,7 @@
 
 
 <div class="viewcode-block" id="ConfigPattern"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigPattern">[docs]</a><span class="k">class</span> <span class="nc">ConfigPattern</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters to configure patterns of files generated</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_str</span><span class="p">(</span>
@@ -346,7 +347,7 @@
 
 
 <div class="viewcode-block" id="ConfigSampleByTwoColumns"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigSampleByTwoColumns">[docs]</a><span class="k">class</span> <span class="nc">ConfigSampleByTwoColumns</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters for the sample by column command</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">group_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
@@ -355,7 +356,7 @@
 
 
 <div class="viewcode-block" id="ConfigWeightValue"><a class="viewcode-back" href="../../pytsv.html#pytsv.configs.ConfigWeightValue">[docs]</a><span class="k">class</span> <span class="nc">ConfigWeightValue</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Config weight and Value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">weight_column</span> <span class="o">=</span> <span class="n">ParamCreator</span><span class="o">.</span><span class="n">create_int</span><span class="p">(</span>
@@ -398,7 +399,7 @@
       &copy;2016 - 2022, Mark Veltzer.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
