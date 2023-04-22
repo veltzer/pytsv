@@ -3,7 +3,7 @@ import itertools
 import logging
 import re
 from collections import defaultdict
-from typing import Iterable, List, Dict, TextIO, Text, Union, Sequence, Optional, Any, IO, Generator
+from typing import Iterable, List, Dict, Union, Sequence, Optional, Any, IO, Generator, TextIO
 
 import pyanyzip.core
 
@@ -253,7 +253,7 @@ class TsvReader:
 
         self.line_number = -1
 
-    def __next__(self) -> List[Text]:
+    def __next__(self) -> List[str]:
         """ method needed to be an iterator """
         self.line_number += 1
         line = self.io.readline()
