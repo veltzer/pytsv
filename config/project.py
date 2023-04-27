@@ -1,6 +1,6 @@
 """ project configuration """
 
-description_short = "pytsv is a module to help with all things TSV"
+description_short = "Pytsv is a the Swiss army knife for TSV files"
 keywords = [
     "python",
     "tsv",

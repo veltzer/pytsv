@@ -23,7 +23,7 @@ from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregate
     ConfigTree, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern, \
     ConfigSampleSize, ConfigReplace, ConfigWeightValue, ConfigCheckUnique
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
-from pytsv.static import APP_NAME, VERSION_STR
+from pytsv.static import APP_NAME, VERSION_STR, DESCRIPTION
 
 # The next line is because pylint complains about pandas objects
 # pylint: disable=unsubscriptable-object,no-member
@@ -799,7 +799,7 @@ def split_by_columns() -> None:
 
 
 @register_main(
-    main_description="Pytsv is the Swiss Army Knife for TSV",
+    main_description=DESCRIPTION,
     app_name=APP_NAME,
     version=VERSION_STR,
 )
