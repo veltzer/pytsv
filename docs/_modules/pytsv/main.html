@@ -55,7 +55,7 @@
     <span class="n">ConfigTree</span><span class="p">,</span> <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span> <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span> <span class="n">ConfigPattern</span><span class="p">,</span> \
     <span class="n">ConfigSampleSize</span><span class="p">,</span> <span class="n">ConfigReplace</span><span class="p">,</span> <span class="n">ConfigWeightValue</span><span class="p">,</span> <span class="n">ConfigCheckUnique</span>
 <span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="kn">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">do_aggregate</span>
-<span class="kn">from</span> <span class="nn">pytsv.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span>
+<span class="kn">from</span> <span class="nn">pytsv.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span><span class="p">,</span> <span class="n">DESCRIPTION</span>
 
 <span class="c1"># The next line is because pylint complains about pandas objects</span>
 <span class="c1"># pylint: disable=unsubscriptable-object,no-member</span>
@@ -831,7 +831,7 @@
 
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../pytsv.html#pytsv.main.main">[docs]</a><span class="nd">@register_main</span><span class="p">(</span>
-    <span class="n">main_description</span><span class="o">=</span><span class="s2">&quot;Pytsv is the Swiss Army Knife for TSV&quot;</span><span class="p">,</span>
+    <span class="n">main_description</span><span class="o">=</span><span class="n">DESCRIPTION</span><span class="p">,</span>
     <span class="n">app_name</span><span class="o">=</span><span class="n">APP_NAME</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="n">VERSION_STR</span><span class="p">,</span>
 <span class="p">)</span>

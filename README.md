@@ -1,12 +1,12 @@
 # *pytsv* project by Mark Veltzer
 
-description: pytsv is a module to help with all things TSV
+description: Pytsv is a the Swiss army knife for TSV files
 
 project website: https://veltzer.github.io/pytsv
 
 author: Mark Veltzer
 
-version: 0.1.67
+version: 0.1.68
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
