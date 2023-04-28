@@ -1,14 +1,13 @@
-Welcome to pytsv's documentation!
-=====================================
+Welcome to |project|'s documentation!
+=====================================================
+
+:Version: |version|
 
 .. toctree::
    :maxdepth: 2
-
-       pytsv <pytsv.rst>
+   :caption: Contents:
 
    modules
-
-
 
 Indices and tables
 ==================
