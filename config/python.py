@@ -8,6 +8,8 @@ make_requires = [
     "pyclassifiers",
     "pymakehelper",
     "pydmt",
+    "pandas-stubs",
+    "types-tqdm",
 ]
 install_requires = [
     "pytconf",
