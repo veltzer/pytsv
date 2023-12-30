@@ -4,7 +4,7 @@ from typing import List
 console_scripts: List[str] = [
     "pytsv=pytsv.main:main",
 ]
-console_requires: List[str] = [
+config_requires: List[str] = []
 dev_requires: List[str] = [
     "pypitools",
 ]
