@@ -1,17 +1,14 @@
-console_scripts = [
+from typing import List
+
+
+console_scripts: List[str] = [
     "pytsv=pytsv.main:main",
 ]
-dev_requires = [
+console_requires: List[str] = [
+dev_requires: List[str] = [
     "pypitools",
 ]
-make_requires = [
-    "pyclassifiers",
-    "pymakehelper",
-    "pydmt",
-    "pandas-stubs",
-    "types-tqdm",
-]
-install_requires = [
+install_requires: List[str] = [
     "pytconf",
     "tqdm",
     "pyanyzip",
@@ -20,7 +17,14 @@ install_requires = [
     "pylogconf",
     "attrs",
 ]
-test_requires = [
+make_requires: List[str] = [
+    "pyclassifiers",
+    "pymakehelper",
+    "pydmt",
+    "pandas-stubs",
+    "types-tqdm",
+]
+test_requires: List[str] = [
     "pylint",
     "pytest",
     "pytest-cov",
@@ -28,3 +32,4 @@ test_requires = [
     "flake8",
     "mypy",
 ]
+requires = config_requires + install_requires + make_requires + test_requires
