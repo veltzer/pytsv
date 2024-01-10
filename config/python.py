@@ -4,9 +4,11 @@ from typing import List
 console_scripts: List[str] = [
     "pytsv=pytsv.main:main",
 ]
-config_requires: List[str] = []
 dev_requires: List[str] = [
     "pypitools",
+]
+config_requires: List[str] = [
+    "pyclassifiers",
 ]
 install_requires: List[str] = [
     "pytconf",
@@ -18,7 +20,6 @@ install_requires: List[str] = [
     "attrs",
 ]
 make_requires: List[str] = [
-    "pyclassifiers",
     "pymakehelper",
     "pydmt",
     "pandas-stubs",
