@@ -19,7 +19,7 @@ install_requires: List[str] = [
     "pylogconf",
     "attrs",
 ]
-make_requires: List[str] = [
+build_requires: List[str] = [
     "pymakehelper",
     "pydmt",
     "pandas-stubs",
@@ -33,4 +33,4 @@ test_requires: List[str] = [
     "flake8",
     "mypy",
 ]
-requires = config_requires + install_requires + make_requires + test_requires
+requires = config_requires + install_requires + build_requires + test_requires
