@@ -203,8 +203,7 @@ class TsvWriter:
                 else:
                     yield t
         else:
-            for x in seq:
-                yield x
+            yield from seq
 
     def write(self, input_list: Sequence[str]) -> None:
         sanitized_list = self._sanitize(input_list)
