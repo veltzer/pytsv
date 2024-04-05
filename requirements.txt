@@ -1,0 +1,19 @@
+# THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
+pyclassifiers
+pytconf
+tqdm
+pyanyzip
+numpy
+pandas
+pylogconf
+attrs
+pymakehelper
+pydmt
+pandas-stubs
+types-tqdm
+pylint
+pytest
+pytest-cov
+pyflakes
+flake8
+mypy
