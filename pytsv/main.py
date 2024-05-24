@@ -592,7 +592,7 @@ def tree() -> None:
             special_string = "└──"
         else:
             special_string = "├──"
-        print(f"{print_list+special_string}{name}")
+        print(f"{print_list + special_string}{name}")
         first = True
         list_to_append = []
         for p_child in children_dict[name]:
