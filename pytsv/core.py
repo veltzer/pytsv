@@ -120,6 +120,7 @@ def is_ascii(s: str) -> bool:
 
 
 class TsvWriter:
+    # pylint: disable=too-many-positional-arguments
     def __init__(
         self,
         filename: str,
@@ -229,6 +230,7 @@ class TsvWriter:
 
 
 class TsvReader:
+    # pylint: disable=too-many-positional-arguments
     def __init__(
         self,
         filename: str,
