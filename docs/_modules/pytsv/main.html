@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pytsv.main &#8212; pytsv Documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=686e5160" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
     <script src="../../_static/documentation_options.js?v=3b2b39e9"></script>
@@ -31,32 +31,32 @@
           <div class="body" role="main">
             
   <h1>Source code for pytsv.main</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">concurrent.futures</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">concurrent.futures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span>
 
-<span class="kn">import</span> <span class="nn">attr</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">numpy.random</span>
-<span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">import</span> <span class="nn">pyanyzip.core</span>
-<span class="kn">import</span> <span class="nn">pylogconf.core</span>
-<span class="kn">import</span> <span class="nn">tqdm</span>
-<span class="kn">from</span> <span class="nn">pytconf</span> <span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_main</span><span class="p">,</span> <span class="n">config_arg_parse_and_launch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">attr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyanyzip.core</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pylogconf.core</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">register_endpoint</span><span class="p">,</span> <span class="n">register_main</span><span class="p">,</span> <span class="n">config_arg_parse_and_launch</span>
 
-<span class="kn">from</span> <span class="nn">pytsv.configs</span> <span class="kn">import</span> <span class="n">ConfigInputFiles</span><span class="p">,</span> <span class="n">ConfigFloatingPoint</span><span class="p">,</span> <span class="n">ConfigAggregateColumns</span><span class="p">,</span> \
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytsv.configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigInputFiles</span><span class="p">,</span> <span class="n">ConfigFloatingPoint</span><span class="p">,</span> <span class="n">ConfigAggregateColumns</span><span class="p">,</span> \
     <span class="n">ConfigMatchColumns</span><span class="p">,</span> <span class="n">ConfigOutputFile</span><span class="p">,</span> <span class="n">ConfigProgress</span><span class="p">,</span> <span class="n">ConfigParallel</span><span class="p">,</span> <span class="n">ConfigNumFields</span><span class="p">,</span> \
     <span class="n">ConfigTsvReader</span><span class="p">,</span> <span class="n">ConfigColumns</span><span class="p">,</span> <span class="n">ConfigInputFile</span><span class="p">,</span> <span class="n">ConfigFixTypes</span><span class="p">,</span> <span class="n">ConfigColumn</span><span class="p">,</span> \
     <span class="n">ConfigBucketNumber</span><span class="p">,</span> <span class="n">ConfigMajority</span><span class="p">,</span> <span class="n">ConfigCsvToTsv</span><span class="p">,</span> <span class="n">ConfigJoin</span><span class="p">,</span> \
     <span class="n">ConfigTree</span><span class="p">,</span> <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span> <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span> <span class="n">ConfigPattern</span><span class="p">,</span> \
     <span class="n">ConfigSampleSize</span><span class="p">,</span> <span class="n">ConfigReplace</span><span class="p">,</span> <span class="n">ConfigWeightValue</span><span class="p">,</span> <span class="n">ConfigCheckUnique</span>
-<span class="kn">from</span> <span class="nn">pytsv.core</span> <span class="kn">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">do_aggregate</span>
-<span class="kn">from</span> <span class="nn">pytsv.static</span> <span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span><span class="p">,</span> <span class="n">DESCRIPTION</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytsv.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">TsvReader</span><span class="p">,</span> <span class="n">TsvWriter</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">do_aggregate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytsv.static</span><span class="w"> </span><span class="kn">import</span> <span class="n">APP_NAME</span><span class="p">,</span> <span class="n">VERSION_STR</span><span class="p">,</span> <span class="n">DESCRIPTION</span>
 
 <span class="c1"># The next line is because pylint complains about pandas objects</span>
 <span class="c1"># pylint: disable=unsubscriptable-object,no-member</span>
@@ -74,7 +74,7 @@
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">aggregate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">aggregate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">do_aggregate</span><span class="p">(</span>
         <span class="n">input_file_names</span><span class="o">=</span><span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">,</span>
         <span class="n">match_columns</span><span class="o">=</span><span class="n">ConfigMatchColumns</span><span class="o">.</span><span class="n">match_columns</span><span class="p">,</span>
@@ -87,8 +87,8 @@
 
 <div class="viewcode-block" id="ParamsForJob">
 <a class="viewcode-back" href="../../pytsv.html#pytsv.main.ParamsForJob">[docs]</a>
-<span class="k">class</span> <span class="nc">ParamsForJob</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParamsForJob</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input_file</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_fields</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validate_all_lines_same_number_of_fields</span> <span class="o">=</span> <span class="kc">None</span>
@@ -99,7 +99,7 @@
 
 <div class="viewcode-block" id="check_file">
 <a class="viewcode-back" href="../../pytsv.html#pytsv.main.check_file">[docs]</a>
-<span class="k">def</span> <span class="nf">check_file</span><span class="p">(</span><span class="n">params_for_job</span><span class="p">:</span> <span class="n">ParamsForJob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_file</span><span class="p">(</span><span class="n">params_for_job</span><span class="p">:</span> <span class="n">ParamsForJob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;checking [</span><span class="si">{</span><span class="n">params_for_job</span><span class="o">.</span><span class="n">input_file</span><span class="si">}</span><span class="s2">]...&quot;</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">params_for_job</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span>
                    <span class="n">num_fields</span><span class="o">=</span><span class="n">params_for_job</span><span class="o">.</span><span class="n">num_fields</span><span class="p">,</span>
@@ -125,7 +125,7 @@
         <span class="n">ConfigTsvReader</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    TODO:</span>
 <span class="sd">    - add ability to say how many lines are bad and print their content</span>
@@ -167,7 +167,7 @@
         <span class="n">ConfigColumns</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">check_columns_unique</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_columns_unique</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">dicts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
     <span class="n">errors</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">:</span>
@@ -200,7 +200,7 @@
         <span class="n">ConfigColumns</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">clean_by_field_num</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_by_field_num</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span>
         <span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span>
         <span class="n">validate_all_lines_same_number_of_fields</span><span class="o">=</span><span class="kc">False</span>
@@ -225,7 +225,7 @@
         <span class="n">ConfigProgress</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">cut</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cut</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -247,7 +247,7 @@
         <span class="n">ConfigColumns</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">drop_duplicates_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">drop_duplicates_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
             <span class="n">input_file_handle</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">input_file_handle</span><span class="p">)</span>
@@ -274,7 +274,7 @@
         <span class="n">ConfigFixTypes</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">fix_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fix_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="c1"># We need to read the input file WITHOUT assuming that it hasn&#39;t problems</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span>
             <span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span>
@@ -307,7 +307,7 @@
         <span class="n">ConfigBucketNumber</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">histogram_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">histogram_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_handle</span><span class="p">:</span>
@@ -341,7 +341,7 @@
         <span class="n">ConfigMajority</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">majority</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">majority</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This means that if x1 appears more</span>
 <span class="sd">    with y2 than any other values in column Y then x1, y2 will be in the output</span>
@@ -382,7 +382,7 @@
         <span class="n">ConfigColumn</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">multiply</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -403,7 +403,7 @@
         <span class="n">ConfigInputFiles</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="n">ConfigInputFiles</span><span class="o">.</span><span class="n">input_files</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -424,7 +424,7 @@
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">remove_quotes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_quotes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -447,7 +447,7 @@
         <span class="n">ConfigCsvToTsv</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">csv_to_tsv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">csv_to_tsv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">ConfigCsvToTsv</span><span class="o">.</span><span class="n">set_max</span><span class="p">:</span>
         <span class="n">csv</span><span class="o">.</span><span class="n">field_size_limit</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">pyanyzip</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">openzip</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
@@ -466,7 +466,7 @@
 
 <div class="viewcode-block" id="MyEventTypes">
 <a class="viewcode-back" href="../../pytsv.html#pytsv.main.MyEventTypes">[docs]</a>
-<span class="k">class</span> <span class="nc">MyEventTypes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyEventTypes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">key_not_found</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">key_found</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">unknown_added</span> <span class="o">=</span> <span class="mi">2</span></div>
@@ -484,7 +484,7 @@
         <span class="n">ConfigJoin</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">join</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">event_found</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">event_unknown_added</span> <span class="o">=</span> <span class="mi">0</span>
@@ -531,7 +531,7 @@
         <span class="n">ConfigProgress</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">lc</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lc</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">TsvWriter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -553,7 +553,7 @@
         <span class="n">ConfigProgress</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sum_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">sums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ConfigProgress</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
@@ -568,7 +568,7 @@
 <div class="viewcode-block" id="JobInfo">
 <a class="viewcode-back" href="../../pytsv.html#pytsv.main.JobInfo">[docs]</a>
 <span class="nd">@attr</span><span class="o">.</span><span class="n">attrs</span>
-<span class="k">class</span> <span class="nc">JobInfo</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JobInfo</span><span class="p">:</span>
     <span class="n">check_not_ascii</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
     <span class="n">input_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
     <span class="n">serial</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
@@ -581,7 +581,7 @@
 <div class="viewcode-block" id="JobReturnValue">
 <a class="viewcode-back" href="../../pytsv.html#pytsv.main.JobReturnValue">[docs]</a>
 <span class="nd">@attr</span><span class="o">.</span><span class="n">attrs</span>
-<span class="k">class</span> <span class="nc">JobReturnValue</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JobReturnValue</span><span class="p">:</span>
     <span class="n">serial</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span>
     <span class="n">files</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">attrib</span><span class="p">()</span></div>
 
@@ -589,7 +589,7 @@
 
 <div class="viewcode-block" id="process_single_file">
 <a class="viewcode-back" href="../../pytsv.html#pytsv.main.process_single_file">[docs]</a>
-<span class="k">def</span> <span class="nf">process_single_file</span><span class="p">(</span><span class="n">job_info</span><span class="p">:</span> <span class="n">JobInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JobReturnValue</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_single_file</span><span class="p">(</span><span class="n">job_info</span><span class="p">:</span> <span class="n">JobInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JobReturnValue</span><span class="p">:</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">tsv_writers_dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
@@ -628,7 +628,7 @@
         <span class="n">ConfigPattern</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">split_by_columns_parallel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_by_columns_parallel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">pylogconf</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;must provide --columns&quot;</span>
     <span class="n">job_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">JobInfo</span><span class="p">(</span>
@@ -660,7 +660,7 @@
         <span class="n">ConfigTree</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">tree</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tree</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    You can also see only parts of the tree</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -719,7 +719,7 @@
         <span class="n">ConfigOutputFile</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">tsv_to_csv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tsv_to_csv</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ConfigOutputFile</span><span class="o">.</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file_handle</span><span class="p">:</span>
         <span class="n">csv_writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">output_file_handle</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">TsvReader</span><span class="p">(</span><span class="n">ConfigInputFile</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file_handle</span><span class="p">:</span>
@@ -738,7 +738,7 @@
         <span class="n">ConfigCheckUnique</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sample_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_by_column</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    To run this you must supply a &#39;value_column&#39; (the column</span>
 <span class="sd">    which will be sampled) and a &#39;weight_column&#39; which must</span>
@@ -785,7 +785,7 @@
         <span class="n">ConfigSampleByColumnOld</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sample_by_column_old</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_by_column_old</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">sum_weights</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -844,7 +844,7 @@
         <span class="n">ConfigSampleByTwoColumns</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">sample_by_two_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_by_two_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;reading the data&quot;</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -894,7 +894,7 @@
         <span class="n">ConfigPattern</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">split_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_by_columns</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">pylogconf</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ConfigColumns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;must provide --columns&quot;</span>
@@ -925,7 +925,7 @@
     <span class="n">app_name</span><span class="o">=</span><span class="n">APP_NAME</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="n">VERSION_STR</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">pylogconf</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
     <span class="n">config_arg_parse_and_launch</span><span class="p">()</span></div>
 
