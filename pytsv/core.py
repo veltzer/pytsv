@@ -1,3 +1,7 @@
+"""
+core.py
+"""
+
 import gzip
 import itertools
 import logging
