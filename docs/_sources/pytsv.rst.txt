@@ -9,37 +9,37 @@ pytsv.configs module
 
 .. automodule:: pytsv.configs
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pytsv.core module
 -----------------
 
 .. automodule:: pytsv.core
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pytsv.main module
 -----------------
 
 .. automodule:: pytsv.main
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 pytsv.static module
 -------------------
 
 .. automodule:: pytsv.static
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: pytsv
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
