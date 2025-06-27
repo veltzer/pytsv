@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pytsv"
-version = "0.1.70"
+version = "0.1.71"
 requires-python = ">=3.12"
 authors = [
 	{ name = "Mark Veltzer", email = "mark.veltzer@gmail.com" }
@@ -44,12 +44,3 @@ line-length = 130
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
-
-[tool.pylint.MAIN]
-source-roots = ["src"]
-
-[tool.setuptools]
-zip-safe = false
-
-[tool.setuptools.packages.find]
-where = ["src"]
