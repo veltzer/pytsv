@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pytsv"
-version = "0.1.72"
+version = "0.1.73"
 requires-python = ">=3.12"
 authors = [
 	{ name = "Mark Veltzer", email = "mark.veltzer@gmail.com" }
@@ -42,8 +42,11 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://veltzer.github.io/pytsv"
-"Bug Tracker" = "https://veltzer.github.io/pytsv/issues"
+"Homepage" = "https://github.com/veltzer/pytsv"
+"Bug Tracker" = "https://github.com/veltzer/pytsv/issues"
+"Documentation" = "https://veltzer.github.io/pytsv"
+"Download" = "https://pypi.org/project/pytsv/"
+"Repository" = "https://github.com/veltzer/pytsv"
 
 [project.scripts]
 pytsv = "pytsv.main:main"
