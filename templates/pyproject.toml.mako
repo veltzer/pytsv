@@ -9,8 +9,8 @@
     import config.version
     import config.platform
 %>[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "${pydmt.helpers.project.get_name()}"
