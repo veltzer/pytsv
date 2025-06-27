@@ -1,10 +1,10 @@
 """ python depedencies for this project """
-from typing import List
+from typing import List, Dict
 
 
-console_scripts: List[str] = [
-    "pytsv=pytsv.main:main",
-]
+scripts: Dict[str, str] = {
+    "pytsv": "pytsv.main:main",
+}
 dev_requires: List[str] = [
     "pypitools",
 ]
@@ -25,6 +25,7 @@ build_requires: List[str] = [
     "pydmt",
     "pandas-stubs",
     "types-tqdm",
+    "ruff",
 ]
 test_requires: List[str] = [
     "pylint",

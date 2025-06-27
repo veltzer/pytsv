@@ -11,6 +11,7 @@ pymakehelper
 pydmt
 pandas-stubs
 types-tqdm
+ruff
 pylint
 pytest
 pytest-cov
