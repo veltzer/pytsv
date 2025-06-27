@@ -51,3 +51,12 @@ pythonpath = ["src"]
 
 [tool.pylint.MAIN]
 source-roots = ["src"]
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.bdist_wheel]
+universal = false
