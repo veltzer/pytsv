@@ -2,6 +2,7 @@ alabaster==1.0.0
 astroid==3.3.10
 attrs==25.3.0
 babel==2.17.0
+build==1.2.2.post1
 certifi==2025.4.26
 charset-normalizer==3.4.2
 coverage==7.8.2
@@ -41,6 +42,7 @@ pylint==3.3.7
 pylogconf==0.0.38
 pymakehelper==0.0.37
 pypipegzip==0.0.24
+pyproject_hooks==1.2.0
 pytconf==0.1.18
 pytest==8.3.5
 pytest-cov==6.1.1
@@ -51,6 +53,7 @@ referencing==0.36.2
 requests==2.32.3
 roman-numerals-py==3.1.0
 rpds-py==0.25.1
+ruff==0.12.1
 six==1.17.0
 smmap==5.0.2
 snowballstemmer==3.0.1

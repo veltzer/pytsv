@@ -7,13 +7,13 @@ def get_readme():
 
 
 setuptools.setup(
-    # the first three fields are a must according to the documentation
     name="pytsv",
     version="0.1.70",
     packages=[
-        "pytsv",
     ],
-    # from here all is optional
+    package_data={
+		"pytsv": ["*.json"],
+    },
     description="Pytsv is a the Swiss army knife for TSV files",
     long_description=get_readme(),
     long_description_content_type="text/x-rst",
@@ -33,15 +33,6 @@ setuptools.setup(
     platforms=[
         "python3",
     ],
-    install_requires=[
-        "pytconf",
-        "tqdm",
-        "pyanyzip",
-        "numpy",
-        "pandas",
-        "pylogconf",
-        "attrs",
-    ],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Console",
@@ -52,7 +43,13 @@ setuptools.setup(
         "Programming Language :: Python :: 3.12",
         "Topic :: Utilities",
     ],
-    entry_points={"console_scripts": [
-        "pytsv=pytsv.main:main",
-    ]},
+    install_requires=[
+        "pytconf",
+        "tqdm",
+        "pyanyzip",
+        "numpy",
+        "pandas",
+        "pylogconf",
+        "attrs",
+    ],
 )
