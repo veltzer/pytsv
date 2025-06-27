@@ -42,3 +42,12 @@ max-line-length = 130
 
 [tool.ruff]
 line-length = 130
+
+[tool.wheel]
+universal = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.pylint.MAIN]
+source-roots = ["src"]
