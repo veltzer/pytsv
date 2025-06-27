@@ -33,8 +33,11 @@ classifiers = ${pydmt.helpers.python.array_indented(0, config.platform.classifie
 dependencies = ${pydmt.helpers.python.array_indented(0, config.python.install_requires)}
 
 [project.urls]
-"Homepage" = "${pydmt.helpers.urls.get_website()}"
-"Bug Tracker" = "${pydmt.helpers.urls.get_website()}/issues"
+"Homepage" = "${pydmt.helpers.urls.get_website_source()}"
+"Bug Tracker" = "${pydmt.helpers.urls.get_website_source()}/issues"
+"Documentation" = "${pydmt.helpers.urls.get_website()}"
+"Download" = "https://pypi.org/project/${config.project.name}/"
+"Repository" = "${pydmt.helpers.urls.get_website_source()}"
 
 [project.scripts]
 % for key, value in config.python.scripts.items():
