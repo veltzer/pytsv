@@ -48,9 +48,9 @@ all: $(ALL)
 
 $(ALL_TESTS): $(ALL_PYTHON) .pylintrc .flake8 .mypy.ini
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest tests
-	$(Q)pymakehelper error_on_print $(PYTHON) -m pylint --reports=n --score=n $(ALL_PACKAGES) 
+	$(Q)pymakehelper error_on_print $(PYTHON) -m pylint --reports=n --score=n src $(ALL_PACKAGES) 
+	$(Q)pymakehelper only_print_on_error $(PYTHON) -m ruff check src $(ALL_PACKAGES)
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m flake8 $(ALL_PACKAGES)
-	$(Q)pymakehelper only_print_on_error $(PYTHON) -m ruff check $(ALL_PACKAGES)
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m mypy .
 	$(Q)pymakehelper touch_mkdir $@
