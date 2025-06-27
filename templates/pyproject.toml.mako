@@ -37,14 +37,8 @@ dependencies = ${pydmt.helpers.python.array_indented(0, config.python.install_re
 ${key} = "${value}"
 % endfor
 
-[tool.pycodestyle]
-max-line-length = 130
-
 [tool.ruff]
 line-length = 130
-
-[tool.wheel]
-universal = false
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -57,6 +51,3 @@ zip-safe = false
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
-[tool.bdist_wheel]
-universal = false

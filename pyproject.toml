@@ -39,14 +39,8 @@ dependencies = [
 [project.scripts]
 pytsv = "pytsv.main:main"
 
-[tool.pycodestyle]
-max-line-length = 130
-
 [tool.ruff]
 line-length = 130
-
-[tool.wheel]
-universal = false
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -59,6 +53,3 @@ zip-safe = false
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
-[tool.bdist_wheel]
-universal = false
