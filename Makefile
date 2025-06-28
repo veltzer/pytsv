@@ -74,11 +74,6 @@ cov:
 pyre:
 	$(Q)pyre check
 
-# turn all code to black style
-.PHONY: black
-black:
-	$(Q)black --target-version py36 $(ALL_PACKAGES)
-
 .PHONY: clean
 clean:
 	$(Q)find . -type f -and \( -name "*.pyc" -or -name "*.pyo" \) -delete

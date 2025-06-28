@@ -7,7 +7,8 @@ import itertools
 import logging
 import re
 from collections import defaultdict
-from typing import Iterable, List, Dict, Union, Sequence, Optional, Any, IO, Generator, TextIO
+from typing import List, Dict, Union, Optional, Any, IO, TextIO
+from collections.abc import Iterable, Sequence, Generator
 
 import pyanyzip.core
 
@@ -39,8 +40,8 @@ def clean(
 
 def do_aggregate(
     input_file_names: Iterable[str],
-    match_columns: List[int],
-    aggregate_columns: List[int],
+    match_columns: list[int],
+    aggregate_columns: list[int],
     output_file_name: str,
     floating_point: bool,
 ) -> None:
@@ -53,7 +54,7 @@ def do_aggregate(
     :param floating_point:
     :return:
     """
-    counts: Dict[str, List[Union[int, float]]] = {}
+    counts: dict[str, list[int | float]] = {}
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
         logger.debug(f"working on file [{input_file_name}]")
@@ -83,7 +84,7 @@ def do_aggregate(
             output_file_handle.write(to_write)
 
 
-def write_data(data: List[List[str]], output_file_name: str) -> None:
+def write_data(data: list[list[str]], output_file_name: str) -> None:
     with TsvWriter(
         filename=output_file_name,
         mode="at",
@@ -94,19 +95,19 @@ def write_data(data: List[List[str]], output_file_name: str) -> None:
 
 def group_by(
     input_file_names: Iterable[str],
-    group_by_columns: List[int],
-    collect_columns: List[int],
+    group_by_columns: list[int],
+    collect_columns: list[int],
     output_file_template: str,
-) -> List[str]:
-    all_data: Dict[str, List[List[str]]] = defaultdict(list)
+) -> list[str]:
+    all_data: dict[str, list[list[str]]] = defaultdict(list)
     limit = 10000
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
         logger.debug(f"working on file [{input_file_name}]")
-        with open(input_file_name, 'rt') as file_handle:
+        with open(input_file_name) as file_handle:
             for line in file_handle:
                 line = line.rstrip()
-                parts: List[str] = line.split("\t")
+                parts: list[str] = line.split("\t")
                 m = "-".join(parts[i] for i in group_by_columns)
                 data_to_append = [parts[i] for i in collect_columns]
                 all_data[m].append(data_to_append)
@@ -132,14 +133,14 @@ class TsvWriter:
         throw_exceptions: bool = False,
 
         sanitize: bool = SANITIZE,
-        fields_to_clean: Optional[List[int]] = None,
+        fields_to_clean: list[int] | None = None,
         clean_edges: bool = CLEAN_EDGES,
         sub_trailing: bool = SUB_TRAILING,
         remove_non_ascii: bool = REMOVE_NON_ASCII,
         lower_case: bool = LOWER_CASE,
 
         check_num_fields: bool = CHECK_NUM_FIELDS,
-        num_fields: Optional[int] = None,
+        num_fields: int | None = None,
         convert_to_string: bool = CONVERT_TO_STRING,
 
         do_gzip: bool = DO_GZIP,
@@ -241,10 +242,10 @@ class TsvReader:
         mode: str = "rt",
         use_any_format: bool = USE_ANY_FORMAT,
         validate_all_lines_same_number_of_fields: bool = VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
-        num_fields: Union[int, None] = None,
+        num_fields: int | None = None,
         skip_comments: bool = SKIP_COMMENTS,
         check_non_ascii: bool = CHECK_NON_ASCII,
-        newline: Union[str, None] = '\n',
+        newline: str | None = '\n',
     ) -> None:
         if use_any_format:
             self.io = pyanyzip.core.openzip(name=filename, mode=mode, newline=newline)
@@ -258,7 +259,7 @@ class TsvReader:
 
         self.line_number = -1
 
-    def __next__(self) -> List[str]:
+    def __next__(self) -> list[str]:
         """ method needed to be an iterator """
         self.line_number += 1
         line = self.io.readline()
@@ -300,7 +301,7 @@ class TsvReader:
         self.io.close()
 
 
-def write_dict(filename: str, d: Dict[str, str]) -> None:
+def write_dict(filename: str, d: dict[str, str]) -> None:
     with TsvWriter(filename=filename, num_fields=2, fields_to_clean=[0]) as output_handle:
         for k, v in d.items():
             output_handle.write([k, v])
