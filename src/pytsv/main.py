@@ -9,7 +9,6 @@ import os
 import sys
 from collections import defaultdict
 from enum import Enum
-from typing import List, Dict, Set
 
 import attr
 import numpy
@@ -18,16 +17,37 @@ import pandas
 import pyanyzip.core
 import pylogconf.core
 import tqdm
-from pytconf import register_endpoint, register_main, config_arg_parse_and_launch
+from pytconf import config_arg_parse_and_launch, register_endpoint, register_main
 
-from pytsv.configs import ConfigInputFiles, ConfigFloatingPoint, ConfigAggregateColumns, \
-    ConfigMatchColumns, ConfigOutputFile, ConfigProgress, ConfigParallel, ConfigNumFields, \
-    ConfigTsvReader, ConfigColumns, ConfigInputFile, ConfigFixTypes, ConfigColumn, \
-    ConfigBucketNumber, ConfigMajority, ConfigCsvToTsv, ConfigJoin, \
-    ConfigTree, ConfigSampleByColumnOld, ConfigSampleByTwoColumns, ConfigPattern, \
-    ConfigSampleSize, ConfigReplace, ConfigWeightValue, ConfigCheckUnique
+from pytsv.configs import (
+    ConfigAggregateColumns,
+    ConfigBucketNumber,
+    ConfigCheckUnique,
+    ConfigColumn,
+    ConfigColumns,
+    ConfigCsvToTsv,
+    ConfigFixTypes,
+    ConfigFloatingPoint,
+    ConfigInputFile,
+    ConfigInputFiles,
+    ConfigJoin,
+    ConfigMajority,
+    ConfigMatchColumns,
+    ConfigNumFields,
+    ConfigOutputFile,
+    ConfigParallel,
+    ConfigPattern,
+    ConfigProgress,
+    ConfigReplace,
+    ConfigSampleByColumnOld,
+    ConfigSampleByTwoColumns,
+    ConfigSampleSize,
+    ConfigTree,
+    ConfigTsvReader,
+    ConfigWeightValue,
+)
 from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
-from pytsv.static import APP_NAME, VERSION_STR, DESCRIPTION
+from pytsv.static import APP_NAME, DESCRIPTION, VERSION_STR
 
 # The next line is because pylint complains about pandas objects
 # pylint: disable=unsubscriptable-object,no-member
@@ -125,7 +145,7 @@ def check() -> None:
     ],
 )
 def check_columns_unique() -> None:
-    dicts: List[Dict[str, int]] = [{} for _ in range(len(ConfigColumns.columns))]
+    dicts: list[dict[str, int]] = [{} for _ in range(len(ConfigColumns.columns))]
     errors = False
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(
@@ -286,7 +306,7 @@ def majority() -> None:
     with y2 than any other values in column Y then x1, y2 will be in the output
     and no other entry with x1 will appear
     """
-    d: Dict[str, Dict[int, int]] = defaultdict(dict)
+    d: dict[str, dict[int, int]] = defaultdict(dict)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
@@ -428,13 +448,12 @@ def join() -> None:
                 new_value = d[key]
                 fields.insert(ConfigJoin.output_insert_column, new_value)
                 output_file_handle.write(fields)
+            elif ConfigJoin.output_add_unknown:
+                event_unknown_added += 1
+                fields.insert(ConfigJoin.output_insert_column, "unknown")
+                output_file_handle.write(fields)
             else:
-                if ConfigJoin.output_add_unknown:
-                    event_unknown_added += 1
-                    fields.insert(ConfigJoin.output_insert_column, "unknown")
-                    output_file_handle.write(fields)
-                else:
-                    event_discarded += 1
+                event_discarded += 1
     print(f"event_found {event_found}")
     print(f"event_unknown_added {event_unknown_added}")
     print(f"event_discarded {event_discarded}")
@@ -469,7 +488,7 @@ def lc() -> None:
     ],
 )
 def sum_columns() -> None:
-    sums: List[float] = [0] * len(ConfigColumns.columns)
+    sums: list[float] = [0] * len(ConfigColumns.columns)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
@@ -486,13 +505,13 @@ class JobInfo:
     serial: int = attr.attrib()
     progress: bool = attr.attrib()
     pattern: str = attr.attrib()
-    columns: List[int] = attr.attrib()
+    columns: list[int] = attr.attrib()
 
 
 @attr.attrs
 class JobReturnValue:
     serial: int = attr.attrib()
-    files: Dict[str, str] = attr.attrib()
+    files: dict[str, str] = attr.attrib()
 
 
 def process_single_file(job_info: JobInfo) -> JobReturnValue:
@@ -543,7 +562,7 @@ def split_by_columns_parallel() -> None:
         ConfigColumns.columns,
     ) for i, input_file in enumerate(iter(ConfigInputFiles.input_files))]
     with concurrent.futures.ProcessPoolExecutor(max_workers=ConfigParallel.jobs) as executor:
-        job_return_values: List[JobReturnValue] = list(executor.map(process_single_file, job_data))
+        job_return_values: list[JobReturnValue] = list(executor.map(process_single_file, job_data))
     job_return_values.sort(key=lambda u: u.serial)
     for job_return_value in job_return_values:
         for key, _filename in job_return_value.files.items():
@@ -564,7 +583,7 @@ def tree() -> None:
     """
     You can also see only parts of the tree
     """
-    children_dict: Dict[str, Set] = defaultdict(set)
+    children_dict: dict[str, set] = defaultdict(set)
     parents_dict = defaultdict(set)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         for fields in input_file_handle:
@@ -577,7 +596,7 @@ def tree() -> None:
         list_of_roots = ConfigTree.roots
     else:
         list_of_roots = []
-        for p_parent in children_dict.keys():
+        for p_parent in children_dict:
             if len(parents_dict[p_parent]) == 0:
                 list_of_roots.append(p_parent)
 
@@ -617,7 +636,7 @@ def tree() -> None:
     ],
 )
 def tsv_to_csv() -> None:
-    with open(ConfigOutputFile.output_file, "wt") as output_file_handle:
+    with open(ConfigOutputFile.output_file, "w") as output_file_handle:
         csv_writer = csv.writer(output_file_handle)
         with TsvReader(ConfigInputFile.input_file) as input_file_handle:
             for fields in input_file_handle:
@@ -677,8 +696,8 @@ def sample_by_column() -> None:
     ],
 )
 def sample_by_column_old() -> None:
-    weights: List[float] = []
-    elements: List[List[str]] = []
+    weights: list[float] = []
+    elements: list[list[str]] = []
     sum_weights = float(0)
     with TsvReader(ConfigInputFile.input_file) as input_handle:
         if ConfigProgress.progress:
@@ -696,7 +715,7 @@ def sample_by_column_old() -> None:
     # this is the same code with numpy
     weights = [w / sum_weights for w in weights]
     if ConfigSampleByColumnOld.hits_mode:
-        results_dict: Dict[int, int] = defaultdict(int)
+        results_dict: dict[int, int] = defaultdict(int)
         for _ in range(ConfigSampleSize.size):
             current_results = numpy.random.choice(
                 a=len(elements),
