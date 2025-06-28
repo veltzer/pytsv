@@ -1,12 +1,12 @@
 """ python deps for this project """
 
+import config.shared
+
 scripts: dict[str, str] = {
     "pytsv": "pytsv.main:main",
 }
 
-config_requires: list[str] = [
-    "pyclassifiers",
-]
+config_requires: list[str] = config.shared.PCONFIG
 install_requires: list[str] = [
     "pytconf",
     "tqdm",
@@ -16,19 +16,10 @@ install_requires: list[str] = [
     "pylogconf",
     "attrs",
 ]
-build_requires: list[str] = [
-    "hatch",
-    "pydmt",
-    "pymakehelper",
-    # types
+build_requires: list[str] = config.shared.PBUILD
+test_requires: list[str] = config.shared.PTEST
+types_required: list[str] = [
     "pandas-stubs",
     "types-tqdm",
 ]
-test_requires: list[str] = [
-    "pylint",
-    "pytest",
-    "pytest-cov",
-    "mypy",
-    "ruff",
-]
-requires = config_requires + install_requires + build_requires + test_requires
+requires = config_requires + install_requires + build_requires + test_requires + types_required
