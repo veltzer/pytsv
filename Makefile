@@ -46,11 +46,11 @@ endif # DO_SH_SYNTAX
 all: $(ALL)
 	@true
 
-$(ALL_TESTS): $(ALL_PYTHON) .pylintrc .flake8 .mypy.ini
+$(ALL_TESTS): $(ALL_PYTHON) .pylintrc .mypy.ini
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest tests
 	$(Q)pymakehelper only_print_on_error $(PYTHON) -m ruff check src $(ALL_PACKAGES)
 	$(Q)pymakehelper error_on_print $(PYTHON) -m pylint --reports=n --score=n src $(ALL_PACKAGES) 
-	$(Q)pymakehelper only_print_on_error $(PYTHON) -m mypy .
+	$(Q)pymakehelper only_print_on_error $(PYTHON) -m mypy src $(ALL_PACKAGES) 
 	$(Q)pymakehelper touch_mkdir $@
 # $(Q)pymakehelper only_print_on_error $(PYTHON) -m pytest --cov=$(PACKAGE_NAME) --cov-report=xml --cov-report=html
 
@@ -58,17 +58,9 @@ $(ALL_TESTS): $(ALL_PYTHON) .pylintrc .flake8 .mypy.ini
 pytest:
 	$(Q)pytest tests
 
-.PHONY: pyflakes
-pyflakes:
-	$(Q)pyflakes $(ALL_PACKAGES)
-
 .PHONY: pylint
 pylint:
 	$(Q)pylint --reports=n --score=n $(ALL_PACKAGES)
-
-.PHONY: flake8
-flake8:
-	$(Q)flake8 $(ALL_PACKAGES)
 
 .PHONY: unittest
 unittest:
