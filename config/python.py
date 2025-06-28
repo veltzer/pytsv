@@ -1,10 +1,9 @@
-""" python depedencies for this project """
+""" python deps for this project """
 
 scripts: dict[str, str] = {
     "pytsv": "pytsv.main:main",
 }
-dev_requires: list[str] = [
-]
+
 config_requires: list[str] = [
     "pyclassifiers",
 ]
@@ -19,16 +18,17 @@ install_requires: list[str] = [
 ]
 build_requires: list[str] = [
     "hatch",
-    "pymakehelper",
     "pydmt",
+    "pymakehelper",
+    # types 
     "pandas-stubs",
     "types-tqdm",
-    "ruff",
 ]
 test_requires: list[str] = [
     "pylint",
     "pytest",
     "pytest-cov",
     "mypy",
+    "ruff",
 ]
 requires = config_requires + install_requires + build_requires + test_requires
