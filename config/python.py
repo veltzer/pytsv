@@ -20,7 +20,7 @@ build_requires: list[str] = [
     "hatch",
     "pydmt",
     "pymakehelper",
-    # types 
+    # types
     "pandas-stubs",
     "types-tqdm",
 ]
