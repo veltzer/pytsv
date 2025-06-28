@@ -30,7 +30,9 @@ readme = "README.md"
 license = "${config.platform.license_type}"
 keywords=${pydmt.helpers.python.array_indented(0, config.project.keywords)}
 classifiers = ${pydmt.helpers.python.array_indented(0, config.platform.classifiers)}
+% if hasattr(config.python, "install_requires"):
 dependencies = ${pydmt.helpers.python.array_indented(0, config.python.install_requires)}
+% endif
 
 [project.urls]
 "Homepage" = "${pydmt.helpers.urls.get_website_source()}"
@@ -39,10 +41,12 @@ dependencies = ${pydmt.helpers.python.array_indented(0, config.python.install_re
 "Download" = "https://pypi.org/project/${config.project.name}/"
 "Repository" = "${pydmt.helpers.urls.get_website_source()}"
 
+% if hasattr(config.python, "scripts"):
 [project.scripts]
 % for key, value in config.python.scripts.items():
 ${key} = "${value}"
 % endfor
+% endif
 
 [tool.ruff]
 line-length = 130
