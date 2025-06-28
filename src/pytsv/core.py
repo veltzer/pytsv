@@ -6,8 +6,8 @@ import gzip
 import itertools
 import logging
 import re
+from typing import Any, IO, TextIO
 from collections import defaultdict
-from typing import List, Dict, Union, Optional, Any, IO, TextIO
 from collections.abc import Iterable, Sequence, Generator
 
 import pyanyzip.core
