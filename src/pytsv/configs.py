@@ -3,7 +3,7 @@
 
 import multiprocessing
 
-from pytconf import ParamCreator, Config
+from pytconf import Config, ParamCreator
 
 CHECK_NON_ASCII = False
 SKIP_COMMENTS = False

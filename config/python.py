@@ -1,16 +1,14 @@
 """ python depedencies for this project """
-from typing import List, Dict
 
-
-scripts: Dict[str, str] = {
+scripts: dict[str, str] = {
     "pytsv": "pytsv.main:main",
 }
-dev_requires: List[str] = [
+dev_requires: list[str] = [
 ]
-config_requires: List[str] = [
+config_requires: list[str] = [
     "pyclassifiers",
 ]
-install_requires: List[str] = [
+install_requires: list[str] = [
     "pytconf",
     "tqdm",
     "pyanyzip",
@@ -19,7 +17,7 @@ install_requires: List[str] = [
     "pylogconf",
     "attrs",
 ]
-build_requires: List[str] = [
+build_requires: list[str] = [
     "hatch",
     "pymakehelper",
     "pydmt",
@@ -27,11 +25,10 @@ build_requires: List[str] = [
     "types-tqdm",
     "ruff",
 ]
-test_requires: List[str] = [
+test_requires: list[str] = [
     "pylint",
     "pytest",
     "pytest-cov",
-    "flake8",
     "mypy",
 ]
 requires = config_requires + install_requires + build_requires + test_requires
