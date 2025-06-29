@@ -53,7 +53,7 @@ ptyprocess==0.7.0
 pyanyzip==0.0.21
 pyclassifiers==0.0.19
 pycparser==2.22
-pydmt==0.3.19
+pydmt==0.3.23
 pyfakeuse==0.0.9
 Pygments==2.19.2
 pylint==3.3.7
@@ -97,7 +97,7 @@ typing_extensions==4.14.0
 tzdata==2025.2
 urllib3==2.5.0
 userpath==1.9.2
-uv==0.7.16
+uv==0.7.17
 venv-run==0.2.0
 virtualenv==20.31.2
 yattag==1.16.1
