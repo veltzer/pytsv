@@ -63,6 +63,7 @@ pypipegzip==0.0.24
 pytconf==0.1.19
 pytest==8.4.1
 python-dateutil==2.9.0.post0
+pytidylib==0.3.2
 pytz==2025.2
 PyYAML==6.0.2
 referencing==0.36.2
@@ -100,5 +101,6 @@ userpath==1.9.2
 uv==0.7.17
 venv-run==0.2.0
 virtualenv==20.31.2
+webencodings==0.5.1
 yattag==1.16.1
 zstandard==0.23.0
