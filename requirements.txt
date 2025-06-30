@@ -54,7 +54,7 @@ platformdirs==4.3.8
 pluggy==1.6.0
 ptyprocess==0.7.0
 pyanyzip==0.0.21
-pyclassifiers==0.0.19
+pyclassifiers==0.0.20
 pycmdtools==0.0.85
 pycparser==2.22
 pydmt==0.3.26
@@ -98,7 +98,7 @@ trove-classifiers==2025.5.9.12
 types-pytz==2025.2.0.20250516
 types-requests==2.32.4.20250611
 types-tqdm==4.67.0.20250516
-typing==3.7.4.3
+typing==3.10.0.0
 typing-extensions==4.14.0
 tzdata==2025.2
 unidecode==1.4.0
