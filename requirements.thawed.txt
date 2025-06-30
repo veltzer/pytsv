@@ -7,6 +7,7 @@ pandas
 pandas-stubs
 pyanyzip
 pyclassifiers
+pycmdtools
 pydmt
 pylint
 pylogconf
