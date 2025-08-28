@@ -240,7 +240,7 @@ def drop_duplicates_by_columns() -> None:
     ],
 )
 def fix_columns() -> None:
-    # We need to read the input file WITHOUT assuming that it hasn't problems
+    # We need to read the input file WITHOUT assuming that it hasnt problems
     with TsvReader(
             filename=ConfigInputFile.input_file,
             check_non_ascii=ConfigTsvReader.check_non_ascii,
@@ -653,15 +653,15 @@ def tsv_to_csv() -> None:
 )
 def sample_by_column() -> None:
     """
-    To run this you must supply a 'value_column' (the column
-    which will be sampled) and a 'weight_column' which must
+    To run this you must supply a "value_column" (the column
+    which will be sampled) and a "weight_column" which must
     be convertible to a floating point number.
     """
     logger = logging.getLogger(__name__)
     logger.info("reading the data")
     df = pandas.read_csv(
         ConfigInputFile.input_file,
-        sep='\t',
+        sep="\t",
         header=None,
     )
     if ConfigCheckUnique.check_unique:
@@ -681,7 +681,7 @@ def sample_by_column() -> None:
     logger.info("writing the output")
     df_result.to_csv(
         ConfigOutputFile.output_file,
-        sep='\t',
+        sep="\t",
         index=True,
     )
 
@@ -756,7 +756,7 @@ def sample_by_two_columns() -> None:
     logger.info("reading the data")
     df = pandas.read_csv(
         ConfigInputFile.input_file,
-        sep='\t',
+        sep="\t",
         header=None,
     )
     logger.info("checking that the values are unique")
@@ -781,9 +781,9 @@ def sample_by_two_columns() -> None:
         res = sample[sample.columns[ConfigWeightValue.value_column]].value_counts()
         res.to_csv(
             ConfigOutputFile.output_file,
-            sep='\t',
+            sep="\t",
             index=False,
-            mode='a',
+            mode="a",
             header=None,
         )
 
@@ -831,5 +831,5 @@ def main():
     config_arg_parse_and_launch()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

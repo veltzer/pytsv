@@ -29,7 +29,7 @@ def clean(
         # with s single space
         text = re.sub(r"[\r\t\n\v ]+", " ", text)
     if remove_non_ascii:
-        text = text.encode('ascii', errors='ignore').decode()
+        text = text.encode("ascii", errors="ignore").decode()
     if clean_edges:
         # remove space from the left and right
         text = text.strip()
@@ -245,7 +245,7 @@ class TsvReader:
         num_fields: int | None = None,
         skip_comments: bool = SKIP_COMMENTS,
         check_non_ascii: bool = CHECK_NON_ASCII,
-        newline: str | None = '\n',
+        newline: str | None = "\n",
     ) -> None:
         if use_any_format:
             self.io = pyanyzip.core.openzip(name=filename, mode=mode, newline=newline)
@@ -271,10 +271,10 @@ class TsvReader:
                 line = self.io.readline()
                 if not line:
                     raise StopIteration
-        line = line.rstrip('\r\n')
+        line = line.rstrip("\r\n")
         if self.check_non_ascii:
             assert is_ascii(line), f"non ascii characters in line [{self.line_number}]"
-        fields = line.split('\t')
+        fields = line.split("\t")
         if self.validate_all_lines_same_number_of_fields:
             if self.num_fields is None:
                 self.num_fields = len(fields)

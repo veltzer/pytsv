@@ -18,7 +18,7 @@ CHECK_NUM_FIELDS = True
 CONVERT_TO_STRING = True
 DO_GZIP = False
 FILENAME_DETECT = True
-DEFAULT_ENCODING = 'utf-8'
+DEFAULT_ENCODING = "utf-8"
 ATTACH_ENCODER = False
 
 # pylint: disable=too-few-public-methods
