@@ -1,6 +1,5 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 attrs
-hatch
 mypy
 numpy
 pandas
