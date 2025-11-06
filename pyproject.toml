@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pytsv"
-version = "0.1.74"
+version = "0.1.75"
 requires-python = ">=3.12"
 authors = [
 	{ name = "Mark Veltzer", email = "mark.veltzer@gmail.com" }
