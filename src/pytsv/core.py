@@ -6,15 +6,27 @@ import gzip
 import itertools
 import logging
 import re
-from typing import Any, IO, TextIO
 from collections import defaultdict
-from collections.abc import Iterable, Sequence, Generator
+from collections.abc import Generator, Iterable, Sequence
+from typing import IO, Any, TextIO
 
 import pyanyzip.core
 
-from pytsv.configs import SANITIZE, CLEAN_EDGES, SUB_TRAILING, REMOVE_NON_ASCII, LOWER_CASE, CHECK_NUM_FIELDS, \
-    CONVERT_TO_STRING, FILENAME_DETECT, DO_GZIP, USE_ANY_FORMAT, SKIP_COMMENTS, \
-    CHECK_NON_ASCII, VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS
+from pytsv.configs import (
+    CHECK_NON_ASCII,
+    CHECK_NUM_FIELDS,
+    CLEAN_EDGES,
+    CONVERT_TO_STRING,
+    DO_GZIP,
+    FILENAME_DETECT,
+    LOWER_CASE,
+    REMOVE_NON_ASCII,
+    SANITIZE,
+    SKIP_COMMENTS,
+    SUB_TRAILING,
+    USE_ANY_FORMAT,
+    VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
+)
 
 
 def clean(
@@ -65,7 +77,7 @@ def do_aggregate(
                     if floating_point:
                         counts[m] = [float(0)] * len(aggregate_columns)
                     else:
-                        counts[m] = [int(0)] * len(aggregate_columns)
+                        counts[m] = [0] * len(aggregate_columns)
                 for i, aggregate_column in enumerate(aggregate_columns):
                     if floating_point:
                         counts[m][i] += float(fields[aggregate_column])
@@ -151,24 +163,24 @@ class TsvWriter:
         if filename_detect:
             found = False
             if filename.endswith(".tsv.gz"):
-                self.io_gzip = gzip.open(filename, mode=mode)
+                self.io_gzip = gzip.open(filename, mode=mode)  # noqa: SIM115
                 found = True
             if filename.endswith(".tsv"):
                 # pylint: disable=consider-using-with
-                self.io = open(filename, mode=mode)
+                self.io = open(filename, mode=mode)  # noqa: SIM115
                 found = True
             if not found:
                 # treat as tsv
                 # pylint: disable=consider-using-with
-                self.io = open(filename, mode=mode)
+                self.io = open(filename, mode=mode)  # noqa: SIM115
             # old code, be more strict
             # assert found, "file name unknown"
         else:
             if do_gzip:
-                self.io_gzip = gzip.open(filename, mode=mode)
+                self.io_gzip = gzip.open(filename, mode=mode)  # noqa: SIM115
             else:
                 # pylint: disable=consider-using-with
-                self.io = open(filename, mode=mode)
+                self.io = open(filename, mode=mode)  # noqa: SIM115
         self.throw_exceptions = throw_exceptions
 
         self.sanitize = sanitize
@@ -251,7 +263,7 @@ class TsvReader:
             self.io = pyanyzip.core.openzip(name=filename, mode=mode, newline=newline)
         else:
             # pylint: disable=consider-using-with
-            self.io = open(filename, mode=mode, newline=newline)
+            self.io = open(filename, mode=mode, newline=newline)  # noqa: SIM115
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
         self.skip_comments = skip_comments

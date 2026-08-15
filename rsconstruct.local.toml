@@ -21,4 +21,5 @@ pip = [
     "pylogconf",
     "attrs",
     "types-tqdm",
+    "pandas-stubs",
 ]
