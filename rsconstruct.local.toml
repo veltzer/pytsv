@@ -20,4 +20,5 @@ pip = [
     "pandas",
     "pylogconf",
     "attrs",
+    "types-tqdm",
 ]
