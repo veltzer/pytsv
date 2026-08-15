@@ -178,13 +178,12 @@ def clean_by_field_num() -> None:
     with TsvReader(
         filename=ConfigInputFile.input_file,
         validate_all_lines_same_number_of_fields=False
-    ) as input_file_handle:
-        with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
-            if ConfigProgress.progress:
-                input_file_handle = tqdm.tqdm(input_file_handle, desc=ConfigInputFile.input_file)
-            for fields in input_file_handle:
-                if len(fields) == ConfigColumns.columns:
-                    output_file_handle.write(fields)
+    ) as input_file_handle, TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
+        if ConfigProgress.progress:
+            input_file_handle = tqdm.tqdm(input_file_handle, desc=ConfigInputFile.input_file)
+        for fields in input_file_handle:
+            if len(fields) == ConfigColumns.columns:
+                output_file_handle.write(fields)
 
 
 @register_endpoint(
@@ -197,7 +196,7 @@ def clean_by_field_num() -> None:
     ],
 )
 def cut() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
@@ -278,7 +277,9 @@ def histogram_by_column() -> None:
             total += 1
     count_in_bucket, bucket_edges = numpy.histogram(a, bins=ConfigBucketNumber.bucket_number)
     with TsvWriter(ConfigOutputFile.output_file) as output_handle:
-        current_sum = 0
+        # numpy.histogram returns numpy integers, so the running total is a
+        # numpy scalar rather than a plain int.
+        current_sum: numpy.signedinteger = numpy.int64(0)
         for i, count in enumerate(count_in_bucket):
             current_sum += count
             edge_from = bucket_edges[i]
@@ -339,7 +340,7 @@ def majority() -> None:
     ],
 )
 def multiply() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
@@ -375,7 +376,7 @@ def read() -> None:
     ],
 )
 def remove_quotes() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
@@ -469,7 +470,7 @@ def join() -> None:
     ],
 )
 def lc() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
@@ -565,7 +566,7 @@ def split_by_columns_parallel() -> None:
         job_return_values: list[JobReturnValue] = list(executor.map(process_single_file, job_data))
     job_return_values.sort(key=lambda u: u.serial)
     for job_return_value in job_return_values:
-        for key, _filename in job_return_value.files.items():
+        for key, _filename in job_return_value.files.items():  # noqa: PERF102
             outfile = ConfigPattern.final_pattern.format(key=key)
             with open(outfile, "wb") as _:
                 pass
