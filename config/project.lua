@@ -6,3 +6,4 @@ KEYWORDS = {
     "format",
     "csv",
 }
+PYPI = true
