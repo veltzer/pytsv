@@ -213,7 +213,7 @@ class TsvWriter:
             return r
         return seq
 
-    def _convert(self, seq: Sequence[str]) -> Generator[str, None, None]:
+    def _convert(self, seq: Sequence[str]) -> Generator[str]:
         if self.convert_to_string:
             for t in seq:
                 if type(t) in (int, float, type(None)):
