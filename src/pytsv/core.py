@@ -286,7 +286,7 @@ class TsvReader:
         line = line.rstrip("\r\n")
         if self.check_non_ascii:
             assert is_ascii(line), f"non ascii characters in line [{self.line_number}]"
-        fields = line.split("\t")
+        fields: list[str] = line.split("\t")
         if self.validate_all_lines_same_number_of_fields:
             if self.num_fields is None:
                 self.num_fields = len(fields)
