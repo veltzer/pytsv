@@ -107,6 +107,7 @@ dev = [
     "pylint",
     "pytest",
     "ruff",
+    "sphinx",
     "types-tqdm",
     "pandas-stubs",
 ]
