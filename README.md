@@ -3,7 +3,7 @@
      values that template reads, and build again. -->
 # *pytsv* project by Mark Veltzer
 
-description: Pytsv is a the Swiss army knife for TSV files
+description: Pytsv is the Swiss army knife for TSV files
 
 project website: https://veltzer.github.io/pytsv
 

@@ -1,5 +1,5 @@
 NAME = "pytsv"
-DESCRIPTION_SHORT = "Pytsv is a the Swiss army knife for TSV files"
+DESCRIPTION_SHORT = "Pytsv is the Swiss army knife for TSV files"
 KEYWORDS = {
     "python",
     "tsv",
