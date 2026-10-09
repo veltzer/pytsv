@@ -185,11 +185,9 @@ class TsvWriter:
 
         self.sanitize = sanitize
         if fields_to_clean is None:
-            self.fields_to_clean = []
+            self.fields_to_clean: list[int] = []
         else:
             self.fields_to_clean = fields_to_clean
-        if self.fields_to_clean is None:
-            self.fields_to_clean = []
         self.clean_edges = clean_edges
         self.sub_trailing = sub_trailing
         self.remove_non_ascii = remove_non_ascii
