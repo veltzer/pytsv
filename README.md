@@ -5,7 +5,7 @@
 
 description: Pytsv is the Swiss army knife for TSV files
 
-project website: https://veltzer.github.io/pytsv
+project website: <https://veltzer.github.io/pytsv>
 
 author: Mark Veltzer
 
