@@ -71,7 +71,7 @@ def do_aggregate(
         logger.debug("working on file [%s]", input_file_name)
         with TsvReader(filename=input_file_name) as input_handle:
             for fields in input_handle:
-                m = "-".join(str(fields[i]) for i in match_columns)
+                m = "-".join(fields[i] for i in match_columns)
                 if m not in counts:
                     if floating_point:
                         counts[m] = [float(0)] * len(aggregate_columns)
@@ -217,11 +217,10 @@ class TsvWriter:
 
     def _convert(self, seq: Sequence[str]) -> Generator[str]:
         if self.convert_to_string:
-            for t in seq:
-                if type(t) in (int, float, type(None)):
-                    yield str(t)
-                else:
-                    yield t
+            # callers may hand in numbers and None although the signature says str
+            values: Sequence[object] = seq
+            for t in values:
+                yield t if isinstance(t, str) else str(t)
         else:
             yield from seq
 
