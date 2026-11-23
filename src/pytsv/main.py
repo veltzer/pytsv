@@ -11,9 +11,8 @@ from collections import defaultdict
 from enum import Enum
 
 import attr
-import numpy
-import numpy.random
-import pandas
+import numpy as np
+import pandas as pd
 import pyanyzip.core
 import pylogconf.core
 import tqdm
@@ -51,7 +50,6 @@ from pytsv.core import TsvReader, TsvWriter, clean, do_aggregate
 from pytsv.static import APP_NAME, DESCRIPTION, VERSION_STR
 
 # The next line is because pylint complains about pandas objects
-# pylint: disable=unsubscriptable-object,no-member
 
 
 @register_endpoint(
@@ -201,14 +199,16 @@ def clean_by_field_num() -> None:
     ],
 )
 def cut() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
-        with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
-            input_file_handle = input_file_handle_raw
-            if ConfigProgress.progress:
-                input_file_handle = tqdm.tqdm(input_file_handle)
-            for fields in input_file_handle:
-                out_fields = [fields[x] for x in ConfigColumns.columns]
-                output_file_handle.write(out_fields)
+    with (
+        TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw,
+        TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle,
+    ):
+        input_file_handle = input_file_handle_raw
+        if ConfigProgress.progress:
+            input_file_handle = tqdm.tqdm(input_file_handle)
+        for fields in input_file_handle:
+            out_fields = [fields[x] for x in ConfigColumns.columns]
+            output_file_handle.write(out_fields)
 
 
 @register_endpoint(
@@ -283,11 +283,11 @@ def histogram_by_column() -> None:
         for fields in input_handle:
             a.append(float(fields[ConfigColumn.column]))
             total += 1
-    count_in_bucket, bucket_edges = numpy.histogram(a, bins=ConfigBucketNumber.bucket_number)
+    count_in_bucket, bucket_edges = np.histogram(a, bins=ConfigBucketNumber.bucket_number)
     with TsvWriter(ConfigOutputFile.output_file) as output_handle:
         # numpy.histogram returns numpy integers, so the running total is a
         # numpy scalar rather than a plain int.
-        current_sum: numpy.signedinteger = numpy.int64(0)
+        current_sum: np.signedinteger = np.int64(0)
         for i, count in enumerate(count_in_bucket):
             current_sum += count
             edge_from = bucket_edges[i]
@@ -349,15 +349,17 @@ def majority() -> None:
     ],
 )
 def multiply() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
-        with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
-            input_file_handle = input_file_handle_raw
-            if ConfigProgress.progress:
-                input_file_handle = tqdm.tqdm(input_file_handle)
-            for fields in input_file_handle:
-                current_number = int(fields[ConfigColumn.column])
-                for _ in range(current_number):
-                    output_file_handle.write(fields)
+    with (
+        TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw,
+        TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle,
+    ):
+        input_file_handle = input_file_handle_raw
+        if ConfigProgress.progress:
+            input_file_handle = tqdm.tqdm(input_file_handle)
+        for fields in input_file_handle:
+            current_number = int(fields[ConfigColumn.column])
+            for _ in range(current_number):
+                output_file_handle.write(fields)
 
 
 @register_endpoint(
@@ -387,16 +389,18 @@ def read() -> None:
     ],
 )
 def remove_quotes() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
-        with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
-            input_file_handle = input_file_handle_raw
-            if ConfigProgress.progress:
-                input_file_handle = tqdm.tqdm(input_file_handle)
-            for fields in input_file_handle:
-                for i in ConfigColumns.columns:
-                    if fields[i].startswith("\"") and fields[i].endswith("\"") and len(fields[i]) > 1:
-                        fields[i] = fields[i][1:-1]
-                output_file_handle.write(fields)
+    with (
+        TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw,
+        TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle,
+    ):
+        input_file_handle = input_file_handle_raw
+        if ConfigProgress.progress:
+            input_file_handle = tqdm.tqdm(input_file_handle)
+        for fields in input_file_handle:
+            for i in ConfigColumns.columns:
+                if fields[i].startswith("\"") and fields[i].endswith("\"") and len(fields[i]) > 1:
+                    fields[i] = fields[i][1:-1]
+            output_file_handle.write(fields)
 
 
 @register_endpoint(
@@ -484,15 +488,17 @@ def join() -> None:
     ],
 )
 def lc() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
-        with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
-            input_file_handle = input_file_handle_raw
-            if ConfigProgress.progress:
-                input_file_handle = tqdm.tqdm(input_file_handle)
-            for fields in input_file_handle:
-                for i in ConfigColumns.columns:
-                    fields[i] = fields[i].lower()
-                output_file_handle.write(fields)
+    with (
+        TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw,
+        TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle,
+    ):
+        input_file_handle = input_file_handle_raw
+        if ConfigProgress.progress:
+            input_file_handle = tqdm.tqdm(input_file_handle)
+        for fields in input_file_handle:
+            for i in ConfigColumns.columns:
+                fields[i] = fields[i].lower()
+            output_file_handle.write(fields)
 
 
 @register_endpoint(
@@ -583,7 +589,7 @@ def split_by_columns_parallel() -> None:
         job_return_values: list[JobReturnValue] = list(executor.map(process_single_file, job_data))
     job_return_values.sort(key=lambda u: u.serial)
     for job_return_value in job_return_values:
-        for key, _filename in job_return_value.files.items():  # noqa: PERF102
+        for key in job_return_value.files:
             outfile = ConfigPattern.final_pattern.format(key=key)
             with open(outfile, "wb") as _:
                 pass
@@ -671,7 +677,7 @@ def sample_by_column() -> None:
     """
     logger = logging.getLogger(__name__)
     logger.info("reading the data")
-    df = pandas.read_csv(
+    df = pd.read_csv(
         ConfigInputFile.input_file,
         sep="\t",
         header=None,
@@ -681,7 +687,7 @@ def sample_by_column() -> None:
         unique_values_count = df[ConfigWeightValue.value_column].nunique()
         if unique_values_count != df.shape[0]:
             logger.error("your data is not unique in the value_column")
-            logger.error(f"unique values {unique_values_count} != number of rows {df.shape[0]}")
+            logger.error("unique values %s != number of rows %s", unique_values_count, df.shape[0])
             return
     logger.info("sampling")
     sample = df.sample(
@@ -730,10 +736,11 @@ def sample_by_column_old() -> None:
 
     # this is the same code with numpy
     weights = [w / sum_weights for w in weights]
+    rng = np.random.default_rng()
     if ConfigSampleByColumnOld.hits_mode:
         results_dict: dict[int, int] = defaultdict(int)
         for _ in range(ConfigSampleSize.size):
-            current_results = numpy.random.choice(
+            current_results = rng.choice(
                 a=len(elements),
                 replace=ConfigReplace.replace,
                 size=1,
@@ -747,7 +754,7 @@ def sample_by_column_old() -> None:
                 record.append(str(hits))
                 output_handle.write(record)
     else:
-        results = numpy.random.choice(
+        results = rng.choice(
             a=len(elements),
             replace=ConfigReplace.replace,
             size=ConfigSampleSize.size,
@@ -770,7 +777,7 @@ def sample_by_column_old() -> None:
 def sample_by_two_columns() -> None:
     logger = logging.getLogger(__name__)
     logger.info("reading the data")
-    df = pandas.read_csv(
+    df = pd.read_csv(
         ConfigInputFile.input_file,
         sep="\t",
         header=None,
@@ -779,7 +786,7 @@ def sample_by_two_columns() -> None:
     unique_values_count = df[ConfigWeightValue.value_column].nunique()
     if ConfigCheckUnique.check_unique and unique_values_count != df.shape[0]:
         logger.error("your data is not unique in the value_column")
-        logger.error(f"unique values {unique_values_count} != number of rows {df.shape[0]}")
+        logger.error("unique values %s != number of rows %s", unique_values_count, df.shape[0])
         return
     logger.info("finding clusters")
     clusters = df[ConfigSampleByTwoColumns.group_column].unique()
@@ -823,7 +830,7 @@ def split_by_columns() -> None:
         with TsvReader(filename=input_file, check_non_ascii=ConfigTsvReader.check_non_ascii) as input_file_handle_raw:
             input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
-                logger.info(f"working on [{input_file}]")
+                logger.info("working on [%s]", input_file)
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
                 key = ",".join([fields[x] for x in ConfigColumns.columns])

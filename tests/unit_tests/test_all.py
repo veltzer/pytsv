@@ -5,6 +5,8 @@ test_all.py
 import os
 import unittest
 
+import pytest
+
 from pytsv.core import TsvReader
 
 
@@ -27,7 +29,8 @@ def read_all_file(filename: str) -> None:
 class TestAll(unittest.TestCase):
 
     def test_open_not_exists(self):
-        self.assertRaises(FileNotFoundError, TsvReader, filename=file_doesnt_exist)
+        with pytest.raises(FileNotFoundError):
+            TsvReader(filename=file_doesnt_exist)
 
     def test_good_file(self):
         g = TsvReader(filename=file_good)
@@ -37,7 +40,8 @@ class TestAll(unittest.TestCase):
         read_all_file(filename=file_good)
 
     def test_bad_file(self):
-        self.assertRaises(AssertionError, read_all_file, filename=file_bad)
+        with pytest.raises(AssertionError):
+            read_all_file(filename=file_bad)
 
     @unittest.skip("does not yet wait for process to die")
     def test_gzip_file(self):

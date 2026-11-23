@@ -68,7 +68,7 @@ def do_aggregate(
     counts: dict[str, list[int | float]] = {}
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
-        logger.debug(f"working on file [{input_file_name}]")
+        logger.debug("working on file [%s]", input_file_name)
         with TsvReader(filename=input_file_name) as input_handle:
             for fields in input_handle:
                 m = "-".join(str(fields[i]) for i in match_columns)
@@ -114,7 +114,7 @@ def group_by(
     limit = 10000
     logger = logging.getLogger(__name__)
     for input_file_name in input_file_names:
-        logger.debug(f"working on file [{input_file_name}]")
+        logger.debug("working on file [%s]", input_file_name)
         with open(input_file_name) as file_handle:
             for line in file_handle:
                 parts: list[str] = line.rstrip().split("\t")
@@ -134,8 +134,18 @@ def is_ascii(s: str) -> bool:
     return all(ord(c) < 128 for c in s)
 
 
+
+def _open_gzip(filename: str, mode: str) -> gzip.GzipFile | TextIO:
+    """Open a gzip file whose lifetime is owned by the caller (closed in close())."""
+    return gzip.open(filename, mode=mode)
+
+
+def _open_plain(filename: str, mode: str, newline: str | None = None) -> IO[Any]:
+    """Open a plain file whose lifetime is owned by the caller (closed in close())."""
+    return open(filename, mode=mode, newline=newline)
+
+
 class TsvWriter:
-    # pylint: disable=too-many-positional-arguments
     def __init__(
         self,
         filename: str,
@@ -161,23 +171,20 @@ class TsvWriter:
         if filename_detect:
             found = False
             if filename.endswith(".tsv.gz"):
-                self.io_gzip = gzip.open(filename, mode=mode)  # noqa: SIM115
+                self.io_gzip = _open_gzip(filename, mode)
                 found = True
             if filename.endswith(".tsv"):
-                # pylint: disable=consider-using-with
-                self.io = open(filename, mode=mode)  # noqa: SIM115
+                self.io = _open_plain(filename, mode)
                 found = True
             if not found:
                 # treat as tsv
-                # pylint: disable=consider-using-with
-                self.io = open(filename, mode=mode)  # noqa: SIM115
+                self.io = _open_plain(filename, mode)
             # old code, be more strict
             # assert found, "file name unknown"
         elif do_gzip:
-            self.io_gzip = gzip.open(filename, mode=mode)  # noqa: SIM115
+            self.io_gzip = _open_gzip(filename, mode)
         else:
-            # pylint: disable=consider-using-with
-            self.io = open(filename, mode=mode)  # noqa: SIM115
+            self.io = _open_plain(filename, mode)
         self.throw_exceptions = throw_exceptions
 
         self.sanitize = sanitize
@@ -242,7 +249,6 @@ class TsvWriter:
 
 
 class TsvReader:
-    # pylint: disable=too-many-positional-arguments
     def __init__(
         self,
         filename: str,
@@ -257,8 +263,7 @@ class TsvReader:
         if use_any_format:
             self.io = pyanyzip.core.openzip(name=filename, mode=mode, newline=newline)
         else:
-            # pylint: disable=consider-using-with
-            self.io = open(filename, mode=mode, newline=newline)  # noqa: SIM115
+            self.io = _open_plain(filename, mode, newline)
         self.validate_all_lines_same_number_of_fields = validate_all_lines_same_number_of_fields
         self.num_fields = num_fields
         self.skip_comments = skip_comments

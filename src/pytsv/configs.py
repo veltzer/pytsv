@@ -21,7 +21,6 @@ FILENAME_DETECT = True
 DEFAULT_ENCODING = "utf-8"
 ATTACH_ENCODER = False
 
-# pylint: disable=too-few-public-methods
 
 
 class ConfigInputFiles(Config):
