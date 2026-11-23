@@ -3,7 +3,6 @@ core.py
 """
 
 import gzip
-import itertools
 import logging
 import re
 from collections import defaultdict
@@ -85,14 +84,14 @@ def do_aggregate(
                         counts[m][i] += int(fields[aggregate_column])
     # notice that we create a writer that does not check the number
     # of fields because the check requires a len(fields) to be available
-    # and it is not in this case because of itertools.chain
+    # and it is not in this case because of the unpacking
     with TsvWriter(
         filename=output_file_name,
         check_num_fields=False,
         sanitize=False,
     ) as output_file_handle:
         for m, aggregates in counts.items():
-            to_write = list(itertools.chain(m, aggregates))
+            to_write = [*m, *(str(a) for a in aggregates)]
             output_file_handle.write(to_write)
 
 
@@ -118,8 +117,7 @@ def group_by(
         logger.debug(f"working on file [{input_file_name}]")
         with open(input_file_name) as file_handle:
             for line in file_handle:
-                line = line.rstrip()
-                parts: list[str] = line.split("\t")
+                parts: list[str] = line.rstrip().split("\t")
                 m = "-".join(parts[i] for i in group_by_columns)
                 data_to_append = [parts[i] for i in collect_columns]
                 all_data[m].append(data_to_append)
@@ -175,12 +173,11 @@ class TsvWriter:
                 self.io = open(filename, mode=mode)  # noqa: SIM115
             # old code, be more strict
             # assert found, "file name unknown"
+        elif do_gzip:
+            self.io_gzip = gzip.open(filename, mode=mode)  # noqa: SIM115
         else:
-            if do_gzip:
-                self.io_gzip = gzip.open(filename, mode=mode)  # noqa: SIM115
-            else:
-                # pylint: disable=consider-using-with
-                self.io = open(filename, mode=mode)  # noqa: SIM115
+            # pylint: disable=consider-using-with
+            self.io = open(filename, mode=mode)  # noqa: SIM115
         self.throw_exceptions = throw_exceptions
 
         self.sanitize = sanitize

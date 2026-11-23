@@ -26,19 +26,19 @@ def read_all_file(filename: str) -> None:
 
 class TestAll(unittest.TestCase):
 
-    def testOpenNotExists(self):
+    def test_open_not_exists(self):
         self.assertRaises(FileNotFoundError, TsvReader, filename=file_doesnt_exist)
 
-    def testGoodFile(self):
+    def test_good_file(self):
         g = TsvReader(filename=file_good)
         g.close()
 
-    def testContextManager(self):
+    def test_context_manager(self):
         read_all_file(filename=file_good)
 
-    def testBadFile(self):
+    def test_bad_file(self):
         self.assertRaises(AssertionError, read_all_file, filename=file_bad)
 
     @unittest.skip("does not yet wait for process to die")
-    def testGzipFile(self):
+    def test_gzip_file(self):
         read_all_file(filename=file_gzip)

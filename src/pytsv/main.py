@@ -41,6 +41,7 @@ from pytsv.configs import (
     ConfigReplace,
     ConfigSampleByColumnOld,
     ConfigSampleByTwoColumns,
+    ConfigSampleColumn,
     ConfigSampleSize,
     ConfigTree,
     ConfigTsvReader,
@@ -75,11 +76,11 @@ def aggregate() -> None:
 
 class ParamsForJob:
     def __init__(self):
-        self.input_file = None
-        self.num_fields = None
-        self.validate_all_lines_same_number_of_fields = None
-        self.check_non_ascii = None
-        self.progress = None
+        self.input_file: str = ""
+        self.num_fields: int | None = None
+        self.validate_all_lines_same_number_of_fields: bool = False
+        self.check_non_ascii: bool = False
+        self.progress: bool = False
 
 
 def check_file(params_for_job: ParamsForJob) -> bool:
@@ -87,7 +88,8 @@ def check_file(params_for_job: ParamsForJob) -> bool:
     with TsvReader(filename=params_for_job.input_file,
                    num_fields=params_for_job.num_fields,
                    validate_all_lines_same_number_of_fields=params_for_job.validate_all_lines_same_number_of_fields,
-                   check_non_ascii=params_for_job.check_non_ascii) as input_file_handle:
+                   check_non_ascii=params_for_job.check_non_ascii) as input_file_handle_raw:
+        input_file_handle = input_file_handle_raw
         if params_for_job.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         for _ in input_file_handle:
@@ -129,7 +131,8 @@ def check() -> None:
             num_fields=ConfigNumFields.num_fields,
             validate_all_lines_same_number_of_fields=ConfigTsvReader.validate_all_lines_same_number_of_fields,
             check_non_ascii=ConfigTsvReader.check_non_ascii,
-        ) as input_file_handle:
+        ) as input_file_handle_raw:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
             for _ in input_file_handle:
@@ -150,7 +153,8 @@ def check_columns_unique() -> None:
     for input_file in ConfigInputFiles.input_files:
         with TsvReader(
             filename=input_file,
-        ) as input_file_handle:
+        ) as input_file_handle_raw:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
             for line_number, fields in enumerate(input_file_handle):
@@ -178,7 +182,8 @@ def clean_by_field_num() -> None:
     with TsvReader(
         filename=ConfigInputFile.input_file,
         validate_all_lines_same_number_of_fields=False
-    ) as input_file_handle, TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
+    ) as input_file_handle_raw, TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
+        input_file_handle = input_file_handle_raw
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle, desc=ConfigInputFile.input_file)
         for fields in input_file_handle:
@@ -196,8 +201,9 @@ def clean_by_field_num() -> None:
     ],
 )
 def cut() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
@@ -215,7 +221,8 @@ def cut() -> None:
     ],
 )
 def drop_duplicates_by_columns() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:
+        input_file_handle = input_file_handle_raw
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         saw = set()
@@ -243,7 +250,8 @@ def fix_columns() -> None:
     with TsvReader(
             filename=ConfigInputFile.input_file,
             check_non_ascii=ConfigTsvReader.check_non_ascii,
-    ) as input_file_handle:
+    ) as input_file_handle_raw:
+        input_file_handle = input_file_handle_raw
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
@@ -308,7 +316,8 @@ def majority() -> None:
     and no other entry with x1 will appear
     """
     d: dict[str, dict[int, int]] = defaultdict(dict)
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:
+        input_file_handle = input_file_handle_raw
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         for fields in input_file_handle:
@@ -325,7 +334,7 @@ def majority() -> None:
             p_count = p_dict[p_second]
             output_file_handle.write([
                 p_first,
-                p_second,
+                str(p_second),
                 str(p_count),
             ])
 
@@ -340,8 +349,9 @@ def majority() -> None:
     ],
 )
 def multiply() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
@@ -359,7 +369,8 @@ def multiply() -> None:
 )
 def read() -> None:
     for input_file in ConfigInputFiles.input_files:
-        with TsvReader(filename=input_file) as input_file_handle:
+        with TsvReader(filename=input_file) as input_file_handle_raw:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle, desc=input_file)
             for _ in input_file_handle:
@@ -376,8 +387,9 @@ def read() -> None:
     ],
 )
 def remove_quotes() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
@@ -431,15 +443,17 @@ def join() -> None:
     event_found = 0
     event_unknown_added = 0
     event_discarded = 0
-    with TsvReader(ConfigJoin.hash_file) as hash_file_handle:
+    with TsvReader(ConfigJoin.hash_file) as hash_file_handle_raw:
+        hash_file_handle = hash_file_handle_raw
         if ConfigProgress.progress:
             hash_file_handle = tqdm.tqdm(hash_file_handle, desc="reading hash")
         for fields in hash_file_handle:
             key = fields[ConfigJoin.hash_key_column]
             value = fields[ConfigJoin.hash_value_column]
             d[key] = value
-    with TsvReader(ConfigInputFile.input_file) as input_file_handle, \
+    with TsvReader(ConfigInputFile.input_file) as input_file_handle_raw, \
             TsvWriter(ConfigOutputFile.output_file) as output_file_handle:
+        input_file_handle = input_file_handle_raw
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle, desc="reading input and writing output")
         for fields in input_file_handle:
@@ -470,8 +484,9 @@ def join() -> None:
     ],
 )
 def lc() -> None:
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:  # noqa: SIM117
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:  # noqa: SIM117
         with TsvWriter(filename=ConfigOutputFile.output_file) as output_file_handle:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 input_file_handle = tqdm.tqdm(input_file_handle)
             for fields in input_file_handle:
@@ -490,7 +505,8 @@ def lc() -> None:
 )
 def sum_columns() -> None:
     sums: list[float] = [0] * len(ConfigColumns.columns)
-    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
+    with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle_raw:
+        input_file_handle = input_file_handle_raw
         if ConfigProgress.progress:
             input_file_handle = tqdm.tqdm(input_file_handle)
         for fields in input_file_handle:
@@ -522,7 +538,8 @@ def process_single_file(job_info: JobInfo) -> JobReturnValue:
     with TsvReader(
             filename=job_info.input_file,
             check_non_ascii=job_info.check_not_ascii
-    ) as input_file_handle:
+    ) as input_file_handle_raw:
+        input_file_handle = input_file_handle_raw
         if job_info.progress:
             logger.info("working on [{job_info.input_file}]")
             input_file_handle = tqdm.tqdm(input_file_handle)
@@ -612,18 +629,12 @@ def tree() -> None:
     # lets draw the tree
     while len(stack) > 0:
         name, depth, last, print_list = stack.pop()
-        if last:
-            special_string = "└──"
-        else:
-            special_string = "├──"
+        special_string = "└──" if last else "├──"
         print(f"{print_list + special_string}{name}")
         first = True
         list_to_append = []
         for p_child in children_dict[name]:
-            if last:
-                special_string = "   "
-            else:
-                special_string = "│  "
+            special_string = "   " if last else "│  "
             list_to_append.append((p_child, depth + 1, first, print_list + special_string))
             first = False
         stack.extend(list(reversed(list_to_append)))
@@ -694,18 +705,22 @@ def sample_by_column() -> None:
         ConfigOutputFile,
         ConfigProgress,
         ConfigSampleByColumnOld,
+        ConfigSampleColumn,
+        ConfigSampleSize,
+        ConfigReplace,
     ],
 )
 def sample_by_column_old() -> None:
     weights: list[float] = []
     elements: list[list[str]] = []
     sum_weights = float(0)
-    with TsvReader(ConfigInputFile.input_file) as input_handle:
+    with TsvReader(ConfigInputFile.input_file) as input_handle_raw:
+        input_handle = input_handle_raw
         if ConfigProgress.progress:
             input_handle = tqdm.tqdm(input_handle)
         for fields in input_handle:
             elements.append(fields)
-            weight = float(fields[ConfigSampleByColumnOld.sample_column])
+            weight = float(fields[ConfigSampleColumn.sample_column])
             sum_weights += weight
             weights.append(weight)
     # the following code will only work on python3.6 because the
@@ -805,7 +820,8 @@ def split_by_columns() -> None:
     assert len(ConfigColumns.columns) > 0, "must provide --columns"
     tsv_writers_dict = {}
     for input_file in ConfigInputFiles.input_files:
-        with TsvReader(filename=input_file, check_non_ascii=ConfigTsvReader.check_non_ascii) as input_file_handle:
+        with TsvReader(filename=input_file, check_non_ascii=ConfigTsvReader.check_non_ascii) as input_file_handle_raw:
+            input_file_handle = input_file_handle_raw
             if ConfigProgress.progress:
                 logger.info(f"working on [{input_file}]")
                 input_file_handle = tqdm.tqdm(input_file_handle)
