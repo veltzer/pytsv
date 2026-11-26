@@ -6,8 +6,7 @@ import gzip
 import logging
 import re
 from collections import defaultdict
-from collections.abc import Generator, Iterable, Sequence
-from typing import IO, Any, TextIO
+from typing import IO, TYPE_CHECKING, Any, TextIO
 
 import pyanyzip.core
 
@@ -26,6 +25,9 @@ from pytsv.configs import (
     USE_ANY_FORMAT,
     VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
 )
+
+if TYPE_CHECKING:
+    from collections.abc import Generator, Iterable, Sequence
 
 
 def clean(
