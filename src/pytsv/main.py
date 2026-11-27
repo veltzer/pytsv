@@ -73,7 +73,7 @@ def aggregate() -> None:
 
 
 class ParamsForJob:
-    def __init__(self):
+    def __init__(self) -> None:
         self.input_file: str = ""
         self.num_fields: int | None = None
         self.validate_all_lines_same_number_of_fields: bool = False
@@ -845,7 +845,7 @@ def split_by_columns() -> None:
     app_name=APP_NAME,
     version=VERSION_STR,
 )
-def main():
+def main() -> None:
     pylogconf.core.setup()
     config_arg_parse_and_launch()
 

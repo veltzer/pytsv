@@ -30,23 +30,23 @@ def read_all_file(filename: str) -> None:
 
 class TestAll(unittest.TestCase):
 
-    def test_open_not_exists(self):
+    def test_open_not_exists(self) -> None:
         with pytest.raises(FileNotFoundError):
             TsvReader(filename=file_doesnt_exist)
 
-    def test_good_file(self):
+    def test_good_file(self) -> None:
         g = TsvReader(filename=file_good)
         g.close()
 
-    def test_context_manager(self):
+    def test_context_manager(self) -> None:
         read_all_file(filename=file_good)
 
-    def test_bad_file(self):
+    def test_bad_file(self) -> None:
         with pytest.raises(AssertionError):
             read_all_file(filename=file_bad)
 
     @unittest.skip("does not yet wait for process to die")
-    def test_gzip_file(self):
+    def test_gzip_file(self) -> None:
         read_all_file(filename=file_gzip)
 
 
@@ -61,14 +61,14 @@ def write_rows(filename: str) -> None:
 
 class TestWriter(unittest.TestCase):
 
-    def test_plain_round_trip(self):
+    def test_plain_round_trip(self) -> None:
         with tempfile.TemporaryDirectory() as folder:
             filename = os.path.join(folder, "out.tsv")
             write_rows(filename)
             with TsvReader(filename=filename) as input_handle:
                 assert list(input_handle) == ROWS
 
-    def test_gzip_by_file_name(self):
+    def test_gzip_by_file_name(self) -> None:
         with tempfile.TemporaryDirectory() as folder:
             filename = os.path.join(folder, "out.tsv.gz")
             write_rows(filename)

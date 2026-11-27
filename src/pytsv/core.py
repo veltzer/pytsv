@@ -6,7 +6,8 @@ import gzip
 import logging
 import re
 from collections import defaultdict
-from typing import IO, TYPE_CHECKING, Any, cast
+from types import TracebackType
+from typing import IO, TYPE_CHECKING, Any, Self, cast
 
 import pyanyzip.core
 
@@ -28,6 +29,7 @@ from pytsv.configs import (
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Iterable, Sequence
+    from types import TracebackType
 
 
 def clean(
@@ -230,11 +232,11 @@ class TsvWriter:
     def close(self) -> None:
         self.io.close()
 
-    def __enter__(self):
+    def __enter__(self) -> Self:
         """ method needed to be a context manager """
         return self
 
-    def __exit__(self, itype, value, traceback):
+    def __exit__(self, itype: type[BaseException] | None, value: BaseException | None, traceback: TracebackType | None) -> None:
         """ method needed to be a context manager """
         self.close()
 
@@ -289,15 +291,15 @@ class TsvReader:
             assert is_ascii(line)
         return fields
 
-    def __iter__(self):
+    def __iter__(self) -> Self:
         """ method needed to be an iterator """
         return self
 
-    def __enter__(self):
+    def __enter__(self) -> Self:
         """ method needed to be a context manager """
         return self
 
-    def __exit__(self, itype, value, traceback):
+    def __exit__(self, itype: type[BaseException] | None, value: BaseException | None, traceback: TracebackType | None) -> None:
         """ method needed to be a context manager """
         self.close()
 
