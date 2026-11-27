@@ -32,6 +32,7 @@ if TYPE_CHECKING:
 
 def clean(
     text: str,
+    *,
     clean_edges: bool = True,
     sub_trailing: bool = True,
     remove_non_ascii: bool = True,
@@ -56,6 +57,7 @@ def do_aggregate(
     match_columns: list[int],
     aggregate_columns: list[int],
     output_file_name: str,
+    *,
     floating_point: bool,
 ) -> None:
     """
@@ -152,6 +154,7 @@ class TsvWriter:
         self,
         filename: str,
         mode: str = "wt",
+        *,
         throw_exceptions: bool = False,
 
         sanitize: bool = SANITIZE,
@@ -254,6 +257,7 @@ class TsvReader:
         self,
         filename: str,
         mode: str = "rt",
+        *,
         use_any_format: bool = USE_ANY_FORMAT,
         validate_all_lines_same_number_of_fields: bool = VALIDATE_ALL_LINES_SAME_NUMBER_OF_FIELDS,
         num_fields: int | None = None,
