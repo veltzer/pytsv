@@ -607,7 +607,7 @@ def tree() -> None:
     """
     You can also see only parts of the tree
     """
-    children_dict: dict[str, set] = defaultdict(set)
+    children_dict: dict[str, set[str]] = defaultdict(set)
     parents_dict = defaultdict(set)
     with TsvReader(filename=ConfigInputFile.input_file) as input_file_handle:
         for fields in input_file_handle:
