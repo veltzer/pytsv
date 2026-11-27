@@ -238,7 +238,6 @@ class TsvWriter:
                 assert len(sanitized_list) == self.num_fields, f"wrong number of fields in {sanitized_list}"
         buf = "\t".join(self._convert(sanitized_list))
         self.io.write(buf.encode())
-        # print("\t".join(self._convert(sanitized_list)), file=self.io)
 
     def close(self) -> None:
         self.io.close()

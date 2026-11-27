@@ -729,12 +729,7 @@ def sample_by_column_old() -> None:
             weight = float(fields[ConfigSampleColumn.sample_column])
             sum_weights += weight
             weights.append(weight)
-    # the following code will only work on python3.6 because the
-    # random.choices API was only introduced then
-    # from random import choices
-    # results = choices(lines, weights, k=size)
 
-    # this is the same code with numpy
     weights = [w / sum_weights for w in weights]
     rng = np.random.default_rng()
     if ConfigSampleByColumnOld.hits_mode:
