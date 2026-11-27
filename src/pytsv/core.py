@@ -6,7 +6,7 @@ import gzip
 import logging
 import re
 from collections import defaultdict
-from typing import IO, TYPE_CHECKING, Any, TextIO
+from typing import IO, TYPE_CHECKING, Any, cast
 
 import pyanyzip.core
 
@@ -139,9 +139,11 @@ def is_ascii(s: str) -> bool:
 
 
 
-def _open_gzip(filename: str, mode: str) -> gzip.GzipFile | TextIO:
+def _open_gzip(filename: str, mode: str) -> IO[Any]:
     """Open a gzip file whose lifetime is owned by the caller (closed in close())."""
-    return gzip.open(filename, mode=mode)
+    # what gzip.open returns depends on the mode, a plain str here: a text
+    # mode gives a text stream, a binary one the GzipFile itself
+    return cast("IO[Any]", gzip.open(filename, mode=mode))
 
 
 def _open_plain(filename: str, mode: str, newline: str | None = None) -> IO[Any]:
@@ -171,25 +173,11 @@ class TsvWriter:
         do_gzip: bool = DO_GZIP,
         filename_detect: bool = FILENAME_DETECT,
     ) -> None:
-        self.io: IO[Any]
-        self.io_text: TextIO
-        if filename_detect:
-            found = False
-            if filename.endswith(".tsv.gz"):
-                self.io_gzip = _open_gzip(filename, mode)
-                found = True
-            if filename.endswith(".tsv"):
-                self.io = _open_plain(filename, mode)
-                found = True
-            if not found:
-                # treat as tsv
-                self.io = _open_plain(filename, mode)
-            # old code, be more strict
-            # assert found, "file name unknown"
-        elif do_gzip:
-            self.io_gzip = _open_gzip(filename, mode)
-        else:
-            self.io = _open_plain(filename, mode)
+        # a text stream in every case: gzip.open in a text mode wraps the
+        # compressed file the same way open does a plain one
+        # with detection, any name but *.tsv.gz is treated as plain tsv
+        compressed = filename.endswith(".tsv.gz") if filename_detect else do_gzip
+        self.io: IO[Any] = _open_gzip(filename, mode) if compressed else _open_plain(filename, mode)
         self.throw_exceptions = throw_exceptions
 
         self.sanitize = sanitize
@@ -237,7 +225,7 @@ class TsvWriter:
             else:
                 assert len(sanitized_list) == self.num_fields, f"wrong number of fields in {sanitized_list}"
         buf = "\t".join(self._convert(sanitized_list))
-        self.io.write(buf.encode())
+        self.io.write(buf + "\n")
 
     def close(self) -> None:
         self.io.close()

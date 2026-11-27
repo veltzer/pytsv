@@ -2,12 +2,14 @@
 test_all.py
 """
 
+import gzip
 import os
+import tempfile
 import unittest
 
 import pytest
 
-from pytsv.core import TsvReader
+from pytsv.core import TsvReader, TsvWriter
 
 
 def get_file(name: str) -> str:
@@ -46,3 +48,29 @@ class TestAll(unittest.TestCase):
     @unittest.skip("does not yet wait for process to die")
     def test_gzip_file(self):
         read_all_file(filename=file_gzip)
+
+
+ROWS = [["a", "b"], ["c", "d"]]
+
+
+def write_rows(filename: str) -> None:
+    with TsvWriter(filename=filename) as output_handle:
+        for row in ROWS:
+            output_handle.write(row)
+
+
+class TestWriter(unittest.TestCase):
+
+    def test_plain_round_trip(self):
+        with tempfile.TemporaryDirectory() as folder:
+            filename = os.path.join(folder, "out.tsv")
+            write_rows(filename)
+            with TsvReader(filename=filename) as input_handle:
+                assert list(input_handle) == ROWS
+
+    def test_gzip_by_file_name(self):
+        with tempfile.TemporaryDirectory() as folder:
+            filename = os.path.join(folder, "out.tsv.gz")
+            write_rows(filename)
+            with gzip.open(filename, mode="rt") as stream:
+                assert stream.read() == "a\tb\nc\td\n"
